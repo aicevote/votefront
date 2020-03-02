@@ -15,7 +15,7 @@ gulp.task('ejs', function(cb) {
           jsonData: item
       }))
       .pipe(rename(`${item.filename}` + '.html'))
-      .pipe(gulp.dest('views/'));
+      .pipe(gulp.dest('public/'));
   });
 
   var jsonFile2 = 'data-result.json',

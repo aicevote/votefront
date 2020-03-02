@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "prestart": "yarn gulp ejs",
-    "start": "yarn http-server"
+    "start": "yarn http-server ./"
   },
   "devDependencies": {
     "gulp": "^4.0.2",

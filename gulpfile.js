@@ -15,7 +15,7 @@ gulp.task('ejs', function(cb) {
           jsonData: item
       }))
       .pipe(rename(`${item.filename}` + '.html'))
-      .pipe(gulp.dest('./'));
+      .pipe(gulp.dest('docs/'));
   });
 
   var jsonFile2 = 'data-result.json',
@@ -28,7 +28,7 @@ gulp.task('ejs', function(cb) {
           jsonData: item
       }))
       .pipe(rename(`${item.filename}` + '.html'))
-      .pipe(gulp.dest('./'));
+      .pipe(gulp.dest('docs/'));
   });
   cb();
 });

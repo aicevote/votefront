@@ -1,0 +1,129 @@
+<html>
+<lang="ja">
+<head prefix="og: http://ogp.me/ns#">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-141182013-1');
+  </script>
+  <meta property="og:title" content="AICEVOTE">
+  <meta property="og:type" content="website">
+  <meta property="og:description" content="票を氷にしたリアルタイム投票サイト">
+  <meta property="og:url" content="aicevote.com">
+  <meta property="og:site_name" content="AICEVOTE">
+  <meta property="og:image" content="http://aicevote.com/images/aicevote_2_skeleton.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <meta name="description" content="セッション切れです。">
+  <title>セッション切れ AICEVOTE</title>
+</head>
+<body>
+  <script src="/javascripts/moment.js"></script>
+  <script src="/javascripts/Chart.min.js"></script>
+  <script src="/javascripts/chartjs-plugin-streaming.js"></script>
+  <script src="/javascripts/ajax.js"></script>
+  <div class="anime" id="logo">
+    <p><img src="/images/animeaicevote.gif" alt=""></p>
+  </div>
+  <script type="text/javascript">
+  $(function(){
+      if($.cookie("access")){
+          $('#logo').css({display:'none'});
+      }else{
+      $(window).load(function(){
+          $(".mainSite").css("display", "none");
+          setTimeout(function() {
+              $('.anime').fadeOut();
+            }, 2000);
+          $(".mainSite").css({opacity:'0'});
+            setTimeout(function(){
+            $(".mainSite").css("display", "block");
+            $(".mainSite").stop().animate({opacity:'1'},1000);
+          },2000);
+          $.cookie("access",$('body').addClass('access'));
+      })
+      };
+  });
+  $(function() {
+    var path = location.pathname;
+    if(path.indexOf("/auth/twitter/") > -1){
+    $('.login').remove();
+    console.log("ログイン中")
+    }
+  });
+  </script>
+  <div class="mainSite">
+  <div class="header">
+    <div class="header-logo"><a href="index"><img src="/images/aice.JPG" ></a>
+    </div>
+    <div id="nav-drawer">
+      <input id="nav-input" type="checkbox" class="nav-unshown">
+      <label id="nav-open" for="nav-input"><span></span></label>
+      <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+      <div id="nav-content">
+        <ul>
+          <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+          <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
+          <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
+          <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
+          <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+          <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a><li>
+        </ul>
+      </div>
+    </div>
+    <div class="header-list">
+      <ul>
+        <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+        <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
+        <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
+        <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
+        <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+        <li><div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div></li>
+      </ul>
+    </div>
+    <div id="menu-background">
+    </div>
+    </div>
+    <div id="allcontainer">
+    <div class="container">
+        <h1>セッションが切れました</h1>
+        <h2>再度ログインしなおしてください</h2>
+        <h3><a href="http://aicevote.com/login"style="text-decoration:none; color:deepskyblue;">再ログイン</a></h3>
+        </div>
+        <div class="subcontents">
+     <h2>人気の投票テーマ</h2>
+     <ul>
+      <li><a href="index" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
+      <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
+      <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
+      <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
+     </ul>
+    </div>
+    </div>
+    <div class="footer">
+     <h1><img src="/images/firstix-ocean.png"></h1>
+     <ul>
+       <li>
+        <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a>
+       </li>
+       <li>
+         <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
+       </li>
+       <li>
+        レポート
+       </li>
+     </ul>
+    </div>
+  </div>
+</body>
+
+</html>

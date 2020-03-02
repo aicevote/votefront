@@ -206,12 +206,12 @@ var data = jsonData;
               if ($('#J').text().length == 0){
                 $('#J').remove();
               }
-              const socket = io("http://localhost:25565");
+              const socket = io("http://sakura-02.yujixr.net/");
               var sessionID;
       
               socket.on('connect', function () {
                 $.ajax({
-                  url: "http://127.0.0.1:25565/auth/sessionid",
+                  url: "http://sakura-02.yujixr.net/auth/sessionid",
                   xhrFields: {
                     withCredentials: true
                   }

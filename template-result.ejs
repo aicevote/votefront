@@ -166,7 +166,7 @@ var data = jsonData;
                 socket.emit('get transition',{id:<%= data.votenumber %>});
                 socket.emit('get comments',{id:<%= data.votenumber %>});
                 $.ajax({
-                  url: "http://127.0.0.1:25565/auth/sessionid",
+                  url: "http://sakura-02.yujixr.net/auth/sessionid",
                   xhrFields: {
                     withCredentials: true
                   }

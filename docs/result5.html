@@ -157,20 +157,20 @@
       
       
               const socket = io("http://sakura-02.yujixr.net");
-              var sessionID;
+              var sessionToken;
       
               socket.on('connect', function () {
                 socket.emit('get result', {id:5});
                 socket.emit('get transition',{id:5});
                 socket.emit('get comments',{id:5});
                 $.ajax({
-                  url: "http://sakura-02.yujixr.net/auth/sessionid",
+                  url: "http://sakura-02.yujixr.net/auth/sessiontoken",
                   xhrFields: {
                     withCredentials: true
                   }
                 }).success(function(res){
-                  sessionID=res.sessionID
-                  socket.emit('get votes',{id:5,sessionID:sessionID});
+                  sessionToken=res.sessionToken
+                  socket.emit('get votes',{id:5,sessionToken:sessionToken});
                 });
               });
               // socket.on('connect_error', (error) => {
@@ -316,7 +316,7 @@
                   var str = message.val();
                   socket.emit('post comment', {
                     id: 5 ,
-                    sessionID: sessionID,
+                    sessionToken: sessionToken,
                     message: str
                   });
                   $('#comment-form')[0].reset();
@@ -351,7 +351,7 @@
                   var str = infmessage.val();
                   socket.emit('post comment', {
                     id: 5,
-                    sessionID: sessionID,
+                    sessionToken: sessionToken,
                     message: str
                   });
                   $('#infcomment-form')[0].reset();

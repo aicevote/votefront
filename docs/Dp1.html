@@ -205,23 +205,23 @@
                 $('#J').remove();
               }
               const socket = io("http://sakura-02.yujixr.net/");
-              var sessionID;
+              var sessionToken;
       
               socket.on('connect', function () {
                 $.ajax({
-                  url: "http://sakura-02.yujixr.net/auth/sessionid",
+                  url: "http://sakura-02.yujixr.net/auth/sessiontoken",
                   xhrFields: {
                     withCredentials: true
                   }
                 }).success(function(res){
-                  sessionID=res.sessionID
+                  sessionToken=res.sessionToken
                 });
               });
       
               $('#A').click((req, res) => {
                 socket.emit('put vote', {
                   id:1,
-                  sessionID: sessionID,
+                  sessionToken: sessionToken,
                   answer: 0
                 });
                 location.href = "/auth/twitter/result1";
@@ -230,7 +230,7 @@
               $('#B').click((req, res) => {
                 socket.emit('put vote', {
                   id:1,
-                  sessionID: sessionID,
+                  sessionToken: sessionToken,
                   answer: 1
                 });
                 location.href = "/auth/twitter/result1";
@@ -239,7 +239,7 @@
               $('#C').click((req, res) => {
                 socket.emit('put vote', {
                   id:1,
-                  sessionID: sessionID,
+                  sessionToken: sessionToken,
                   answer: 2
                 });
                 location.href = "/auth/twitter/result1";
@@ -248,7 +248,7 @@
               $('#D').click((req, res) => {
                 socket.emit('put vote', {
                   id:1,
-                  sessionID: sessionID,
+                  sessionToken: sessionToken,
                   answer: 3
                 });
                 location.href = "/auth/twitter/result1";
@@ -257,7 +257,7 @@
               $('#E').click((req, res) => {
                 socket.emit('put vote', {
                   id:1,
-                  sessionID: sessionID,
+                  sessionToken: sessionToken,
                   answer: 4
                 });
                 location.href = "/auth/twitter/result1";
@@ -266,7 +266,7 @@
               $('#F').click((req, res) => {
                 socket.emit('put vote', {
                   id:1,
-                  sessionID: sessionID,
+                  sessionToken: sessionToken,
                   answer: 5
                 });
                 location.href = "/auth/twitter/result1";
@@ -275,7 +275,7 @@
               $('#G').click((req, res) => {
                 socket.emit('put vote', {
                   id:1,
-                  sessionID: sessionID,
+                  sessionToken: sessionToken,
                   answer: 6
                 });
                 location.href = "/auth/twitter/result1";
@@ -284,7 +284,7 @@
               $('#H').click((req, res) => {
                 socket.emit('put vote', {
                   id:1,
-                  sessionID: sessionID,
+                  sessionToken: sessionToken,
                   answer: 7
                 });
                 location.href = "/auth/twitter/result1";
@@ -293,7 +293,7 @@
               $('#I').click((req, res) => {
                 socket.emit('put vote', {
                   id:1,
-                  sessionID: sessionID,
+                  sessionToken: sessionToken,
                   answer: 8
                 });
                 location.href = "/auth/twitter/result1";
@@ -302,7 +302,7 @@
               $('#J').click((req, res) => {
                 socket.emit('put vote', {
                   id:1,
-                  sessionID: sessionID,
+                  sessionToken: sessionToken,
                   answer: 9
                 });
                 location.href = "/auth/twitter/result1";

@@ -159,20 +159,20 @@ var data = jsonData;
       
       
               const socket = io("http://sakura-02.yujixr.net");
-              var sessionID;
+              var sessionToken;
       
               socket.on('connect', function () {
                 socket.emit('get result', {id:<%= data.votenumber %>});
                 socket.emit('get transition',{id:<%= data.votenumber %>});
                 socket.emit('get comments',{id:<%= data.votenumber %>});
                 $.ajax({
-                  url: "http://sakura-02.yujixr.net/auth/sessionid",
+                  url: "http://sakura-02.yujixr.net/auth/sessiontoken",
                   xhrFields: {
                     withCredentials: true
                   }
                 }).success(function(res){
-                  sessionID=res.sessionID
-                  socket.emit('get votes',{id:<%= data.votenumber %>,sessionID:sessionID});
+                  sessionToken=res.sessionToken
+                  socket.emit('get votes',{id:<%= data.votenumber %>,sessionToken:sessionToken});
                 });
               });
               // socket.on('connect_error', (error) => {
@@ -318,7 +318,7 @@ var data = jsonData;
                   var str = message.val();
                   socket.emit('post comment', {
                     id: <%= data.votenumber%> ,
-                    sessionID: sessionID,
+                    sessionToken: sessionToken,
                     message: str
                   });
                   $('#comment-form')[0].reset();
@@ -353,7 +353,7 @@ var data = jsonData;
                   var str = infmessage.val();
                   socket.emit('post comment', {
                     id: <%= data.votenumber %>,
-                    sessionID: sessionID,
+                    sessionToken: sessionToken,
                     message: str
                   });
                   $('#infcomment-form')[0].reset();

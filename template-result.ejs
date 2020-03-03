@@ -158,7 +158,7 @@ var data = jsonData;
               }
       
       
-              const socket = io("http://api.aicevote.com");
+              const socket = io("https://api.aicevote.com");
               var sessionToken;
       
               socket.on('connect', function () {
@@ -166,7 +166,7 @@ var data = jsonData;
                 socket.emit('get transition',{id:<%= data.votenumber %>});
                 socket.emit('get comments',{id:<%= data.votenumber %>});
                 $.ajax({
-                  url: "http://api.aicevote.com/auth/sessiontoken",
+                  url: "https://api.aicevote.com/auth/sessiontoken",
                   xhrFields: {
                     withCredentials: true
                   }

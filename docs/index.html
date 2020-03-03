@@ -117,6 +117,20 @@
                           socket.emit('get news', null);
                       });
                       socket.on("news",(article)=>{
+                        for (let i = 0; i < article.related.length; i++) {
+                          article.related[i].forEach((article) => {
+                            article["id"] = i;
+                          });
+                        }
+                        article.latest.forEach((article) => {
+                          article["id"] = null;
+                        });
+                        article = article.related.reduce(
+                          (prev, cur) => prev.concat(cur)
+                        ).concat(article.latest).sort(
+                          (a, b) => a.publishedAt - b.publishedAt
+                        );
+                        
                         const newslist = document.getElementById('newslist');
                         for (let i = 0; i < article.related.length; i++) {
                           var item = article.related[i];

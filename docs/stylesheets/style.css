@@ -278,26 +278,26 @@ input[name="tab_item"] {
   display:none;
 }
 
-#newsnav-open00, #newsnav-open01, #newsnav-open02, #newsnav-open03, #newsnav-open04, #newsnav-open05,
-#newsnav-open10, #newsnav-open11, #newsnav-open12, #newsnav-open13, #newsnav-open14, #newsnav-open15,
-#newsnav-open20, #newsnav-open21, #newsnav-open22, #newsnav-open23, #newsnav-open24, #newsnav-open25,
-#newsnav-open30, #newsnav-open31, #newsnav-open32, #newsnav-open33, #newsnav-open34, #newsnav-open35,
-#newsnav-open40, #newsnav-open41, #newsnav-open42, #newsnav-open43, #newsnav-open44, #newsnav-open45,
-#newsnav-open50, #newsnav-open51, #newsnav-open52, #newsnav-open53, #newsnav-open54, #newsnav-open55,
-#newsnav-open60, #newsnav-open61, #newsnav-open62, #newsnav-open63, #newsnav-open64, #newsnav-open65,
-#newsnav-open70, #newsnav-open71, #newsnav-open72, #newsnav-open73, #newsnav-open74, #newsnav-open75,
-#newsnav-open80, #newsnav-open81, #newsnav-open82, #newsnav-open83, #newsnav-open84, #newsnav-open85,
-#newsnav-open90, #newsnav-open91, #newsnav-open92, #newsnav-open93, #newsnav-open94, #newsnav-open95,
-#newsnav-open100, #newsnav-open101, #newsnav-open102, #newsnav-open103, #newsnav-open104, #newsnav-open105,
-#newsnav-open110, #newsnav-open111, #newsnav-open112, #newsnav-open113, #newsnav-open114, #newsnav-open115,
-#newsnav-open120, #newsnav-open121, #newsnav-open122, #newsnav-open123, #newsnav-open124, #newsnav-open125,
-#newsnav-open130, #newsnav-open131, #newsnav-open132, #newsnav-open133, #newsnav-open134, #newsnav-open135,
-#newsnav-open140, #newsnav-open141, #newsnav-open142, #newsnav-open143, #newsnav-open144, #newsnav-open145,
-#newsnav-open150, #newsnav-open151, #newsnav-open152, #newsnav-open153, #newsnav-open154, #newsnav-open155,
-#newsnav-open160, #newsnav-open161, #newsnav-open162, #newsnav-open163, #newsnav-open164, #newsnav-open165,
-#newsnav-open170, #newsnav-open171, #newsnav-open172, #newsnav-open173, #newsnav-open174, #newsnav-open175,
-#newsnav-open180, #newsnav-open181, #newsnav-open182, #newsnav-open183, #newsnav-open184, #newsnav-open185,
-#newsnav-open190, #newsnav-open191, #newsnav-open192, #newsnav-open193, #newsnav-open194, #newsnav-open195
+#newsnav-open0, #newsnav-open1, #newsnav-open2, #newsnav-open3, #newsnav-open4, #newsnav-open5,#newsnav-open6, #newsnav-open7, #newsnav-open8, #newsnav-open9,
+#newsnav-open10, #newsnav-open11, #newsnav-open12, #newsnav-open13, #newsnav-open14, #newsnav-open15,#newsnav-open16, #newsnav-open17, #newsnav-open18, #newsnav-open19,
+#newsnav-open20, #newsnav-open21, #newsnav-open22, #newsnav-open23, #newsnav-open24, #newsnav-open25,#newsnav-open26, #newsnav-open27, #newsnav-open28, #newsnav-open29,
+#newsnav-open30, #newsnav-open31, #newsnav-open32, #newsnav-open33, #newsnav-open34, #newsnav-open35,#newsnav-open36, #newsnav-open37, #newsnav-open38, #newsnav-open39,
+#newsnav-open40, #newsnav-open41, #newsnav-open42, #newsnav-open43, #newsnav-open44, #newsnav-open45,#newsnav-open46, #newsnav-open47, #newsnav-open48, #newsnav-open49,
+#newsnav-open50, #newsnav-open51, #newsnav-open52, #newsnav-open53, #newsnav-open54, #newsnav-open55,#newsnav-open56, #newsnav-open57, #newsnav-open58, #newsnav-open59,
+#newsnav-open60, #newsnav-open61, #newsnav-open62, #newsnav-open63, #newsnav-open64, #newsnav-open65,#newsnav-open66, #newsnav-open67, #newsnav-open68, #newsnav-open69,
+#newsnav-open70, #newsnav-open71, #newsnav-open72, #newsnav-open73, #newsnav-open74, #newsnav-open75,#newsnav-open76, #newsnav-open77, #newsnav-open78, #newsnav-open79,
+#newsnav-open80, #newsnav-open81, #newsnav-open82, #newsnav-open83, #newsnav-open84, #newsnav-open85,#newsnav-open86, #newsnav-open87, #newsnav-open88, #newsnav-open89,
+#newsnav-open90, #newsnav-open91, #newsnav-open92, #newsnav-open93, #newsnav-open94, #newsnav-open95,#newsnav-open96, #newsnav-open97, #newsnav-open98, #newsnav-open99,
+#newsnav-open100, #newsnav-open101, #newsnav-open102, #newsnav-open103, #newsnav-open104, #newsnav-open105, #newsnav-open106, #newsnav-open107, #newsnav-open108, #newsnav-open109,
+#newsnav-open110, #newsnav-open111, #newsnav-open112, #newsnav-open113, #newsnav-open114, #newsnav-open115, #newsnav-open116, #newsnav-open117, #newsnav-open118, #newsnav-open119,
+#newsnav-open120, #newsnav-open121, #newsnav-open122, #newsnav-open123, #newsnav-open124, #newsnav-open125, #newsnav-open126, #newsnav-open127, #newsnav-open128, #newsnav-open129,
+#newsnav-open130, #newsnav-open131, #newsnav-open132, #newsnav-open133, #newsnav-open134, #newsnav-open135, #newsnav-open136, #newsnav-open137, #newsnav-open138, #newsnav-open139,
+#newsnav-open140, #newsnav-open141, #newsnav-open142, #newsnav-open143, #newsnav-open144, #newsnav-open145, #newsnav-open146, #newsnav-open147, #newsnav-open148, #newsnav-open149,
+#newsnav-open150, #newsnav-open151, #newsnav-open152, #newsnav-open153, #newsnav-open154, #newsnav-open155, #newsnav-open156, #newsnav-open157, #newsnav-open158, #newsnav-open159,
+#newsnav-open160, #newsnav-open161, #newsnav-open162, #newsnav-open163, #newsnav-open164, #newsnav-open165, #newsnav-open166, #newsnav-open167, #newsnav-open168, #newsnav-open169,
+#newsnav-open170, #newsnav-open171, #newsnav-open172, #newsnav-open173, #newsnav-open174, #newsnav-open175, #newsnav-open176, #newsnav-open177, #newsnav-open178, #newsnav-open179,
+#newsnav-open180, #newsnav-open181, #newsnav-open182, #newsnav-open183, #newsnav-open184, #newsnav-open185, #newsnav-open186, #newsnav-open187, #newsnav-open188, #newsnav-open189,
+#newsnav-open190, #newsnav-open191, #newsnav-open192, #newsnav-open193, #newsnav-open194, #newsnav-open195, #newsnav-open196, #newsnav-open197, #newsnav-open198, #newsnav-open199
 {
   position: relative;
   display: inline-block;
@@ -317,26 +317,26 @@ input[name="tab_item"] {
   transition: .5s ease-in-out;
 }
 
-#newsnav-content00, #newsnav-content01, #newsnav-content02, #newsnav-content03, #newsnav-content04, #newsnav-content05, 
-#newsnav-content10, #newsnav-content11, #newsnav-content12, #newsnav-content13, #newsnav-content14, #newsnav-content15, 
-#newsnav-content20, #newsnav-content21, #newsnav-content22, #newsnav-content23, #newsnav-content24, #newsnav-content25, 
-#newsnav-content30, #newsnav-content31, #newsnav-content32, #newsnav-content33, #newsnav-content34, #newsnav-content35, 
-#newsnav-content40, #newsnav-content41, #newsnav-content42, #newsnav-content43, #newsnav-content44, #newsnav-content45, 
-#newsnav-content50, #newsnav-content51, #newsnav-content52, #newsnav-content53, #newsnav-content54, #newsnav-content55, 
-#newsnav-content60, #newsnav-content61, #newsnav-content62, #newsnav-content63, #newsnav-content64, #newsnav-content65, 
-#newsnav-content70, #newsnav-content71, #newsnav-content72, #newsnav-content73, #newsnav-content74, #newsnav-content75, 
-#newsnav-content80, #newsnav-content81, #newsnav-content82, #newsnav-content83, #newsnav-content84, #newsnav-content85, 
-#newsnav-content90, #newsnav-content91, #newsnav-content92, #newsnav-content93, #newsnav-content94, #newsnav-content95,
-#newsnav-content100, #newsnav-content101, #newsnav-content102, #newsnav-content103, #newsnav-content104, #newsnav-content105, 
-#newsnav-content110, #newsnav-content111, #newsnav-content112, #newsnav-content113, #newsnav-content114, #newsnav-content115, 
-#newsnav-content120, #newsnav-content121, #newsnav-content122, #newsnav-content123, #newsnav-content124, #newsnav-content125, 
-#newsnav-content130, #newsnav-content131, #newsnav-content132, #newsnav-content133, #newsnav-content134, #newsnav-content135, 
-#newsnav-content140, #newsnav-content141, #newsnav-content142, #newsnav-content143, #newsnav-content144, #newsnav-content145, 
-#newsnav-content150, #newsnav-content151, #newsnav-content152, #newsnav-content153, #newsnav-content154, #newsnav-content155, 
-#newsnav-content160, #newsnav-content161, #newsnav-content162, #newsnav-content163, #newsnav-content164, #newsnav-content165, 
-#newsnav-content170, #newsnav-content171, #newsnav-content172, #newsnav-content173, #newsnav-content174, #newsnav-content175, 
-#newsnav-content180, #newsnav-content181, #newsnav-content182, #newsnav-content183, #newsnav-content184, #newsnav-content185, 
-#newsnav-content190, #newsnav-content191, #newsnav-content192, #newsnav-content193, #newsnav-content194, #newsnav-content195
+#newsnav-content0, #newsnav-content1, #newsnav-content2, #newsnav-content3, #newsnav-content4, #newsnav-content5, #newsnav-content6, #newsnav-content7, #newsnav-content8, #newsnav-content9,
+#newsnav-content10, #newsnav-content11, #newsnav-content12, #newsnav-content13, #newsnav-content14, #newsnav-content15,  #newsnav-content16, #newsnav-content17, #newsnav-content18, #newsnav-content19,
+#newsnav-content20, #newsnav-content21, #newsnav-content22, #newsnav-content23, #newsnav-content24, #newsnav-content25,  #newsnav-content26, #newsnav-content27, #newsnav-content28, #newsnav-content29,
+#newsnav-content30, #newsnav-content31, #newsnav-content32, #newsnav-content33, #newsnav-content34, #newsnav-content35,  #newsnav-content36, #newsnav-content37, #newsnav-content38, #newsnav-content39,
+#newsnav-content40, #newsnav-content41, #newsnav-content42, #newsnav-content43, #newsnav-content44, #newsnav-content45,  #newsnav-content46, #newsnav-content47, #newsnav-content48, #newsnav-content49,
+#newsnav-content50, #newsnav-content51, #newsnav-content52, #newsnav-content53, #newsnav-content54, #newsnav-content55,  #newsnav-content56, #newsnav-content57, #newsnav-content58, #newsnav-content59,
+#newsnav-content60, #newsnav-content61, #newsnav-content62, #newsnav-content63, #newsnav-content64, #newsnav-content65,  #newsnav-content66, #newsnav-content67, #newsnav-content68, #newsnav-content69,
+#newsnav-content70, #newsnav-content71, #newsnav-content72, #newsnav-content73, #newsnav-content74, #newsnav-content75,  #newsnav-content76, #newsnav-content77, #newsnav-content78, #newsnav-content79,
+#newsnav-content80, #newsnav-content81, #newsnav-content82, #newsnav-content83, #newsnav-content84, #newsnav-content85,  #newsnav-content86, #newsnav-content87, #newsnav-content88, #newsnav-content89,
+#newsnav-content90, #newsnav-content91, #newsnav-content92, #newsnav-content93, #newsnav-content94, #newsnav-content95, #newsnav-content96, #newsnav-content97, #newsnav-content98, #newsnav-content99,
+#newsnav-content100, #newsnav-content101, #newsnav-content102, #newsnav-content103, #newsnav-content104, #newsnav-content105,  #newsnav-content106, #newsnav-content107, #newsnav-content108, #newsnav-content109,
+#newsnav-content110, #newsnav-content111, #newsnav-content112, #newsnav-content113, #newsnav-content114, #newsnav-content115,  #newsnav-content116, #newsnav-content117, #newsnav-content118, #newsnav-content119,
+#newsnav-content120, #newsnav-content121, #newsnav-content122, #newsnav-content123, #newsnav-content124, #newsnav-content125,  #newsnav-content126, #newsnav-content127, #newsnav-content128, #newsnav-content129,
+#newsnav-content130, #newsnav-content131, #newsnav-content132, #newsnav-content133, #newsnav-content134, #newsnav-content135,  #newsnav-content136, #newsnav-content137, #newsnav-content138, #newsnav-content139,
+#newsnav-content140, #newsnav-content141, #newsnav-content142, #newsnav-content143, #newsnav-content144, #newsnav-content145,  #newsnav-content146, #newsnav-content147, #newsnav-content148, #newsnav-content149,
+#newsnav-content150, #newsnav-content151, #newsnav-content152, #newsnav-content153, #newsnav-content154, #newsnav-content155,  #newsnav-content156, #newsnav-content157, #newsnav-content158, #newsnav-content159,
+#newsnav-content160, #newsnav-content161, #newsnav-content162, #newsnav-content163, #newsnav-content164, #newsnav-content165,  #newsnav-content166, #newsnav-content167, #newsnav-content168, #newsnav-content169,
+#newsnav-content170, #newsnav-content171, #newsnav-content172, #newsnav-content173, #newsnav-content174, #newsnav-content175,  #newsnav-content176, #newsnav-content177, #newsnav-content178, #newsnav-content179,
+#newsnav-content180, #newsnav-content181, #newsnav-content182, #newsnav-content183, #newsnav-content184, #newsnav-content185,  #newsnav-content186, #newsnav-content187, #newsnav-content188, #newsnav-content189,
+#newsnav-content190, #newsnav-content191, #newsnav-content192, #newsnav-content193, #newsnav-content194, #newsnav-content195, #newsnav-content196, #newsnav-content197, #newsnav-content198, #newsnav-content199
  {
   position: fixed;
   left: 0px;
@@ -355,26 +355,27 @@ input[name="tab_item"] {
   border-radius: 5px;
 }
 
-#newsnav-input00:checked ~ #newsnav-close, #newsnav-input01:checked ~ #newsnav-close, #newsnav-input02:checked ~ #newsnav-close, #newsnav-input03:checked ~ #newsnav-close, #newsnav-input04:checked ~ #newsnav-close, #newsnav-input05:checked ~ #newsnav-close, 
-#newsnav-input10:checked ~ #newsnav-close, #newsnav-input11:checked ~ #newsnav-close, #newsnav-input12:checked ~ #newsnav-close, #newsnav-input13:checked ~ #newsnav-close, #newsnav-input14:checked ~ #newsnav-close, #newsnav-input15:checked ~ #newsnav-close, 
-#newsnav-input20:checked ~ #newsnav-close, #newsnav-input21:checked ~ #newsnav-close, #newsnav-input22:checked ~ #newsnav-close, #newsnav-input23:checked ~ #newsnav-close, #newsnav-input24:checked ~ #newsnav-close, #newsnav-input25:checked ~ #newsnav-close, 
-#newsnav-input30:checked ~ #newsnav-close, #newsnav-input31:checked ~ #newsnav-close, #newsnav-input32:checked ~ #newsnav-close, #newsnav-input33:checked ~ #newsnav-close, #newsnav-input34:checked ~ #newsnav-close, #newsnav-input35:checked ~ #newsnav-close, 
-#newsnav-input40:checked ~ #newsnav-close, #newsnav-input41:checked ~ #newsnav-close, #newsnav-input42:checked ~ #newsnav-close, #newsnav-input43:checked ~ #newsnav-close, #newsnav-input44:checked ~ #newsnav-close, #newsnav-input45:checked ~ #newsnav-close, 
-#newsnav-input50:checked ~ #newsnav-close, #newsnav-input51:checked ~ #newsnav-close, #newsnav-input52:checked ~ #newsnav-close, #newsnav-input53:checked ~ #newsnav-close, #newsnav-input54:checked ~ #newsnav-close, #newsnav-input55:checked ~ #newsnav-close, 
-#newsnav-input60:checked ~ #newsnav-close, #newsnav-input61:checked ~ #newsnav-close, #newsnav-input62:checked ~ #newsnav-close, #newsnav-input63:checked ~ #newsnav-close, #newsnav-input64:checked ~ #newsnav-close, #newsnav-input65:checked ~ #newsnav-close, 
-#newsnav-input70:checked ~ #newsnav-close, #newsnav-input71:checked ~ #newsnav-close, #newsnav-input72:checked ~ #newsnav-close, #newsnav-input73:checked ~ #newsnav-close, #newsnav-input74:checked ~ #newsnav-close, #newsnav-input75:checked ~ #newsnav-close, 
-#newsnav-input80:checked ~ #newsnav-close, #newsnav-input81:checked ~ #newsnav-close, #newsnav-input82:checked ~ #newsnav-close, #newsnav-input83:checked ~ #newsnav-close, #newsnav-input84:checked ~ #newsnav-close, #newsnav-input85:checked ~ #newsnav-close, 
-#newsnav-input90:checked ~ #newsnav-close, #newsnav-input91:checked ~ #newsnav-close, #newsnav-input92:checked ~ #newsnav-close, #newsnav-input93:checked ~ #newsnav-close, #newsnav-input94:checked ~ #newsnav-close, #newsnav-input95:checked ~ #newsnav-close,
-#newsnav-input100:checked ~ #newsnav-close, #newsnav-input101:checked ~ #newsnav-close, #newsnav-input102:checked ~ #newsnav-close, #newsnav-input103:checked ~ #newsnav-close, #newsnav-input104:checked ~ #newsnav-close, #newsnav-input105:checked ~ #newsnav-close, 
-#newsnav-input110:checked ~ #newsnav-close, #newsnav-input111:checked ~ #newsnav-close, #newsnav-input112:checked ~ #newsnav-close, #newsnav-input113:checked ~ #newsnav-close, #newsnav-input114:checked ~ #newsnav-close, #newsnav-input115:checked ~ #newsnav-close, 
-#newsnav-input120:checked ~ #newsnav-close, #newsnav-input121:checked ~ #newsnav-close, #newsnav-input122:checked ~ #newsnav-close, #newsnav-input123:checked ~ #newsnav-close, #newsnav-input124:checked ~ #newsnav-close, #newsnav-input125:checked ~ #newsnav-close, 
-#newsnav-input130:checked ~ #newsnav-close, #newsnav-input131:checked ~ #newsnav-close, #newsnav-input132:checked ~ #newsnav-close, #newsnav-input133:checked ~ #newsnav-close, #newsnav-input134:checked ~ #newsnav-close, #newsnav-input135:checked ~ #newsnav-close, 
-#newsnav-input140:checked ~ #newsnav-close, #newsnav-input141:checked ~ #newsnav-close, #newsnav-input142:checked ~ #newsnav-close, #newsnav-input143:checked ~ #newsnav-close, #newsnav-input144:checked ~ #newsnav-close, #newsnav-input145:checked ~ #newsnav-close, 
-#newsnav-input150:checked ~ #newsnav-close, #newsnav-input151:checked ~ #newsnav-close, #newsnav-input152:checked ~ #newsnav-close, #newsnav-input153:checked ~ #newsnav-close, #newsnav-input154:checked ~ #newsnav-close, #newsnav-input155:checked ~ #newsnav-close, 
-#newsnav-input160:checked ~ #newsnav-close, #newsnav-input161:checked ~ #newsnav-close, #newsnav-input162:checked ~ #newsnav-close, #newsnav-input163:checked ~ #newsnav-close, #newsnav-input164:checked ~ #newsnav-close, #newsnav-input165:checked ~ #newsnav-close, 
-#newsnav-input170:checked ~ #newsnav-close, #newsnav-input171:checked ~ #newsnav-close, #newsnav-input172:checked ~ #newsnav-close, #newsnav-input173:checked ~ #newsnav-close, #newsnav-input174:checked ~ #newsnav-close, #newsnav-input175:checked ~ #newsnav-close, 
-#newsnav-input180:checked ~ #newsnav-close, #newsnav-input181:checked ~ #newsnav-close, #newsnav-input182:checked ~ #newsnav-close, #newsnav-input183:checked ~ #newsnav-close, #newsnav-input184:checked ~ #newsnav-close, #newsnav-input185:checked ~ #newsnav-close, 
-#newsnav-input190:checked ~ #newsnav-close, #newsnav-input191:checked ~ #newsnav-close, #newsnav-input192:checked ~ #newsnav-close, #newsnav-input193:checked ~ #newsnav-close, #newsnav-input194:checked ~ #newsnav-close, #newsnav-input195:checked ~ #newsnav-close  {
+#newsnav-input0:checked ~ #newsnav-close, #newsnav-input1:checked ~ #newsnav-close, #newsnav-input2:checked ~ #newsnav-close, #newsnav-input3:checked ~ #newsnav-close, #newsnav-input4:checked ~ #newsnav-close, #newsnav-input5:checked ~ #newsnav-close, #newsnav-input6:checked ~ #newsnav-close, #newsnav-input7:checked ~ #newsnav-close, #newsnav-input8:checked ~ #newsnav-close, #newsnav-input9:checked ~ #newsnav-close,  
+#newsnav-input10:checked ~ #newsnav-close, #newsnav-input11:checked ~ #newsnav-close, #newsnav-input12:checked ~ #newsnav-close, #newsnav-input13:checked ~ #newsnav-close, #newsnav-input14:checked ~ #newsnav-close, #newsnav-input15:checked ~ #newsnav-close, #newsnav-input16:checked ~ #newsnav-close, #newsnav-input17:checked ~ #newsnav-close, #newsnav-input18:checked ~ #newsnav-close, #newsnav-input19:checked ~ #newsnav-close, 
+#newsnav-input20:checked ~ #newsnav-close, #newsnav-input21:checked ~ #newsnav-close, #newsnav-input22:checked ~ #newsnav-close, #newsnav-input23:checked ~ #newsnav-close, #newsnav-input24:checked ~ #newsnav-close, #newsnav-input25:checked ~ #newsnav-close, #newsnav-input26:checked ~ #newsnav-close, #newsnav-input27:checked ~ #newsnav-close, #newsnav-input28:checked ~ #newsnav-close, #newsnav-input29:checked ~ #newsnav-close, 
+#newsnav-input30:checked ~ #newsnav-close, #newsnav-input31:checked ~ #newsnav-close, #newsnav-input32:checked ~ #newsnav-close, #newsnav-input33:checked ~ #newsnav-close, #newsnav-input34:checked ~ #newsnav-close, #newsnav-input35:checked ~ #newsnav-close, #newsnav-input36:checked ~ #newsnav-close, #newsnav-input37:checked ~ #newsnav-close, #newsnav-input38:checked ~ #newsnav-close, #newsnav-input39:checked ~ #newsnav-close, 
+#newsnav-input40:checked ~ #newsnav-close, #newsnav-input41:checked ~ #newsnav-close, #newsnav-input42:checked ~ #newsnav-close, #newsnav-input43:checked ~ #newsnav-close, #newsnav-input44:checked ~ #newsnav-close, #newsnav-input45:checked ~ #newsnav-close, #newsnav-input46:checked ~ #newsnav-close, #newsnav-input47:checked ~ #newsnav-close, #newsnav-input48:checked ~ #newsnav-close, #newsnav-input49:checked ~ #newsnav-close, 
+#newsnav-input50:checked ~ #newsnav-close, #newsnav-input51:checked ~ #newsnav-close, #newsnav-input52:checked ~ #newsnav-close, #newsnav-input53:checked ~ #newsnav-close, #newsnav-input54:checked ~ #newsnav-close, #newsnav-input55:checked ~ #newsnav-close, #newsnav-input56:checked ~ #newsnav-close, #newsnav-input57:checked ~ #newsnav-close, #newsnav-input58:checked ~ #newsnav-close, #newsnav-input59:checked ~ #newsnav-close, 
+#newsnav-input60:checked ~ #newsnav-close, #newsnav-input61:checked ~ #newsnav-close, #newsnav-input62:checked ~ #newsnav-close, #newsnav-input63:checked ~ #newsnav-close, #newsnav-input64:checked ~ #newsnav-close, #newsnav-input65:checked ~ #newsnav-close, #newsnav-input66:checked ~ #newsnav-close, #newsnav-input67:checked ~ #newsnav-close, #newsnav-input68:checked ~ #newsnav-close, #newsnav-input69:checked ~ #newsnav-close, 
+#newsnav-input70:checked ~ #newsnav-close, #newsnav-input71:checked ~ #newsnav-close, #newsnav-input72:checked ~ #newsnav-close, #newsnav-input73:checked ~ #newsnav-close, #newsnav-input74:checked ~ #newsnav-close, #newsnav-input75:checked ~ #newsnav-close, #newsnav-input76:checked ~ #newsnav-close, #newsnav-input77:checked ~ #newsnav-close, #newsnav-input78:checked ~ #newsnav-close, #newsnav-input79:checked ~ #newsnav-close, 
+#newsnav-input80:checked ~ #newsnav-close, #newsnav-input81:checked ~ #newsnav-close, #newsnav-input82:checked ~ #newsnav-close, #newsnav-input83:checked ~ #newsnav-close, #newsnav-input84:checked ~ #newsnav-close, #newsnav-input85:checked ~ #newsnav-close, #newsnav-input86:checked ~ #newsnav-close, #newsnav-input87:checked ~ #newsnav-close, #newsnav-input88:checked ~ #newsnav-close, #newsnav-input89:checked ~ #newsnav-close, 
+#newsnav-input90:checked ~ #newsnav-close, #newsnav-input91:checked ~ #newsnav-close, #newsnav-input92:checked ~ #newsnav-close, #newsnav-input93:checked ~ #newsnav-close, #newsnav-input94:checked ~ #newsnav-close, #newsnav-input95:checked ~ #newsnav-close, #newsnav-input96:checked ~ #newsnav-close, #newsnav-input97:checked ~ #newsnav-close, #newsnav-input98:checked ~ #newsnav-close, #newsnav-input99:checked ~ #newsnav-close, 
+#newsnav-input100:checked ~ #newsnav-close, #newsnav-input101:checked ~ #newsnav-close, #newsnav-input102:checked ~ #newsnav-close, #newsnav-input103:checked ~ #newsnav-close, #newsnav-input104:checked ~ #newsnav-close, #newsnav-input105:checked ~ #newsnav-close, #newsnav-input106:checked ~ #newsnav-close, #newsnav-input107:checked ~ #newsnav-close, #newsnav-input108:checked ~ #newsnav-close, #newsnav-input109:checked ~ #newsnav-close, 
+#newsnav-input110:checked ~ #newsnav-close, #newsnav-input111:checked ~ #newsnav-close, #newsnav-input112:checked ~ #newsnav-close, #newsnav-input113:checked ~ #newsnav-close, #newsnav-input114:checked ~ #newsnav-close, #newsnav-input115:checked ~ #newsnav-close, #newsnav-input116:checked ~ #newsnav-close, #newsnav-input117:checked ~ #newsnav-close, #newsnav-input118:checked ~ #newsnav-close, #newsnav-input119:checked ~ #newsnav-close,
+#newsnav-input120:checked ~ #newsnav-close, #newsnav-input121:checked ~ #newsnav-close, #newsnav-input122:checked ~ #newsnav-close, #newsnav-input123:checked ~ #newsnav-close, #newsnav-input124:checked ~ #newsnav-close, #newsnav-input125:checked ~ #newsnav-close, #newsnav-input126:checked ~ #newsnav-close, #newsnav-input127:checked ~ #newsnav-close, #newsnav-input128:checked ~ #newsnav-close, #newsnav-input129:checked ~ #newsnav-close,
+#newsnav-input130:checked ~ #newsnav-close, #newsnav-input131:checked ~ #newsnav-close, #newsnav-input132:checked ~ #newsnav-close, #newsnav-input133:checked ~ #newsnav-close, #newsnav-input134:checked ~ #newsnav-close, #newsnav-input135:checked ~ #newsnav-close, #newsnav-input136:checked ~ #newsnav-close, #newsnav-input137:checked ~ #newsnav-close, #newsnav-input138:checked ~ #newsnav-close, #newsnav-input139:checked ~ #newsnav-close,
+#newsnav-input140:checked ~ #newsnav-close, #newsnav-input141:checked ~ #newsnav-close, #newsnav-input142:checked ~ #newsnav-close, #newsnav-input143:checked ~ #newsnav-close, #newsnav-input144:checked ~ #newsnav-close, #newsnav-input145:checked ~ #newsnav-close, #newsnav-input146:checked ~ #newsnav-close, #newsnav-input147:checked ~ #newsnav-close, #newsnav-input148:checked ~ #newsnav-close, #newsnav-input149:checked ~ #newsnav-close,
+#newsnav-input150:checked ~ #newsnav-close, #newsnav-input151:checked ~ #newsnav-close, #newsnav-input152:checked ~ #newsnav-close, #newsnav-input153:checked ~ #newsnav-close, #newsnav-input154:checked ~ #newsnav-close, #newsnav-input155:checked ~ #newsnav-close, #newsnav-input156:checked ~ #newsnav-close, #newsnav-input157:checked ~ #newsnav-close, #newsnav-input158:checked ~ #newsnav-close, #newsnav-input159:checked ~ #newsnav-close,
+#newsnav-input160:checked ~ #newsnav-close, #newsnav-input161:checked ~ #newsnav-close, #newsnav-input162:checked ~ #newsnav-close, #newsnav-input163:checked ~ #newsnav-close, #newsnav-input164:checked ~ #newsnav-close, #newsnav-input165:checked ~ #newsnav-close, #newsnav-input166:checked ~ #newsnav-close, #newsnav-input167:checked ~ #newsnav-close, #newsnav-input168:checked ~ #newsnav-close, #newsnav-input169:checked ~ #newsnav-close,
+#newsnav-input170:checked ~ #newsnav-close, #newsnav-input171:checked ~ #newsnav-close, #newsnav-input172:checked ~ #newsnav-close, #newsnav-input173:checked ~ #newsnav-close, #newsnav-input174:checked ~ #newsnav-close, #newsnav-input175:checked ~ #newsnav-close, #newsnav-input176:checked ~ #newsnav-close, #newsnav-input177:checked ~ #newsnav-close, #newsnav-input178:checked ~ #newsnav-close, #newsnav-input179:checked ~ #newsnav-close,
+#newsnav-input180:checked ~ #newsnav-close, #newsnav-input181:checked ~ #newsnav-close, #newsnav-input182:checked ~ #newsnav-close, #newsnav-input183:checked ~ #newsnav-close, #newsnav-input184:checked ~ #newsnav-close, #newsnav-input185:checked ~ #newsnav-close, #newsnav-input186:checked ~ #newsnav-close, #newsnav-input187:checked ~ #newsnav-close, #newsnav-input188:checked ~ #newsnav-close, #newsnav-input189:checked ~ #newsnav-close,
+#newsnav-input190:checked ~ #newsnav-close, #newsnav-input191:checked ~ #newsnav-close, #newsnav-input192:checked ~ #newsnav-close, #newsnav-input193:checked ~ #newsnav-close, #newsnav-input194:checked ~ #newsnav-close, #newsnav-input195:checked ~ #newsnav-close,#newsnav-input196:checked ~ #newsnav-close, #newsnav-input197:checked ~ #newsnav-close, #newsnav-input198:checked ~ #newsnav-close, #newsnav-input199:checked ~ #newsnav-close
+  {
   display: block;/*カバーを表示*/
   opacity: .6;
 }
@@ -1613,26 +1614,26 @@ input[name="tab_item"] {
   display:none;
 }
 
-#newsnav-open00, #newsnav-open01, #newsnav-open02, #newsnav-open03, #newsnav-open04, #newsnav-open05,
-#newsnav-open10, #newsnav-open11, #newsnav-open12, #newsnav-open13, #newsnav-open14, #newsnav-open15,
-#newsnav-open20, #newsnav-open21, #newsnav-open22, #newsnav-open23, #newsnav-open24, #newsnav-open25,
-#newsnav-open30, #newsnav-open31, #newsnav-open32, #newsnav-open33, #newsnav-open34, #newsnav-open35,
-#newsnav-open40, #newsnav-open41, #newsnav-open42, #newsnav-open43, #newsnav-open44, #newsnav-open45,
-#newsnav-open50, #newsnav-open51, #newsnav-open52, #newsnav-open53, #newsnav-open54, #newsnav-open55,
-#newsnav-open60, #newsnav-open61, #newsnav-open62, #newsnav-open63, #newsnav-open64, #newsnav-open65,
-#newsnav-open70, #newsnav-open71, #newsnav-open72, #newsnav-open73, #newsnav-open74, #newsnav-open75,
-#newsnav-open80, #newsnav-open81, #newsnav-open82, #newsnav-open83, #newsnav-open84, #newsnav-open85,
-#newsnav-open90, #newsnav-open91, #newsnav-open92, #newsnav-open93, #newsnav-open94, #newsnav-open95,
-#newsnav-open100, #newsnav-open101, #newsnav-open102, #newsnav-open103, #newsnav-open104, #newsnav-open105,
-#newsnav-open110, #newsnav-open111, #newsnav-open112, #newsnav-open113, #newsnav-open114, #newsnav-open115,
-#newsnav-open120, #newsnav-open121, #newsnav-open122, #newsnav-open123, #newsnav-open124, #newsnav-open125,
-#newsnav-open130, #newsnav-open131, #newsnav-open132, #newsnav-open133, #newsnav-open134, #newsnav-open135,
-#newsnav-open140, #newsnav-open141, #newsnav-open142, #newsnav-open143, #newsnav-open144, #newsnav-open145,
-#newsnav-open150, #newsnav-open151, #newsnav-open152, #newsnav-open153, #newsnav-open154, #newsnav-open155,
-#newsnav-open160, #newsnav-open161, #newsnav-open162, #newsnav-open163, #newsnav-open164, #newsnav-open165,
-#newsnav-open170, #newsnav-open171, #newsnav-open172, #newsnav-open173, #newsnav-open174, #newsnav-open175,
-#newsnav-open180, #newsnav-open181, #newsnav-open182, #newsnav-open183, #newsnav-open184, #newsnav-open185,
-#newsnav-open190, #newsnav-open191, #newsnav-open192, #newsnav-open193, #newsnav-open194, #newsnav-open195
+#newsnav-open0, #newsnav-open1, #newsnav-open2, #newsnav-open3, #newsnav-open4, #newsnav-open5,#newsnav-open6, #newsnav-open7, #newsnav-open8, #newsnav-open9,
+#newsnav-open10, #newsnav-open11, #newsnav-open12, #newsnav-open13, #newsnav-open14, #newsnav-open15,#newsnav-open16, #newsnav-open17, #newsnav-open18, #newsnav-open19,
+#newsnav-open20, #newsnav-open21, #newsnav-open22, #newsnav-open23, #newsnav-open24, #newsnav-open25,#newsnav-open26, #newsnav-open27, #newsnav-open28, #newsnav-open29,
+#newsnav-open30, #newsnav-open31, #newsnav-open32, #newsnav-open33, #newsnav-open34, #newsnav-open35,#newsnav-open36, #newsnav-open37, #newsnav-open38, #newsnav-open39,
+#newsnav-open40, #newsnav-open41, #newsnav-open42, #newsnav-open43, #newsnav-open44, #newsnav-open45,#newsnav-open46, #newsnav-open47, #newsnav-open48, #newsnav-open49,
+#newsnav-open50, #newsnav-open51, #newsnav-open52, #newsnav-open53, #newsnav-open54, #newsnav-open55,#newsnav-open56, #newsnav-open57, #newsnav-open58, #newsnav-open59,
+#newsnav-open60, #newsnav-open61, #newsnav-open62, #newsnav-open63, #newsnav-open64, #newsnav-open65,#newsnav-open66, #newsnav-open67, #newsnav-open68, #newsnav-open69,
+#newsnav-open70, #newsnav-open71, #newsnav-open72, #newsnav-open73, #newsnav-open74, #newsnav-open75,#newsnav-open76, #newsnav-open77, #newsnav-open78, #newsnav-open79,
+#newsnav-open80, #newsnav-open81, #newsnav-open82, #newsnav-open83, #newsnav-open84, #newsnav-open85,#newsnav-open86, #newsnav-open87, #newsnav-open88, #newsnav-open89,
+#newsnav-open90, #newsnav-open91, #newsnav-open92, #newsnav-open93, #newsnav-open94, #newsnav-open95,#newsnav-open96, #newsnav-open97, #newsnav-open98, #newsnav-open99,
+#newsnav-open100, #newsnav-open101, #newsnav-open102, #newsnav-open103, #newsnav-open104, #newsnav-open105, #newsnav-open106, #newsnav-open107, #newsnav-open108, #newsnav-open109,
+#newsnav-open110, #newsnav-open111, #newsnav-open112, #newsnav-open113, #newsnav-open114, #newsnav-open115, #newsnav-open116, #newsnav-open117, #newsnav-open118, #newsnav-open119,
+#newsnav-open120, #newsnav-open121, #newsnav-open122, #newsnav-open123, #newsnav-open124, #newsnav-open125, #newsnav-open126, #newsnav-open127, #newsnav-open128, #newsnav-open129,
+#newsnav-open130, #newsnav-open131, #newsnav-open132, #newsnav-open133, #newsnav-open134, #newsnav-open135, #newsnav-open136, #newsnav-open137, #newsnav-open138, #newsnav-open139,
+#newsnav-open140, #newsnav-open141, #newsnav-open142, #newsnav-open143, #newsnav-open144, #newsnav-open145, #newsnav-open146, #newsnav-open147, #newsnav-open148, #newsnav-open149,
+#newsnav-open150, #newsnav-open151, #newsnav-open152, #newsnav-open153, #newsnav-open154, #newsnav-open155, #newsnav-open156, #newsnav-open157, #newsnav-open158, #newsnav-open159,
+#newsnav-open160, #newsnav-open161, #newsnav-open162, #newsnav-open163, #newsnav-open164, #newsnav-open165, #newsnav-open166, #newsnav-open167, #newsnav-open168, #newsnav-open169,
+#newsnav-open170, #newsnav-open171, #newsnav-open172, #newsnav-open173, #newsnav-open174, #newsnav-open175, #newsnav-open176, #newsnav-open177, #newsnav-open178, #newsnav-open179,
+#newsnav-open180, #newsnav-open181, #newsnav-open182, #newsnav-open183, #newsnav-open184, #newsnav-open185, #newsnav-open186, #newsnav-open187, #newsnav-open188, #newsnav-open189,
+#newsnav-open190, #newsnav-open191, #newsnav-open192, #newsnav-open193, #newsnav-open194, #newsnav-open195, #newsnav-open196, #newsnav-open197, #newsnav-open198, #newsnav-open199
 {
   position: relative;
   display: inline-block;
@@ -1652,27 +1653,27 @@ input[name="tab_item"] {
   transition: .5s ease-in-out;
 }
 
-#newsnav-content00, #newsnav-content01, #newsnav-content02, #newsnav-content03, #newsnav-content04, #newsnav-content05, 
-#newsnav-content10, #newsnav-content11, #newsnav-content12, #newsnav-content13, #newsnav-content14, #newsnav-content15, 
-#newsnav-content20, #newsnav-content21, #newsnav-content22, #newsnav-content23, #newsnav-content24, #newsnav-content25, 
-#newsnav-content30, #newsnav-content31, #newsnav-content32, #newsnav-content33, #newsnav-content34, #newsnav-content35, 
-#newsnav-content40, #newsnav-content41, #newsnav-content42, #newsnav-content43, #newsnav-content44, #newsnav-content45, 
-#newsnav-content50, #newsnav-content51, #newsnav-content52, #newsnav-content53, #newsnav-content54, #newsnav-content55, 
-#newsnav-content60, #newsnav-content61, #newsnav-content62, #newsnav-content63, #newsnav-content64, #newsnav-content65, 
-#newsnav-content70, #newsnav-content71, #newsnav-content72, #newsnav-content73, #newsnav-content74, #newsnav-content75, 
-#newsnav-content80, #newsnav-content81, #newsnav-content82, #newsnav-content83, #newsnav-content84, #newsnav-content85, 
-#newsnav-content90, #newsnav-content91, #newsnav-content92, #newsnav-content93, #newsnav-content94, #newsnav-content95,
-#newsnav-content100, #newsnav-content101, #newsnav-content102, #newsnav-content103, #newsnav-content104, #newsnav-content105, 
-#newsnav-content110, #newsnav-content111, #newsnav-content112, #newsnav-content113, #newsnav-content114, #newsnav-content115, 
-#newsnav-content120, #newsnav-content121, #newsnav-content122, #newsnav-content123, #newsnav-content124, #newsnav-content125, 
-#newsnav-content130, #newsnav-content131, #newsnav-content132, #newsnav-content133, #newsnav-content134, #newsnav-content135, 
-#newsnav-content140, #newsnav-content141, #newsnav-content142, #newsnav-content143, #newsnav-content144, #newsnav-content145, 
-#newsnav-content150, #newsnav-content151, #newsnav-content152, #newsnav-content153, #newsnav-content154, #newsnav-content155, 
-#newsnav-content160, #newsnav-content161, #newsnav-content162, #newsnav-content163, #newsnav-content164, #newsnav-content165, 
-#newsnav-content170, #newsnav-content171, #newsnav-content172, #newsnav-content173, #newsnav-content174, #newsnav-content175, 
-#newsnav-content180, #newsnav-content181, #newsnav-content182, #newsnav-content183, #newsnav-content184, #newsnav-content185, 
-#newsnav-content190, #newsnav-content191, #newsnav-content192, #newsnav-content193, #newsnav-content194, #newsnav-content195
- {
+#newsnav-content0, #newsnav-content1, #newsnav-content2, #newsnav-content3, #newsnav-content4, #newsnav-content5, #newsnav-content6, #newsnav-content7, #newsnav-content8, #newsnav-content9,
+#newsnav-content10, #newsnav-content11, #newsnav-content12, #newsnav-content13, #newsnav-content14, #newsnav-content15,  #newsnav-content16, #newsnav-content17, #newsnav-content18, #newsnav-content19,
+#newsnav-content20, #newsnav-content21, #newsnav-content22, #newsnav-content23, #newsnav-content24, #newsnav-content25,  #newsnav-content26, #newsnav-content27, #newsnav-content28, #newsnav-content29,
+#newsnav-content30, #newsnav-content31, #newsnav-content32, #newsnav-content33, #newsnav-content34, #newsnav-content35,  #newsnav-content36, #newsnav-content37, #newsnav-content38, #newsnav-content39,
+#newsnav-content40, #newsnav-content41, #newsnav-content42, #newsnav-content43, #newsnav-content44, #newsnav-content45,  #newsnav-content46, #newsnav-content47, #newsnav-content48, #newsnav-content49,
+#newsnav-content50, #newsnav-content51, #newsnav-content52, #newsnav-content53, #newsnav-content54, #newsnav-content55,  #newsnav-content56, #newsnav-content57, #newsnav-content58, #newsnav-content59,
+#newsnav-content60, #newsnav-content61, #newsnav-content62, #newsnav-content63, #newsnav-content64, #newsnav-content65,  #newsnav-content66, #newsnav-content67, #newsnav-content68, #newsnav-content69,
+#newsnav-content70, #newsnav-content71, #newsnav-content72, #newsnav-content73, #newsnav-content74, #newsnav-content75,  #newsnav-content76, #newsnav-content77, #newsnav-content78, #newsnav-content79,
+#newsnav-content80, #newsnav-content81, #newsnav-content82, #newsnav-content83, #newsnav-content84, #newsnav-content85,  #newsnav-content86, #newsnav-content87, #newsnav-content88, #newsnav-content89,
+#newsnav-content90, #newsnav-content91, #newsnav-content92, #newsnav-content93, #newsnav-content94, #newsnav-content95, #newsnav-content96, #newsnav-content97, #newsnav-content98, #newsnav-content99,
+#newsnav-content100, #newsnav-content101, #newsnav-content102, #newsnav-content103, #newsnav-content104, #newsnav-content105,  #newsnav-content106, #newsnav-content107, #newsnav-content108, #newsnav-content109,
+#newsnav-content110, #newsnav-content111, #newsnav-content112, #newsnav-content113, #newsnav-content114, #newsnav-content115,  #newsnav-content116, #newsnav-content117, #newsnav-content118, #newsnav-content119,
+#newsnav-content120, #newsnav-content121, #newsnav-content122, #newsnav-content123, #newsnav-content124, #newsnav-content125,  #newsnav-content126, #newsnav-content127, #newsnav-content128, #newsnav-content129,
+#newsnav-content130, #newsnav-content131, #newsnav-content132, #newsnav-content133, #newsnav-content134, #newsnav-content135,  #newsnav-content136, #newsnav-content137, #newsnav-content138, #newsnav-content139,
+#newsnav-content140, #newsnav-content141, #newsnav-content142, #newsnav-content143, #newsnav-content144, #newsnav-content145,  #newsnav-content146, #newsnav-content147, #newsnav-content148, #newsnav-content149,
+#newsnav-content150, #newsnav-content151, #newsnav-content152, #newsnav-content153, #newsnav-content154, #newsnav-content155,  #newsnav-content156, #newsnav-content157, #newsnav-content158, #newsnav-content159,
+#newsnav-content160, #newsnav-content161, #newsnav-content162, #newsnav-content163, #newsnav-content164, #newsnav-content165,  #newsnav-content166, #newsnav-content167, #newsnav-content168, #newsnav-content169,
+#newsnav-content170, #newsnav-content171, #newsnav-content172, #newsnav-content173, #newsnav-content174, #newsnav-content175,  #newsnav-content176, #newsnav-content177, #newsnav-content178, #newsnav-content179,
+#newsnav-content180, #newsnav-content181, #newsnav-content182, #newsnav-content183, #newsnav-content184, #newsnav-content185,  #newsnav-content186, #newsnav-content187, #newsnav-content188, #newsnav-content189,
+#newsnav-content190, #newsnav-content191, #newsnav-content192, #newsnav-content193, #newsnav-content194, #newsnav-content195, #newsnav-content196, #newsnav-content197, #newsnav-content198, #newsnav-content199
+{
   position: fixed;
   left: 0px;
   right: 0px;
@@ -1690,26 +1691,27 @@ input[name="tab_item"] {
   border-radius: 5px;
 }
 
-#newsnav-input00:checked ~ #newsnav-close, #newsnav-input01:checked ~ #newsnav-close, #newsnav-input02:checked ~ #newsnav-close, #newsnav-input03:checked ~ #newsnav-close, #newsnav-input04:checked ~ #newsnav-close, #newsnav-input05:checked ~ #newsnav-close, 
-#newsnav-input10:checked ~ #newsnav-close, #newsnav-input11:checked ~ #newsnav-close, #newsnav-input12:checked ~ #newsnav-close, #newsnav-input13:checked ~ #newsnav-close, #newsnav-input14:checked ~ #newsnav-close, #newsnav-input15:checked ~ #newsnav-close, 
-#newsnav-input20:checked ~ #newsnav-close, #newsnav-input21:checked ~ #newsnav-close, #newsnav-input22:checked ~ #newsnav-close, #newsnav-input23:checked ~ #newsnav-close, #newsnav-input24:checked ~ #newsnav-close, #newsnav-input25:checked ~ #newsnav-close, 
-#newsnav-input30:checked ~ #newsnav-close, #newsnav-input31:checked ~ #newsnav-close, #newsnav-input32:checked ~ #newsnav-close, #newsnav-input33:checked ~ #newsnav-close, #newsnav-input34:checked ~ #newsnav-close, #newsnav-input35:checked ~ #newsnav-close, 
-#newsnav-input40:checked ~ #newsnav-close, #newsnav-input41:checked ~ #newsnav-close, #newsnav-input42:checked ~ #newsnav-close, #newsnav-input43:checked ~ #newsnav-close, #newsnav-input44:checked ~ #newsnav-close, #newsnav-input45:checked ~ #newsnav-close, 
-#newsnav-input50:checked ~ #newsnav-close, #newsnav-input51:checked ~ #newsnav-close, #newsnav-input52:checked ~ #newsnav-close, #newsnav-input53:checked ~ #newsnav-close, #newsnav-input54:checked ~ #newsnav-close, #newsnav-input55:checked ~ #newsnav-close, 
-#newsnav-input60:checked ~ #newsnav-close, #newsnav-input61:checked ~ #newsnav-close, #newsnav-input62:checked ~ #newsnav-close, #newsnav-input63:checked ~ #newsnav-close, #newsnav-input64:checked ~ #newsnav-close, #newsnav-input65:checked ~ #newsnav-close, 
-#newsnav-input70:checked ~ #newsnav-close, #newsnav-input71:checked ~ #newsnav-close, #newsnav-input72:checked ~ #newsnav-close, #newsnav-input73:checked ~ #newsnav-close, #newsnav-input74:checked ~ #newsnav-close, #newsnav-input75:checked ~ #newsnav-close, 
-#newsnav-input80:checked ~ #newsnav-close, #newsnav-input81:checked ~ #newsnav-close, #newsnav-input82:checked ~ #newsnav-close, #newsnav-input83:checked ~ #newsnav-close, #newsnav-input84:checked ~ #newsnav-close, #newsnav-input85:checked ~ #newsnav-close, 
-#newsnav-input90:checked ~ #newsnav-close, #newsnav-input91:checked ~ #newsnav-close, #newsnav-input92:checked ~ #newsnav-close, #newsnav-input93:checked ~ #newsnav-close, #newsnav-input94:checked ~ #newsnav-close, #newsnav-input95:checked ~ #newsnav-close,
-#newsnav-input100:checked ~ #newsnav-close, #newsnav-input101:checked ~ #newsnav-close, #newsnav-input102:checked ~ #newsnav-close, #newsnav-input103:checked ~ #newsnav-close, #newsnav-input104:checked ~ #newsnav-close, #newsnav-input105:checked ~ #newsnav-close, 
-#newsnav-input110:checked ~ #newsnav-close, #newsnav-input111:checked ~ #newsnav-close, #newsnav-input112:checked ~ #newsnav-close, #newsnav-input113:checked ~ #newsnav-close, #newsnav-input114:checked ~ #newsnav-close, #newsnav-input115:checked ~ #newsnav-close, 
-#newsnav-input120:checked ~ #newsnav-close, #newsnav-input121:checked ~ #newsnav-close, #newsnav-input122:checked ~ #newsnav-close, #newsnav-input123:checked ~ #newsnav-close, #newsnav-input124:checked ~ #newsnav-close, #newsnav-input125:checked ~ #newsnav-close, 
-#newsnav-input130:checked ~ #newsnav-close, #newsnav-input131:checked ~ #newsnav-close, #newsnav-input132:checked ~ #newsnav-close, #newsnav-input133:checked ~ #newsnav-close, #newsnav-input134:checked ~ #newsnav-close, #newsnav-input135:checked ~ #newsnav-close, 
-#newsnav-input140:checked ~ #newsnav-close, #newsnav-input141:checked ~ #newsnav-close, #newsnav-input142:checked ~ #newsnav-close, #newsnav-input143:checked ~ #newsnav-close, #newsnav-input144:checked ~ #newsnav-close, #newsnav-input145:checked ~ #newsnav-close, 
-#newsnav-input150:checked ~ #newsnav-close, #newsnav-input151:checked ~ #newsnav-close, #newsnav-input152:checked ~ #newsnav-close, #newsnav-input153:checked ~ #newsnav-close, #newsnav-input154:checked ~ #newsnav-close, #newsnav-input155:checked ~ #newsnav-close, 
-#newsnav-input160:checked ~ #newsnav-close, #newsnav-input161:checked ~ #newsnav-close, #newsnav-input162:checked ~ #newsnav-close, #newsnav-input163:checked ~ #newsnav-close, #newsnav-input164:checked ~ #newsnav-close, #newsnav-input165:checked ~ #newsnav-close, 
-#newsnav-input170:checked ~ #newsnav-close, #newsnav-input171:checked ~ #newsnav-close, #newsnav-input172:checked ~ #newsnav-close, #newsnav-input173:checked ~ #newsnav-close, #newsnav-input174:checked ~ #newsnav-close, #newsnav-input175:checked ~ #newsnav-close, 
-#newsnav-input180:checked ~ #newsnav-close, #newsnav-input181:checked ~ #newsnav-close, #newsnav-input182:checked ~ #newsnav-close, #newsnav-input183:checked ~ #newsnav-close, #newsnav-input184:checked ~ #newsnav-close, #newsnav-input185:checked ~ #newsnav-close, 
-#newsnav-input190:checked ~ #newsnav-close, #newsnav-input191:checked ~ #newsnav-close, #newsnav-input192:checked ~ #newsnav-close, #newsnav-input193:checked ~ #newsnav-close, #newsnav-input194:checked ~ #newsnav-close, #newsnav-input195:checked ~ #newsnav-close  {
+#newsnav-input0:checked ~ #newsnav-close, #newsnav-input1:checked ~ #newsnav-close, #newsnav-input2:checked ~ #newsnav-close, #newsnav-input3:checked ~ #newsnav-close, #newsnav-input4:checked ~ #newsnav-close, #newsnav-input5:checked ~ #newsnav-close, #newsnav-input6:checked ~ #newsnav-close, #newsnav-input7:checked ~ #newsnav-close, #newsnav-input8:checked ~ #newsnav-close, #newsnav-input9:checked ~ #newsnav-close,  
+#newsnav-input10:checked ~ #newsnav-close, #newsnav-input11:checked ~ #newsnav-close, #newsnav-input12:checked ~ #newsnav-close, #newsnav-input13:checked ~ #newsnav-close, #newsnav-input14:checked ~ #newsnav-close, #newsnav-input15:checked ~ #newsnav-close, #newsnav-input16:checked ~ #newsnav-close, #newsnav-input17:checked ~ #newsnav-close, #newsnav-input18:checked ~ #newsnav-close, #newsnav-input19:checked ~ #newsnav-close, 
+#newsnav-input20:checked ~ #newsnav-close, #newsnav-input21:checked ~ #newsnav-close, #newsnav-input22:checked ~ #newsnav-close, #newsnav-input23:checked ~ #newsnav-close, #newsnav-input24:checked ~ #newsnav-close, #newsnav-input25:checked ~ #newsnav-close, #newsnav-input26:checked ~ #newsnav-close, #newsnav-input27:checked ~ #newsnav-close, #newsnav-input28:checked ~ #newsnav-close, #newsnav-input29:checked ~ #newsnav-close, 
+#newsnav-input30:checked ~ #newsnav-close, #newsnav-input31:checked ~ #newsnav-close, #newsnav-input32:checked ~ #newsnav-close, #newsnav-input33:checked ~ #newsnav-close, #newsnav-input34:checked ~ #newsnav-close, #newsnav-input35:checked ~ #newsnav-close, #newsnav-input36:checked ~ #newsnav-close, #newsnav-input37:checked ~ #newsnav-close, #newsnav-input38:checked ~ #newsnav-close, #newsnav-input39:checked ~ #newsnav-close, 
+#newsnav-input40:checked ~ #newsnav-close, #newsnav-input41:checked ~ #newsnav-close, #newsnav-input42:checked ~ #newsnav-close, #newsnav-input43:checked ~ #newsnav-close, #newsnav-input44:checked ~ #newsnav-close, #newsnav-input45:checked ~ #newsnav-close, #newsnav-input46:checked ~ #newsnav-close, #newsnav-input47:checked ~ #newsnav-close, #newsnav-input48:checked ~ #newsnav-close, #newsnav-input49:checked ~ #newsnav-close, 
+#newsnav-input50:checked ~ #newsnav-close, #newsnav-input51:checked ~ #newsnav-close, #newsnav-input52:checked ~ #newsnav-close, #newsnav-input53:checked ~ #newsnav-close, #newsnav-input54:checked ~ #newsnav-close, #newsnav-input55:checked ~ #newsnav-close, #newsnav-input56:checked ~ #newsnav-close, #newsnav-input57:checked ~ #newsnav-close, #newsnav-input58:checked ~ #newsnav-close, #newsnav-input59:checked ~ #newsnav-close, 
+#newsnav-input60:checked ~ #newsnav-close, #newsnav-input61:checked ~ #newsnav-close, #newsnav-input62:checked ~ #newsnav-close, #newsnav-input63:checked ~ #newsnav-close, #newsnav-input64:checked ~ #newsnav-close, #newsnav-input65:checked ~ #newsnav-close, #newsnav-input66:checked ~ #newsnav-close, #newsnav-input67:checked ~ #newsnav-close, #newsnav-input68:checked ~ #newsnav-close, #newsnav-input69:checked ~ #newsnav-close, 
+#newsnav-input70:checked ~ #newsnav-close, #newsnav-input71:checked ~ #newsnav-close, #newsnav-input72:checked ~ #newsnav-close, #newsnav-input73:checked ~ #newsnav-close, #newsnav-input74:checked ~ #newsnav-close, #newsnav-input75:checked ~ #newsnav-close, #newsnav-input76:checked ~ #newsnav-close, #newsnav-input77:checked ~ #newsnav-close, #newsnav-input78:checked ~ #newsnav-close, #newsnav-input79:checked ~ #newsnav-close, 
+#newsnav-input80:checked ~ #newsnav-close, #newsnav-input81:checked ~ #newsnav-close, #newsnav-input82:checked ~ #newsnav-close, #newsnav-input83:checked ~ #newsnav-close, #newsnav-input84:checked ~ #newsnav-close, #newsnav-input85:checked ~ #newsnav-close, #newsnav-input86:checked ~ #newsnav-close, #newsnav-input87:checked ~ #newsnav-close, #newsnav-input88:checked ~ #newsnav-close, #newsnav-input89:checked ~ #newsnav-close, 
+#newsnav-input90:checked ~ #newsnav-close, #newsnav-input91:checked ~ #newsnav-close, #newsnav-input92:checked ~ #newsnav-close, #newsnav-input93:checked ~ #newsnav-close, #newsnav-input94:checked ~ #newsnav-close, #newsnav-input95:checked ~ #newsnav-close, #newsnav-input96:checked ~ #newsnav-close, #newsnav-input97:checked ~ #newsnav-close, #newsnav-input98:checked ~ #newsnav-close, #newsnav-input99:checked ~ #newsnav-close, 
+#newsnav-input100:checked ~ #newsnav-close, #newsnav-input101:checked ~ #newsnav-close, #newsnav-input102:checked ~ #newsnav-close, #newsnav-input103:checked ~ #newsnav-close, #newsnav-input104:checked ~ #newsnav-close, #newsnav-input105:checked ~ #newsnav-close, #newsnav-input106:checked ~ #newsnav-close, #newsnav-input107:checked ~ #newsnav-close, #newsnav-input108:checked ~ #newsnav-close, #newsnav-input109:checked ~ #newsnav-close, 
+#newsnav-input110:checked ~ #newsnav-close, #newsnav-input111:checked ~ #newsnav-close, #newsnav-input112:checked ~ #newsnav-close, #newsnav-input113:checked ~ #newsnav-close, #newsnav-input114:checked ~ #newsnav-close, #newsnav-input115:checked ~ #newsnav-close, #newsnav-input116:checked ~ #newsnav-close, #newsnav-input117:checked ~ #newsnav-close, #newsnav-input118:checked ~ #newsnav-close, #newsnav-input119:checked ~ #newsnav-close,
+#newsnav-input120:checked ~ #newsnav-close, #newsnav-input121:checked ~ #newsnav-close, #newsnav-input122:checked ~ #newsnav-close, #newsnav-input123:checked ~ #newsnav-close, #newsnav-input124:checked ~ #newsnav-close, #newsnav-input125:checked ~ #newsnav-close, #newsnav-input126:checked ~ #newsnav-close, #newsnav-input127:checked ~ #newsnav-close, #newsnav-input128:checked ~ #newsnav-close, #newsnav-input129:checked ~ #newsnav-close,
+#newsnav-input130:checked ~ #newsnav-close, #newsnav-input131:checked ~ #newsnav-close, #newsnav-input132:checked ~ #newsnav-close, #newsnav-input133:checked ~ #newsnav-close, #newsnav-input134:checked ~ #newsnav-close, #newsnav-input135:checked ~ #newsnav-close, #newsnav-input136:checked ~ #newsnav-close, #newsnav-input137:checked ~ #newsnav-close, #newsnav-input138:checked ~ #newsnav-close, #newsnav-input139:checked ~ #newsnav-close,
+#newsnav-input140:checked ~ #newsnav-close, #newsnav-input141:checked ~ #newsnav-close, #newsnav-input142:checked ~ #newsnav-close, #newsnav-input143:checked ~ #newsnav-close, #newsnav-input144:checked ~ #newsnav-close, #newsnav-input145:checked ~ #newsnav-close, #newsnav-input146:checked ~ #newsnav-close, #newsnav-input147:checked ~ #newsnav-close, #newsnav-input148:checked ~ #newsnav-close, #newsnav-input149:checked ~ #newsnav-close,
+#newsnav-input150:checked ~ #newsnav-close, #newsnav-input151:checked ~ #newsnav-close, #newsnav-input152:checked ~ #newsnav-close, #newsnav-input153:checked ~ #newsnav-close, #newsnav-input154:checked ~ #newsnav-close, #newsnav-input155:checked ~ #newsnav-close, #newsnav-input156:checked ~ #newsnav-close, #newsnav-input157:checked ~ #newsnav-close, #newsnav-input158:checked ~ #newsnav-close, #newsnav-input159:checked ~ #newsnav-close,
+#newsnav-input160:checked ~ #newsnav-close, #newsnav-input161:checked ~ #newsnav-close, #newsnav-input162:checked ~ #newsnav-close, #newsnav-input163:checked ~ #newsnav-close, #newsnav-input164:checked ~ #newsnav-close, #newsnav-input165:checked ~ #newsnav-close, #newsnav-input166:checked ~ #newsnav-close, #newsnav-input167:checked ~ #newsnav-close, #newsnav-input168:checked ~ #newsnav-close, #newsnav-input169:checked ~ #newsnav-close,
+#newsnav-input170:checked ~ #newsnav-close, #newsnav-input171:checked ~ #newsnav-close, #newsnav-input172:checked ~ #newsnav-close, #newsnav-input173:checked ~ #newsnav-close, #newsnav-input174:checked ~ #newsnav-close, #newsnav-input175:checked ~ #newsnav-close, #newsnav-input176:checked ~ #newsnav-close, #newsnav-input177:checked ~ #newsnav-close, #newsnav-input178:checked ~ #newsnav-close, #newsnav-input179:checked ~ #newsnav-close,
+#newsnav-input180:checked ~ #newsnav-close, #newsnav-input181:checked ~ #newsnav-close, #newsnav-input182:checked ~ #newsnav-close, #newsnav-input183:checked ~ #newsnav-close, #newsnav-input184:checked ~ #newsnav-close, #newsnav-input185:checked ~ #newsnav-close, #newsnav-input186:checked ~ #newsnav-close, #newsnav-input187:checked ~ #newsnav-close, #newsnav-input188:checked ~ #newsnav-close, #newsnav-input189:checked ~ #newsnav-close,
+#newsnav-input190:checked ~ #newsnav-close, #newsnav-input191:checked ~ #newsnav-close, #newsnav-input192:checked ~ #newsnav-close, #newsnav-input193:checked ~ #newsnav-close, #newsnav-input194:checked ~ #newsnav-close, #newsnav-input195:checked ~ #newsnav-close,#newsnav-input196:checked ~ #newsnav-close, #newsnav-input197:checked ~ #newsnav-close, #newsnav-input198:checked ~ #newsnav-close, #newsnav-input199:checked ~ #newsnav-close
+{
   display: block;/*カバーを表示*/
   opacity: .6;
 }

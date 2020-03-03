@@ -156,7 +156,7 @@
               }
       
       
-              const socket = io("http://api.aicevote.com");
+              const socket = io("https://api.aicevote.com");
               var sessionToken;
       
               socket.on('connect', function () {
@@ -164,7 +164,7 @@
                 socket.emit('get transition',{id:6});
                 socket.emit('get comments',{id:6});
                 $.ajax({
-                  url: "http://api.aicevote.com/auth/sessiontoken",
+                  url: "https://api.aicevote.com/auth/sessiontoken",
                   xhrFields: {
                     withCredentials: true
                   }

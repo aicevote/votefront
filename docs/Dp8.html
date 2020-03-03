@@ -204,12 +204,12 @@
               if ($('#J').text().length == 0){
                 $('#J').remove();
               }
-              const socket = io("http://api.aicevote.com/");
+              const socket = io("https://api.aicevote.com/");
               var sessionToken;
       
               socket.on('connect', function () {
                 $.ajax({
-                  url: "http://api.aicevote.com/auth/sessiontoken",
+                  url: "https://api.aicevote.com/auth/sessiontoken",
                   xhrFields: {
                     withCredentials: true
                   }

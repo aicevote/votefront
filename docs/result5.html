@@ -156,7 +156,7 @@
               }
       
       
-              const socket = io("http://sakura-02.yujixr.net");
+              const socket = io("http://api.aicevote.com");
               var sessionToken;
       
               socket.on('connect', function () {
@@ -164,7 +164,7 @@
                 socket.emit('get transition',{id:5});
                 socket.emit('get comments',{id:5});
                 $.ajax({
-                  url: "http://sakura-02.yujixr.net/auth/sessiontoken",
+                  url: "http://api.aicevote.com/auth/sessiontoken",
                   xhrFields: {
                     withCredentials: true
                   }

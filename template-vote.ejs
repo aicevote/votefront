@@ -206,12 +206,12 @@ var data = jsonData;
               if ($('#J').text().length == 0){
                 $('#J').remove();
               }
-              const socket = io("http://sakura-02.yujixr.net/");
+              const socket = io("http://api.aicevote.com/");
               var sessionToken;
       
               socket.on('connect', function () {
                 $.ajax({
-                  url: "http://sakura-02.yujixr.net/auth/sessiontoken",
+                  url: "http://api.aicevote.com/auth/sessiontoken",
                   xhrFields: {
                     withCredentials: true
                   }

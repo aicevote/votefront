@@ -172,20 +172,20 @@ var data = jsonData;
     
             const socket = io("https://api.aicevote.com");
             var sessionToken;
+            $.ajax({
+              url: "https://api.aicevote.com/auth/sessiontoken",
+              xhrFields: {
+                withCredentials: true
+              }
+            }).success(function(res){
+              sessionToken=res.sessionToken
+            });
     
             socket.on('connect', function () {
               socket.emit('get result', {id:<%= data.votenumber %>});
               socket.emit('get transition',{id:<%= data.votenumber %>});
               socket.emit('get comments',{id:<%= data.votenumber %>});
-              $.ajax({
-                url: "https://api.aicevote.com/auth/sessiontoken",
-                xhrFields: {
-                  withCredentials: true
-                }
-              }).success(function(res){
-                sessionToken=res.sessionToken
-                socket.emit('get votes',{id:<%= data.votenumber %>,sessionToken:sessionToken});
-              });
+              socket.emit('get votes',{id:<%= data.votenumber %>,sessionToken:sessionToken});
             });
             // socket.on('connect_error', (error) => {
             //   console.log("connect_error: " + error);

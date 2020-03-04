@@ -2,8 +2,7 @@
 var data = jsonData;
 %>
 
-<!DOCTYPE html>
-<html lang="ja">
+<lang="ja">
 
 <head prefix="og: http://ogp.me/ns#">
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -28,8 +27,6 @@ var data = jsonData;
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-  <meta name="description" content="<%= data.explain %>">
-  <title><%= data.theme %> </title>
 
 </head>
 <body>
@@ -101,6 +98,21 @@ var data = jsonData;
   </div>
   <div id="allcontainer">
     <div class="container">
+        <!DOCTYPE html>
+        <html lang="ja">
+        
+
+          <head>
+            <meta charset="UTF-8">
+            <meta name="description" content="<%= data.explain %>">
+            <title><%= data.theme %> </title>
+          </head>
+        
+
+
+          <body>
+
+
       <div class="balloon2-left">
         <p><%= data.theme %></p>
       </div>
@@ -778,6 +790,14 @@ var data = jsonData;
             <img border="0" width="234" height="60" alt="" src="https://www24.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001035000&mc=1"></a>
             <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+65U41" alt="">
       </div>
+
+    </body>
+    
+    </html>
+
+
+
+
       <h2>人気の投票テーマ</h2>
       <ul>
         <li><a href="index" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
@@ -804,4 +824,3 @@ var data = jsonData;
 </div>
 </body>
 
-</html>

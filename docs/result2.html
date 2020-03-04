@@ -1,7 +1,6 @@
 
 
-<!DOCTYPE html>
-<html lang="ja">
+<lang="ja">
 
 <head prefix="og: http://ogp.me/ns#">
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -26,8 +25,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-  <meta name="description" content="現在日本で施行されているような、一般的な死刑制度に賛成の人は賛成、反対の人は反対に投票して下さい">
-  <title>あなたは死刑制度に、賛成？反対？ </title>
 
 </head>
 <body>
@@ -65,7 +62,7 @@
     }
   });
   </script>
-  <div class="mainSite">
+<div class="mainSite">
   <div class="header">
     <div class="header-logo"><a href="index"><img src="/images/aice.JPG" ></a>
     </div>
@@ -96,712 +93,732 @@
     </div>
     <div id="menu-background">
     </div>
-    </div>
-    <div id="allcontainer">
+  </div>
+  <div id="allcontainer">
     <div class="container">
-        <div class="balloon2-left">
-          <p>あなたは死刑制度に、賛成？反対？</p>
-        </div>
-        <h4>
-          現在日本で施行されているような、一般的な死刑制度に賛成の人は賛成、反対の人は反対に投票して下さい
-        </h4>
+        <!DOCTYPE html>
+        <html lang="ja">
         
-        <script>
-          var user = "<%= user %>";
-          var ids = "<%= ids %>";
-          var influencer = "<%= influencer %>";
-          var img = "<%= img %>";
-          var ary = ids.split(',');
-            $(function () {
-              
-              if ($('#agree0').text().length == 0){
-                $('#A2').remove();
-                $('#agree0').remove();
-              }
-              if ($('#agree1').text().length == 0){
-                $('#B2').remove();
-                $('#agree1').remove();
-              }
-              if ($('#agree2').text().length == 0){
-                $('#C2').remove();
-                $('#agree2').remove();
-              }
-              if ($('#agree3').text().length == 0){
-                $('#D2').remove();
-                $('#agree3').remove();
-              }
-              if ($('#agree4').text().length == 0){
-                $('#E2').remove();
-                $('#agree4').remove();
-              }
-              if ($('#agree5').text().length == 0){
-                $('#F2').remove();
-                $('#agree5').remove();
-              }
-              if ($('#agree6').text().length == 0){
-                $('#G2').remove();
-                $('#agree6').remove();
-              }
-              if ($('#agree7').text().length == 0){
-                $('#H2').remove();
-                $('#agree7').remove();
-              }
-              if ($('#agree8').text().length == 0){
-                $('#I2').remove();
-                $('#agree8').remove();
-              }
-              if ($('#agree9').text().length == 0){
-                $('#J2').remove();
-                $('#agree9').remove();
-              }
+
+          <head>
+            <meta charset="UTF-8">
+            <meta name="description" content="現在日本で施行されているような、一般的な死刑制度に賛成の人は賛成、反対の人は反対に投票して下さい">
+            <title>あなたは死刑制度に、賛成？反対？ </title>
+          </head>
+        
+
+
+          <body>
+
+
+      <div class="balloon2-left">
+        <p>あなたは死刑制度に、賛成？反対？</p>
+      </div>
+      <h4>
+        現在日本で施行されているような、一般的な死刑制度に賛成の人は賛成、反対の人は反対に投票して下さい
+      </h4>
       
-      
-              const socket = io("https://api.aicevote.com");
-              var sessionToken;
-      
-              socket.on('connect', function () {
-                socket.emit('get result', {id:2});
-                socket.emit('get transition',{id:2});
-                socket.emit('get comments',{id:2});
-                $.ajax({
-                  url: "https://api.aicevote.com/auth/sessiontoken",
-                  xhrFields: {
-                    withCredentials: true
-                  }
-                }).success(function(res){
-                  sessionToken=res.sessionToken
-                  socket.emit('get votes',{id:2,sessionToken:sessionToken});
-                });
-              });
-              // socket.on('connect_error', (error) => {
-              //   console.log("connect_error: " + error);
-              // });
-              // socket.on('connect_timeout', (timeout) => {
-              //   console.log("connect_timeout: " + timeout);
-              // });
-              // socket.on('error', (error) => {
-              //   console.log("error: " + error);
-              // });
-              // socket.on('disconnect', (disconnect) => {
-              //   console.log("disconnect: " + disconnect);
-              // });
-              // socket.on('reconnect', (attemptNumber) => {
-              //   console.log("reconnect: " + attemptNumber);
-              // });
-              // socket.on('reconnect_attempt', (attemptNumber) => {
-              //   console.log("reconnect_attempt: " + attemptNumber);
-              // });
-              // socket.on('reconnecting', (attemptNumber) => {
-              //   console.log("reconnecting: " + attemptNumber);
-              // });
-              // socket.on('reconnect_error', (error) => {
-              //   console.log("reconnect_error: " + error);
-              // });
-              // socket.on('reconnect_failed', () => {
-              //   console.log("reconnect_failed");
-              // });
-              // socket.on('ping', () => {
-              //   console.log("ping");
-              // });
-              // socket.on('pong', (latency) => {
-              //   console.log("pong: " + latency);
-              // });
-              socket.on('result', function (obj) {
-                if(obj.id!=2){return}
-                var ctx = document.getElementById("ch").getContext("2d");
-                var chart = new Chart(ctx, {
-                  type: "horizontalBar",
-                  data: {
-                    datasets: [{
-                      label: "賛成",
-                      data: [obj.results[0]],
-                      backgroundColor: "rgb(0,220,255)"
-                    },
-                    {
-                      label: "反対",
-                      data: [obj.results[1]],
-                      backgroundColor: "rgb(255,162,0)"
-                    },
-                    {
-                      label: "",
-                      data: [obj.results[2]],
-                      backgroundColor: "rgb(24,197,140)"
-                    },
-                    {
-                      label: "",
-                      data: [obj.results[3]],
-                      backgroundColor: "rgb(255,174,201)"
-                    },
-                    {
-                      label: "",
-                      data: [obj.results[4]],
-                      backgroundColor: "rgb(6,21,159)"
-                    },
-                    {
-                      label: "",
-                      data: [obj.results[5]],
-                      backgroundColor: "rgb(217,0,0)"
-                    },
-                    {
-                      label: "",
-                      data: [obj.results[6]],
-                      backgroundColor: "rgb(112,146,190)"
-                    },
-                    {
-                      label: "",
-                      data: [obj.results[7]],
-                      backgroundColor: "rgb(136,0,21)"
-                    },
-                    {
-                      label: "",
-                      data: [obj.results[8]],
-                      backgroundColor: "rgb(0,0,0)"
-                    },
-                    {
-                      label: "",
-                      data: [obj.results[9]],
-                      backgroundColor: "rgb(130,120,0)"
-                    }]
-                  },
-                  options: {
-                    animation: false,
-                    scales: {
-                      xAxes: [{
-                        stacked: true,
-                      }],
-                      yAxes: [{
-                        stacked: true
-                      }]
-                    }
-                  }
-                });
-                $('#A2').empty();
-                $('#B2').empty();
-                $('#C2').empty();
-                $('#D2').empty();
-                $('#E2').empty();
-                $('#F2').empty();
-                $('#G2').empty();
-                $('#H2').empty();
-                $('#I2').empty();
-                $('#J2').empty();
-                $('#A2').prepend($('<dt>' + obj.results[0] + '</dt><dt>' + "%" + '</dt>'));
-                $('#B2').prepend($('<dt>' + obj.results[1] + '</dt><dt>' + "%" + '</dt>'));
-                $('#C2').prepend($('<dt>' + obj.results[2] + '</dt><dt>' + "%" + '</dt>'));
-                $('#D2').prepend($('<dt>' + obj.results[3] + '</dt><dt>' + "%" + '</dt>'));
-                $('#E2').prepend($('<dt>' + obj.results[4] + '</dt><dt>' + "%" + '</dt>'));
-                $('#F2').prepend($('<dt>' + obj.results[5] + '</dt><dt>' + "%" + '</dt>'));
-                $('#G2').prepend($('<dt>' + obj.results[6] + '</dt><dt>' + "%" + '</dt>'));
-                $('#H2').prepend($('<dt>' + obj.results[7] + '</dt><dt>' + "%" + '</dt>'));
-                $('#I2').prepend($('<dt>' + obj.results[8] + '</dt><dt>' + "%" + '</dt>'));
-                $('#J2').prepend($('<dt>' + obj.results[9] + '</dt><dt>' + "%" + '</dt>'));
-             
-                $('#count').empty();
-                $('#count').prepend($("<h4>" + "通算投票数・賛成" + obj.counts[0] + "票 反対" + obj.counts[1] + "票　" + obj.counts[2] + "票 " + obj.counts[3] + "票 " + obj.counts[4] + "票 " + obj.counts[5] + "票 " + obj.counts[6] + "票 " + obj.counts[7] + "票 " + obj.counts[8] + "票 " + obj.counts[9] + "票" + "</h4>"));
-              });
-              if(user == "ゲスト"){
-                $('form').remove();
-              }
-              if(influencer == "false"){
-                $('#onlyinfluencer').remove();
-              }
-      
-              $('#submit').click(function () {
-                var message = $('#message');
-                if (message.val().length == 0) {
-                  alert("文字を入力してください");
-                } else if (message.val().length >= 140){
-                  alert("140字以内に収めてください")
-                } else {
-                  var str = message.val();
-                  socket.emit('post comment', {
-                    id: 2 ,
-                    sessionToken: sessionToken,
-                    message: str
-                  });
-                  $('#comment-form')[0].reset();
+      <script>
+        var user = "<%= user %>";
+        var ids = "<%= ids %>";
+        var influencer = "<%= influencer %>";
+        var img = "<%= img %>";
+        var ary = ids.split(',');
+          $(function () {
+            
+            if ($('#agree0').text().length == 0){
+              $('#A2').remove();
+              $('#agree0').remove();
+            }
+            if ($('#agree1').text().length == 0){
+              $('#B2').remove();
+              $('#agree1').remove();
+            }
+            if ($('#agree2').text().length == 0){
+              $('#C2').remove();
+              $('#agree2').remove();
+            }
+            if ($('#agree3').text().length == 0){
+              $('#D2').remove();
+              $('#agree3').remove();
+            }
+            if ($('#agree4').text().length == 0){
+              $('#E2').remove();
+              $('#agree4').remove();
+            }
+            if ($('#agree5').text().length == 0){
+              $('#F2').remove();
+              $('#agree5').remove();
+            }
+            if ($('#agree6').text().length == 0){
+              $('#G2').remove();
+              $('#agree6').remove();
+            }
+            if ($('#agree7').text().length == 0){
+              $('#H2').remove();
+              $('#agree7').remove();
+            }
+            if ($('#agree8').text().length == 0){
+              $('#I2').remove();
+              $('#agree8').remove();
+            }
+            if ($('#agree9').text().length == 0){
+              $('#J2').remove();
+              $('#agree9').remove();
+            }
+    
+    
+            const socket = io("https://api.aicevote.com");
+            var sessionToken;
+    
+            socket.on('connect', function () {
+              socket.emit('get result', {id:2});
+              socket.emit('get transition',{id:2});
+              socket.emit('get comments',{id:2});
+              $.ajax({
+                url: "https://api.aicevote.com/auth/sessiontoken",
+                xhrFields: {
+                  withCredentials: true
                 }
-              });
-      
-              socket.on('comments', function (comments){
-                if(comments.id!=2){return}
-                comments.comments.forEach(element => {
-                  if(element.isInfluencer == true){
-                  $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + element.createdAt + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
-                  }else{
-                    $('#comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + element.createdAt + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
-                  }
-                });
-              });
-              socket.on('comment', function (obj) {
-                if(obj.id!=2){return}
-                if (obj.isInfluencer  == true){
-                  $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + obj.imageURI + '"><div class="twitter__block-text"><div class="name">' + obj.name + '</div><p><div class="text" id="text">' + obj.message + '</div></p><div class="date" id="date">たった今</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));        
-                }else{
-                  $('#comment-list').prepend($('<div class="twitter__block"><img src="' + obj.imageURI + '"><div class="twitter__block-text"><div class="name">' + obj.name + '</div><p><div class="text" id="text">' + obj.message + '</div></p><div class="date" id="date">たった今</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
-                }
-              });
-              $('#infsubmit').click(function () {
-                var infmessage = $('#influencer-message');
-                if (infmessage.val().length == 0) {
-                  alert("文字を入力してください");
-                } else if (infmessage.val().length >= 140){
-                  alert("140字以内に収めてください")
-                } else {
-                  var str = infmessage.val();
-                  socket.emit('post comment', {
-                    id: 2,
-                    sessionToken: sessionToken,
-                    message: str
-                  });
-                  $('#infcomment-form')[0].reset();
-                }
-              });
-      
-              socket.on('votes', function (people){
-                people.votes.forEach(element => {
-                  if(element.answer == 0){
-                    $('#member').append($("<li><h4>賛成<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 1){
-                    $('#member').append($("<li><h4>反対<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 2){
-                    $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 3){
-                    $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 4){
-                    $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 5){
-                    $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 6){
-                    $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 7){
-                    $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 8){
-                    $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 9){
-                    $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }
-                });
-                people.votesFromInfluencer.forEach(element => {
-                  if(element.answer == 0){
-                    $('#ainfmember').append($("<li><h4>賛成<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 1){
-                    $('#ainfmember').append($("<li><h4>反対<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 2){
-                    $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 3){
-                    $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 4){
-                    $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 5){
-                    $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 6){
-                    $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 7){
-                    $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 8){
-                    $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }else　if(element.answer == 9){
-                    $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                  }
-                });
-              });
-      
-      
-              socket.on('transition', function (obj) {
-                if(obj.id!=2){return}
-                obj.shortTransition.reverse();
-                obj.longTransition.reverse();
-                let a_time = [], a_lasts = [], b_lasts = [],c_lasts = [], d_lasts = [], e_lasts = [], f_lasts = [], g_lasts = [], h_lasts = [], i_lasts = [], j_lasts = [];
-                const length = obj.shortTransition.length, now = Date.now();
-      
-                for (let i = 0; i < length; i++) {
-                  a_time[i] = "" + Math.round((now - obj.shortTransition[i].timestamp) / 3600000) + "h前";
-                  a_lasts[i] = obj.shortTransition[i].percentage[0];
-                  b_lasts[i] = a_lasts[i] + obj.shortTransition[i].percentage[1];
-                  c_lasts[i] = b_lasts[i] + obj.shortTransition[i].percentage[2];
-                  d_lasts[i] = c_lasts[i] + obj.shortTransition[i].percentage[3];
-                  e_lasts[i] = d_lasts[i] + obj.shortTransition[i].percentage[4];
-                  f_lasts[i] = e_lasts[i] + obj.shortTransition[i].percentage[5];
-                  g_lasts[i] = f_lasts[i] + obj.shortTransition[i].percentage[6];
-                  h_lasts[i] = g_lasts[i] + obj.shortTransition[i].percentage[7];
-                  i_lasts[i] = h_lasts[i] + obj.shortTransition[i].percentage[8];
-                  j_lasts[i] = 120;
-                }
-                var ctx = document.getElementById("canvas1").getContext("2d");
-                var myBar = new Chart(ctx, {
-                  type: 'line',
-                  data: {
-                    labels: a_time,
-                    datasets: [{
-                      label: ' 賛成',                     //データ設定
-                      data: a_lasts,
-                      backgroundColor: "rgb(0,220,255)",
-                      borderColor: 'rgb(0,220,255)'
-                    }, {
-                      label: ' 反対',
-                      data: b_lasts,
-                      backgroundColor: 'rgb(255,162,0)'
-                    }, {
-                      label: ' ',
-                      data: c_lasts,
-                      backgroundColor: 'rgb(24,197,140)'
-                    }, {
-                      label: ' ',
-                      data: d_lasts,
-                      backgroundColor: 'rgb(255,174,201)'
-                    }, {
-                      label: ' ',
-                      data: e_lasts,
-                      backgroundColor: 'rgb(6,21,159)'
-                    }, {
-                      label: ' ',
-                      data: f_lasts,
-                      backgroundColor: 'rgb(217,0,0)'
-                    }, {
-                      label: ' ',
-                      data: g_lasts,
-                      backgroundColor: 'rgb(112,146,190)'
-                    }, {
-                      label: ' ',
-                      data: h_lasts,
-                      backgroundColor: 'rgb(136,0,21)'
-                    }, {
-                      label: ' ',
-                      data: i_lasts,
-                      backgroundColor: 'rgb(0,0,0)'
-                    }, {
-                      label: ' ',
-                      data: j_lasts,
-                      backgroundColor: '#f16272'
-                    }
-                    ]
-                  },
-                  options: {                             //◆オプション
-                    responsive: true,                  //グラフ自動設定
-                    legend: {                          //凡例設定
-                      display: false                 //表示設定
-                    },
-                    title: {                           //タイトル設定
-                      display: true,                 //表示設定
-                      fontSize: 10,                  //フォントサイズ
-                      text: '短期時系列世論'                //ラベル
-                    },
-                    scales: {                          //軸設定
-                      yAxes: [{                      //y軸設定
-                        display: true,             //表示設定
-                        scaleLabel: {              //軸ラベル設定
-                          display: false,          //表示設定
-                          labelString: 'k',  //ラベル
-                          fontSize: 10               //フォントサイズ
-                        },
-                        ticks: {                      //最大値最小値設定
-                          min: 0,                   //最小値
-                          max: 100,                  //最大値
-                          fontSize: 10,             //フォントサイズ
-                          stepSize: 10               //軸間隔
-                        },
-                      }],
-                      xAxes: [{                         //x軸設定
-                        display: true,                //表示設定
-                        barPercentage: 0.4,           //棒グラフ幅
-                        categoryPercentage: 0.4,      //棒グラフ幅
-                        scaleLabel: {                 //軸ラベル設定
-                          display: false,             //表示設定
-                          labelString: '%',  //ラベル
-                          fontSize: 10               //フォントサイズ
-                        },
-                        ticks: {
-                          fontSize: 10             //フォントサイズ
-                        },
-                      }],
-                    },
-                  }
-                });
-      
-                let a_time2 = [], a_lasts2 = [], b_lasts2 = [],c_lasts2 = [], d_lasts2 = [], e_lasts2 = [], f_lasts2 = [], g_lasts2 = [], h_lasts2 = [], i_lasts2 = [], j_lasts2 = [];
-                const length2 = obj.longTransition.length;
-      
-                for (let i = 0; i < length2; i++) {
-                  a_time2[i] = "" + Math.round((now - obj.longTransition[i].timestamp) / 86400000) + "日前";
-                  a_lasts2[i] = obj.longTransition[i].percentage[0];
-                  b_lasts2[i] = a_lasts2[i] + obj.longTransition[i].percentage[1];
-                  c_lasts2[i] = b_lasts2[i] + obj.longTransition[i].percentage[2];
-                  d_lasts2[i] = c_lasts2[i] + obj.longTransition[i].percentage[3];
-                  e_lasts2[i] = d_lasts2[i] + obj.longTransition[i].percentage[4];
-                  f_lasts2[i] = e_lasts2[i] + obj.longTransition[i].percentage[5];
-                  g_lasts2[i] = f_lasts2[i] + obj.longTransition[i].percentage[6];
-                  h_lasts2[i] = g_lasts2[i] + obj.longTransition[i].percentage[7];
-                  i_lasts2[i] = h_lasts2[i] + obj.longTransition[i].percentage[8];
-                  j_lasts2[i] = 120;
-                }
-                var ctx = document.getElementById("canvas2").getContext("2d");
-                var myBar = new Chart(ctx, {
-                  type: 'line',
-                  data: {
-                    labels: a_time2,
-                    datasets: [{
-                      label: ' 賛成',                     //データ設定
-                      data: a_lasts2,
-                      backgroundColor: "rgb(0,220,255)",
-                      borderColor: 'rgb(0,220,255)'
-                    }, {
-                      label: ' 反対',
-                      data: b_lasts2,
-                      backgroundColor: 'rgb(255,162,0)'
-                    }, {
-                      label: ' ',
-                      data: c_lasts2,
-                      backgroundColor: 'rgb(24,197,140)'
-                    }, {
-                      label: ' ',
-                      data: d_lasts2,
-                      backgroundColor: 'rgb(255,174,201)'
-                    }, {
-                      label: ' ',
-                      data: e_lasts2,
-                      backgroundColor: 'rgb(6,21,159)'
-                    }, {
-                      label: ' ',
-                      data: f_lasts2,
-                      backgroundColor: 'rgb(217,0,0)'
-                    }, {
-                      label: ' ',
-                      data: g_lasts2,
-                      backgroundColor: 'rgb(112,146,190)'
-                    }, {
-                      label: ' ',
-                      data: h_lasts2,
-                      backgroundColor: 'rgb(136,0,21)'
-                    }, {
-                      label: ' ',
-                      data: i_lasts2,
-                      backgroundColor: 'rgb(0,0,0)'
-                    }, {
-                      label: ' ',
-                      data: j_lasts2,
-                      backgroundColor: 'rgb(130,120,0)'
-                    }
-                    ]
-                  },
-                  options: {                             //◆オプション
-                    responsive: true,                  //グラフ自動設定
-                    legend: {                          //凡例設定
-                      display: false                 //表示設定
-                    },
-                    title: {                           //タイトル設定
-                      display: true,                 //表示設定
-                      fontSize: 10,                  //フォントサイズ
-                      text: '長期時系列世論'                //ラベル
-                    },
-                    scales: {                          //軸設定
-                      yAxes: [{                      //y軸設定
-                        display: true,             //表示設定
-                        scaleLabel: {              //軸ラベル設定
-                          display: false,          //表示設定
-                          labelString: 'k',  //ラベル
-                          fontSize: 10               //フォントサイズ
-                        },
-                        ticks: {                      //最大値最小値設定
-                          min: 0,                   //最小値
-                          max: 100,                  //最大値
-                          fontSize: 10,             //フォントサイズ
-                          stepSize: 10               //軸間隔
-                        },
-                      }],
-                      xAxes: [{                         //x軸設定
-                        display: true,                //表示設定
-                        barPercentage: 0.4,           //棒グラフ幅
-                        categoryPercentage: 0.4,      //棒グラフ幅
-                        scaleLabel: {                 //軸ラベル設定
-                          display: false,             //表示設定
-                          labelString: '%',  //ラベル
-                          fontSize: 10               //フォントサイズ
-                        },
-                        ticks: {
-                          fontSize: 10             //フォントサイズ
-                        },
-                      }],
-                    },
-                  }
-                });
+              }).success(function(res){
+                sessionToken=res.sessionToken
+                socket.emit('get votes',{id:2,sessionToken:sessionToken});
               });
             });
-        </script>
-        <div class="which1" id="agree0">賛成</div>
-      
-        <div class="which2" id="agree1">反対</div>
-      
-        <div id="A2" class="number1">
-        </div>
-      
-        <div id="B2" class="number2">
-        </div>
-        <div class="which1" id="agree2"></div>
-      
-        <div class="which2" id="agree3"></div>
-      
-        <div id="C2" class="number1">
-        </div>
-      
-        <div id="D2" class="number2">
-        </div>
-        <div class="which1" id="agree4"></div>
-      
-        <div class="which2" id="agree5"></div>
-      
-        <div id="E2" class="number1">
-        </div>
-      
-        <div id="F2" class="number2">
-        </div>
-        <div class="which1" id="agree6"></div>
-      
-        <div class="which2" id="agree7"></div>
-      
-        <div id="G2" class="number1">
-        </div>
-      
-        <div id="H2" class="number2">
-        </div>
-        <div class="which1" id="agree8"></div>
-      
-        <div class="which2" id="agree9"></div>
-      
-        <div id="I2" class="number1">
-        </div>
-      
-        <div id="J2" class="number2">
-        </div>
-      
-      
-      
-        <canvas id="ch" class="nowgraph" width="300" height="100"></canvas>
-      
-        <h4>
-          <div id="navpeople1-drawer">
-            <input id="navpeople1-input" type="checkbox" class="nav-unshown">
-            <label id="navpeople1-open" for="navpeople1-input"><span><img src="/images/blueperson.gif" style="width:70px;height:63px;"></span></label>
-            <label class="nav-unshown" id="navpeople1-close" for="navpeople1-input"></label>
-            <div id="navpeople1-content">
-                <h3>フォローの投票先</h3>
-              <ul id="member">
-              </ul>
-            </div>
+            // socket.on('connect_error', (error) => {
+            //   console.log("connect_error: " + error);
+            // });
+            // socket.on('connect_timeout', (timeout) => {
+            //   console.log("connect_timeout: " + timeout);
+            // });
+            // socket.on('error', (error) => {
+            //   console.log("error: " + error);
+            // });
+            // socket.on('disconnect', (disconnect) => {
+            //   console.log("disconnect: " + disconnect);
+            // });
+            // socket.on('reconnect', (attemptNumber) => {
+            //   console.log("reconnect: " + attemptNumber);
+            // });
+            // socket.on('reconnect_attempt', (attemptNumber) => {
+            //   console.log("reconnect_attempt: " + attemptNumber);
+            // });
+            // socket.on('reconnecting', (attemptNumber) => {
+            //   console.log("reconnecting: " + attemptNumber);
+            // });
+            // socket.on('reconnect_error', (error) => {
+            //   console.log("reconnect_error: " + error);
+            // });
+            // socket.on('reconnect_failed', () => {
+            //   console.log("reconnect_failed");
+            // });
+            // socket.on('ping', () => {
+            //   console.log("ping");
+            // });
+            // socket.on('pong', (latency) => {
+            //   console.log("pong: " + latency);
+            // });
+            socket.on('result', function (obj) {
+              if(obj.id!=2){return}
+              var ctx = document.getElementById("ch").getContext("2d");
+              var chart = new Chart(ctx, {
+                type: "horizontalBar",
+                data: {
+                  datasets: [{
+                    label: "賛成",
+                    data: [obj.results[0]],
+                    backgroundColor: "rgb(0,220,255)"
+                  },
+                  {
+                    label: "反対",
+                    data: [obj.results[1]],
+                    backgroundColor: "rgb(255,162,0)"
+                  },
+                  {
+                    label: "",
+                    data: [obj.results[2]],
+                    backgroundColor: "rgb(24,197,140)"
+                  },
+                  {
+                    label: "",
+                    data: [obj.results[3]],
+                    backgroundColor: "rgb(255,174,201)"
+                  },
+                  {
+                    label: "",
+                    data: [obj.results[4]],
+                    backgroundColor: "rgb(6,21,159)"
+                  },
+                  {
+                    label: "",
+                    data: [obj.results[5]],
+                    backgroundColor: "rgb(217,0,0)"
+                  },
+                  {
+                    label: "",
+                    data: [obj.results[6]],
+                    backgroundColor: "rgb(112,146,190)"
+                  },
+                  {
+                    label: "",
+                    data: [obj.results[7]],
+                    backgroundColor: "rgb(136,0,21)"
+                  },
+                  {
+                    label: "",
+                    data: [obj.results[8]],
+                    backgroundColor: "rgb(0,0,0)"
+                  },
+                  {
+                    label: "",
+                    data: [obj.results[9]],
+                    backgroundColor: "rgb(130,120,0)"
+                  }]
+                },
+                options: {
+                  animation: false,
+                  scales: {
+                    xAxes: [{
+                      stacked: true,
+                    }],
+                    yAxes: [{
+                      stacked: true
+                    }]
+                  }
+                }
+              });
+              $('#A2').empty();
+              $('#B2').empty();
+              $('#C2').empty();
+              $('#D2').empty();
+              $('#E2').empty();
+              $('#F2').empty();
+              $('#G2').empty();
+              $('#H2').empty();
+              $('#I2').empty();
+              $('#J2').empty();
+              $('#A2').prepend($('<dt>' + obj.results[0] + '</dt><dt>' + "%" + '</dt>'));
+              $('#B2').prepend($('<dt>' + obj.results[1] + '</dt><dt>' + "%" + '</dt>'));
+              $('#C2').prepend($('<dt>' + obj.results[2] + '</dt><dt>' + "%" + '</dt>'));
+              $('#D2').prepend($('<dt>' + obj.results[3] + '</dt><dt>' + "%" + '</dt>'));
+              $('#E2').prepend($('<dt>' + obj.results[4] + '</dt><dt>' + "%" + '</dt>'));
+              $('#F2').prepend($('<dt>' + obj.results[5] + '</dt><dt>' + "%" + '</dt>'));
+              $('#G2').prepend($('<dt>' + obj.results[6] + '</dt><dt>' + "%" + '</dt>'));
+              $('#H2').prepend($('<dt>' + obj.results[7] + '</dt><dt>' + "%" + '</dt>'));
+              $('#I2').prepend($('<dt>' + obj.results[8] + '</dt><dt>' + "%" + '</dt>'));
+              $('#J2').prepend($('<dt>' + obj.results[9] + '</dt><dt>' + "%" + '</dt>'));
+            
+              $('#count').empty();
+              $('#count').prepend($("<h4>" + "通算投票数・賛成" + obj.counts[0] + "票 反対" + obj.counts[1] + "票　" + obj.counts[2] + "票 " + obj.counts[3] + "票 " + obj.counts[4] + "票 " + obj.counts[5] + "票 " + obj.counts[6] + "票 " + obj.counts[7] + "票 " + obj.counts[8] + "票 " + obj.counts[9] + "票" + "</h4>"));
+            });
+            if(user == "ゲスト"){
+              $('form').remove();
+            }
+            if(influencer == "false"){
+              $('#onlyinfluencer').remove();
+            }
+    
+            $('#submit').click(function () {
+              var message = $('#message');
+              if (message.val().length == 0) {
+                alert("文字を入力してください");
+              } else if (message.val().length >= 140){
+                alert("140字以内に収めてください")
+              } else {
+                var str = message.val();
+                socket.emit('post comment', {
+                  id: 2 ,
+                  sessionToken: sessionToken,
+                  message: str
+                });
+                $('#comment-form')[0].reset();
+              }
+            });
+    
+            socket.on('comments', function (comments){
+              if(comments.id!=2){return}
+              comments.comments.forEach(element => {
+                if(element.isInfluencer == true){
+                $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + element.createdAt + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
+                }else{
+                  $('#comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + element.createdAt + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
+                }
+              });
+            });
+            socket.on('comment', function (obj) {
+              if(obj.id!=2){return}
+              if (obj.isInfluencer  == true){
+                $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + obj.imageURI + '"><div class="twitter__block-text"><div class="name">' + obj.name + '</div><p><div class="text" id="text">' + obj.message + '</div></p><div class="date" id="date">たった今</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));        
+              }else{
+                $('#comment-list').prepend($('<div class="twitter__block"><img src="' + obj.imageURI + '"><div class="twitter__block-text"><div class="name">' + obj.name + '</div><p><div class="text" id="text">' + obj.message + '</div></p><div class="date" id="date">たった今</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
+              }
+            });
+            $('#infsubmit').click(function () {
+              var infmessage = $('#influencer-message');
+              if (infmessage.val().length == 0) {
+                alert("文字を入力してください");
+              } else if (infmessage.val().length >= 140){
+                alert("140字以内に収めてください")
+              } else {
+                var str = infmessage.val();
+                socket.emit('post comment', {
+                  id: 2,
+                  sessionToken: sessionToken,
+                  message: str
+                });
+                $('#infcomment-form')[0].reset();
+              }
+            });
+    
+            socket.on('votes', function (people){
+              people.votes.forEach(element => {
+                if(element.answer == 0){
+                  $('#member').append($("<li><h4>賛成<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 1){
+                  $('#member').append($("<li><h4>反対<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 2){
+                  $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 3){
+                  $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 4){
+                  $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 5){
+                  $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 6){
+                  $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 7){
+                  $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 8){
+                  $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 9){
+                  $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }
+              });
+              people.votesFromInfluencer.forEach(element => {
+                if(element.answer == 0){
+                  $('#ainfmember').append($("<li><h4>賛成<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 1){
+                  $('#ainfmember').append($("<li><h4>反対<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 2){
+                  $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 3){
+                  $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 4){
+                  $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 5){
+                  $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 6){
+                  $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 7){
+                  $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 8){
+                  $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }else　if(element.answer == 9){
+                  $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                }
+              });
+            });
+    
+    
+            socket.on('transition', function (obj) {
+              if(obj.id!=2){return}
+              obj.shortTransition.reverse();
+              obj.longTransition.reverse();
+              let a_time = [], a_lasts = [], b_lasts = [],c_lasts = [], d_lasts = [], e_lasts = [], f_lasts = [], g_lasts = [], h_lasts = [], i_lasts = [], j_lasts = [];
+              const length = obj.shortTransition.length, now = Date.now();
+    
+              for (let i = 0; i < length; i++) {
+                a_time[i] = "" + Math.round((now - obj.shortTransition[i].timestamp) / 3600000) + "h前";
+                a_lasts[i] = obj.shortTransition[i].percentage[0];
+                b_lasts[i] = a_lasts[i] + obj.shortTransition[i].percentage[1];
+                c_lasts[i] = b_lasts[i] + obj.shortTransition[i].percentage[2];
+                d_lasts[i] = c_lasts[i] + obj.shortTransition[i].percentage[3];
+                e_lasts[i] = d_lasts[i] + obj.shortTransition[i].percentage[4];
+                f_lasts[i] = e_lasts[i] + obj.shortTransition[i].percentage[5];
+                g_lasts[i] = f_lasts[i] + obj.shortTransition[i].percentage[6];
+                h_lasts[i] = g_lasts[i] + obj.shortTransition[i].percentage[7];
+                i_lasts[i] = h_lasts[i] + obj.shortTransition[i].percentage[8];
+                j_lasts[i] = 120;
+              }
+              var ctx = document.getElementById("canvas1").getContext("2d");
+              var myBar = new Chart(ctx, {
+                type: 'line',
+                data: {
+                  labels: a_time,
+                  datasets: [{
+                    label: ' 賛成',                     //データ設定
+                    data: a_lasts,
+                    backgroundColor: "rgb(0,220,255)",
+                    borderColor: 'rgb(0,220,255)'
+                  }, {
+                    label: ' 反対',
+                    data: b_lasts,
+                    backgroundColor: 'rgb(255,162,0)'
+                  }, {
+                    label: ' ',
+                    data: c_lasts,
+                    backgroundColor: 'rgb(24,197,140)'
+                  }, {
+                    label: ' ',
+                    data: d_lasts,
+                    backgroundColor: 'rgb(255,174,201)'
+                  }, {
+                    label: ' ',
+                    data: e_lasts,
+                    backgroundColor: 'rgb(6,21,159)'
+                  }, {
+                    label: ' ',
+                    data: f_lasts,
+                    backgroundColor: 'rgb(217,0,0)'
+                  }, {
+                    label: ' ',
+                    data: g_lasts,
+                    backgroundColor: 'rgb(112,146,190)'
+                  }, {
+                    label: ' ',
+                    data: h_lasts,
+                    backgroundColor: 'rgb(136,0,21)'
+                  }, {
+                    label: ' ',
+                    data: i_lasts,
+                    backgroundColor: 'rgb(0,0,0)'
+                  }, {
+                    label: ' ',
+                    data: j_lasts,
+                    backgroundColor: '#f16272'
+                  }
+                  ]
+                },
+                options: {                             //◆オプション
+                  responsive: true,                  //グラフ自動設定
+                  legend: {                          //凡例設定
+                    display: false                 //表示設定
+                  },
+                  title: {                           //タイトル設定
+                    display: true,                 //表示設定
+                    fontSize: 10,                  //フォントサイズ
+                    text: '短期時系列世論'                //ラベル
+                  },
+                  scales: {                          //軸設定
+                    yAxes: [{                      //y軸設定
+                      display: true,             //表示設定
+                      scaleLabel: {              //軸ラベル設定
+                        display: false,          //表示設定
+                        labelString: 'k',  //ラベル
+                        fontSize: 10               //フォントサイズ
+                      },
+                      ticks: {                      //最大値最小値設定
+                        min: 0,                   //最小値
+                        max: 100,                  //最大値
+                        fontSize: 10,             //フォントサイズ
+                        stepSize: 10               //軸間隔
+                      },
+                    }],
+                    xAxes: [{                         //x軸設定
+                      display: true,                //表示設定
+                      barPercentage: 0.4,           //棒グラフ幅
+                      categoryPercentage: 0.4,      //棒グラフ幅
+                      scaleLabel: {                 //軸ラベル設定
+                        display: false,             //表示設定
+                        labelString: '%',  //ラベル
+                        fontSize: 10               //フォントサイズ
+                      },
+                      ticks: {
+                        fontSize: 10             //フォントサイズ
+                      },
+                    }],
+                  },
+                }
+              });
+    
+              let a_time2 = [], a_lasts2 = [], b_lasts2 = [],c_lasts2 = [], d_lasts2 = [], e_lasts2 = [], f_lasts2 = [], g_lasts2 = [], h_lasts2 = [], i_lasts2 = [], j_lasts2 = [];
+              const length2 = obj.longTransition.length;
+    
+              for (let i = 0; i < length2; i++) {
+                a_time2[i] = "" + Math.round((now - obj.longTransition[i].timestamp) / 86400000) + "日前";
+                a_lasts2[i] = obj.longTransition[i].percentage[0];
+                b_lasts2[i] = a_lasts2[i] + obj.longTransition[i].percentage[1];
+                c_lasts2[i] = b_lasts2[i] + obj.longTransition[i].percentage[2];
+                d_lasts2[i] = c_lasts2[i] + obj.longTransition[i].percentage[3];
+                e_lasts2[i] = d_lasts2[i] + obj.longTransition[i].percentage[4];
+                f_lasts2[i] = e_lasts2[i] + obj.longTransition[i].percentage[5];
+                g_lasts2[i] = f_lasts2[i] + obj.longTransition[i].percentage[6];
+                h_lasts2[i] = g_lasts2[i] + obj.longTransition[i].percentage[7];
+                i_lasts2[i] = h_lasts2[i] + obj.longTransition[i].percentage[8];
+                j_lasts2[i] = 120;
+              }
+              var ctx = document.getElementById("canvas2").getContext("2d");
+              var myBar = new Chart(ctx, {
+                type: 'line',
+                data: {
+                  labels: a_time2,
+                  datasets: [{
+                    label: ' 賛成',                     //データ設定
+                    data: a_lasts2,
+                    backgroundColor: "rgb(0,220,255)",
+                    borderColor: 'rgb(0,220,255)'
+                  }, {
+                    label: ' 反対',
+                    data: b_lasts2,
+                    backgroundColor: 'rgb(255,162,0)'
+                  }, {
+                    label: ' ',
+                    data: c_lasts2,
+                    backgroundColor: 'rgb(24,197,140)'
+                  }, {
+                    label: ' ',
+                    data: d_lasts2,
+                    backgroundColor: 'rgb(255,174,201)'
+                  }, {
+                    label: ' ',
+                    data: e_lasts2,
+                    backgroundColor: 'rgb(6,21,159)'
+                  }, {
+                    label: ' ',
+                    data: f_lasts2,
+                    backgroundColor: 'rgb(217,0,0)'
+                  }, {
+                    label: ' ',
+                    data: g_lasts2,
+                    backgroundColor: 'rgb(112,146,190)'
+                  }, {
+                    label: ' ',
+                    data: h_lasts2,
+                    backgroundColor: 'rgb(136,0,21)'
+                  }, {
+                    label: ' ',
+                    data: i_lasts2,
+                    backgroundColor: 'rgb(0,0,0)'
+                  }, {
+                    label: ' ',
+                    data: j_lasts2,
+                    backgroundColor: 'rgb(130,120,0)'
+                  }
+                  ]
+                },
+                options: {                             //◆オプション
+                  responsive: true,                  //グラフ自動設定
+                  legend: {                          //凡例設定
+                    display: false                 //表示設定
+                  },
+                  title: {                           //タイトル設定
+                    display: true,                 //表示設定
+                    fontSize: 10,                  //フォントサイズ
+                    text: '長期時系列世論'                //ラベル
+                  },
+                  scales: {                          //軸設定
+                    yAxes: [{                      //y軸設定
+                      display: true,             //表示設定
+                      scaleLabel: {              //軸ラベル設定
+                        display: false,          //表示設定
+                        labelString: 'k',  //ラベル
+                        fontSize: 10               //フォントサイズ
+                      },
+                      ticks: {                      //最大値最小値設定
+                        min: 0,                   //最小値
+                        max: 100,                  //最大値
+                        fontSize: 10,             //フォントサイズ
+                        stepSize: 10               //軸間隔
+                      },
+                    }],
+                    xAxes: [{                         //x軸設定
+                      display: true,                //表示設定
+                      barPercentage: 0.4,           //棒グラフ幅
+                      categoryPercentage: 0.4,      //棒グラフ幅
+                      scaleLabel: {                 //軸ラベル設定
+                        display: false,             //表示設定
+                        labelString: '%',  //ラベル
+                        fontSize: 10               //フォントサイズ
+                      },
+                      ticks: {
+                        fontSize: 10             //フォントサイズ
+                      },
+                    }],
+                  },
+                }
+              });
+            });
+          });
+      </script>
+      <div class="which1" id="agree0">賛成</div>
+    
+      <div class="which2" id="agree1">反対</div>
+    
+      <div id="A2" class="number1">
+      </div>
+    
+      <div id="B2" class="number2">
+      </div>
+      <div class="which1" id="agree2"></div>
+    
+      <div class="which2" id="agree3"></div>
+    
+      <div id="C2" class="number1">
+      </div>
+    
+      <div id="D2" class="number2">
+      </div>
+      <div class="which1" id="agree4"></div>
+    
+      <div class="which2" id="agree5"></div>
+    
+      <div id="E2" class="number1">
+      </div>
+    
+      <div id="F2" class="number2">
+      </div>
+      <div class="which1" id="agree6"></div>
+    
+      <div class="which2" id="agree7"></div>
+    
+      <div id="G2" class="number1">
+      </div>
+    
+      <div id="H2" class="number2">
+      </div>
+      <div class="which1" id="agree8"></div>
+    
+      <div class="which2" id="agree9"></div>
+    
+      <div id="I2" class="number1">
+      </div>
+    
+      <div id="J2" class="number2">
+      </div>
+    
+    
+    
+      <canvas id="ch" class="nowgraph" width="300" height="100"></canvas>
+    
+      <h4>
+        <div id="navpeople1-drawer">
+          <input id="navpeople1-input" type="checkbox" class="nav-unshown">
+          <label id="navpeople1-open" for="navpeople1-input"><span><img src="/images/blueperson.gif" style="width:70px;height:63px;"></span></label>
+          <label class="nav-unshown" id="navpeople1-close" for="navpeople1-input"></label>
+          <div id="navpeople1-content">
+              <h3>フォローの投票先</h3>
+            <ul id="member">
+            </ul>
           </div>
-          フォローの投票先
-          <a href="https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=http://aicevote.com&hashtags=あなたは死刑制度に、賛成？反対？" style="text-decoration:black; color:deepskyblue;"><img src="/images/twitter.png">みんなを呼ぼう</a>
-        </h4>
-        
+        </div>
+        フォローの投票先
+        <a href="https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=http://aicevote.com&hashtags=あなたは死刑制度に、賛成？反対？" style="text-decoration:black; color:deepskyblue;"><img src="/images/twitter.png">みんなを呼ぼう</a>
+      </h4>
       
-        <div class="tabs2">
-      
-          <input id="chart" type="radio" name="tab_item2" checked>
-      
-          <label class="tab_item2" for="chart">詳細</label>
-      
-          <input id="comment" type="radio" name="tab_item2">
-      
-          <label class="tab_item2" for="comment">コメント</label>
-      
-          <input id="influencer" type="radio" name="tab_item2">
-      
-          <label class="tab_item2" for="influencer">インフルエンサ</label>
-      
-          <div class="tab_content2" id="chart_content"> 
-                <div class="cp_tab">
-                  <input type="radio" name="cp_tab" id="tab1_1" aria-controls="first_tab01" checked>
-                  <label for="tab1_1">短期スパン</label>
-                  <input type="radio" name="cp_tab" id="tab1_2" aria-controls="second_tab01">
-                  <label for="tab1_2">長期スパン</label>
-                  <div class="cp_tabpanels">
-                    <div id="first_tab01" class="cp_tabpanel">
-                      <canvas id="canvas1" width="300" height="210"></canvas>
-                    </div>
-                    <div id="second_tab01" class="cp_tabpanel">
-                      <canvas id="canvas2" width="300" height="210"></canvas>
-                    </div>
+    
+      <div class="tabs2">
+    
+        <input id="chart" type="radio" name="tab_item2" checked>
+    
+        <label class="tab_item2" for="chart">詳細</label>
+    
+        <input id="comment" type="radio" name="tab_item2">
+    
+        <label class="tab_item2" for="comment">コメント</label>
+    
+        <input id="influencer" type="radio" name="tab_item2">
+    
+        <label class="tab_item2" for="influencer">インフルエンサ</label>
+    
+        <div class="tab_content2" id="chart_content"> 
+              <div class="cp_tab">
+                <input type="radio" name="cp_tab" id="tab1_1" aria-controls="first_tab01" checked>
+                <label for="tab1_1">短期スパン</label>
+                <input type="radio" name="cp_tab" id="tab1_2" aria-controls="second_tab01">
+                <label for="tab1_2">長期スパン</label>
+                <div class="cp_tabpanels">
+                  <div id="first_tab01" class="cp_tabpanel">
+                    <canvas id="canvas1" width="300" height="210"></canvas>
+                  </div>
+                  <div id="second_tab01" class="cp_tabpanel">
+                    <canvas id="canvas2" width="300" height="210"></canvas>
                   </div>
                 </div>
-              <div id="count"></div>
-          </div>
-      
-          <div class="tab_content2" id="comment_content">
-            <div class="comments">
-              <form id="comment-form">
-                <textarea id="message" placeholder="公開コメントの追加" cols="20" rows="1"></textarea>    
-                <a type="btn" class="submit" id="submit" style="font-size:11px">送信</a>
-              </form>
-              <div id="comment-list"></div>
-            </div>
-          </div>
-      
-          <div class="tab_content2" id="influencer_content">
-              <div class="comments">
-                <div id="onlyinfluencer">
-                  <h5><p>あなたのフォロワー数は50000人を超えており、あなたはAICEVOTE認定インフルエンサーです</p><p>こちらではインフルエンサーのコメントのみが反映されます</p></h5>
-                  <form id="infcomment-list">
-                    <textarea id="influencer-message" placeholder="公開コメントの追加" cols="20" rows="1"></textarea>    
-                    <a type="btn" class="submit" id="infsubmit">送信</a>
-                  </form>
-                </div>
-                  <h3>
-                    <div id="infnavpeople1-drawer">
-                      <input id="infnavpeople1-input" type="checkbox" class="infnav-unshown">
-                      <label id="infnavpeople1-open" for="infnavpeople1-input"><span><img src="/images/person.png" class="blink"></span></label>
-                      <label class="infnav-unshown" id="infnavpeople1-close" for="infnavpeople1-input"></label>
-                      <div id="infnavpeople1-content">
-                          <a href="https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=http://aicevote.com&hashtags=あなたは死刑制度に、賛成？反対？" style="text-decoration:black; color:deepskyblue;"><h4><img src="/images/twitter.png">フォロワーを呼ぼう</h4></a>
-                        <h3>インフルエンサーの投票</h3>
-                        <ul id="ainfmember">
-                        </ul>
-                      </div>
-                    </div>
-                    インフルエンサーの投票
-                  </h3>
-                <h5>フォロワー数50000人以上の基準を満たすインフルエンサーのコメントです</h5>
-                <div id="influencer-comment-list"></div>
               </div>
+            <div id="count"></div>
+        </div>
+    
+        <div class="tab_content2" id="comment_content">
+          <div class="comments">
+            <form id="comment-form">
+              <textarea id="message" placeholder="公開コメントの追加" cols="20" rows="1"></textarea>    
+              <a type="btn" class="submit" id="submit" style="font-size:11px">送信</a>
+            </form>
+            <div id="comment-list"></div>
+          </div>
+        </div>
+    
+        <div class="tab_content2" id="influencer_content">
+            <div class="comments">
+              <div id="onlyinfluencer">
+                <h5><p>あなたのフォロワー数は50000人を超えており、あなたはAICEVOTE認定インフルエンサーです</p><p>こちらではインフルエンサーのコメントのみが反映されます</p></h5>
+                <form id="infcomment-list">
+                  <textarea id="influencer-message" placeholder="公開コメントの追加" cols="20" rows="1"></textarea>    
+                  <a type="btn" class="submit" id="infsubmit">送信</a>
+                </form>
+              </div>
+                <h3>
+                  <div id="infnavpeople1-drawer">
+                    <input id="infnavpeople1-input" type="checkbox" class="infnav-unshown">
+                    <label id="infnavpeople1-open" for="infnavpeople1-input"><span><img src="/images/person.png" class="blink"></span></label>
+                    <label class="infnav-unshown" id="infnavpeople1-close" for="infnavpeople1-input"></label>
+                    <div id="infnavpeople1-content">
+                        <a href="https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=http://aicevote.com&hashtags=あなたは死刑制度に、賛成？反対？" style="text-decoration:black; color:deepskyblue;"><h4><img src="/images/twitter.png">フォロワーを呼ぼう</h4></a>
+                      <h3>インフルエンサーの投票</h3>
+                      <ul id="ainfmember">
+                      </ul>
+                    </div>
+                  </div>
+                  インフルエンサーの投票
+                </h3>
+              <h5>フォロワー数50000人以上の基準を満たすインフルエンサーのコメントです</h5>
+              <div id="influencer-comment-list"></div>
             </div>
-        </div>
-        </div>
-        <div class="subcontents">
-          <div class="adpc">
-              <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+6D4GH" rel="nofollow">
-                <img border="0" width="300" height="250" alt="" src="https://www25.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001069000&mc=1"></a>
-                <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+6D4GH" alt="">
           </div>
-          <div class="adsmart">
-              <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+65U41" rel="nofollow">
-                <img border="0" width="234" height="60" alt="" src="https://www24.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001035000&mc=1"></a>
-                <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+65U41" alt="">
-          </div>
-      
-      
-     <h2>人気の投票テーマ</h2>
-     <ul>
-      <li><a href="index" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
-      <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
-      <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
-      <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
-     </ul>
+      </div>
     </div>
-    </div>
-    <div class="footer">
-     <h1><img src="/images/firstix-ocean.png"></h1>
-     <ul>
-       <li>
-        <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a>
-       </li>
-       <li>
-         <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
-       </li>
-       <li>
-        レポート
-       </li>
-     </ul>
+    <div class="subcontents">
+      <div class="adpc">
+          <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+6D4GH" rel="nofollow">
+            <img border="0" width="300" height="250" alt="" src="https://www25.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001069000&mc=1"></a>
+            <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+6D4GH" alt="">
+      </div>
+      <div class="adsmart">
+          <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+65U41" rel="nofollow">
+            <img border="0" width="234" height="60" alt="" src="https://www24.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001035000&mc=1"></a>
+            <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+65U41" alt="">
+      </div>
+
+    </body>
+    
+    </html>
+
+
+
+
+      <h2>人気の投票テーマ</h2>
+      <ul>
+        <li><a href="index" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
+        <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
+        <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
+        <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
+      </ul>
     </div>
   </div>
+  <div class="footer">
+    <h1><img src="/images/firstix-ocean.png"></h1>
+    <ul>
+      <li>
+      <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a>
+      </li>
+      <li>
+        <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
+      </li>
+      <li>
+      レポート
+      </li>
+    </ul>
+  </div>
+</div>
 </body>
 
-</html>

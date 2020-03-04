@@ -170,6 +170,7 @@ var data = jsonData;
             }
     
     
+            console.log("ws start");
             const socket = io("https://api.aicevote.com");
             var sessionToken;
             $.ajax({
@@ -179,6 +180,7 @@ var data = jsonData;
               }
             }).success(function(res){
               sessionToken=res.sessionToken
+              console.log(sessionToken);
             });
     
             socket.on('connect', function () {

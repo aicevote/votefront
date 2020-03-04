@@ -22,7 +22,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 </head>
@@ -31,6 +30,7 @@
   <script src="/javascripts/Chart.min.js"></script>
   <script src="/javascripts/chartjs-plugin-streaming.js"></script>
   <script src="/javascripts/ajax.js"></script>
+  <script src="/javascripts/glacierapi.js"></script>
   <div class="anime" id="logo">
     <p><img src="/images/animeaicevote.gif" alt=""></p>
   </div>
@@ -213,108 +213,56 @@
                 if ($('#J').text().length == 0){
                   $('#J').remove();
                 }
-                const socket = io("https://api.aicevote.com/");
                 var sessionToken;
-        
-                socket.on('connect', function () {
-                  $.ajax({
-                    url: "https://api.aicevote.com/auth/sessiontoken",
-                    xhrFields: {
-                      withCredentials: true
-                    }
-                  }).success(function(res){
-                    sessionToken=res.sessionToken,
-                    console.log(sessionToken);
-                  });
-                });
+                getSessionToken().then(val=>sessionToken)
         
                 $('#A').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:2,
-                    sessionToken: sessionToken,
-                    answer: 0
-                  });
+                  vote(2,sessionToken,0)
                   location.href = "/result2.html";
                 });
         
                 $('#B').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:2,
-                    sessionToken: sessionToken,
-                    answer: 1
-                  });
+                  vote(2,sessionToken,1)
                   location.href = "/result2.html";
                 });
         
                 $('#C').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:2,
-                    sessionToken: sessionToken,
-                    answer: 2
-                  });
+                  vote(2,sessionToken,2)
                   location.href = "/result2.html";
                 });
         
                 $('#D').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:2,
-                    sessionToken: sessionToken,
-                    answer: 3
-                  });
+                  vote(2,sessionToken,3)
                   location.href = "/result2.html";
                 });
         
                 $('#E').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:2,
-                    sessionToken: sessionToken,
-                    answer: 4
-                  });
+                  vote(2,sessionToken,4)
                   location.href = "/result2.html";
                 });
         
                 $('#F').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:2,
-                    sessionToken: sessionToken,
-                    answer: 5
-                  });
+                  vote(2,sessionToken,5)
                   location.href = "/result2.html";
                 });
         
                 $('#G').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:2,
-                    sessionToken: sessionToken,
-                    answer: 6
-                  });
+                  vote(2,sessionToken,6)
                   location.href = "/result2.html";
                 });
         
                 $('#H').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:2,
-                    sessionToken: sessionToken,
-                    answer: 7
-                  });
+                  vote(2,sessionToken,7)
                   location.href = "/result2.html";
                 });
         
                 $('#I').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:2,
-                    sessionToken: sessionToken,
-                    answer: 8
-                  });
+                  vote(2,sessionToken,8)
                   location.href = "/result2.html";
                 });
         
                 $('#J').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:2,
-                    sessionToken: sessionToken,
-                    answer: 9
-                  });
+                  vote(2,sessionToken,9)
                   location.href = "/result2.html";
                 });
         

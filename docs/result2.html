@@ -168,22 +168,24 @@
             }
     
     
+            console.log("ws start");
             const socket = io("https://api.aicevote.com");
             var sessionToken;
+            $.ajax({
+              url: "https://api.aicevote.com/auth/sessiontoken",
+              xhrFields: {
+                withCredentials: true
+              }
+            }).success(function(res){
+              sessionToken=res.sessionToken
+              console.log(sessionToken);
+            });
     
             socket.on('connect', function () {
               socket.emit('get result', {id:2});
               socket.emit('get transition',{id:2});
               socket.emit('get comments',{id:2});
-              $.ajax({
-                url: "https://api.aicevote.com/auth/sessiontoken",
-                xhrFields: {
-                  withCredentials: true
-                }
-              }).success(function(res){
-                sessionToken=res.sessionToken
-                socket.emit('get votes',{id:2,sessionToken:sessionToken});
-              });
+              socket.emit('get votes',{id:2,sessionToken:sessionToken});
             });
             // socket.on('connect_error', (error) => {
             //   console.log("connect_error: " + error);

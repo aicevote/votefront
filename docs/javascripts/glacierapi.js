@@ -61,7 +61,7 @@ function getVotes(id, sessionToken) {
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: "GET",
-                url: baseURI + "vote/votes/" + id + "?sessionToken=" + sessionToken,
+                url: baseURI + "vote/votes/" + id + "?sessiontoken=" + sessionToken,
                 success: (data) => { resolve(data); },
                 error: (_) => { reject(); }
             });
@@ -82,7 +82,7 @@ function vote(id, sessionToken, answer) {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "POST",
-            url: baseURI + "vote/votes/" + id + "?sessionToken=" + sessionToken + "&answer=" + answer,
+            url: baseURI + "vote/votes/" + id + "?sessiontoken=" + sessionToken + "&answer=" + answer,
             success: (data) => { resolve(data); },
             error: (_) => { reject(); }
         });
@@ -115,7 +115,7 @@ function comment(id, sessionToken, message) {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "POST",
-            url: baseURI + "vote/comments/" + id + "?sessionToken=" + sessionToken + "&message=" + message,
+            url: baseURI + "vote/comments/" + id + "?sessiontoken=" + sessionToken + "&message=" + message,
             success: (data) => { resolve(data); },
             error: (_) => { reject(); }
         });

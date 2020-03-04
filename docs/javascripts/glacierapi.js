@@ -123,7 +123,7 @@ function comment(id, sessionToken, message) {
 }
 
 // NEWS
-function getArticlesAll() {
+function getAllArticles() {
     return new Promise((resolve, reject) => {
         $.ajax({
             type: "GET",

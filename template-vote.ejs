@@ -24,7 +24,6 @@ var data = jsonData;
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 </head>
@@ -216,108 +215,56 @@ var data = jsonData;
                 if ($('#J').text().length == 0){
                   $('#J').remove();
                 }
-                const socket = io("https://api.aicevote.com/");
                 var sessionToken;
-        
-                socket.on('connect', function () {
-                  $.ajax({
-                    url: "https://api.aicevote.com/auth/sessiontoken",
-                    xhrFields: {
-                      withCredentials: true
-                    }
-                  }).success(function(res){
-                    sessionToken=res.sessionToken,
-                    console.log(sessionToken);
-                  });
-                });
+                getSessionToken().then(val=>sessionToken)
         
                 $('#A').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
-                    sessionToken: sessionToken,
-                    answer: 0
-                  });
+                  vote(<%= data.votenumber %>,sessionToken,0)
                   location.href = "/result<%= data.votenumber %>.html";
                 });
         
                 $('#B').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
-                    sessionToken: sessionToken,
-                    answer: 1
-                  });
+                  vote(<%= data.votenumber %>,sessionToken,1)
                   location.href = "/result<%= data.votenumber %>.html";
                 });
         
                 $('#C').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
-                    sessionToken: sessionToken,
-                    answer: 2
-                  });
+                  vote(<%= data.votenumber %>,sessionToken,2)
                   location.href = "/result<%= data.votenumber %>.html";
                 });
         
                 $('#D').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
-                    sessionToken: sessionToken,
-                    answer: 3
-                  });
+                  vote(<%= data.votenumber %>,sessionToken,3)
                   location.href = "/result<%= data.votenumber %>.html";
                 });
         
                 $('#E').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
-                    sessionToken: sessionToken,
-                    answer: 4
-                  });
+                  vote(<%= data.votenumber %>,sessionToken,4)
                   location.href = "/result<%= data.votenumber %>.html";
                 });
         
                 $('#F').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
-                    sessionToken: sessionToken,
-                    answer: 5
-                  });
+                  vote(<%= data.votenumber %>,sessionToken,5)
                   location.href = "/result<%= data.votenumber %>.html";
                 });
         
                 $('#G').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
-                    sessionToken: sessionToken,
-                    answer: 6
-                  });
+                  vote(<%= data.votenumber %>,sessionToken,6)
                   location.href = "/result<%= data.votenumber %>.html";
                 });
         
                 $('#H').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
-                    sessionToken: sessionToken,
-                    answer: 7
-                  });
+                  vote(<%= data.votenumber %>,sessionToken,7)
                   location.href = "/result<%= data.votenumber %>.html";
                 });
         
                 $('#I').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
-                    sessionToken: sessionToken,
-                    answer: 8
-                  });
+                  vote(<%= data.votenumber %>,sessionToken,8)
                   location.href = "/result<%= data.votenumber %>.html";
                 });
         
                 $('#J').click((req, res) => {
-                  socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
-                    sessionToken: sessionToken,
-                    answer: 9
-                  });
+                  vote(<%= data.votenumber %>,sessionToken,9)
                   location.href = "/result<%= data.votenumber %>.html";
                 });
         

@@ -24,7 +24,6 @@ var data = jsonData;
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
@@ -172,58 +171,10 @@ var data = jsonData;
     
     
             console.log("ws start");
-            const socket = io("https://api.aicevote.com");
             var sessionToken;
-            $.ajax({
-              url: "https://api.aicevote.com/auth/sessiontoken",
-              xhrFields: {
-                withCredentials: true
-              }
-            }).success(function(res){
-              sessionToken=res.sessionToken
-              console.log(sessionToken);
-            });
-    
-            socket.on('connect', function () {
-              socket.emit('get result', {id:<%= data.votenumber %>});
-              socket.emit('get transition',{id:<%= data.votenumber %>});
-              socket.emit('get comments',{id:<%= data.votenumber %>});
-              socket.emit('get votes',{id:<%= data.votenumber %>,sessionToken:sessionToken});
-            });
-            // socket.on('connect_error', (error) => {
-            //   console.log("connect_error: " + error);
-            // });
-            // socket.on('connect_timeout', (timeout) => {
-            //   console.log("connect_timeout: " + timeout);
-            // });
-            // socket.on('error', (error) => {
-            //   console.log("error: " + error);
-            // });
-            // socket.on('disconnect', (disconnect) => {
-            //   console.log("disconnect: " + disconnect);
-            // });
-            // socket.on('reconnect', (attemptNumber) => {
-            //   console.log("reconnect: " + attemptNumber);
-            // });
-            // socket.on('reconnect_attempt', (attemptNumber) => {
-            //   console.log("reconnect_attempt: " + attemptNumber);
-            // });
-            // socket.on('reconnecting', (attemptNumber) => {
-            //   console.log("reconnecting: " + attemptNumber);
-            // });
-            // socket.on('reconnect_error', (error) => {
-            //   console.log("reconnect_error: " + error);
-            // });
-            // socket.on('reconnect_failed', () => {
-            //   console.log("reconnect_failed");
-            // });
-            // socket.on('ping', () => {
-            //   console.log("ping");
-            // });
-            // socket.on('pong', (latency) => {
-            //   console.log("pong: " + latency);
-            // });
-            socket.on('result', function (obj) {
+            getSessionToken().then(val=>sessionToken)
+
+            getResult(<%= data.votenumber%>).then(obj=> {
               if(obj.id!=<%= data.votenumber%>){return}
               var ctx = document.getElementById("ch").getContext("2d");
               var chart = new Chart(ctx, {
@@ -331,16 +282,12 @@ var data = jsonData;
                 alert("140字以内に収めてください")
               } else {
                 var str = message.val();
-                socket.emit('post comment', {
-                  id: <%= data.votenumber%> ,
-                  sessionToken: sessionToken,
-                  message: str
-                });
+                comment(<%= data.votenumber%>,sessionToken,str)
                 $('#comment-form')[0].reset();
               }
             });
     
-            socket.on('comments', function (comments){
+            getComments(<%= data.votenumber%>).then(comments=>{
               if(comments.id!=<%= data.votenumber%>){return}
               comments.comments.forEach(element => {
                 if(element.isInfluencer == true){
@@ -350,14 +297,6 @@ var data = jsonData;
                 }
               });
             });
-            socket.on('comment', function (obj) {
-              if(obj.id!=<%= data.votenumber%>){return}
-              if (obj.isInfluencer  == true){
-                $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + obj.imageURI + '"><div class="twitter__block-text"><div class="name">' + obj.name + '</div><p><div class="text" id="text">' + obj.message + '</div></p><div class="date" id="date">たった今</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));        
-              }else{
-                $('#comment-list').prepend($('<div class="twitter__block"><img src="' + obj.imageURI + '"><div class="twitter__block-text"><div class="name">' + obj.name + '</div><p><div class="text" id="text">' + obj.message + '</div></p><div class="date" id="date">たった今</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
-              }
-            });
             $('#infsubmit').click(function () {
               var infmessage = $('#influencer-message');
               if (infmessage.val().length == 0) {
@@ -366,16 +305,12 @@ var data = jsonData;
                 alert("140字以内に収めてください")
               } else {
                 var str = infmessage.val();
-                socket.emit('post comment', {
-                  id: <%= data.votenumber %>,
-                  sessionToken: sessionToken,
-                  message: str
-                });
+                comment(<%= data.votenumber%>,sessionToken,str)
                 $('#infcomment-form')[0].reset();
               }
             });
     
-            socket.on('votes', function (people){
+            getVotes(<%= data.votenumber%>, sessionToken).then( (people)=>{
               people.votes.forEach(element => {
                 if(element.answer == 0){
                   $('#member').append($("<li><h4><%= data.which0 %><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
@@ -425,7 +360,7 @@ var data = jsonData;
             });
     
     
-            socket.on('transition', function (obj) {
+            getTransitions(<%= data.votenumber%>).then((obj)=> {
               if(obj.id!=<%= data.votenumber%>){return}
               obj.shortTransition.reverse();
               obj.longTransition.reverse();

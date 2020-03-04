@@ -20,6 +20,7 @@
           <meta http-equiv="X-UA-Compatible" content="IE=edge">
           <meta name="viewport" content="width=device-width,initial-scale=1">
           <link rel='stylesheet' href='/stylesheets/style.css' />
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
           <meta name="description" content="リアルタイム投票サービス　AICEVOTE　（アイスボート）のホームメニューです。">
@@ -30,7 +31,6 @@
           <script src="/javascripts/Chart.min.js"></script>
           <script src="/javascripts/chartjs-plugin-streaming.js"></script>
           <script src="/javascripts/ajax.js"></script>
-          <script src="/javascripts/glacierapi.js"></script>
           <div class="anime" id="logo">
             <p><img src="/images/animeaicevote.gif" alt=""></p>
           </div>
@@ -100,6 +100,7 @@
                   
                       
                     $(function(){
+                      const socket = io("https://api.aicevote.com");
                       if(influencer == "false"){
                         $('#onlyinfluencer').remove();
                       }
@@ -112,7 +113,10 @@
                         $(this).toggleClass("open");
                         $(this).next().slideToggle(300);
                       });
-                      getAllArticles().then((article)=>{
+                      socket.on('connect', function () {
+                          socket.emit('get news', null);
+                      });
+                      socket.on("news",(article)=>{
                         for (let i = 0; i < article.related.length; i++) {
                           article.related[i].forEach((article) => {
                             article["id"] = i;

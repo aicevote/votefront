@@ -22,6 +22,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
@@ -31,7 +32,6 @@
   <script src="/javascripts/Chart.min.js"></script>
   <script src="/javascripts/chartjs-plugin-streaming.js"></script>
   <script src="/javascripts/ajax.js"></script>
-  <script src="/javascripts/glacierapi.js"></script>
   <div class="anime" id="logo">
     <p><img src="/images/animeaicevote.gif" alt=""></p>
   </div>
@@ -169,10 +169,58 @@
     
     
             console.log("ws start");
+            const socket = io("https://api.aicevote.com");
             var sessionToken;
-            getSessionToken().then(val=>sessionToken)
-
-            getResult(5).then(obj=> {
+            $.ajax({
+              url: "https://api.aicevote.com/auth/sessiontoken",
+              xhrFields: {
+                withCredentials: true
+              }
+            }).success(function(res){
+              sessionToken=res.sessionToken
+              console.log(sessionToken);
+            });
+    
+            socket.on('connect', function () {
+              socket.emit('get result', {id:5});
+              socket.emit('get transition',{id:5});
+              socket.emit('get comments',{id:5});
+              socket.emit('get votes',{id:5,sessionToken:sessionToken});
+            });
+            // socket.on('connect_error', (error) => {
+            //   console.log("connect_error: " + error);
+            // });
+            // socket.on('connect_timeout', (timeout) => {
+            //   console.log("connect_timeout: " + timeout);
+            // });
+            // socket.on('error', (error) => {
+            //   console.log("error: " + error);
+            // });
+            // socket.on('disconnect', (disconnect) => {
+            //   console.log("disconnect: " + disconnect);
+            // });
+            // socket.on('reconnect', (attemptNumber) => {
+            //   console.log("reconnect: " + attemptNumber);
+            // });
+            // socket.on('reconnect_attempt', (attemptNumber) => {
+            //   console.log("reconnect_attempt: " + attemptNumber);
+            // });
+            // socket.on('reconnecting', (attemptNumber) => {
+            //   console.log("reconnecting: " + attemptNumber);
+            // });
+            // socket.on('reconnect_error', (error) => {
+            //   console.log("reconnect_error: " + error);
+            // });
+            // socket.on('reconnect_failed', () => {
+            //   console.log("reconnect_failed");
+            // });
+            // socket.on('ping', () => {
+            //   console.log("ping");
+            // });
+            // socket.on('pong', (latency) => {
+            //   console.log("pong: " + latency);
+            // });
+            socket.on('result', function (obj) {
               if(obj.id!=5){return}
               var ctx = document.getElementById("ch").getContext("2d");
               var chart = new Chart(ctx, {
@@ -280,12 +328,16 @@
                 alert("140字以内に収めてください")
               } else {
                 var str = message.val();
-                comment(5,sessionToken,str)
+                socket.emit('post comment', {
+                  id: 5 ,
+                  sessionToken: sessionToken,
+                  message: str
+                });
                 $('#comment-form')[0].reset();
               }
             });
     
-            getComments(5).then(comments=>{
+            socket.on('comments', function (comments){
               if(comments.id!=5){return}
               comments.comments.forEach(element => {
                 if(element.isInfluencer == true){
@@ -295,6 +347,14 @@
                 }
               });
             });
+            socket.on('comment', function (obj) {
+              if(obj.id!=5){return}
+              if (obj.isInfluencer  == true){
+                $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + obj.imageURI + '"><div class="twitter__block-text"><div class="name">' + obj.name + '</div><p><div class="text" id="text">' + obj.message + '</div></p><div class="date" id="date">たった今</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));        
+              }else{
+                $('#comment-list').prepend($('<div class="twitter__block"><img src="' + obj.imageURI + '"><div class="twitter__block-text"><div class="name">' + obj.name + '</div><p><div class="text" id="text">' + obj.message + '</div></p><div class="date" id="date">たった今</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
+              }
+            });
             $('#infsubmit').click(function () {
               var infmessage = $('#influencer-message');
               if (infmessage.val().length == 0) {
@@ -303,12 +363,16 @@
                 alert("140字以内に収めてください")
               } else {
                 var str = infmessage.val();
-                comment(5,sessionToken,str)
+                socket.emit('post comment', {
+                  id: 5,
+                  sessionToken: sessionToken,
+                  message: str
+                });
                 $('#infcomment-form')[0].reset();
               }
             });
     
-            getVotes(5, sessionToken).then( (people)=>{
+            socket.on('votes', function (people){
               people.votes.forEach(element => {
                 if(element.answer == 0){
                   $('#member').append($("<li><h4>里<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
@@ -358,7 +422,7 @@
             });
     
     
-            getTransitions(5).then((obj)=> {
+            socket.on('transition', function (obj) {
               if(obj.id!=5){return}
               obj.shortTransition.reverse();
               obj.longTransition.reverse();

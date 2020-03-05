@@ -32,36 +32,7 @@
   <script src="/javascripts/Chart.min.js"></script>
   <script src="/javascripts/chartjs-plugin-streaming.js"></script>
   <script src="/javascripts/ajax.js"></script>
-  <div class="anime" id="logo">
-    <p><img src="/images/animeaicevote.gif" alt=""></p>
-  </div>
-  <script type="text/javascript">
-  $(function(){
-      if($.cookie("access")){
-          $('#logo').css({display:'none'});
-      }else{
-      $(window).load(function(){
-          $(".mainSite").css("display", "none");
-          setTimeout(function() {
-              $('.anime').fadeOut();
-            }, 2000);
-          $(".mainSite").css({opacity:'0'});
-            setTimeout(function(){
-            $(".mainSite").css("display", "block");
-            $(".mainSite").stop().animate({opacity:'1'},1000);
-          },2000);
-          $.cookie("access",$('body').addClass('access'));
-      })
-      };
-  });
-  $(function() {
-    var path = location.pathname;
-    if(path.indexOf("/auth/twitter/") > -1){
-    $('.login').remove();
-    console.log("ログイン中")
-    }
-  });
-  </script>
+
 <div class="mainSite">
   <div class="header">
     <div class="header-logo"><a href="home"><img src="/images/aice.JPG" ></a>

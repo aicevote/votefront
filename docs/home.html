@@ -35,30 +35,34 @@
             <p><img src="/images/animeaicevote.gif" alt=""></p>
           </div>
           <script type="text/javascript">
-          $(function(){
-              if($.cookie("access")){
-                  $('#logo').css({display:'none'});
-              }else{
-              $(window).load(function(){
-                  $(".mainSite").css("display", "none");
-                  setTimeout(function() {
-                      $('.anime').fadeOut();
-                    }, 2000);
-                  $(".mainSite").css({opacity:'0'});
-                    setTimeout(function(){
-                    $(".mainSite").css("display", "block");
-                    $(".mainSite").stop().animate({opacity:'1'},1000);
-                  },2000);
-                  $.cookie("access",$('body').addClass('access'));
-              })
-              };
-          });
+          
           $(function() {
-            var path = location.pathname;
-            if(path.indexOf("/auth/twitter/") > -1){
-            $('.login').remove();
-            console.log("ログイン中")
-            }
+            const socket = io("https://api.aicevote.com");
+            var sessionToken;
+            $.ajax({
+              url: "https://api.aicevote.com/auth/sessiontoken",
+              xhrFields: {
+                withCredentials: true
+              }
+            }).success(function(res){
+              sessionToken=res.sessionToken
+              if(!sessionToken){
+                img = "/images/person.png";
+                influencer = false;
+                user = "ゲスト";
+              }else{
+                $.ajax({
+                  url: "https://api.aicevote.com/profiles?sessiontoken=" + sessionToken,
+                  xhrFields: {
+                    withCredentials: true
+                  }
+                }).success(function(res){
+                  img = res.imageURI;
+                  user = res.name;
+                  influencer = res.isInfluencer;             
+                });
+              }
+            });
           });
           </script>
           <div class="mainSite">
@@ -101,10 +105,10 @@
                       
                     $(function(){
                       const socket = io("https://api.aicevote.com");
-                      if(influencer == "false"){
+                      if(influencer == false){
                         $('#onlyinfluencer').remove();
                       }
-                      else if(influencer == "true"){
+                      else if(influencer == true){
                         $('#notinfluencer').remove();
                       }
                       $(".anews").click(function () {
@@ -128,7 +132,7 @@
                         article = article.related.reduce(
                           (prev, cur) => prev.concat(cur)
                         ).concat(article.latest).sort(
-                          (a, b) => a.publishedAt - b.publishedAt
+                          (a, b) => b.publishedAt - a.publishedAt
                         );
                         
                         const newslist = document.getElementById('newslist');                     
@@ -168,7 +172,7 @@
                     })
                   
                 </script>
-                  <div> <img src=<%= img %> width="48" height="48" margin="24" border-radius="50%"> <div><%=user %> さんようこそ。</div></div>
+                  <div> <img src=<%= img %> width="48" height="48" margin="24" border-radius="50%"> <div><%= user %> さんようこそ。</div></div>
                   <div id= "onlyinfluencer">
                     <h5>※あなたはツイッターフォロワー数の基準によりインフルエンサーとなりました。インフルエンサーの投票結果は一般に公表されます。</h5>
                   </div>

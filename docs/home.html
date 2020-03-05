@@ -117,10 +117,11 @@
             <div id="allcontainer">
             <div class="container">
                 <script>
-                    var influencer = "<%=influencer%>";
                   
                       
                     $(function(){
+                      console.log(img);
+                      console.log(user);
                       const socket = io("https://api.aicevote.com");
                       if(influencer == false){
                         $('#onlyinfluencer').remove();

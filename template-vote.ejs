@@ -225,11 +225,10 @@ var data = jsonData;
                       withCredentials: true
                     }
                   }).success(function(res){
-                    sessionToken=res.sessionToken,
-                    console.log(sessionToken);
+                    sessionToken=res.sessionToken
                   });
                 });
-        
+                console.log(sessionToken);
                 $('#A').click((req, res) => {
                   socket.emit('put vote', {
                     id:<%= data.votenumber %>,

@@ -15,11 +15,8 @@
       "which6":null,
       "which7":null,
       "which8":null,
-      "which9":null,
-      "user":"<%= user %>",
-      "ids":"<%= ids %>",
-      "influencer":"<%= influencer %>",
-      "img":"<%= img %>"
+      "which9":null
+      
     },
     {
       "filename":"result1",
@@ -36,11 +33,8 @@
       "which6":null,
       "which7":null,
       "which8":null,
-      "which9":null,
-      "user":"<%= user %>",
-      "ids":"<%= ids %>",
-      "influencer":"<%= influencer %>",
-      "img":"<%= img %>"
+      "which9":null
+      
     },
     {
       "filename":"result2",
@@ -57,11 +51,8 @@
       "which6":null,
       "which7":null,
       "which8":null,
-      "which9":null,
-      "user":"<%= user %>",
-      "ids":"<%= ids %>",
-      "influencer":"<%= influencer %>",
-      "img":"<%= img %>"
+      "which9":null
+      
     },
     {
       "filename":"result3",
@@ -78,11 +69,8 @@
       "which6":null,
       "which7":null,
       "which8":null,
-      "which9":null,
-      "user":"<%= user %>",
-      "ids":"<%= ids %>",
-      "influencer":"<%= influencer %>",
-      "img":"<%= img %>"
+      "which9":null
+      
     },
     {
       "filename":"result4",
@@ -99,11 +87,8 @@
       "which6":null,
       "which7":null,
       "which8":null,
-      "which9":null,
-      "user":"<%= user %>",
-      "ids":"<%= ids %>",
-      "influencer":"<%= influencer %>",
-      "img":"<%= img %>"
+      "which9":null
+      
     },
     {
       "filename":"result5",
@@ -120,11 +105,8 @@
       "which6":null,
       "which7":null,
       "which8":null,
-      "which9":null,
-      "user":"<%= user %>",
-      "ids":"<%= ids %>",
-      "influencer":"<%= influencer %>",
-      "img":"<%= img %>"
+      "which9":null
+      
     },
     {
       "filename":"result6",
@@ -141,11 +123,8 @@
       "which6":null,
       "which7":null,
       "which8":null,
-      "which9":null,
-      "user":"<%= user %>",
-      "ids":"<%= ids %>",
-      "influencer":"<%= influencer %>",
-      "img":"<%= img %>"
+      "which9":null
+      
     },
     {
       "filename":"result7",
@@ -162,11 +141,8 @@
       "which6":null,
       "which7":null,
       "which8":null,
-      "which9":null,
-      "user":"<%= user %>",
-      "ids":"<%= ids %>",
-      "influencer":"<%= influencer %>",
-      "img":"<%= img %>"
+      "which9":null
+      
     },
     {
       "filename":"result8",
@@ -183,11 +159,8 @@
       "which6":null,
       "which7":null,
       "which8":null,
-      "which9":null,
-      "user":"<%= user %>",
-      "ids":"<%= ids %>",
-      "influencer":"<%= influencer %>",
-      "img":"<%= img %>"
+      "which9":null
+      
     },
     {
       "filename":"result9",
@@ -204,11 +177,8 @@
       "which6":null,
       "which7":null,
       "which8":null,
-      "which9":null,
-      "user":"<%= user %>",
-      "ids":"<%= ids %>",
-      "influencer":"<%= influencer %>",
-      "img":"<%= img %>"
+      "which9":null
+      
     },
     {
       "filename":"result10",
@@ -225,11 +195,8 @@
       "which6":null,
       "which7":null,
       "which8":null,
-      "which9":null,
-      "user":"<%= user %>",
-      "ids":"<%= ids %>",
-      "influencer":"<%= influencer %>",
-      "img":"<%= img %>"
+      "which9":null
+      
     },
     {
       "filename":"result11",
@@ -246,11 +213,8 @@
       "which6":null,
       "which7":null,
       "which8":null,
-      "which9":null,
-      "user":"<%= user %>",
-      "ids":"<%= ids %>",
-      "influencer":"<%= influencer %>",
-      "img":"<%= img %>"
+      "which9":null
+      
     }
   ]
 }

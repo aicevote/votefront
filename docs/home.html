@@ -64,9 +64,12 @@
             }).success(function(res){
               sessionToken=res.sessionToken
               if(!sessionToken){
-                img = "/images/person.png";
-                influencer = false;
-                user = "ゲスト";
+                $('#onlyinfluencer').remove();
+                const profile = document.getElementById('profile');
+                profile.innerHTML = `
+                                      <img src="/images/person.png"  width="48" height="48" margin="24" border-radius="50%">
+                                      ゲストさんようこそ
+                                        `;
               }else{
                 $.ajax({
                   url: "https://api.aicevote.com/profiles?sessiontoken=" + sessionToken,
@@ -74,9 +77,18 @@
                     withCredentials: true
                   }
                 }).success(function(res){
-                  img = res.imageURI;
-                  user = res.name;
-                  influencer = res.isInfluencer;             
+                  $('.login').remove();
+                  const profile = document.getElementById('profile');
+                  profile.innerHTML = `
+                                      <img src="${res.imageURI}"  width="48" height="48" margin="24" border-radius="50%">
+                                      ${res.username}さんようこそ
+                                        `;
+                  if(res.influencer == false){
+                        $('#onlyinfluencer').remove();
+                      }
+                      else if(res.influencer == true){
+                        $('#notinfluencer').remove();
+                      }          
                 });
               }
             });
@@ -120,15 +132,7 @@
                   
                       
                     $(function(){
-                      console.log(img);
-                      console.log(user);
                       const socket = io("https://api.aicevote.com");
-                      if(influencer == false){
-                        $('#onlyinfluencer').remove();
-                      }
-                      else if(influencer == true){
-                        $('#notinfluencer').remove();
-                      }
                       $(".anews").click(function () {
                         $(".anews").not(this).removeClass("open");
                         $(".anews").not(this).next().slideUp(300);
@@ -190,7 +194,7 @@
                     })
                   
                 </script>
-                  <div> <img src=<%= img %> width="48" height="48" margin="24" border-radius="50%"> <div><%= user %> さんようこそ。</div></div>
+                  <div id="profile"></div>
                   <div id= "onlyinfluencer">
                     <h5>※あなたはツイッターフォロワー数の基準によりインフルエンサーとなりました。インフルエンサーの投票結果は一般に公表されます。</h5>
                   </div>

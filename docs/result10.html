@@ -119,11 +119,35 @@
       </h4>
       
       <script>
-        var user = "<%= user %>";
-        var ids = "<%= ids %>";
-        var influencer = "<%= influencer %>";
-        var img = "<%= img %>";
-        var ary = ids.split(',');
+        var options = ["賛成","反対","","","","","","","","",]
+        $(function() {
+            const socket = io("https://api.aicevote.com");
+            var sessionToken;
+            $.ajax({
+              url: "https://api.aicevote.com/auth/sessiontoken",
+              xhrFields: {
+                withCredentials: true
+              }
+            }).success(function(res){
+              sessionToken=res.sessionToken
+              if(!sessionToken){
+                $('#onlyinfluencer').remove();
+                $('form').remove();
+              }else{
+                $.ajax({
+                  url: "https://api.aicevote.com/profiles?sessiontoken=" + sessionToken,
+                  xhrFields: {
+                    withCredentials: true
+                  }
+                }).success(function(res){
+                  $('.login').remove();                  
+                  if(res.influencer == false){
+                    $('#onlyinfluencer').remove();
+                  }          
+                });
+              }
+            });
+          });
           $(function () {
             
             if ($('#agree0').text().length == 0){
@@ -168,18 +192,7 @@
             }
     
     
-            console.log("ws start");
-            const socket = io("https://api.aicevote.com");
-            var sessionToken;
-            $.ajax({
-              url: "https://api.aicevote.com/auth/sessiontoken",
-              xhrFields: {
-                withCredentials: true
-              }
-            }).success(function(res){
-              sessionToken=res.sessionToken
-              console.log(sessionToken);
-            });
+            
     
             socket.on('connect', function () {
               socket.emit('get result', {id:10});
@@ -311,15 +324,12 @@
               $('#J2').prepend($('<dt>' + obj.results[9] + '</dt><dt>' + "%" + '</dt>'));
             
               $('#count').empty();
-              $('#count').prepend($("<h4>" + "通算投票数・賛成" + obj.counts[0] + "票 反対" + obj.counts[1] + "票　" + obj.counts[2] + "票 " + obj.counts[3] + "票 " + obj.counts[4] + "票 " + obj.counts[5] + "票 " + obj.counts[6] + "票 " + obj.counts[7] + "票 " + obj.counts[8] + "票 " + obj.counts[9] + "票" + "</h4>"));
+              for (var i=0; i<obj.counts.length; i++) {
+                if (obj.counts[i]){
+                  $('#count').prepend($("<h4>" + options[i] + ":" + obj.counts[i] + "票</h4>"))
+                }
+              }
             });
-            if(user == "ゲスト"){
-              $('form').remove();
-            }
-            if(influencer == "false"){
-              $('#onlyinfluencer').remove();
-            }
-    
             $('#submit').click(function () {
               var message = $('#message');
               if (message.val().length == 0) {
@@ -373,6 +383,7 @@
             });
     
             socket.on('votes', function (people){
+              $('#member').empty();
               people.votes.forEach(element => {
                 if(element.answer == 0){
                   $('#member').append($("<li><h4>賛成<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
@@ -396,6 +407,7 @@
                   $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
                 }
               });
+              $('#ainfmember').empty();
               people.votesFromInfluencer.forEach(element => {
                 if(element.answer == 0){
                   $('#ainfmember').append($("<li><h4>賛成<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
@@ -737,6 +749,7 @@
                   </div>
                 </div>
               </div>
+              <h4>通算投票数</h4>
             <div id="count"></div>
         </div>
     

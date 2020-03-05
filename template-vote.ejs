@@ -55,13 +55,7 @@ var data = jsonData;
       })
       };
   });
-  $(function() {
-    var path = location.pathname;
-    if(path.indexOf("/auth/twitter/") > -1){
-    $('.login').remove();
-    console.log("ログイン中")
-    }
-  });
+
   </script>
   <div class="mainSite">
   <div class="header">
@@ -225,7 +219,12 @@ var data = jsonData;
                       withCredentials: true
                     }
                   }).success(function(res){
-                    sessionToken=res.sessionToken
+                    sessionToken=res.sessionToken;
+                    if(!sessionToken){
+                      location.href = "/result<%= data.votenumber %>.html"
+                    }else{
+                      $('.login').remove();
+                    }
                   });
                 });
                 console.log(sessionToken);

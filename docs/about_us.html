@@ -55,12 +55,23 @@
       };
   });
   $(function() {
-    var path = location.pathname;
-    if(path.indexOf("/auth/twitter/") > -1){
-    $('.login').remove();
-    console.log("ログイン中")
-    }
-  });
+            const socket = io("https://api.aicevote.com/");
+                var sessionToken;
+        
+                socket.on('connect', function () {
+                  $.ajax({
+                    url: "https://api.aicevote.com/auth/sessiontoken",
+                    xhrFields: {
+                      withCredentials: true
+                    }
+                  }).success(function(res){
+                    sessionToken=res.sessionToken;
+                    if(sessionToken){
+                      $('.login').remove();                   
+                    }
+                  });
+                });
+          });
   </script>
   <div class="mainSite">
   <div class="header">

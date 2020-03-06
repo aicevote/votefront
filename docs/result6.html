@@ -1,16 +1,11 @@
+<!DOCTYPE html>
+<html lang="ja">
 
-
-<lang="ja">
+<head>
+  <meta charset="UTF-8">
+</head>
 
 <head prefix="og: http://ogp.me/ns#">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-141182013-1');
-  </script>
   <meta property="og:title" content="AICEVOTE">
   <meta property="og:type" content="website">
   <meta property="og:description" content="票を氷にしたリアルタイム投票サイト">
@@ -25,212 +20,168 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-
-</head>
-<body>
   <script src="/javascripts/moment.js"></script>
   <script src="/javascripts/Chart.min.js"></script>
   <script src="/javascripts/chartjs-plugin-streaming.js"></script>
-  <script src="/javascripts/ajax.js"></script>
 
-<div class="mainSite">
-  <div class="header">
-    <div class="header-logo"><a href="home"><img src="/images/aice.JPG" ></a>
-    </div>
-    <div id="nav-drawer">
-      <input id="nav-input" type="checkbox" class="nav-unshown">
-      <label id="nav-open" for="nav-input"><span></span></label>
-      <label class="nav-unshown" id="nav-close" for="nav-input"></label>
-      <div id="nav-content">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-141182013-1');
+  </script>
+</head>
+
+<body>
+  <div class="mainSite">
+    <div class="header">
+      <div class="header-logo">
+        <a href="home"><img src="/images/aice.JPG"></a>
+      </div>
+
+      <div id="nav-drawer">
+        <input id="nav-input" type="checkbox" class="nav-unshown">
+        <label id="nav-open" for="nav-input"><span></span></label>
+        <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+
+        <div id="nav-content">
+          <ul>
+            <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+            <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
+            <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
+            <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
+            <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+            <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a>
+            <li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="header-list">
         <ul>
           <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-          <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
-          <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
-          <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
+          <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
+          <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
+          <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
           <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-          <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a><li>
+          <li>
+            <div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div>
+          </li>
         </ul>
       </div>
+
+      <div id="menu-background"> </div>
     </div>
-    <div class="header-list">
-      <ul>
-        <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-        <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
-        <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
-        <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
-        <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-        <li><div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div></li>
-      </ul>
-    </div>
-    <div id="menu-background">
-    </div>
-  </div>
-  <div id="allcontainer">
-    <div class="container">
-        <!DOCTYPE html>
-        <html lang="ja">
-        
 
-          <head>
-            <meta charset="UTF-8">
-            <meta name="description" content="あなたはタピオカ好きですか？嫌いですか？　好きな人は好き、嫌いな人は嫌いに投票して下さい">
-            <title>タピオカ、好き？嫌い？ </title>
-          </head>
-        
+    <div id="allcontainer">
+      <div class="container">
+        <div class="balloon2-left">
+          <p id="title"></p>
+        </div>
+        <h4 id="description"></h4>
 
+        <script>
+          $(() => {
+            const socket = io("https://api.aicevote.com");
+            const themeID = parseInt(window.location.pathname.replace(/[^-^0-9^\.]/g, ""), 10);
+            var sessionToken = "";
+            var title = "";
+            var description = "";
+            var choices = [""];
+            const colors = ["rgb(0,220,255)", "rgb(255,162,0)", "rgb(24,197,140)",
+              "rgb(255,174,201)", "rgb(6,21,159)", "rgb(217,0,0)", "rgb(112,146,190)",
+              "rgb(136,0,21)", "rgb(0,0,0)", "rgb(130,120,0)"];
 
-          <body>
-
-
-      <div class="balloon2-left">
-        <p>タピオカ、好き？嫌い？</p>
-      </div>
-      <h4>
-        あなたはタピオカ好きですか？嫌いですか？　好きな人は好き、嫌いな人は嫌いに投票して下さい
-      </h4>
-      
-      <script>
-        var options = ["好き","嫌い","","","","","","","","",]
-
-        $(() => {
-          const socket = io("https://api.aicevote.com");
-          const themeID = 6;
-          var sessionToken = null;
-
-          socket.on("connect", () => {
-            $.ajax({
-              url: "https://api.aicevote.com/auth/sessiontoken",
-              xhrFields: { withCredentials: true }
-            })
-            .done((data, textStatus, jqXHR) => {
-              sessionToken = data.sessionToken;
-              $.ajax({ url: "https://api.aicevote.com/profiles?sessiontoken=" + sessionToken })
+            $.ajax({ url: "https://api.aicevote.com/themes/" + themeID })
               .done((data, textStatus, jqXHR) => {
-                $(".login").remove();                  
-                if (!data.isInfluencer) { $("#onlyinfluencer").remove(); }          
+                title = data.title;
+                description = data.description;
+                choices = data.choices;
+
+                document.title = title;
+                $("#title").text(title);
+                $("#description").text(description);
+                $("#share").attr("href", "https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=http://aicevote.com&hashtags=" + title);
               });
-            })
-            .fail((jqXHR, textStatus, errorThrown) => {
-              $("#onlyinfluencer").remove();
-              $("form").remove();
-            })
-            .always(() => {
-              socket.emit("get votes", sessionToken ? { id: themeID, sessionToken: sessionToken } : { id: themeID });
-            })
-            
-            socket.emit("get result", { id: themeID });
-            socket.emit("get transition",{ id: themeID });
-            socket.emit("get comments",{ id: themeID });
-          });
-          
-            if ($('#agree0').text().length == 0){
+
+            socket.on("connect", () => {
+              $.ajax({
+                url: "https://api.aicevote.com/auth/sessiontoken",
+                xhrFields: { withCredentials: true }
+              }).done((data, textStatus, jqXHR) => {
+                sessionToken = data.sessionToken;
+                $.ajax({ url: "https://api.aicevote.com/profiles?sessiontoken=" + sessionToken })
+                  .done((data, textStatus, jqXHR) => {
+                    $(".login").remove();
+                    if (!data.isInfluencer) { $("#onlyinfluencer").remove(); }
+                  });
+              }).fail((jqXHR, textStatus, errorThrown) => {
+                $("#onlyinfluencer").remove();
+                $("form").remove();
+              }).always(() => {
+                socket.emit("get votes", sessionToken ? { themeID: themeID, sessionToken: sessionToken } : { themeID: themeID });
+              })
+
+              socket.emit("get result", { themeID: themeID });
+              socket.emit("get transition", { themeID: themeID });
+              socket.emit("get comments", { themeID: themeID });
+            });
+
+            if ($('#agree0').text().length == 0) {
               $('#A2').remove();
               $('#agree0').remove();
             }
-            if ($('#agree1').text().length == 0){
+            if ($('#agree1').text().length == 0) {
               $('#B2').remove();
               $('#agree1').remove();
             }
-            if ($('#agree2').text().length == 0){
+            if ($('#agree2').text().length == 0) {
               $('#C2').remove();
               $('#agree2').remove();
             }
-            if ($('#agree3').text().length == 0){
+            if ($('#agree3').text().length == 0) {
               $('#D2').remove();
               $('#agree3').remove();
             }
-            if ($('#agree4').text().length == 0){
+            if ($('#agree4').text().length == 0) {
               $('#E2').remove();
               $('#agree4').remove();
             }
-            if ($('#agree5').text().length == 0){
+            if ($('#agree5').text().length == 0) {
               $('#F2').remove();
               $('#agree5').remove();
             }
-            if ($('#agree6').text().length == 0){
+            if ($('#agree6').text().length == 0) {
               $('#G2').remove();
               $('#agree6').remove();
             }
-            if ($('#agree7').text().length == 0){
+            if ($('#agree7').text().length == 0) {
               $('#H2').remove();
               $('#agree7').remove();
             }
-            if ($('#agree8').text().length == 0){
+            if ($('#agree8').text().length == 0) {
               $('#I2').remove();
               $('#agree8').remove();
             }
-            if ($('#agree9').text().length == 0){
+            if ($('#agree9').text().length == 0) {
               $('#J2').remove();
               $('#agree9').remove();
             }
             socket.on('result', function (obj) {
-              if(obj.id!=6){return}
+              if (obj.themeID != themeID) { return }
               var ctx = document.getElementById("ch").getContext("2d");
               var chart = new Chart(ctx, {
                 type: "horizontalBar",
                 data: {
-                  datasets: [{
-                    label: "好き",
-                    data: [obj.results[0]],
-                    backgroundColor: "rgb(0,220,255)"
-                  },
-                  {
-                    label: "嫌い",
-                    data: [obj.results[1]],
-                    backgroundColor: "rgb(255,162,0)"
-                  },
-                  {
-                    label: "",
-                    data: [obj.results[2]],
-                    backgroundColor: "rgb(24,197,140)"
-                  },
-                  {
-                    label: "",
-                    data: [obj.results[3]],
-                    backgroundColor: "rgb(255,174,201)"
-                  },
-                  {
-                    label: "",
-                    data: [obj.results[4]],
-                    backgroundColor: "rgb(6,21,159)"
-                  },
-                  {
-                    label: "",
-                    data: [obj.results[5]],
-                    backgroundColor: "rgb(217,0,0)"
-                  },
-                  {
-                    label: "",
-                    data: [obj.results[6]],
-                    backgroundColor: "rgb(112,146,190)"
-                  },
-                  {
-                    label: "",
-                    data: [obj.results[7]],
-                    backgroundColor: "rgb(136,0,21)"
-                  },
-                  {
-                    label: "",
-                    data: [obj.results[8]],
-                    backgroundColor: "rgb(0,0,0)"
-                  },
-                  {
-                    label: "",
-                    data: [obj.results[9]],
-                    backgroundColor: "rgb(130,120,0)"
-                  }]
+                  datasets: obj.results.map((val, i) => ({
+                    label: choices[i],
+                    data: [val],
+                    backgroundColor: colors[i]
+                  }))
                 },
-                options: {
-                  animation: false,
-                  scales: {
-                    xAxes: [{
-                      stacked: true,
-                    }],
-                    yAxes: [{
-                      stacked: true
-                    }]
-                  }
-                }
+                options: { animation: false, scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] } }
               });
               $('#A2').empty();
               $('#B2').empty();
@@ -252,182 +203,124 @@
               $('#H2').prepend($('<dt>' + obj.results[7] + '</dt><dt>' + "%" + '</dt>'));
               $('#I2').prepend($('<dt>' + obj.results[8] + '</dt><dt>' + "%" + '</dt>'));
               $('#J2').prepend($('<dt>' + obj.results[9] + '</dt><dt>' + "%" + '</dt>'));
-            
+
               $('#count').empty();
-              for (var i=0; i<obj.counts.length; i++) {
-                if (obj.counts[i]){
-                  $('#count').prepend($("<h4>" + options[i] + ":" + obj.counts[i] + "票</h4>"))
-                }
-              }
+              obj.counts.forEach((val, i) => { $('#count').prepend($("<h4>" + choices[i] + ":" + val + "票</h4>")) })
             });
             $('#submit').click(function () {
-              var message = $('#message');
-              if (message.val().length == 0) {
+              const message = $('#message').val();
+              if (message.length == 0) {
                 alert("文字を入力してください");
-              } else if (message.val().length >= 140){
+              } else if (message.length >= 140) {
                 alert("140字以内に収めてください")
               } else {
-                var str = message.val();
                 socket.emit('post comment', {
-                  id: 6 ,
+                  themeID: themeID,
                   sessionToken: sessionToken,
-                  message: str
+                  message: message
                 });
                 $('#comment-form')[0].reset();
               }
             });
-    
-            socket.on('comments', function (comments){
-              if(comments.id!=6){return}
+
+            socket.on('comments', (comments) => {
               comments.comments.forEach(element => {
-                if(element.isInfluencer == true){
-                $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + element.createdAt + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
-                }else{
+                if (element.isInfluencer) {
+                  $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + element.createdAt + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
+                } else {
                   $('#comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + element.createdAt + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
                 }
               });
             });
-            socket.on('comment', function (obj) {
-              if(obj.id!=6){return}
-              if (obj.isInfluencer  == true){
-                $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + obj.imageURI + '"><div class="twitter__block-text"><div class="name">' + obj.name + '</div><p><div class="text" id="text">' + obj.message + '</div></p><div class="date" id="date">たった今</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));        
-              }else{
-                $('#comment-list').prepend($('<div class="twitter__block"><img src="' + obj.imageURI + '"><div class="twitter__block-text"><div class="name">' + obj.name + '</div><p><div class="text" id="text">' + obj.message + '</div></p><div class="date" id="date">たった今</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
-              }
-            });
             $('#infsubmit').click(function () {
-              var infmessage = $('#influencer-message');
-              if (infmessage.val().length == 0) {
+              const message = $('#influencer-message').val();
+              if (message.length == 0) {
                 alert("文字を入力してください");
-              } else if (infmessage.val().length >= 140){
+              } else if (message.length >= 140) {
                 alert("140字以内に収めてください")
               } else {
-                var str = infmessage.val();
                 socket.emit('post comment', {
-                  id: 6,
+                  themeID: themeID,
                   sessionToken: sessionToken,
-                  message: str
+                  message: message
                 });
                 $('#infcomment-form')[0].reset();
               }
             });
-    
-            socket.on('votes', function (people){
+
+            socket.on('votes', function (people) {
               $('#member').empty();
               people.votes.forEach(element => {
-                if(element.answer == 0){
-                  $('#member').append($("<li><h4>好き<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 1){
-                  $('#member').append($("<li><h4>嫌い<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 2){
-                  $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 3){
-                  $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 4){
-                  $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 5){
-                  $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 6){
-                  $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 7){
-                  $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 8){
-                  $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 9){
-                  $('#member').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }
+                $('#member').append($("<li><h4>" + choices[element.answer] + "<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
               });
               $('#ainfmember').empty();
               people.votesFromInfluencer.forEach(element => {
-                if(element.answer == 0){
-                  $('#ainfmember').append($("<li><h4>好き<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 1){
-                  $('#ainfmember').append($("<li><h4>嫌い<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 2){
-                  $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 3){
-                  $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 4){
-                  $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 5){
-                  $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 6){
-                  $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 7){
-                  $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 8){
-                  $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }else　if(element.answer == 9){
-                  $('#ainfmember').append($("<li><h4><img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
-                }
+                $('#ainfmember').append($("<li><h4>" + choices[element.answer] + "<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
               });
             });
-    
-    
+
+
             socket.on('transition', function (obj) {
-              if(obj.id!=6){return}
               obj.shortTransition.reverse();
               obj.longTransition.reverse();
-              let a_time = [], a_lasts = [], b_lasts = [],c_lasts = [], d_lasts = [], e_lasts = [], f_lasts = [], g_lasts = [], h_lasts = [], i_lasts = [], j_lasts = [];
-              const length = obj.shortTransition.length, now = Date.now();
-    
-              for (let i = 0; i < length; i++) {
-                a_time[i] = "" + Math.round((now - obj.shortTransition[i].timestamp) / 3600000) + "h前";
-                a_lasts[i] = obj.shortTransition[i].percentage[0];
-                b_lasts[i] = a_lasts[i] + obj.shortTransition[i].percentage[1];
-                c_lasts[i] = b_lasts[i] + obj.shortTransition[i].percentage[2];
-                d_lasts[i] = c_lasts[i] + obj.shortTransition[i].percentage[3];
-                e_lasts[i] = d_lasts[i] + obj.shortTransition[i].percentage[4];
-                f_lasts[i] = e_lasts[i] + obj.shortTransition[i].percentage[5];
-                g_lasts[i] = f_lasts[i] + obj.shortTransition[i].percentage[6];
-                h_lasts[i] = g_lasts[i] + obj.shortTransition[i].percentage[7];
-                i_lasts[i] = h_lasts[i] + obj.shortTransition[i].percentage[8];
-                j_lasts[i] = 120;
-              }
+              const now = Date.now();
+
+              let time = obj.shortTransition.map((val) => Math.round((now - val.timestamp) / 3600000) + "h前");
+              let a_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 1).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let b_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 2).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let c_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 3).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let d_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 4).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let e_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 5).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let f_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 6).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let g_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 7).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let h_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 8).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let i_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 9).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let j_lasts = obj.shortTransition.map((val, i) => 120);
+
               var ctx = document.getElementById("canvas1").getContext("2d");
               var myBar = new Chart(ctx, {
                 type: 'line',
                 data: {
-                  labels: a_time,
+                  labels: time,
                   datasets: [{
-                    label: ' 好き',                     //データ設定
+                    label: choices[0],                     //データ設定
                     data: a_lasts,
                     backgroundColor: "rgb(0,220,255)",
                     borderColor: 'rgb(0,220,255)'
                   }, {
-                    label: ' 嫌い',
+                    label: choices[1],
                     data: b_lasts,
                     backgroundColor: 'rgb(255,162,0)'
                   }, {
-                    label: ' ',
+                    label: choices[2],
                     data: c_lasts,
                     backgroundColor: 'rgb(24,197,140)'
                   }, {
-                    label: ' ',
+                    label: choices[3],
                     data: d_lasts,
                     backgroundColor: 'rgb(255,174,201)'
                   }, {
-                    label: ' ',
+                    label: choices[4],
                     data: e_lasts,
                     backgroundColor: 'rgb(6,21,159)'
                   }, {
-                    label: ' ',
+                    label: choices[5],
                     data: f_lasts,
                     backgroundColor: 'rgb(217,0,0)'
                   }, {
-                    label: ' ',
+                    label: choices[6],
                     data: g_lasts,
                     backgroundColor: 'rgb(112,146,190)'
                   }, {
-                    label: ' ',
+                    label: choices[7],
                     data: h_lasts,
                     backgroundColor: 'rgb(136,0,21)'
                   }, {
-                    label: ' ',
+                    label: choices[8],
                     data: i_lasts,
                     backgroundColor: 'rgb(0,0,0)'
                   }, {
-                    label: ' ',
+                    label: choices[9],
                     data: j_lasts,
                     backgroundColor: '#f16272'
                   }
@@ -474,68 +367,64 @@
                   },
                 }
               });
-    
-              let a_time2 = [], a_lasts2 = [], b_lasts2 = [],c_lasts2 = [], d_lasts2 = [], e_lasts2 = [], f_lasts2 = [], g_lasts2 = [], h_lasts2 = [], i_lasts2 = [], j_lasts2 = [];
-              const length2 = obj.longTransition.length;
-    
-              for (let i = 0; i < length2; i++) {
-                a_time2[i] = "" + Math.round((now - obj.longTransition[i].timestamp) / 86400000) + "日前";
-                a_lasts2[i] = obj.longTransition[i].percentage[0];
-                b_lasts2[i] = a_lasts2[i] + obj.longTransition[i].percentage[1];
-                c_lasts2[i] = b_lasts2[i] + obj.longTransition[i].percentage[2];
-                d_lasts2[i] = c_lasts2[i] + obj.longTransition[i].percentage[3];
-                e_lasts2[i] = d_lasts2[i] + obj.longTransition[i].percentage[4];
-                f_lasts2[i] = e_lasts2[i] + obj.longTransition[i].percentage[5];
-                g_lasts2[i] = f_lasts2[i] + obj.longTransition[i].percentage[6];
-                h_lasts2[i] = g_lasts2[i] + obj.longTransition[i].percentage[7];
-                i_lasts2[i] = h_lasts2[i] + obj.longTransition[i].percentage[8];
-                j_lasts2[i] = 120;
-              }
+
+              time = obj.shortTransition.map((val) => Math.round((now - val.timestamp) / 3600000) + "h前");
+              a_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 1).reduce((accumulator, currentValue) => accumulator + currentValue));
+              b_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 2).reduce((accumulator, currentValue) => accumulator + currentValue));
+              c_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 3).reduce((accumulator, currentValue) => accumulator + currentValue));
+              d_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 4).reduce((accumulator, currentValue) => accumulator + currentValue));
+              e_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 5).reduce((accumulator, currentValue) => accumulator + currentValue));
+              f_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 6).reduce((accumulator, currentValue) => accumulator + currentValue));
+              g_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 7).reduce((accumulator, currentValue) => accumulator + currentValue));
+              h_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 8).reduce((accumulator, currentValue) => accumulator + currentValue));
+              i_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 9).reduce((accumulator, currentValue) => accumulator + currentValue));
+              j_lasts = obj.shortTransition.map((val, i) => 120);
+
               var ctx = document.getElementById("canvas2").getContext("2d");
               var myBar = new Chart(ctx, {
                 type: 'line',
                 data: {
-                  labels: a_time2,
+                  labels: time,
                   datasets: [{
-                    label: ' 好き',                     //データ設定
-                    data: a_lasts2,
+                    label: choices[0],                     //データ設定
+                    data: a_lasts,
                     backgroundColor: "rgb(0,220,255)",
                     borderColor: 'rgb(0,220,255)'
                   }, {
-                    label: ' 嫌い',
-                    data: b_lasts2,
+                    label: choices[1],
+                    data: b_lasts,
                     backgroundColor: 'rgb(255,162,0)'
                   }, {
-                    label: ' ',
-                    data: c_lasts2,
+                    label: choices[2],
+                    data: c_lasts,
                     backgroundColor: 'rgb(24,197,140)'
                   }, {
-                    label: ' ',
-                    data: d_lasts2,
+                    label: choices[3],
+                    data: d_lasts,
                     backgroundColor: 'rgb(255,174,201)'
                   }, {
-                    label: ' ',
-                    data: e_lasts2,
+                    label: choices[4],
+                    data: e_lasts,
                     backgroundColor: 'rgb(6,21,159)'
                   }, {
-                    label: ' ',
-                    data: f_lasts2,
+                    label: choices[5],
+                    data: f_lasts,
                     backgroundColor: 'rgb(217,0,0)'
                   }, {
-                    label: ' ',
-                    data: g_lasts2,
+                    label: choices[6],
+                    data: g_lasts,
                     backgroundColor: 'rgb(112,146,190)'
                   }, {
-                    label: ' ',
-                    data: h_lasts2,
+                    label: choices[7],
+                    data: h_lasts,
                     backgroundColor: 'rgb(136,0,21)'
                   }, {
-                    label: ' ',
-                    data: i_lasts2,
+                    label: choices[8],
+                    data: i_lasts,
                     backgroundColor: 'rgb(0,0,0)'
                   }, {
-                    label: ' ',
-                    data: j_lasts2,
+                    label: choices[9],
+                    data: j_lasts,
                     backgroundColor: 'rgb(130,120,0)'
                   }
                   ]
@@ -583,187 +472,196 @@
               });
             });
           });
-      </script>
-      <div class="which1" id="agree0">好き</div>
-    
-      <div class="which2" id="agree1">嫌い</div>
-    
-      <div id="A2" class="number1">
-      </div>
-    
-      <div id="B2" class="number2">
-      </div>
-      <div class="which1" id="agree2"></div>
-    
-      <div class="which2" id="agree3"></div>
-    
-      <div id="C2" class="number1">
-      </div>
-    
-      <div id="D2" class="number2">
-      </div>
-      <div class="which1" id="agree4"></div>
-    
-      <div class="which2" id="agree5"></div>
-    
-      <div id="E2" class="number1">
-      </div>
-    
-      <div id="F2" class="number2">
-      </div>
-      <div class="which1" id="agree6"></div>
-    
-      <div class="which2" id="agree7"></div>
-    
-      <div id="G2" class="number1">
-      </div>
-    
-      <div id="H2" class="number2">
-      </div>
-      <div class="which1" id="agree8"></div>
-    
-      <div class="which2" id="agree9"></div>
-    
-      <div id="I2" class="number1">
-      </div>
-    
-      <div id="J2" class="number2">
-      </div>
-    
-    
-    
-      <canvas id="ch" class="nowgraph" width="300" height="100"></canvas>
-    
-      <h4>
-        <div id="navpeople1-drawer">
-          <input id="navpeople1-input" type="checkbox" class="nav-unshown">
-          <label id="navpeople1-open" for="navpeople1-input"><span><img src="/images/blueperson.gif" style="width:70px;height:63px;"></span></label>
-          <label class="nav-unshown" id="navpeople1-close" for="navpeople1-input"></label>
-          <div id="navpeople1-content">
-              <h3>フォローの投票先</h3>
-            <ul id="member">
-            </ul>
-          </div>
+        </script>
+        <div class="which1" id="agree0">賛成</div>
+
+        <div class="which2" id="agree1">反対</div>
+
+        <div id="A2" class="number1">
         </div>
-        フォローの投票先
-        <a href="https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=http://aicevote.com&hashtags=タピオカ、好き？嫌い？" style="text-decoration:black; color:deepskyblue;"><img src="/images/twitter.png">みんなを呼ぼう</a>
-      </h4>
-      
-    
-      <div class="tabs2">
-    
-        <input id="chart" type="radio" name="tab_item2" checked>
-    
-        <label class="tab_item2" for="chart">詳細</label>
-    
-        <input id="comment" type="radio" name="tab_item2">
-    
-        <label class="tab_item2" for="comment">コメント</label>
-    
-        <input id="influencer" type="radio" name="tab_item2">
-    
-        <label class="tab_item2" for="influencer">インフルエンサ</label>
-    
-        <div class="tab_content2" id="chart_content"> 
-              <div class="cp_tab">
-                <input type="radio" name="cp_tab" id="tab1_1" aria-controls="first_tab01" checked>
-                <label for="tab1_1">短期スパン</label>
-                <input type="radio" name="cp_tab" id="tab1_2" aria-controls="second_tab01">
-                <label for="tab1_2">長期スパン</label>
-                <div class="cp_tabpanels">
-                  <div id="first_tab01" class="cp_tabpanel">
-                    <canvas id="canvas1" width="300" height="210"></canvas>
-                  </div>
-                  <div id="second_tab01" class="cp_tabpanel">
-                    <canvas id="canvas2" width="300" height="210"></canvas>
-                  </div>
+
+        <div id="B2" class="number2">
+        </div>
+        <div class="which1" id="agree2"></div>
+
+        <div class="which2" id="agree3"></div>
+
+        <div id="C2" class="number1">
+        </div>
+
+        <div id="D2" class="number2">
+        </div>
+        <div class="which1" id="agree4"></div>
+
+        <div class="which2" id="agree5"></div>
+
+        <div id="E2" class="number1">
+        </div>
+
+        <div id="F2" class="number2">
+        </div>
+        <div class="which1" id="agree6"></div>
+
+        <div class="which2" id="agree7"></div>
+
+        <div id="G2" class="number1">
+        </div>
+
+        <div id="H2" class="number2">
+        </div>
+        <div class="which1" id="agree8"></div>
+
+        <div class="which2" id="agree9"></div>
+
+        <div id="I2" class="number1">
+        </div>
+
+        <div id="J2" class="number2">
+        </div>
+
+
+
+        <canvas id="ch" class="nowgraph" width="300" height="100"></canvas>
+
+        <h4>
+          <div id="navpeople1-drawer">
+            <input id="navpeople1-input" type="checkbox" class="nav-unshown">
+            <label id="navpeople1-open" for="navpeople1-input"><span><img src="/images/blueperson.gif"
+                  style="width:70px;height:63px;"></span></label>
+            <label class="nav-unshown" id="navpeople1-close" for="navpeople1-input"></label>
+            <div id="navpeople1-content">
+              <h3>フォローの投票先</h3>
+              <ul id="member">
+              </ul>
+            </div>
+          </div>
+          フォローの投票先
+          <a style="text-decoration:black; color:deepskyblue;" id="share"><img src="/images/twitter.png">みんなを呼ぼう</a>
+        </h4>
+
+
+        <div class="tabs2">
+
+          <input id="chart" type="radio" name="tab_item2" checked>
+
+          <label class="tab_item2" for="chart">詳細</label>
+
+          <input id="comment" type="radio" name="tab_item2">
+
+          <label class="tab_item2" for="comment">コメント</label>
+
+          <input id="influencer" type="radio" name="tab_item2">
+
+          <label class="tab_item2" for="influencer">インフルエンサ</label>
+
+          <div class="tab_content2" id="chart_content">
+            <div class="cp_tab">
+              <input type="radio" name="cp_tab" id="tab1_1" aria-controls="first_tab01" checked>
+              <label for="tab1_1">短期スパン</label>
+              <input type="radio" name="cp_tab" id="tab1_2" aria-controls="second_tab01">
+              <label for="tab1_2">長期スパン</label>
+              <div class="cp_tabpanels">
+                <div id="first_tab01" class="cp_tabpanel">
+                  <canvas id="canvas1" width="300" height="210"></canvas>
+                </div>
+                <div id="second_tab01" class="cp_tabpanel">
+                  <canvas id="canvas2" width="300" height="210"></canvas>
                 </div>
               </div>
-              <h4>通算投票数</h4>
+            </div>
+            <h4>通算投票数</h4>
             <div id="count"></div>
-        </div>
-    
-        <div class="tab_content2" id="comment_content">
-          <div class="comments">
-            <form id="comment-form">
-              <textarea id="message" placeholder="公開コメントの追加" cols="20" rows="1"></textarea>    
-              <a type="btn" class="submit" id="submit" style="font-size:11px">送信</a>
-            </form>
-            <div id="comment-list"></div>
           </div>
-        </div>
-    
-        <div class="tab_content2" id="influencer_content">
+
+          <div class="tab_content2" id="comment_content">
+            <div class="comments">
+              <form id="comment-form">
+                <textarea id="message" placeholder="公開コメントの追加" cols="20" rows="1"></textarea>
+                <a type="btn" class="submit" id="submit" style="font-size:11px">送信</a>
+              </form>
+              <div id="comment-list"></div>
+            </div>
+          </div>
+
+          <div class="tab_content2" id="influencer_content">
             <div class="comments">
               <div id="onlyinfluencer">
-                <h5><p>あなたのフォロワー数は50000人を超えており、あなたはAICEVOTE認定インフルエンサーです</p><p>こちらではインフルエンサーのコメントのみが反映されます</p></h5>
+                <h5>
+                  <p>あなたのフォロワー数は50000人を超えており、あなたはAICEVOTE認定インフルエンサーです</p>
+                  <p>こちらではインフルエンサーのコメントのみが反映されます</p>
+                </h5>
                 <form id="infcomment-list">
-                  <textarea id="influencer-message" placeholder="公開コメントの追加" cols="20" rows="1"></textarea>    
+                  <textarea id="influencer-message" placeholder="公開コメントの追加" cols="20" rows="1"></textarea>
                   <a type="btn" class="submit" id="infsubmit">送信</a>
                 </form>
               </div>
-                <h3>
-                  <div id="infnavpeople1-drawer">
-                    <input id="infnavpeople1-input" type="checkbox" class="infnav-unshown">
-                    <label id="infnavpeople1-open" for="infnavpeople1-input"><span><img src="/images/person.png" class="blink"></span></label>
-                    <label class="infnav-unshown" id="infnavpeople1-close" for="infnavpeople1-input"></label>
-                    <div id="infnavpeople1-content">
-                        <a href="https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=http://aicevote.com&hashtags=タピオカ、好き？嫌い？" style="text-decoration:black; color:deepskyblue;"><h4><img src="/images/twitter.png">フォロワーを呼ぼう</h4></a>
-                      <h3>インフルエンサーの投票</h3>
-                      <ul id="ainfmember">
-                      </ul>
-                    </div>
+              <h3>
+                <div id="infnavpeople1-drawer">
+                  <input id="infnavpeople1-input" type="checkbox" class="infnav-unshown">
+                  <label id="infnavpeople1-open" for="infnavpeople1-input"><span><img src="/images/person.png"
+                        class="blink"></span></label>
+                  <label class="infnav-unshown" id="infnavpeople1-close" for="infnavpeople1-input"></label>
+                  <div id="infnavpeople1-content">
+                    <a href="https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=http://aicevote.com&hashtags=NHKスクランブル放送、賛成反対？"
+                      style="text-decoration:black; color:deepskyblue;">
+                      <h4><img src="/images/twitter.png">フォロワーを呼ぼう</h4>
+                    </a>
+                    <h3>インフルエンサーの投票</h3>
+                    <ul id="ainfmember">
+                    </ul>
                   </div>
-                  インフルエンサーの投票
-                </h3>
+                </div>
+                インフルエンサーの投票
+              </h3>
               <h5>フォロワー数50000人以上の基準を満たすインフルエンサーのコメントです</h5>
               <div id="influencer-comment-list"></div>
             </div>
           </div>
+        </div>
       </div>
-    </div>
-    <div class="subcontents">
-      <div class="adpc">
+      <div class="subcontents">
+        <div class="adpc">
           <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+6D4GH" rel="nofollow">
-            <img border="0" width="300" height="250" alt="" src="https://www25.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001069000&mc=1"></a>
-            <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+6D4GH" alt="">
-      </div>
-      <div class="adsmart">
+            <img border="0" width="300" height="250" alt=""
+              src="https://www25.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001069000&mc=1"></a>
+          <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+6D4GH" alt="">
+        </div>
+        <div class="adsmart">
           <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+65U41" rel="nofollow">
-            <img border="0" width="234" height="60" alt="" src="https://www24.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001035000&mc=1"></a>
-            <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+65U41" alt="">
-      </div>
+            <img border="0" width="234" height="60" alt=""
+              src="https://www24.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001035000&mc=1"></a>
+          <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+65U41" alt="">
+        </div>
 
-    </body>
-    
-    </html>
-
-
-
-
-      <h2>人気の投票テーマ</h2>
-      <ul>
-        <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
-        <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
-        <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
-        <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer">
-    <h1><img src="/images/firstix-ocean.png"></h1>
-    <ul>
-      <li>
-      <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a>
-      </li>
-      <li>
-        <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
-      </li>
-      <li>
-      レポート
-      </li>
-    </ul>
-  </div>
-</div>
 </body>
 
+</html>
+
+
+
+
+<h2>人気の投票テーマ</h2>
+<ul>
+  <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
+  <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
+  <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
+  <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
+</ul>
+</div>
+</div>
+<div class="footer">
+  <h1><img src="/images/firstix-ocean.png"></h1>
+  <ul>
+    <li>
+      <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a>
+    </li>
+    <li>
+      <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
+    </li>
+    <li>
+      レポート
+    </li>
+  </ul>
+</div>
+</div>
+</body>

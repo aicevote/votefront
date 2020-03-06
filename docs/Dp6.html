@@ -1,16 +1,7 @@
-
-
-<lang="ja">
+<!DOCTYPE html>
+<html lang="ja">
 
 <head prefix="og: http://ogp.me/ns#">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-141182013-1');
-  </script>
   <meta property="og:title" content="AICEVOTE">
   <meta property="og:type" content="website">
   <meta property="og:description" content="票を氷にしたリアルタイム投票サイト">
@@ -25,303 +16,311 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-</head>
-<body>
   <script src="/javascripts/moment.js"></script>
   <script src="/javascripts/Chart.min.js"></script>
   <script src="/javascripts/chartjs-plugin-streaming.js"></script>
-  <script src="/javascripts/ajax.js"></script>
 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'UA-141182013-1');
+  </script>
+</head>
+
+<body>
   <div class="mainSite">
-  <div class="header">
-    <div class="header-logo"><a href="home"><img src="/images/aice.JPG" ></a>
-    </div>
-    <div id="nav-drawer">
-      <input id="nav-input" type="checkbox" class="nav-unshown">
-      <label id="nav-open" for="nav-input"><span></span></label>
-      <label class="nav-unshown" id="nav-close" for="nav-input"></label>
-      <div id="nav-content">
+    <div class="header">
+      <div class="header-logo"> <a href="home"><img src="/images/aice.JPG"></a> </div>
+      <div id="nav-drawer">
+        <input id="nav-input" type="checkbox" class="nav-unshown">
+        <label id="nav-open" for="nav-input"><span></span></label>
+        <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+        <div id="nav-content">
+          <ul>
+            <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+            <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
+            <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
+            <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
+            <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+            <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a>
+            <li>
+          </ul>
+        </div>
+      </div>
+      <div class="header-list">
         <ul>
           <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-          <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
-          <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
-          <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
+          <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
+          <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
+          <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
           <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-          <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a><li>
+          <li>
+            <div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div>
+          </li>
         </ul>
       </div>
+      <div id="menu-background"> </div>
     </div>
-    <div class="header-list">
-      <ul>
-        <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-        <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
-        <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
-        <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
-        <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-        <li><div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div></li>
-      </ul>
-    </div>
-    <div id="menu-background">
-    </div>
-  </div>
+
     <div id="allcontainer">
-        <div class="container">
-            <!DOCTYPE html>
-            <html lang="ja">
-          <head>
-            <meta charset="UTF-8">
-            <meta name="description" content="あなたはタピオカを好きですか？嫌いですか？　好きな人は好き、嫌いな人は嫌いに投票して下さい">
-            <title>タピオカ、好き？嫌い？</title>
-          </head>
-            
-          <body>
-            <div class="balloon2-left">
-              <p> タピオカ、好き？嫌い？</p>
-            </div>
-            <h4>
-              あなたはタピオカを好きですか？嫌いですか？　好きな人は好き、嫌いな人は嫌いに投票して下さい
-            </h4>
-            <div class="button" id="button01">
-              <ul>
-                <li>
-                  <a id="A" class="btn-box1">好き</a>
-                </li>
-                <li>
-                  <a id="B" class="btn-box2">嫌い</a>
-                </li>
-              </ul>
-            </div>
-            <div class="button" id="button23">
-              <ul>
-                <li>
-                  <a id="C" class="btn-box1"></a>
-                </li>
-                <li>
-                  <a id="D" class="btn-box2"></a>
-                </li>
-              </ul>
-            </div>
-            <div class="button" id="button45">
-              <ul>
-                <li>
-                  <a id="E" class="btn-box1"></a>
-                </li>
-                <li>
-                  <a id="F" class="btn-box2"></a>
-                </li>
-              </ul>
-            </div>
-            <div class="button" id="button67">
-              <ul>
-                <li>
-                  <a id="G" class="btn-box1"></a>
-                </li>
-                <li>
-                  <a id="H" class="btn-box2"></a>
-                </li>
-              </ul>
-            </div>
-            <div class="button" id="button89">
-              <ul>
-                <li>
-                  <a id="I" class="btn-box1"></a>
-                </li>
-                <li>
-                  <a id="J" class="btn-box2"></a>
-                </li>
-              </ul>
-            </div>
+      <div class="container">
+
+        <body>
+          <div class="balloon2-left">
+            <p id="title"></p>
           </div>
-        <div class="subcontents">
-            <div class="adpc">
-                <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+6D4GH" rel="nofollow">
-                  <img border="0" width="300" height="250" alt="" src="https://www25.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001069000&mc=1"></a>
-                  <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+6D4GH" alt="">
-            </div>
-            <div class="adsmart">
-                <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+65U41" rel="nofollow">
-                  <img border="0" width="234" height="60" alt="" src="https://www24.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001035000&mc=1"></a>
-                  <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+65U41" alt="">
-            </div>
-          </body>
-    
-          </html>
-          
-            <script>
-              $(() => {
-                if ($('#A').text().length == 0){
-                  $('#A').remove();
-                  $('#button01').remove();
-                }
-                if ($('#B').text().length == 0){
-                  $('#B').remove();
-                }
-                if ($('#C').text().length == 0){
-                  $('#C').remove();
-                  $('#button23').remove();
-                }
-                if ($('#D').text().length == 0){
-                  $('#D').remove();
-                }
-                if ($('#E').text().length == 0){
-                  $('#E').remove();
-                  $('#button45').remove();
-                }
-                if ($('#F').text().length == 0){
-                  $('#F').remove();
-                }
-                if ($('#G').text().length == 0){
-                  $('#G').remove();
-                  $('#button67').remove();
-                }
-                if ($('#H').text().length == 0){
-                  $('#H').remove();
-                }
-                if ($('#I').text().length == 0){
-                  $('#I').remove();
-                  $('#button89').remove();
-                }
-                if ($('#J').text().length == 0){
-                  $('#J').remove();
-                }
-                const socket = io("https://api.aicevote.com/");
-                var sessionToken;
-        
-                socket.on('connect', function () {
-                  $.ajax({
-                    url: "https://api.aicevote.com/auth/sessiontoken",
-                    xhrFields: {
-                      withCredentials: true
-                    }
-                  }).success(function(res){
-                    sessionToken=res.sessionToken;
-                    if(!sessionToken){
-                      location.href = "/result6.html"
-                    }else{
-                      $('.login').remove();
-                    }
-                  });
-                });
-                console.log(sessionToken);
-                $('#A').click((req, res) => {
-                  socket.emit('put vote', {
-                    themeID:6,
-                    sessionToken: sessionToken,
-                    answer: 0
-                  });
-                  location.href = "/result6.html";
-                });
-        
-                $('#B').click((req, res) => {
-                  socket.emit('put vote', {
-                    themeID:6,
-                    sessionToken: sessionToken,
-                    answer: 1
-                  });
-                  location.href = "/result6.html";
-                });
-        
-                $('#C').click((req, res) => {
-                  socket.emit('put vote', {
-                    themeID:6,
-                    sessionToken: sessionToken,
-                    answer: 2
-                  });
-                  location.href = "/result6.html";
-                });
-        
-                $('#D').click((req, res) => {
-                  socket.emit('put vote', {
-                    themeID:6,
-                    sessionToken: sessionToken,
-                    answer: 3
-                  });
-                  location.href = "/result6.html";
-                });
-        
-                $('#E').click((req, res) => {
-                  socket.emit('put vote', {
-                    themeID:6,
-                    sessionToken: sessionToken,
-                    answer: 4
-                  });
-                  location.href = "/result6.html";
-                });
-        
-                $('#F').click((req, res) => {
-                  socket.emit('put vote', {
-                    themeID:6,
-                    sessionToken: sessionToken,
-                    answer: 5
-                  });
-                  location.href = "/result6.html";
-                });
-        
-                $('#G').click((req, res) => {
-                  socket.emit('put vote', {
-                    themeID:6,
-                    sessionToken: sessionToken,
-                    answer: 6
-                  });
-                  location.href = "/result6.html";
-                });
-        
-                $('#H').click((req, res) => {
-                  socket.emit('put vote', {
-                    themeID:6,
-                    sessionToken: sessionToken,
-                    answer: 7
-                  });
-                  location.href = "/result6.html";
-                });
-        
-                $('#I').click((req, res) => {
-                  socket.emit('put vote', {
-                    themeID:6,
-                    sessionToken: sessionToken,
-                    answer: 8
-                  });
-                  location.href = "/result6.html";
-                });
-        
-                $('#J').click((req, res) => {
-                  socket.emit('put vote', {
-                    themeID:6,
-                    sessionToken: sessionToken,
-                    answer: 9
-                  });
-                  location.href = "/result6.html";
-                });
-        
-        
-        
-              });
-            </script>
-            <h2>人気の投票テーマ</h2>
+          <h4 id="description"></h4>
+
+          <div class="button" id="button01">
             <ul>
-              <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
-              <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
-              <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
-              <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
+              <li>
+                <a id="A" class="btn-box1">賛成</a>
+              </li>
+              <li>
+                <a id="B" class="btn-box2">反対</a>
+              </li>
             </ul>
           </div>
-      
-        
+          <div class="button" id="button23">
+            <ul>
+              <li>
+                <a id="C" class="btn-box1"></a>
+              </li>
+              <li>
+                <a id="D" class="btn-box2"></a>
+              </li>
+            </ul>
+          </div>
+          <div class="button" id="button45">
+            <ul>
+              <li>
+                <a id="E" class="btn-box1"></a>
+              </li>
+              <li>
+                <a id="F" class="btn-box2"></a>
+              </li>
+            </ul>
+          </div>
+          <div class="button" id="button67">
+            <ul>
+              <li>
+                <a id="G" class="btn-box1"></a>
+              </li>
+              <li>
+                <a id="H" class="btn-box2"></a>
+              </li>
+            </ul>
+          </div>
+          <div class="button" id="button89">
+            <ul>
+              <li>
+                <a id="I" class="btn-box1"></a>
+              </li>
+              <li>
+                <a id="J" class="btn-box2"></a>
+              </li>
+            </ul>
+          </div>
+      </div>
+
+      <script>
+        $(() => {
+          const socket = io("https://api.aicevote.com");
+          const themeID = parseInt(window.location.pathname.replace(/[^-^0-9^\.]/g, ""), 10);
+          var sessionToken = "";
+          var title = "";
+          var description = "";
+          var choices = [""];
+
+          $.ajax({ url: "https://api.aicevote.com/themes/" + themeID })
+            .done((data, textStatus, jqXHR) => {
+              title = data.title;
+              description = data.description;
+              choices = data.choices;
+
+              document.title = title;
+              $("#title").text(title);
+              $("#description").text(description);
+            });
+
+          if ($('#A').text().length == 0) {
+            $('#A').remove();
+            $('#button01').remove();
+          }
+          if ($('#B').text().length == 0) {
+            $('#B').remove();
+          }
+          if ($('#C').text().length == 0) {
+            $('#C').remove();
+            $('#button23').remove();
+          }
+          if ($('#D').text().length == 0) {
+            $('#D').remove();
+          }
+          if ($('#E').text().length == 0) {
+            $('#E').remove();
+            $('#button45').remove();
+          }
+          if ($('#F').text().length == 0) {
+            $('#F').remove();
+          }
+          if ($('#G').text().length == 0) {
+            $('#G').remove();
+            $('#button67').remove();
+          }
+          if ($('#H').text().length == 0) {
+            $('#H').remove();
+          }
+          if ($('#I').text().length == 0) {
+            $('#I').remove();
+            $('#button89').remove();
+          }
+          if ($('#J').text().length == 0) {
+            $('#J').remove();
+          }
+
+          socket.on('connect', function () {
+            $.ajax({
+              url: "https://api.aicevote.com/auth/sessiontoken",
+              xhrFields: { withCredentials: true }
+            }).done((data, textStatus, jqXHR) => {
+              sessionToken = data.sessionToken;
+              if (sessionToken) {
+                $('.login').remove();
+              } else {
+                location.href = "/result" + themeID + ".html";
+              }
+            });
+          });
+          $('#A').click((req, res) => {
+            socket.emit('put vote', {
+              themeID: themeID,
+              sessionToken: sessionToken,
+              answer: 0
+            });
+            location.href = "/result" + themeID + ".html";
+          });
+
+          $('#B').click((req, res) => {
+            socket.emit('put vote', {
+              themeID: themeID,
+              sessionToken: sessionToken,
+              answer: 1
+            });
+            location.href = "/result" + themeID + ".html";
+          });
+
+          $('#C').click((req, res) => {
+            socket.emit('put vote', {
+              themeID: themeID,
+              sessionToken: sessionToken,
+              answer: 2
+            });
+            location.href = "/result" + themeID + ".html";
+          });
+
+          $('#D').click((req, res) => {
+            socket.emit('put vote', {
+              themeID: themeID,
+              sessionToken: sessionToken,
+              answer: 3
+            });
+            location.href = "/result" + themeID + ".html";
+          });
+
+          $('#E').click((req, res) => {
+            socket.emit('put vote', {
+              themeID: themeID,
+              sessionToken: sessionToken,
+              answer: 4
+            });
+            location.href = "/result" + themeID + ".html";
+          });
+
+          $('#F').click((req, res) => {
+            socket.emit('put vote', {
+              themeID: themeID,
+              sessionToken: sessionToken,
+              answer: 5
+            });
+            location.href = "/result" + themeID + ".html";
+          });
+
+          $('#G').click((req, res) => {
+            socket.emit('put vote', {
+              themeID: themeID,
+              sessionToken: sessionToken,
+              answer: 6
+            });
+            location.href = "/result" + themeID + ".html";
+          });
+
+          $('#H').click((req, res) => {
+            socket.emit('put vote', {
+              themeID: themeID,
+              sessionToken: sessionToken,
+              answer: 7
+            });
+            location.href = "/result" + themeID + ".html";
+          });
+
+          $('#I').click((req, res) => {
+            socket.emit('put vote', {
+              themeID: themeID,
+              sessionToken: sessionToken,
+              answer: 8
+            });
+            location.href = "/result" + themeID + ".html";
+          });
+
+          $('#J').click((req, res) => {
+            socket.emit('put vote', {
+              themeID: themeID,
+              sessionToken: sessionToken,
+              answer: 9
+            });
+            location.href = "/result" + themeID + ".html";
+          });
+        });
+      </script>
+
+      <div class="subcontents">
+        <div class="adpc">
+          <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+6D4GH" rel="nofollow">
+            <img border="0" width="300" height="250" alt=""
+              src="https://www25.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001069000&mc=1">
+          </a>
+          <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+6D4GH" alt="">
+        </div>
+        <div class="adsmart">
+          <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+65U41" rel="nofollow">
+            <img border="0" width="234" height="60" alt=""
+              src="https://www24.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001035000&mc=1">
+          </a>
+          <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+65U41" alt="">
+        </div>
+        <h2>人気の投票テーマ</h2>
+        <ul>
+          <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
+          <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
+          <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
+          <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
+        </ul>
+      </div>
+
     </div>
     <div class="footer">
-     <h1><img src="/images/firstix-ocean.png"></h1>
-     <ul>
-       <li>
-        <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a>
-       </li>
-       <li>
-         <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
-       </li>
-       <li>
-        レポート
-       </li>
-     </ul>
+      <h1><img src="/images/firstix-ocean.png"></h1>
+      <ul>
+        <li> <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a> </li>
+        <li> <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a> </li>
+        <li> レポート </li>
+      </ul>
     </div>
   </div>
 </body>
 
+</html>

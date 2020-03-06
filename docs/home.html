@@ -57,6 +57,7 @@
                     withCredentials: true
                   }
                 }).success(function(res){
+                  console.log(res.username);
                   $('.login').remove();
                   const profile = document.getElementById('profile');
                   profile.innerHTML = `

@@ -42,21 +42,19 @@
           xhrFields: { withCredentials: true }
         }).done((data, textStatus, jqXHR) => {
           sessionToken = data.sessionToken;
-          if (sessionToken) {
-            $.ajax({
-              url: "https://api.aicevote.com/profiles?sessiontoken=" + sessionToken
-            }).done((data, textStatus, jqXHR) => {
-              $('.login').remove();
-              const profile = document.getElementById('profile');
-              profile.innerHTML = `<img src="${data.imageURI}"  width="48" height="48" margin="24" border-radius="50%">${data.name}さんようこそ`;
-              if (data.isInfluencer) { $('#notinfluencer').remove(); }
-              else { $('#onlyinfluencer').remove(); }
-            });
-          } else {
-            $('#onlyinfluencer').remove();
+          $.ajax({
+            url: "https://api.aicevote.com/profiles?sessiontoken=" + sessionToken
+          }).done((data, textStatus, jqXHR) => {
+            $('.login').remove();
             const profile = document.getElementById('profile');
-            profile.innerHTML = `<img src="/images/person.png"  width="48" height="48" margin="24" border-radius="50%">ゲストさんようこそ`;
-          }
+            profile.innerHTML = `<img src="${data.imageURI}"  width="48" height="48" margin="24" border-radius="50%">${data.name}さんようこそ`;
+            if (data.isInfluencer) { $('#notinfluencer').remove(); }
+            else { $('#onlyinfluencer').remove(); }
+          });
+        }).fail((jqXHR, textStatus, errorThrown) => {
+          $('#onlyinfluencer').remove();
+          const profile = document.getElementById('profile');
+          profile.innerHTML = `<img src="/images/person.png"  width="48" height="48" margin="24" border-radius="50%">ゲストさんようこそ`;
         });
       });
     </script>

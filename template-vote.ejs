@@ -207,7 +207,7 @@ var data = jsonData;
                 console.log(sessionToken);
                 $('#A').click((req, res) => {
                   socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
+                    themeID:<%= data.votenumber %>,
                     sessionToken: sessionToken,
                     answer: 0
                   });
@@ -216,7 +216,7 @@ var data = jsonData;
         
                 $('#B').click((req, res) => {
                   socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
+                    themeID:<%= data.votenumber %>,
                     sessionToken: sessionToken,
                     answer: 1
                   });
@@ -225,7 +225,7 @@ var data = jsonData;
         
                 $('#C').click((req, res) => {
                   socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
+                    themeID:<%= data.votenumber %>,
                     sessionToken: sessionToken,
                     answer: 2
                   });
@@ -234,7 +234,7 @@ var data = jsonData;
         
                 $('#D').click((req, res) => {
                   socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
+                    themeID:<%= data.votenumber %>,
                     sessionToken: sessionToken,
                     answer: 3
                   });
@@ -243,7 +243,7 @@ var data = jsonData;
         
                 $('#E').click((req, res) => {
                   socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
+                    themeID:<%= data.votenumber %>,
                     sessionToken: sessionToken,
                     answer: 4
                   });
@@ -252,7 +252,7 @@ var data = jsonData;
         
                 $('#F').click((req, res) => {
                   socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
+                    themeID:<%= data.votenumber %>,
                     sessionToken: sessionToken,
                     answer: 5
                   });
@@ -261,7 +261,7 @@ var data = jsonData;
         
                 $('#G').click((req, res) => {
                   socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
+                    themeID:<%= data.votenumber %>,
                     sessionToken: sessionToken,
                     answer: 6
                   });
@@ -270,7 +270,7 @@ var data = jsonData;
         
                 $('#H').click((req, res) => {
                   socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
+                    themeID:<%= data.votenumber %>,
                     sessionToken: sessionToken,
                     answer: 7
                   });
@@ -279,7 +279,7 @@ var data = jsonData;
         
                 $('#I').click((req, res) => {
                   socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
+                    themeID:<%= data.votenumber %>,
                     sessionToken: sessionToken,
                     answer: 8
                   });
@@ -288,7 +288,7 @@ var data = jsonData;
         
                 $('#J').click((req, res) => {
                   socket.emit('put vote', {
-                    id:<%= data.votenumber %>,
+                    themeID:<%= data.votenumber %>,
                     sessionToken: sessionToken,
                     answer: 9
                   });

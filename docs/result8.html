@@ -104,6 +104,16 @@
                 $("#title").text(title);
                 $("#description").text(description);
                 $("#share").attr("href", "https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=http://aicevote.com&hashtags=" + title);
+                $("#agree0").text(choices[0]);
+                $("#agree1").text(choices[1]);
+                $("#agree2").text(choices[2]);
+                $("#agree3").text(choices[3]);
+                $("#agree4").text(choices[4]);
+                $("#agree5").text(choices[5]);
+                $("#agree6").text(choices[6]);
+                $("#agree7").text(choices[7]);
+                $("#agree8").text(choices[8]);
+                $("#agree9").text(choices[9]);
               });
 
             socket.on("connect", () => {

@@ -1,149 +1,136 @@
 <html>
-    <lang="ja">
-        <head prefix="og: http://ogp.me/ns#">
-          <!-- Global site tag (gtag.js) - Google Analytics -->
-          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
-          <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'UA-141182013-1');
-          </script>
-          <meta property="og:title" content="AICEVOTE">
-          <meta property="og:type" content="website">
-          <meta property="og:description" content="票を氷にしたリアルタイム投票サイト">
-          <meta property="og:url" content="aicevote.com">
-          <meta property="og:site_name" content="AICEVOTE">
-          <meta property="og:image" content="http://aicevote.com/images/aicevote_2_skeleton.png">
-          <meta name="twitter:card" content="summary_large_image">
-          <meta charset="UTF-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width,initial-scale=1">
-          <link rel='stylesheet' href='/stylesheets/style.css' />
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-          <meta name="description" content="リアルタイム投票サービス　AICEVOTE　（アイスボート）のホームメニューです。">
-          <title>ホーム</title>
-        </head>
-        <body>
-          <script src="/javascripts/moment.js"></script>
-          <script src="/javascripts/Chart.min.js"></script>
-          <script src="/javascripts/chartjs-plugin-streaming.js"></script>
-          <script src="/javascripts/ajax.js"></script>
-          
-          <script type="text/javascript">
-          $(function() {
-            const socket = io("https://api.aicevote.com");
-            var sessionToken;
+<lang="ja">
+
+  <head prefix="og: http://ogp.me/ns#">
+    <title>ホーム</title>
+    <meta name="description" content="リアルタイム投票サービス　AICEVOTE　（アイスボート）のホームメニューです。">
+    <meta property="og:title" content="AICEVOTE">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="票を氷にしたリアルタイム投票サイト">
+    <meta property="og:url" content="aicevote.com">
+    <meta property="og:site_name" content="AICEVOTE">
+    <meta property="og:image" content="http://aicevote.com/images/aicevote_2_skeleton.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="/javascripts/moment.js"></script>
+    <script src="/javascripts/Chart.min.js"></script>
+    <script src="/javascripts/chartjs-plugin-streaming.js"></script>
+    <script src="/javascripts/ajax.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'UA-141182013-1');
+    </script>
+  </head>
+
+  <body>
+    <script>
+      $(() => {
+        var sessionToken = "";
+        $.ajax({
+          url: "https://api.aicevote.com/auth/sessiontoken",
+          xhrFields: { withCredentials: true }
+        }).done((data, textStatus, jqXHR) => {
+          sessionToken = data.sessionToken;
+          if (sessionToken) {
             $.ajax({
-              url: "https://api.aicevote.com/auth/sessiontoken",
-              xhrFields: {
-                withCredentials: true
-              }
-            }).success(function(res){
-              sessionToken=res.sessionToken
-              if(!sessionToken){
-                $('#onlyinfluencer').remove();
-                const profile = document.getElementById('profile');
-                profile.innerHTML = `
-                                      <img src="/images/person.png"  width="48" height="48" margin="24" border-radius="50%">
-                                      ゲストさんようこそ
-                                        `;
-              }else{
-                $.ajax({
-                  url: "https://api.aicevote.com/profiles?sessiontoken=" + sessionToken,
-                  xhrFields: {
-                    withCredentials: true
-                  }
-                }).success(function(res){
-                  console.log(res.username);
-                  $('.login').remove();
-                  const profile = document.getElementById('profile');
-                  profile.innerHTML = `
-                                      <img src="${res.imageURI}"  width="48" height="48" margin="24" border-radius="50%">
-                                      ${res.username}さんようこそ
-                                        `;
-                  if(res.influencer == false){
-                    console.log(res.username);
-                        $('#onlyinfluencer').remove();
-                      }
-                      else if(res.influencer == true){
-                        $('#notinfluencer').remove();
-                      }          
-                });
-              }
+              url: "https://api.aicevote.com/profiles?sessiontoken=" + sessionToken
+            }).done((data, textStatus, jqXHR) => {
+              $('.login').remove();
+              const profile = document.getElementById('profile');
+              profile.innerHTML = `<img src="${data.imageURI}"  width="48" height="48" margin="24" border-radius="50%">${data.name}さんようこそ`;
+              if (data.isInfluencer) { $('#notinfluencer').remove(); }
+              else { $('#onlyinfluencer').remove(); }
             });
-          });
-          </script>
-          <div class="mainSite">
-          <div class="header">
-            <div class="header-logo"><a href="home"><img src="/images/aice.JPG" ></a>
-            </div>
-            <div id="nav-drawer">
-              <input id="nav-input" type="checkbox" class="nav-unshown">
-              <label id="nav-open" for="nav-input"><span></span></label>
-              <label class="nav-unshown" id="nav-close" for="nav-input"></label>
-              <div id="nav-content">
-                <ul>
-                  <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-                  <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
-                  <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
-                  <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
-                  <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-                  <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a><li>
-                </ul>
-              </div>
-            </div>
-            <div class="header-list">
-              <ul>
-                <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-                <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
-                <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
-                <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
-                <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-                <li><div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div></li>
-              </ul>
-            </div>
-            <div id="menu-background">
-            </div>
+          } else {
+            $('#onlyinfluencer').remove();
+            const profile = document.getElementById('profile');
+            profile.innerHTML = `<img src="/images/person.png"  width="48" height="48" margin="24" border-radius="50%">ゲストさんようこそ`;
+          }
+        });
+      });
+    </script>
+    <div class="mainSite">
+      <div class="header">
+        <div class="header-logo"><a href="home"><img src="/images/aice.JPG"></a>
+        </div>
+        <div id="nav-drawer">
+          <input id="nav-input" type="checkbox" class="nav-unshown">
+          <label id="nav-open" for="nav-input"><span></span></label>
+          <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+          <div id="nav-content">
+            <ul>
+              <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+              <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
+              <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
+              <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
+              <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+              <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a>
+              <li>
+            </ul>
           </div>
-            <div id="allcontainer">
-            <div class="container">
-                <script>
-                  
-                      
-                    $(function(){
-                      const socket = io("https://api.aicevote.com");
-                      $(".anews").click(function () {
-                        $(".anews").not(this).removeClass("open");
-                        $(".anews").not(this).next().slideUp(300);
-                        $(this).toggleClass("open");
-                        $(this).next().slideToggle(300);
-                      });
-                      socket.on('connect', function () {
-                          socket.emit('get news', null);
-                      });
-                      socket.on("news",(article)=>{
-                        for (let i = 0; i < article.related.length; i++) {
-                          article.related[i].forEach((article) => {
-                            article["id"] = i;
-                          });
-                        }
-                        article.latest.forEach((article) => {
-                          article["id"] = null;
-                        });
-                        article = article.related.reduce(
-                          (prev, cur) => prev.concat(cur)
-                        ).concat(article.latest).sort(
-                          (a, b) => b.publishedAt - a.publishedAt
-                        );
-                        
-                        const newslist = document.getElementById('newslist');                     
-                        for (let j = 0; j < article.length; j++) {
-                          var news = article[j];
-                          const li = document.createElement('li');
-                          li.innerHTML = `
+        </div>
+        <div class="header-list">
+          <ul>
+            <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+            <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
+            <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
+            <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
+            <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+            <li>
+              <div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div>
+            </li>
+          </ul>
+        </div>
+        <div id="menu-background">
+        </div>
+      </div>
+      <div id="allcontainer">
+        <div class="container">
+          <script>
+
+
+            $(function () {
+              const socket = io("https://api.aicevote.com");
+              $(".anews").click(function () {
+                $(".anews").not(this).removeClass("open");
+                $(".anews").not(this).next().slideUp(300);
+                $(this).toggleClass("open");
+                $(this).next().slideToggle(300);
+              });
+              socket.on('connect', function () {
+                socket.emit('get news', null);
+              });
+              socket.on("news", (article) => {
+                for (let i = 0; i < article.related.length; i++) {
+                  article.related[i].forEach((article) => {
+                    article["id"] = i;
+                  });
+                }
+                article.latest.forEach((article) => {
+                  article["id"] = null;
+                });
+                article = article.related.reduce(
+                  (prev, cur) => prev.concat(cur)
+                ).concat(article.latest).sort(
+                  (a, b) => b.publishedAt - a.publishedAt
+                );
+
+                const newslist = document.getElementById('newslist');
+                for (let j = 0; j < article.length; j++) {
+                  var news = article[j];
+                  const li = document.createElement('li');
+                  li.innerHTML = `
                                         <label id="newsnav-open${j}" for="newsnav-input${j}"><span></span>  
                                           <div class="onenews">
                                             <div class="anews">
@@ -169,199 +156,201 @@
                                           <div class="news-background">
                                           </div>
                                         `;
-                          newslist.appendChild(li)
-                        }
-                        
-                      });
-                    })
-                  
-                </script>
-                  <div id="profile"></div>
-                  <div id= "onlyinfluencer">
-                    <h5>※あなたはツイッターフォロワー数の基準によりインフルエンサーとなりました。インフルエンサーの投票結果は一般に公表されます。</h5>
-                  </div>
-                  <div id= "notinfluencer">
-                    <h5>※ツイッターアカウントでログインした方の投票結果は、あなたのフォロワーに公表されます。</h5>
-                  </div>
-                  <div class="tabs" align="left">
-                  <input id="all" type="radio" name="tab_item" checked>
-                  <label class="tab_item" for="all">主要</label>
-                  <input id="political" type="radio" name="tab_item">
-                  <label class="tab_item" for="political">政治</label>
-                  <input id="life" type="radio" name="tab_item">
-                  <label class="tab_item" for="life">生活</label>
-                  <input id="economic" type="radio" name="tab_item" >
-                  <label class="tab_item" for="economic">経済</label>
-                  <input id="sports" type="radio" name="tab_item" >
-                  <label class="tab_item" for="sports">スポーツ</label>
-                  <input id="WS" type="radio" name="tab_item" >
-                  <label class="tab_item" for="WS">芸能</label>
-                  <input id="Gourmet" type="radio" name="tab_item" >
-                  <label class="tab_item" for="Gourmet">グルメ</label>
-                  <input id="girl" type="radio" name="tab_item" >
-                  <label class="tab_item" for="girl">その他</label>
-                  <input id="Trend" type="radio" name="tab_item" >
-                  <label class="tab_item" for="Trend">トレンド</label>
-                  <input id="pr" type="radio" name="tab_item" >
-                  <label class="tab_item" for="pr">PR</label>
-                  <div class="tab_content" id="all_content">
-                    <div class="tab_content_description">
-                      <p class="c-txtsp">
-                       <ul>
-                        <li><img src="/images/money.png"><a href="Dp10">ベーシックインカム賛成？反対？</a></li>
-                        <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
-                        <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
-                        <li><img src="/images/building.png"><a href="Dp0">NHKスクランブル放送、賛成反対？</a></li>
-                        <li><img src="/images/candy.png"><a href="Dp6">タピオカ 好き？嫌い？</a></li>
-                        <li><img src="/images/gun.png"><a href="Dp11">第三次世界大戦は起きる？起きない？</a></li>
-                        <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
-                        <li><img src="/images/forest.png"><a href="Dp8">環境問題、どう思う？</a></li>
-                      </ul>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="tab_content" id="political_content">
-                    <div class="tab_content_description">
-                      <p class="c-txtsp">
-                        <ul>
-                          <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
-                          <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
-                          <li><img src="/images/politics.png"><a href="Dp2">あなたは死刑制度に、賛成？反対？</a></li>
-                          <li><img src="/images/building.png"><a href="Dp0">NHKスクランブル放送、賛成反対？</a></li>
-                          <li><img src="/images/forest.png"><a href="Dp8">環境問題、どう思う？</a></li>
-                        </ul>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="tab_content" id="life_content">
-                    <div class="tab_content_description">
-                      <p class="c-txtsp">
-                        <ul>
-                          <li><img src="/images/dog.png"><a href="Dp3">あなたは犬派？、猫派？</a></li>
-                          <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
-                        </ul>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="tab_content" id="economic_content">
-                    <div class="tab_content_description">
-                      <p class="c-txtsp">
-                        <ul>
-                          <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
-                          <li><img src="/images/money.png"><a href="Dp10">ベーシックインカム賛成？反対？</a></li>
-                        </ul>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="tab_content" id="sports_content">
-                    <div class="tab_content_description">
-                      <p class="c-txtsp">
-                        <ul>
-                          <li><img src="/images/baseball.png">（予定）今年のセ・リーグで優勝チームは？</li>
-                          <li><img src="/images/soccer.png">（予定）サッカーW杯の優勝するのは？</li>
-                        </ul>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="tab_content" id="WS_content">
-                    <div class="tab_content_description">
-                      <p class="c-txtsp">
-                        <ul>
-                          <li><img src="/images/mike.png">(終了）ガキ使と紅白どっち派？</li>
-                          <li><img src="/images/mike.png">（終了）紅白歌合戦、どちらが強い？</li>
-                        </ul>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="tab_content" id="Gourmet_content">
-                    <div class="tab_content_description">
-                      <p class="c-txtsp">
-                        <ul>
-                          <li><img src="/images/candy.png"><a href="Dp5">たけのこの里派？きのこの山派？</a></li>
-                          <li><img src="/images/candy.png"><a href="Dp6">タピオカ 好き？嫌い？</a></li>
-                        </ul>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="tab_content" id="girl_content">
-                    <div class="tab_content_description">
-                      <p class="c-txtsp">
-                        <ul>
-                          <li><img src="/images/gun.png"><a href="Dp11">第三次世界大戦は起きる？起きない？</a></li>
-                          <li><img src="/images/alien.png">（予定）地球外生命体はいる？いない？</a></li>
-                        </ul>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="tab_content" id="Trend_content">
-                    <div class="tab_content_description">
-                      <p class="c-txtsp">
-                        <ul>
-                            <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
-                            <li><img src="/images/politics.png"><a href="Dp2">あなたは死刑制度に、賛成？反対？</a></li>
-                            <li><img src="/images/dog.png"><a href="Dp3">あなたは犬派？、猫派？</a></li>
-                            <li><img src="/images/candy.png"><a href="Dp5">たけのこの里派？きのこの山派？</a></li>
-                            <li><img src="/images/candy.png"><a href="Dp6">タピオカ 好き？嫌い？</a></li>
-                            <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
-                       </ul>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="tab_content" id="pr_content">
-                      <div class="tab_content_description">
-                        <p class="c-txtsp">
-                              PRの内容が入ります。
-                        </p>
-                      </div>
-                  </div>
-                  </div>
-                  <div id="newszone">
-                    <h1>
-                      -News-
-                    </h1>
-                    <div id="news">
-                      <ul id="newslist">
-                  
-                      </ul>
-                    </div>
-                  </div>
-                  </div>
-                  <div class="subcontents">
-                    <div class="adpc">
-                        <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+6D4GH" rel="nofollow">
-                          <img border="0" width="300" height="250" alt="" src="https://www26.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001069000&mc=1"></a>
-                          <img border="0" width="1" height="1" src="https://www13.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+6D4GH" alt="">
-                    </div>
-                    <div class="adsmart">
-                        <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+66H9D" rel="nofollow">
-                          <img border="0" width="234" height="60" alt="" src="https://www22.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001038000&mc=1"></a>
-                          <img border="0" width="1" height="1" src="https://www12.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+66H9D" alt="">
-                    </div>
-                  
-             <h2>人気の投票テーマ</h2>
-             <ul>
-              <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
-              <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
-              <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
-              <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
-             </ul>
+                  newslist.appendChild(li)
+                }
+
+              });
+            })
+
+          </script>
+          <div id="profile"></div>
+          <div id="onlyinfluencer">
+            <h5>※あなたはツイッターフォロワー数の基準によりインフルエンサーとなりました。インフルエンサーの投票結果は一般に公表されます。</h5>
+          </div>
+          <div id="notinfluencer">
+            <h5>※ツイッターアカウントでログインした方の投票結果は、あなたのフォロワーに公表されます。</h5>
+          </div>
+          <div class="tabs" align="left">
+            <input id="all" type="radio" name="tab_item" checked>
+            <label class="tab_item" for="all">主要</label>
+            <input id="political" type="radio" name="tab_item">
+            <label class="tab_item" for="political">政治</label>
+            <input id="life" type="radio" name="tab_item">
+            <label class="tab_item" for="life">生活</label>
+            <input id="economic" type="radio" name="tab_item">
+            <label class="tab_item" for="economic">経済</label>
+            <input id="sports" type="radio" name="tab_item">
+            <label class="tab_item" for="sports">スポーツ</label>
+            <input id="WS" type="radio" name="tab_item">
+            <label class="tab_item" for="WS">芸能</label>
+            <input id="Gourmet" type="radio" name="tab_item">
+            <label class="tab_item" for="Gourmet">グルメ</label>
+            <input id="girl" type="radio" name="tab_item">
+            <label class="tab_item" for="girl">その他</label>
+            <input id="Trend" type="radio" name="tab_item">
+            <label class="tab_item" for="Trend">トレンド</label>
+            <input id="pr" type="radio" name="tab_item">
+            <label class="tab_item" for="pr">PR</label>
+            <div class="tab_content" id="all_content">
+              <div class="tab_content_description">
+                <p class="c-txtsp">
+                  <ul>
+                    <li><img src="/images/money.png"><a href="Dp10">ベーシックインカム賛成？反対？</a></li>
+                    <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
+                    <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
+                    <li><img src="/images/building.png"><a href="Dp0">NHKスクランブル放送、賛成反対？</a></li>
+                    <li><img src="/images/candy.png"><a href="Dp6">タピオカ 好き？嫌い？</a></li>
+                    <li><img src="/images/gun.png"><a href="Dp11">第三次世界大戦は起きる？起きない？</a></li>
+                    <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
+                    <li><img src="/images/forest.png"><a href="Dp8">環境問題、どう思う？</a></li>
+                  </ul>
+                </p>
+              </div>
             </div>
+            <div class="tab_content" id="political_content">
+              <div class="tab_content_description">
+                <p class="c-txtsp">
+                  <ul>
+                    <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
+                    <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
+                    <li><img src="/images/politics.png"><a href="Dp2">あなたは死刑制度に、賛成？反対？</a></li>
+                    <li><img src="/images/building.png"><a href="Dp0">NHKスクランブル放送、賛成反対？</a></li>
+                    <li><img src="/images/forest.png"><a href="Dp8">環境問題、どう思う？</a></li>
+                  </ul>
+                </p>
+              </div>
             </div>
-            <div class="footer">
-             <h1><img src="/images/firstix-ocean.png"></h1>
-             <ul>
-               <li>
-                <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a>
-               </li>
-               <li>
-                 <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
-               </li>
-               <li>
-                レポート
-               </li>
-             </ul>
+            <div class="tab_content" id="life_content">
+              <div class="tab_content_description">
+                <p class="c-txtsp">
+                  <ul>
+                    <li><img src="/images/dog.png"><a href="Dp3">あなたは犬派？、猫派？</a></li>
+                    <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+            <div class="tab_content" id="economic_content">
+              <div class="tab_content_description">
+                <p class="c-txtsp">
+                  <ul>
+                    <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
+                    <li><img src="/images/money.png"><a href="Dp10">ベーシックインカム賛成？反対？</a></li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+            <div class="tab_content" id="sports_content">
+              <div class="tab_content_description">
+                <p class="c-txtsp">
+                  <ul>
+                    <li><img src="/images/baseball.png">（予定）今年のセ・リーグで優勝チームは？</li>
+                    <li><img src="/images/soccer.png">（予定）サッカーW杯の優勝するのは？</li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+            <div class="tab_content" id="WS_content">
+              <div class="tab_content_description">
+                <p class="c-txtsp">
+                  <ul>
+                    <li><img src="/images/mike.png">(終了）ガキ使と紅白どっち派？</li>
+                    <li><img src="/images/mike.png">（終了）紅白歌合戦、どちらが強い？</li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+            <div class="tab_content" id="Gourmet_content">
+              <div class="tab_content_description">
+                <p class="c-txtsp">
+                  <ul>
+                    <li><img src="/images/candy.png"><a href="Dp5">たけのこの里派？きのこの山派？</a></li>
+                    <li><img src="/images/candy.png"><a href="Dp6">タピオカ 好き？嫌い？</a></li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+            <div class="tab_content" id="girl_content">
+              <div class="tab_content_description">
+                <p class="c-txtsp">
+                  <ul>
+                    <li><img src="/images/gun.png"><a href="Dp11">第三次世界大戦は起きる？起きない？</a></li>
+                    <li><img src="/images/alien.png">（予定）地球外生命体はいる？いない？</a></li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+            <div class="tab_content" id="Trend_content">
+              <div class="tab_content_description">
+                <p class="c-txtsp">
+                  <ul>
+                    <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
+                    <li><img src="/images/politics.png"><a href="Dp2">あなたは死刑制度に、賛成？反対？</a></li>
+                    <li><img src="/images/dog.png"><a href="Dp3">あなたは犬派？、猫派？</a></li>
+                    <li><img src="/images/candy.png"><a href="Dp5">たけのこの里派？きのこの山派？</a></li>
+                    <li><img src="/images/candy.png"><a href="Dp6">タピオカ 好き？嫌い？</a></li>
+                    <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+            <div class="tab_content" id="pr_content">
+              <div class="tab_content_description">
+                <p class="c-txtsp">
+                  PRの内容が入ります。
+                </p>
+              </div>
             </div>
           </div>
-        </body>
-      
+          <div id="newszone">
+            <h1>
+              -News-
+            </h1>
+            <div id="news">
+              <ul id="newslist">
+
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="subcontents">
+          <div class="adpc">
+            <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+6D4GH" rel="nofollow">
+              <img border="0" width="300" height="250" alt=""
+                src="https://www26.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001069000&mc=1"></a>
+            <img border="0" width="1" height="1" src="https://www13.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+6D4GH" alt="">
+          </div>
+          <div class="adsmart">
+            <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+66H9D" rel="nofollow">
+              <img border="0" width="234" height="60" alt=""
+                src="https://www22.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001038000&mc=1"></a>
+            <img border="0" width="1" height="1" src="https://www12.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+66H9D" alt="">
+          </div>
+
+          <h2>人気の投票テーマ</h2>
+          <ul>
+            <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
+            <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
+            <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
+            <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer">
+        <h1><img src="/images/firstix-ocean.png"></h1>
+        <ul>
+          <li>
+            <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a>
+          </li>
+          <li>
+            <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
+          </li>
+          <li>
+            レポート
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+
 </html>

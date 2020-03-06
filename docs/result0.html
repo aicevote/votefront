@@ -91,36 +91,38 @@
       
       <script>
         var options = ["賛成","反対","","","","","","","","",]
-        $(function() {
-            const socket = io("https://api.aicevote.com");
-            var sessionToken;
+
+        $(() => {
+          const socket = io("https://api.aicevote.com");
+          const themeID = 0;
+          var sessionToken = null;
+
+          socket.on("connect", () => {
             $.ajax({
               url: "https://api.aicevote.com/auth/sessiontoken",
-              xhrFields: {
-                withCredentials: true
-              }
-            }).success(function(res){
-              sessionToken=res.sessionToken
-              if(!sessionToken){
-                $('#onlyinfluencer').remove();
-                $('form').remove();
-              }else{
-                $.ajax({
-                  url: "https://api.aicevote.com/profiles?sessiontoken=" + sessionToken,
-                  xhrFields: {
-                    withCredentials: true
-                  }
-                }).success(function(res){
-                  $('.login').remove();                  
-                  if(res.influencer == false){
-                    $('#onlyinfluencer').remove();
-                  }          
-                });
-              }
-            });
-          });
-          $(function () {
+              xhrFields: { withCredentials: true }
+            })
+            .done((data, textStatus, jqXHR) => {
+              sessionToken = data.sessionToken;
+              $.ajax({ url: "https://api.aicevote.com/profiles?sessiontoken=" + sessionToken })
+              .done((data, textStatus, jqXHR) => {
+                $(".login").remove();                  
+                if (!data.isInfluencer) { $("#onlyinfluencer").remove(); }          
+              });
+            })
+            .fail((jqXHR, textStatus, errorThrown) => {
+              $("#onlyinfluencer").remove();
+              $("form").remove();
+            })
+            .always(() => {
+              socket.emit("get votes", sessionToken ? { id: themeID, sessionToken: sessionToken } : { id: themeID });
+            })
             
+            socket.emit("get result", { id: themeID });
+            socket.emit("get transition",{ id: themeID });
+            socket.emit("get comments",{ id: themeID });
+          });
+          
             if ($('#agree0').text().length == 0){
               $('#A2').remove();
               $('#agree0').remove();
@@ -161,49 +163,6 @@
               $('#J2').remove();
               $('#agree9').remove();
             }
-    
-    
-            
-    
-            socket.on('connect', function () {
-              socket.emit('get result', {id:0});
-              socket.emit('get transition',{id:0});
-              socket.emit('get comments',{id:0});
-              socket.emit('get votes',{id:0,sessionToken:sessionToken});
-            });
-            // socket.on('connect_error', (error) => {
-            //   console.log("connect_error: " + error);
-            // });
-            // socket.on('connect_timeout', (timeout) => {
-            //   console.log("connect_timeout: " + timeout);
-            // });
-            // socket.on('error', (error) => {
-            //   console.log("error: " + error);
-            // });
-            // socket.on('disconnect', (disconnect) => {
-            //   console.log("disconnect: " + disconnect);
-            // });
-            // socket.on('reconnect', (attemptNumber) => {
-            //   console.log("reconnect: " + attemptNumber);
-            // });
-            // socket.on('reconnect_attempt', (attemptNumber) => {
-            //   console.log("reconnect_attempt: " + attemptNumber);
-            // });
-            // socket.on('reconnecting', (attemptNumber) => {
-            //   console.log("reconnecting: " + attemptNumber);
-            // });
-            // socket.on('reconnect_error', (error) => {
-            //   console.log("reconnect_error: " + error);
-            // });
-            // socket.on('reconnect_failed', () => {
-            //   console.log("reconnect_failed");
-            // });
-            // socket.on('ping', () => {
-            //   console.log("ping");
-            // });
-            // socket.on('pong', (latency) => {
-            //   console.log("pong: " + latency);
-            // });
             socket.on('result', function (obj) {
               if(obj.id!=0){return}
               var ctx = document.getElementById("ch").getContext("2d");

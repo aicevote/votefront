@@ -62,16 +62,16 @@
           $.ajax({
             url: "https://api.aicevote.com/themes"
           }).done((data, textStatus, jqXHR) => {
-            const all = document.getElementById('all');
-            const political = document.getElementById('political');
-            const life = document.getElementById('life');
-            const economic = document.getElementById('economic');
-            const sports = document.getElementById('sports');
-            const entertainment = document.getElementById('entertainment');
-            const gourmet = document.getElementById('gourmet');
-            const other = document.getElementById('other');
-            const trend = document.getElementById('trend');
-            const pr = document.getElementById('pr');
+            const all = document.getElementById('liall');
+            const political = document.getElementById('lipolitical');
+            const life = document.getElementById('lilife');
+            const economic = document.getElementById('lieconomic');
+            const sports = document.getElementById('lisports');
+            const entertainment = document.getElementById('lientertainment');
+            const gourmet = document.getElementById('ligourmet');
+            const other = document.getElementById('liother');
+            const trend = document.getElementById('litrend');
+            const pr = document.getElementById('lipr');
             const li = document.createElement('li');
             data.forEach(item =>{
               li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
@@ -161,16 +161,16 @@
           $.ajax({
             url: "https://api.aicevote.com/themes"
           }).done((data, textStatus, jqXHR) => {
-            const all = document.getElementById('all');
-            const political = document.getElementById('political');
-            const life = document.getElementById('life');
-            const economic = document.getElementById('economic');
-            const sports = document.getElementById('sports');
-            const entertainment = document.getElementById('entertainment');
-            const gourmet = document.getElementById('gourmet');
-            const other = document.getElementById('other');
-            const trend = document.getElementById('trend');
-            const pr = document.getElementById('pr');
+            const all = document.getElementById('liall');
+            const political = document.getElementById('lipolitical');
+            const life = document.getElementById('lilife');
+            const economic = document.getElementById('lieconomic');
+            const sports = document.getElementById('lisports');
+            const entertainment = document.getElementById('lientertainment');
+            const gourmet = document.getElementById('ligourmet');
+            const other = document.getElementById('liother');
+            const trend = document.getElementById('litrend');
+            const pr = document.getElementById('lipr');
             const li = document.createElement('li');
             data.forEach(item =>{
               li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
@@ -333,7 +333,7 @@
             <div class="tab_content" id="all_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id="trend">
+                  <ul id="litrend">
                     <li><img src="/images/money.png"><a href="Dp9">ベーシックインカム賛成？反対？</a></li>
                     <li><img src="/images/money.png"><a href="Dp3">日本のカジノ、賛成？反対？</a></li>
                     <li><img src="/images/building.png"><a href="Dp8">大学入試改革、賛成反対？</a></li>
@@ -349,7 +349,7 @@
             <div class="tab_content" id="political_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id="political">
+                  <ul id="lipolitical">
                     
                   </ul>
                 </p>
@@ -358,7 +358,7 @@
             <div class="tab_content" id="life_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id=life>
+                  <ul id=lilife>
                    
                   </ul>
                 </p>
@@ -367,7 +367,7 @@
             <div class="tab_content" id="economic_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id="economic">
+                  <ul id="lieconomic">
                     
                   </ul>
                 </p>
@@ -376,7 +376,7 @@
             <div class="tab_content" id="sports_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id="sports">
+                  <ul id="lisports">
                     
                   </ul>
                 </p>
@@ -385,7 +385,7 @@
             <div class="tab_content" id="WS_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id=entertainment>
+                  <ul id=lientertainment>
                     
                   </ul>
                 </p>
@@ -394,7 +394,7 @@
             <div class="tab_content" id="Gourmet_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id="gourmet">
+                  <ul id="ligourmet">
                     
                   </ul>
                 </p>
@@ -403,7 +403,7 @@
             <div class="tab_content" id="girl_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id="other">
+                  <ul id="liother">
                     
                   </ul>
                 </p>
@@ -412,7 +412,7 @@
             <div class="tab_content" id="Trend_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id="all">
+                  <ul id="liall">
                     
                   </ul>
                 </p>
@@ -421,7 +421,7 @@
             <div class="tab_content" id="pr_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id="pr">
+                  <ul id="lipr">
                     
                   </ul>
                 </p>

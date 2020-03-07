@@ -74,23 +74,23 @@
             const pr = document.getElementById('pr');
             
             data.forEach(item =>{
-              all.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
-              if(item.genre == political){
-                political.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
-              }else if(item.genre == life){
-                life.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
-              }else if(item.genre == economic){
-                economic.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
-              }else if(item.genre == sports){
-                sports.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
-              }else if(item.genre == entertainment){
-                entertainment.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
-              }else if(item.genre == gourmet){
-                gourmet.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
-              }else if(item.genre == other){
-                other.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
-              }else if(item.genre == pr){
-                pr.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              all.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              if(item.genre == 0){
+                political.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == 1){
+                life.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == 2){
+                economic.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == 3){
+                sports.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == 4){
+                entertainment.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == 5){
+                gourmet.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == 6){
+                other.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == 7){
+                pr.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
               }
             })
           });
@@ -164,23 +164,23 @@
             const pr = document.getElementById('pr');
             
             data.forEach(item =>{
-              all.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
-              if(item.genre == political){
-                political.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
-              }else if(item.genre == life){
-                life.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
-              }else if(item.genre == economic){
-                economic.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
-              }else if(item.genre == sports){
-                sports.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
-              }else if(item.genre == entertainment){
-                entertainment.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
-              }else if(item.genre == gourmet){
-                gourmet.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
-              }else if(item.genre == other){
-                other.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
-              }else if(item.genre == pr){
-                pr.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
+              all.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+              if(item.genre == 0){
+                political.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == 1){
+                life.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == 2){
+                economic.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == 3){
+                sports.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == 4){
+                entertainment.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == 5){
+                gourmet.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == 6){
+                other.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == 7){
+                pr.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
               }
             })
           });

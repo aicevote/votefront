@@ -163,7 +163,7 @@
                 const relate = document.getElementById('relate');
                 data.forEach(item => {
                   if (item.genre == Genre) {
-                  relate.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                  relate.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
                   }
                 });
               });

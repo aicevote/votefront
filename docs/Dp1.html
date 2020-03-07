@@ -140,6 +140,7 @@
               title = data.title;
               description = data.description;
               choices = data.choices;
+              Genre = data.genre;
 
               document.title = title;
               $("#title").text(title);
@@ -154,6 +155,18 @@
               $("#H").text(choices[7]);
               $("#I").text(choices[8]);
               $("#J").text(choices[9]);
+
+              $.ajax({
+                url: "https://api.aicevote.com/theme",
+                xhrFields: { withCredentials: true }
+              }).done((data, textStatus, jqXHR) => {
+                const relate = document.getElementById('relate');
+                data.forEach(item => {
+                  if (item.genre == Genre) {
+                  relate.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                  }
+                });
+              });
             });
 
           if ($('#A').text().length == 0) {
@@ -192,6 +205,8 @@
             $('#J').remove();
           }
 
+          
+
           socket.on('connect', function () {
             $.ajax({
               url: "https://api.aicevote.com/auth/sessiontoken",
@@ -201,7 +216,7 @@
               if (sessionToken) {
                 $('.login').remove();
               } else {
-                location.href = "/result" + themeID + ".html";
+                location.href = "/Dp" + themeID + ".html";
               }
             });
           });
@@ -312,8 +327,8 @@
           </a>
           <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+65U41" alt="">
         </div>
-        <h2>人気の投票テーマ</h2>
-        <ul>
+        <h2>関連する投票テーマ</h2>
+        <ul id="relate">
           <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
           <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
           <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>

@@ -99,6 +99,7 @@
                 title = data.title;
                 description = data.description;
                 choices = data.choices;
+                Genre = data.genre;
 
                 document.title = title;
                 $("#title").text(title);
@@ -126,10 +127,34 @@
                   .done((data, textStatus, jqXHR) => {
                     $(".login").remove();
                     if (!data.isInfluencer) { $("#onlyinfluencer").remove(); }
+                    $.ajax({
+                      url: "https://api.aicevote.com/theme",
+                      xhrFields: { withCredentials: true }
+                    }).done((data, textStatus, jqXHR) => {
+                      const relate = document.getElementById('relate');
+                      data.forEach(item => {
+                        if (item.genre == Genre) {
+                        relate.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                        }
+                      });
+                    });
                   });
               }).fail((jqXHR, textStatus, errorThrown) => {
                 $("#onlyinfluencer").remove();
                 $("form").remove();
+
+                $.ajax({
+                  url: "https://api.aicevote.com/theme",
+                  xhrFields: { withCredentials: true }
+                }).done((data, textStatus, jqXHR) => {
+                  const relate = document.getElementById('relate');
+                  data.forEach(item => {
+                    if (item.genre == Genre) {
+                    relate.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                    }
+                  });
+                });
+
               }).always(() => {
                 socket.emit("get votes", sessionToken ? { themeID: themeID, sessionToken: sessionToken } : { themeID: themeID });
               })
@@ -650,8 +675,8 @@
 
 
 
-<h2>人気の投票テーマ</h2>
-<ul>
+<h2>関連する投票テーマ</h2>
+<ul id="relate">
   <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
   <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
   <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>

@@ -59,51 +59,6 @@
             else { $('#onlyinfluencer').remove(); }
           });
 
-          $.ajax({
-            url: "https://api.aicevote.com/themes"
-          }).done((data, textStatus, jqXHR) => {
-            const all = document.getElementById('liall');
-            const political = document.getElementById('lipolitical');
-            const life = document.getElementById('lilife');
-            const economic = document.getElementById('lieconomic');
-            const sports = document.getElementById('lisports');
-            const entertainment = document.getElementById('lientertainment');
-            const gourmet = document.getElementById('ligourmet');
-            const other = document.getElementById('liother');
-            const trend = document.getElementById('litrend');
-            const pr = document.getElementById('lipr');
-            const li = document.createElement('li');
-            data.forEach(item =>{
-              li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
-              all.appendChild(li);
-              if(item.genre == 0){
-                li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
-                political.appendChild(li);
-              }else if(item.genre == 1){
-                li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
-                life.appendChild(li);
-              }else if(item.genre == 2){
-                li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
-                economic.appendChild(li);
-              }else if(item.genre == 3){
-                li.innerHTML = `<src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
-                sports.appendChild(li);
-              }else if(item.genre == 4){
-                li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
-                entertainment.appendChild(li);
-              }else if(item.genre == 5){
-                li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
-                gourmet.appendChild(li)
-              }else if(item.genre == 6){
-                li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
-                other.appendChild(li)
-              }else if(item.genre == 7){
-                li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
-                pr.appendChild(li)
-              }
-            })
-          });
-
 
 
           socket.on("news", (article) => {
@@ -158,52 +113,24 @@
           const profile = document.getElementById('profile');
           profile.innerHTML = `<img src="/images/person.png"  width="48" height="48" margin="24" border-radius="50%">ゲストさんようこそ`;
           
+
           $.ajax({
             url: "https://api.aicevote.com/themes"
           }).done((data, textStatus, jqXHR) => {
-            const all = document.getElementById('liall');
-            const political = document.getElementById('lipolitical');
-            const life = document.getElementById('lilife');
-            const economic = document.getElementById('lieconomic');
-            const sports = document.getElementById('lisports');
-            const entertainment = document.getElementById('lientertainment');
-            const gourmet = document.getElementById('ligourmet');
-            const other = document.getElementById('liother');
-            const trend = document.getElementById('litrend');
-            const pr = document.getElementById('lipr');
-            const li = document.createElement('li');
+            const tabs = [document.getElementById('liall'), document.getElementById('lipolitical'),
+            document.getElementById('lilife'), document.getElementById('lieconomic'),
+            document.getElementById('lisports'), document.getElementById('lientertainment'),
+            document.getElementById('ligourmet'), document.getElementById('liother'),
+            document.getElementById('litrend'), document.getElementById('lipr')
+            ];
+
             data.forEach(item =>{
-              li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
-              all.appendChild(li);
-              if(item.genre == 0){
-                li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
-                political.appendChild(li);
-              }else if(item.genre == 1){
-                li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
-                life.appendChild(li);
-              }else if(item.genre == 2){
-                li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
-                economic.appendChild(li);
-              }else if(item.genre == 3){
-                li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
-                sports.appendChild(li);
-              }else if(item.genre == 4){
-                li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
-                entertainment.appendChild(li);
-              }else if(item.genre == 5){
-                li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
-                gourmet.appendChild(li)
-              }else if(item.genre == 6){
-                li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
-                other.appendChild(li)
-              }else if(item.genre == 7){
-                li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
-                pr.appendChild(li)
-              }
+              const li = document.createElement('li');
+              li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
+              tabs[0].appendChild(li);
+              tabs[item.genre+1].appendChild(li);
             })
           });
-
-
 
           socket.on("news", (article) => {
             for (let i = 0; i < article.related.length; i++) {
@@ -349,7 +276,7 @@
             <div class="tab_content" id="political_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id="lipolitical">
+                  <ul id=lipolitical>
                     
                   </ul>
                 </p>
@@ -367,7 +294,7 @@
             <div class="tab_content" id="economic_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id="lieconomic">
+                  <ul id=lieconomic>
                     
                   </ul>
                 </p>
@@ -376,7 +303,7 @@
             <div class="tab_content" id="sports_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id="lisports">
+                  <ul id=lisports>
                     
                   </ul>
                 </p>
@@ -394,7 +321,7 @@
             <div class="tab_content" id="Gourmet_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id="ligourmet">
+                  <ul id=ligourmet>
                     
                   </ul>
                 </p>
@@ -403,7 +330,7 @@
             <div class="tab_content" id="girl_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id="liother">
+                  <ul id=liother>
                     
                   </ul>
                 </p>
@@ -412,7 +339,7 @@
             <div class="tab_content" id="Trend_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id="liall">
+                  <ul id=liall>
                     
                   </ul>
                 </p>
@@ -421,7 +348,7 @@
             <div class="tab_content" id="pr_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul id="lipr">
+                  <ul id=lipr>
                     
                   </ul>
                 </p>

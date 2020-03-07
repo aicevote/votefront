@@ -37,11 +37,18 @@
     <script>
       $(() => {
         var sessionToken = "";
+        const socket = io("https://api.aicevote.com");
+        socket.on('connect', function () {
+          socket.emit('get news', null);
+        });
+
         $.ajax({
           url: "https://api.aicevote.com/auth/sessiontoken",
           xhrFields: { withCredentials: true }
+
         }).done((data, textStatus, jqXHR) => {
           sessionToken = data.sessionToken;
+
           $.ajax({
             url: "https://api.aicevote.com/profiles?sessiontoken=" + sessionToken
           }).done((data, textStatus, jqXHR) => {
@@ -51,12 +58,185 @@
             if (data.isInfluencer) { $('#notinfluencer').remove(); }
             else { $('#onlyinfluencer').remove(); }
           });
+
+          $.ajax({
+            url: "https://api.aicevote.com/themes"
+          }).done((data, textStatus, jqXHR) => {
+            const all = document.getElementById('all');
+            const political = document.getElementById('political');
+            const life = document.getElementById('life');
+            const economic = document.getElementById('economic');
+            const sports = document.getElementById('sports');
+            const entertainment = document.getElementById('entertainment');
+            const gourmet = document.getElementById('gourmet');
+            const other = document.getElementById('other');
+            const trend = document.getElementById('trend');
+            const pr = document.getElementById('pr');
+            
+            data.forEach(item =>{
+              all.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              if(item.genre == political){
+                political.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == life){
+                life.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == economic){
+                economic.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == sports){
+                sports.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == entertainment){
+                entertainment.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == gourmet){
+                gourmet.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == other){
+                other.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == pr){
+                pr.innerHTML = `<li><img src="/image/${item.img}.png><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              }
+            })
+          });
+
+
+
+          socket.on("news", (article) => {
+            for (let i = 0; i < article.related.length; i++) {
+              article.related[i].forEach((article) => {
+                article["id"] = i;
+              });
+            }
+            article.latest.forEach((article) => {
+              article["id"] = null;
+            });
+            article = article.related.reduce(
+              (prev, cur) => prev.concat(cur)
+            ).concat(article.latest).sort(
+              (a, b) => b.publishedAt - a.publishedAt
+            );
+            const newslist = document.getElementById('newslist');
+            for (let j = 0; j < article.length; j++) {
+              var news = article[j];
+              const li = document.createElement('li');
+              li.innerHTML = `
+                                    <label id="newsnav-open${j}" for="newsnav-input${j}"><span></span>  
+                                      <div class="onenews">
+                                        <div class="anews">
+                                          <img src="${news.uriToImage}">
+                                          <p>${news.title}</p>
+                                        </div>
+                                        <div class="bnews">
+                                          <input id="newsnav-input${j}" type="checkbox" class="newsnav-unshown">
+                                          <label class="newsnav-unshown" id="newsnav-close" for="newsnav-input${j}"></label>
+                                          <div id="newsnav-content${j}">
+                                            <div class="newscontents">
+                                              <p>${news.title}</p>
+                                              <img src="${news.uriToImage}">
+                                              <a href="${news.uri}">                         
+                                                <h4>記事を読む</h4>
+                                              </a>
+                                              <div style="text-align:center; color:white; margin 10px;"><a href="Dp${news.id}" class="btn-gradient-flat">関連する投票</a></div>                                 
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </label>
+                                      <div class="news-background">
+                                      </div>
+                                    `;
+              newslist.appendChild(li)
+            }
+          
         }).fail((jqXHR, textStatus, errorThrown) => {
           $('#onlyinfluencer').remove();
           const profile = document.getElementById('profile');
           profile.innerHTML = `<img src="/images/person.png"  width="48" height="48" margin="24" border-radius="50%">ゲストさんようこそ`;
+          
+          $.ajax({
+            url: "https://api.aicevote.com/themes"
+          }).done((data, textStatus, jqXHR) => {
+            const all = document.getElementById('all');
+            const political = document.getElementById('political');
+            const life = document.getElementById('life');
+            const economic = document.getElementById('economic');
+            const sports = document.getElementById('sports');
+            const entertainment = document.getElementById('entertainment');
+            const gourmet = document.getElementById('gourmet');
+            const other = document.getElementById('other');
+            const trend = document.getElementById('trend');
+            const pr = document.getElementById('pr');
+            
+            data.forEach(item =>{
+              all.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
+              if(item.genre == political){
+                political.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == life){
+                life.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == economic){
+                economic.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == sports){
+                sports.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == entertainment){
+                entertainment.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == gourmet){
+                gourmet.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == other){
+                other.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
+              }else if(item.genre == pr){
+                pr.innerHTML = `<li><img src="/image/${item.img}.png><a href ="result${item.themeID}">${item.title}</a></li>`;
+              }
+            })
+          });
+
+
+
+          socket.on("news", (article) => {
+            for (let i = 0; i < article.related.length; i++) {
+              article.related[i].forEach((article) => {
+                article["id"] = i;
+              });
+            }
+            article.latest.forEach((article) => {
+              article["id"] = null;
+            });
+            article = article.related.reduce(
+              (prev, cur) => prev.concat(cur)
+            ).concat(article.latest).sort(
+              (a, b) => b.publishedAt - a.publishedAt
+            );
+            const newslist = document.getElementById('newslist');
+            for (let j = 0; j < article.length; j++) {
+              var news = article[j];
+              const li = document.createElement('li');
+              li.innerHTML = `
+                                    <label id="newsnav-open${j}" for="newsnav-input${j}"><span></span>  
+                                      <div class="onenews">
+                                        <div class="anews">
+                                          <img src="${news.uriToImage}">
+                                          <p>${news.title}</p>
+                                        </div>
+                                        <div class="bnews">
+                                          <input id="newsnav-input${j}" type="checkbox" class="newsnav-unshown">
+                                          <label class="newsnav-unshown" id="newsnav-close" for="newsnav-input${j}"></label>
+                                          <div id="newsnav-content${j}">
+                                            <div class="newscontents">
+                                              <p>${news.title}</p>
+                                              <img src="${news.uriToImage}">
+                                              <a href="${news.uri}">                         
+                                                <h4>記事を読む</h4>
+                                              </a>
+                                              <div style="text-align:center; color:white; margin 10px;"><a href="result${news.id}" class="btn-gradient-flat">関連する投票</a></div>                                 
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </label>
+                                      <div class="news-background">
+                                      </div>
+                                    `;
+              newslist.appendChild(li)
+            }
+          });
         });
       });
+    });
     </script>
     <div class="mainSite">
       <div class="header">
@@ -95,72 +275,6 @@
       </div>
       <div id="allcontainer">
         <div class="container">
-          <script>
-
-
-            $(function () {
-              const socket = io("https://api.aicevote.com");
-              $(".anews").click(function () {
-                $(".anews").not(this).removeClass("open");
-                $(".anews").not(this).next().slideUp(300);
-                $(this).toggleClass("open");
-                $(this).next().slideToggle(300);
-              });
-              socket.on('connect', function () {
-                socket.emit('get news', null);
-              });
-              socket.on("news", (article) => {
-                for (let i = 0; i < article.related.length; i++) {
-                  article.related[i].forEach((article) => {
-                    article["id"] = i;
-                  });
-                }
-                article.latest.forEach((article) => {
-                  article["id"] = null;
-                });
-                article = article.related.reduce(
-                  (prev, cur) => prev.concat(cur)
-                ).concat(article.latest).sort(
-                  (a, b) => b.publishedAt - a.publishedAt
-                );
-
-                const newslist = document.getElementById('newslist');
-                for (let j = 0; j < article.length; j++) {
-                  var news = article[j];
-                  const li = document.createElement('li');
-                  li.innerHTML = `
-                                        <label id="newsnav-open${j}" for="newsnav-input${j}"><span></span>  
-                                          <div class="onenews">
-                                            <div class="anews">
-                                              <img src="${news.uriToImage}">
-                                              <p>${news.title}</p>
-                                            </div>
-                                            <div class="bnews">
-                                              <input id="newsnav-input${j}" type="checkbox" class="newsnav-unshown">
-                                              <label class="newsnav-unshown" id="newsnav-close" for="newsnav-input${j}"></label>
-                                              <div id="newsnav-content${j}">
-                                                <div class="newscontents">
-                                                  <p>${news.title}</p>
-                                                  <img src="${news.uriToImage}">
-                                                  <a href="${news.uri}">                         
-                                                    <h4>記事を読む</h4>
-                                                  </a>
-                                                  <div style="text-align:center; color:white; margin 10px;"><a href="Dp${news.id}" class="btn-gradient-flat">関連する投票</a></div>                                 
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </label>
-                                          <div class="news-background">
-                                          </div>
-                                        `;
-                  newslist.appendChild(li)
-                }
-
-              });
-            })
-
-          </script>
           <div id="profile"></div>
           <div id="onlyinfluencer">
             <h5>※あなたはツイッターフォロワー数の基準によりインフルエンサーとなりました。インフルエンサーの投票結果は一般に公表されます。</h5>
@@ -170,7 +284,7 @@
           </div>
           <div class="tabs" align="left">
             <input id="all" type="radio" name="tab_item" checked>
-            <label class="tab_item" for="all">主要</label>
+            <label class="tab_item" for="all">トレンド</label>
             <input id="political" type="radio" name="tab_item">
             <label class="tab_item" for="political">政治</label>
             <input id="life" type="radio" name="tab_item">
@@ -186,13 +300,13 @@
             <input id="girl" type="radio" name="tab_item">
             <label class="tab_item" for="girl">その他</label>
             <input id="Trend" type="radio" name="tab_item">
-            <label class="tab_item" for="Trend">トレンド</label>
+            <label class="tab_item" for="Trend">全て</label>
             <input id="pr" type="radio" name="tab_item">
             <label class="tab_item" for="pr">PR</label>
             <div class="tab_content" id="all_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul>
+                  <ul id="trend">
                     <li><img src="/images/money.png"><a href="Dp9">ベーシックインカム賛成？反対？</a></li>
                     <li><img src="/images/money.png"><a href="Dp3">日本のカジノ、賛成？反対？</a></li>
                     <li><img src="/images/building.png"><a href="Dp8">大学入試改革、賛成反対？</a></li>
@@ -208,7 +322,7 @@
             <div class="tab_content" id="political_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul>
+                  <ul id="political">
                     <li><img src="/images/money.png"><a href="Dp3">日本のカジノ、賛成？反対？</a></li>
                     <li><img src="/images/building.png"><a href="Dp8">大学入試改革、賛成反対？</a></li>
                     <li><img src="/images/politics.png"><a href="Dp1">あなたは死刑制度に、賛成？反対？</a></li>
@@ -221,7 +335,7 @@
             <div class="tab_content" id="life_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul>
+                  <ul id=life>
                     <li><img src="/images/dog.png"><a href="Dp2">あなたは犬派？、猫派？</a></li>
                     <li><img src="/images/smartphone.png"><a href="Dp6">iOS派？Android派？</a></li>
                   </ul>
@@ -231,7 +345,7 @@
             <div class="tab_content" id="economic_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul>
+                  <ul id="economic">
                     <li><img src="/images/money.png"><a href="Dp3">日本のカジノ、賛成？反対？</a></li>
                     <li><img src="/images/money.png"><a href="Dp9">ベーシックインカム賛成？反対？</a></li>
                   </ul>
@@ -241,7 +355,7 @@
             <div class="tab_content" id="sports_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul>
+                  <ul id="sports">
                     <li><img src="/images/baseball.png">（予定）今年のセ・リーグで優勝チームは？</li>
                     <li><img src="/images/soccer.png">（予定）サッカーW杯の優勝するのは？</li>
                   </ul>
@@ -251,7 +365,7 @@
             <div class="tab_content" id="WS_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul>
+                  <ul id=entertainment>
                     <li><img src="/images/mike.png">(終了）ガキ使と紅白どっち派？</li>
                     <li><img src="/images/mike.png">（終了）紅白歌合戦、どちらが強い？</li>
                   </ul>
@@ -261,7 +375,7 @@
             <div class="tab_content" id="Gourmet_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul>
+                  <ul id="gourmet">
                     <li><img src="/images/candy.png"><a href="Dp4">たけのこの里派？きのこの山派？</a></li>
                     <li><img src="/images/candy.png"><a href="Dp5">タピオカ 好き？嫌い？</a></li>
                   </ul>
@@ -271,7 +385,7 @@
             <div class="tab_content" id="girl_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul>
+                  <ul id="other">
                     <li><img src="/images/gun.png"><a href="Dp10">第三次世界大戦は起きる？起きない？</a></li>
                     <li><img src="/images/alien.png">（予定）地球外生命体はいる？いない？</a></li>
                   </ul>
@@ -281,7 +395,7 @@
             <div class="tab_content" id="Trend_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  <ul>
+                  <ul id="all">
                     <li><img src="/images/building.png"><a href="Dp8">大学入試改革、賛成反対？</a></li>
                     <li><img src="/images/politics.png"><a href="Dp1">あなたは死刑制度に、賛成？反対？</a></li>
                     <li><img src="/images/dog.png"><a href="Dp2">あなたは犬派？、猫派？</a></li>
@@ -295,7 +409,9 @@
             <div class="tab_content" id="pr_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  PRの内容が入ります。
+                  <ul id="pr">
+                    
+                  </ul>
                 </p>
               </div>
             </div>

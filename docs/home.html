@@ -62,6 +62,7 @@
           $.ajax({
             url: "https://api.aicevote.com/themes"
           }).done((data, textStatus, jqXHR) => {
+            console.log(data);
             const all = document.getElementById('liall');
             const political = document.getElementById('lipolitical');
             const life = document.getElementById('lilife');

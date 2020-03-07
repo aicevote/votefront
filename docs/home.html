@@ -72,25 +72,34 @@
             const other = document.getElementById('other');
             const trend = document.getElementById('trend');
             const pr = document.getElementById('pr');
-            
+            const li = document.createElement('li');
             data.forEach(item =>{
-              all.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              li.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+              all.appendChild(li);
               if(item.genre == 0){
-                political.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                li.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                political.appendChild(li);
               }else if(item.genre == 1){
-                life.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                li.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                life.appendChild(li);
               }else if(item.genre == 2){
-                economic.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                li.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                economic.appendChild(li);
               }else if(item.genre == 3){
-                sports.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                li.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                sports.appendChild(li);
               }else if(item.genre == 4){
-                entertainment.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                li.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                entertainment.appendChild(li);
               }else if(item.genre == 5){
-                gourmet.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                li.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                gourmet.appendChild(li)
               }else if(item.genre == 6){
-                other.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                li.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                other.appendChild(li)
               }else if(item.genre == 7){
-                pr.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                li.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                pr.appendChild(li)
               }
             })
           });
@@ -162,25 +171,34 @@
             const other = document.getElementById('other');
             const trend = document.getElementById('trend');
             const pr = document.getElementById('pr');
-            
+            const li = document.createElement('li');
             data.forEach(item =>{
-              all.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+              li.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+              all.appendChild(li);
               if(item.genre == 0){
-                political.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                li.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                political.appendChild(li);
               }else if(item.genre == 1){
-                life.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                li.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                life.appendChild(li);
               }else if(item.genre == 2){
-                economic.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                li.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                economic.appendChild(li);
               }else if(item.genre == 3){
-                sports.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                li.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                sports.appendChild(li);
               }else if(item.genre == 4){
-                entertainment.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                li.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                entertainment.appendChild(li);
               }else if(item.genre == 5){
-                gourmet.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                li.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                gourmet.appendChild(li)
               }else if(item.genre == 6){
-                other.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                li.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                other.appendChild(li)
               }else if(item.genre == 7){
-                pr.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                li.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                pr.appendChild(li)
               }
             })
           });

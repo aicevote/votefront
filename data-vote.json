@@ -1,208 +1,46 @@
 {
   "data" : [
     {
-      "filename":"Dp0",
-      "votenumber":0,
-      "theme":"NHKスクランブル放送、賛成反対？",
-      "explain":"NHKに受信料を支払った人だけがNHKの番組を視聴できるスクランブル放送について、このシステムの導入に賛成だと思う方は賛成、反対だという方は反対に投票してください。",
-      "sessionID":"<%= sessionID %>",
-      "which0":"賛成",
-      "which1":"反対",
-      "which2":null,
-      "which3":null,
-      "which4":null,
-      "which5":null,
-      "which6":null,
-      "which7":null,
-      "which8":null,
-      "which9":null
+      "filename":"Dp0"
     },
     {
-      "filename":"Dp1",
-      "votenumber":1,
-      "theme":"あなたのタイプのOSは何？",
-      "explain":"一般的なPCにおけるOS（オペレーティングシステム）のうち、Windowsが好きな人は「Win」、Macが好きな人は「Mac」、Linuxが好きな人は「Lin」に投票してください",
-      "sessionID":"<%= sessionID %>",
-      "which0":"Win",
-      "which1":"Mac",
-      "which2":"Lin",
-      "which3":null,
-      "which4":null,
-      "which5":null,
-      "which6":null,
-      "which7":null,
-      "which8":null,
-      "which9":null
+      "filename":"Dp1"
     },
     {
-      "filename":"Dp2",
-      "votenumber":2,
-      "theme":"あなたは死刑制度に、賛成？反対？",
-      "explain":"現在日本で施行されているような、一般的な死刑制度に賛成の人は賛成、反対の人は反対に投票して下さい",
-      "sessionID":"<%= sessionID %>",
-      "which0":"賛成",
-      "which1":"反対",
-      "which2":null,
-      "which3":null,
-      "which4":null,
-      "which5":null,
-      "which6":null,
-      "which7":null,
-      "which8":null,
-      "which9":null
+      "filename":"Dp2"
     },
     {
-      "filename":"Dp3",
-      "votenumber":3,
-      "theme":"あなたは犬派？、猫派？",
-      "explain":"日本で一般的に飼われている犬や猫ですが、あなたはどちらが好きですか？　犬が好きな人は犬派、猫が好きな人は猫派に投票して下さい",
-      "sessionID":"<%= sessionID %>",
-      "which0":"犬派",
-      "which1":"猫派",
-      "which2":null,
-      "which3":null,
-      "which4":null,
-      "which5":null,
-      "which6":null,
-      "which7":null,
-      "which8":null,
-      "which9":null
+      "filename":"Dp3"
     },
     {
-      "filename":"Dp4",
-      "votenumber":4,
-      "theme":"日本のカジノ、IR賛成？反対？",
-      "explain":"現在日本で設置が予定されている公営賭博を目的としたカジノについてどう思いますか？設置に賛成の人は賛成、反対の人は反対に投票して下さい",
-      "sessionID":"<%= sessionID %>",
-      "which0":"賛成",
-      "which1":"反対",
-      "which2":null,
-      "which3":null,
-      "which4":null,
-      "which5":null,
-      "which6":null,
-      "which7":null,
-      "which8":null,
-      "which9":null
+      "filename":"Dp4"
     },
     {
-      "filename":"Dp5",
-      "votenumber":5,
-      "theme":"たけのこの里派？きのこの山派？",
-      "explain":"お菓子の「たけのこの里」と「きのこの山」どちらが好きですか？「たけのこの里」が好きだという人は里、「きのこの山」が好きだという人は山に投票してください。",
-      "sessionID":"<%= sessionID %>",
-      "which0":"里",
-      "which1":"山",
-      "which2":null,
-      "which3":null,
-      "which4":null,
-      "which5":null,
-      "which6":null,
-      "which7":null,
-      "which8":null,
-      "which9":null
+      "filename":"Dp5"
     },
     {
-      "filename":"Dp6",
-      "votenumber":6,
-      "theme":"タピオカ、好き？嫌い？",
-      "explain":"あなたはタピオカを好きですか？嫌いですか？　好きな人は好き、嫌いな人は嫌いに投票して下さい",
-      "sessionID":"<%= sessionID %>",
-      "which0":"好き",
-      "which1":"嫌い",
-      "which2":null,
-      "which3":null,
-      "which4":null,
-      "which5":null,
-      "which6":null,
-      "which7":null,
-      "which8":null,
-      "which9":null
+      "filename":"Dp6"
     },
     {
-      "filename":"Dp7",
-      "votenumber":7,
-      "theme":"iOS派？Android派？",
-      "explain":"Apple社のiOSと、Google社のAndroidというスマートフォンの二大OS、あなたはどちらが好きですか? iOSが好きな人はiOS、Androidが好きな人はAndに投票して下さい",
-      "sessionID":"<%= sessionID %>",
-      "which0":"iOS",
-      "which1":"And",
-      "which2":null,
-      "which3":null,
-      "which4":null,
-      "which5":null,
-      "which6":null,
-      "which7":null,
-      "which8":null,
-      "which9":null
+      "filename":"Dp7"
     },
     {
-      "filename":"Dp8",
-      "votenumber":8,
-      "theme":"環境問題どう思う？",
-      "explain":"人間は自由や利便さといった経済活動を犠牲にしても、地球の自然環境保護に努めるべきでしょうか？　努めるべきと思う人はYes、そうは思わない人はNoに投票して下さい",
-      "sessionID":"<%= sessionID %>",
-      "which0":"Yes",
-      "which1":"No",
-      "which2":null,
-      "which3":null,
-      "which4":null,
-      "which5":null,
-      "which6":null,
-      "which7":null,
-      "which8":null,
-      "which9":null
+      "filename":"Dp8"
     },
     {
-      "filename":"Dp9",
-      "votenumber":9,
-      "theme":"大学入試改革、賛成？反対？",
-      "explain":"文科省による大学入学者選抜改革と呼ばれる、マーク式センター試験から記述重視の共通試験への変更、英語民間試験の導入が予定されています。この政策について賛成の人は賛成、反対の人は反対に投票して下さい",
-      "sessionID":"<%= sessionID %>",
-      "which0":"賛成",
-      "which1":"反対",
-      "which2":null,
-      "which3":null,
-      "which4":null,
-      "which5":null,
-      "which6":null,
-      "which7":null,
-      "which8":null,
-      "which9":null
+      "filename":"Dp9"
     },
     {
-      "filename":"Dp10",
-      "votenumber":10,
-      "theme":"ベーシックインカム、賛成？反対？",
-      "explain":"政府が全国民に最低限の生活を送るのに必要とされている額の現金を定期的に支給するという政策「ベーシックインカム」。この政策について賛成の人は賛成、反対の人は反対に投票して下さい",
-      "sessionID":"<%= sessionID %>",
-      "which0":"賛成",
-      "which1":"反対",
-      "which2":null,
-      "which3":null,
-      "which4":null,
-      "which5":null,
-      "which6":null,
-      "which7":null,
-      "which8":null,
-      "which9":null
+      "filename":"Dp10"
     },
     {
-      "filename":"Dp11",
-      "votenumber":11,
-      "theme":"第三次世界大戦、ある？ない？",
-      "explain":"多国間をまたぐ第二次世界大戦のような戦争が再びあると思う人はある、ないと思う人はないに投票して下さい",
-      "sessionID":"<%= sessionID %>",
-      "which0":"ある",
-      "which1":"ない",
-      "which2":null,
-      "which3":null,
-      "which4":null,
-      "which5":null,
-      "which6":null,
-      "which7":null,
-      "which8":null,
-      "which9":null
+      "filename":"Dp11"
+    },
+    {
+      "filename":"Dp12"
+    },
+    {
+      "filename":"Dp13"
     }
   ]
 }

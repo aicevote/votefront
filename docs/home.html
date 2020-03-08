@@ -68,7 +68,7 @@
             document.getElementById('ligourmet'), document.getElementById('liother'),
             document.getElementById('lipr'), document.getElementById('litrend')
             ];
-
+            const litre = document.getElementById('litre');
             data.sort(
               function(a,b){
                 if (a.topicality < b.topicality){
@@ -83,7 +83,11 @@
               li.innerHTML = `<img src="${data[i].imageURI}"><a href ="Dp${data[i].themeID}">${data[i].title}</a>`;
               tabs[9].appendChild(li);
             }
-
+            for(i=0;i<3;i++){
+              let li = document.createElement('li');
+              li.innerHTML = `<img src="${data[i].imageURI}"><a href ="result${data[i].themeID}">${data[i].title}</a>`;
+              litre.appendChild(li);
+            }
 
             data.forEach(item =>{
               let li = document.createElement('li');

@@ -314,62 +314,62 @@
               const now = Date.now();
 
               let time = obj.shortTransition.map((val) => Math.round((now - val.timestamp) / 3600000) + "h前");
-              let a_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 1).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let b_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 2).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let c_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 3).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let d_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 4).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let e_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 5).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let f_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 6).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let g_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 7).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let h_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 8).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let i_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 9).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let j_lasts = obj.shortTransition.map((val, i) => 120);
+              let a_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 1).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let b_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 2).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let c_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 3).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let d_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 4).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let e_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 5).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let f_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 6).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let g_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 7).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let h_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 8).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let i_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 9).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let j_lasts1 = obj.shortTransition.map((val, i) => 120);
 
-              var ctx = document.getElementById("canvas1").getContext("2d");
-              var myBar = new Chart(ctx, {
+              var ctx1 = document.getElementById("canvas1").getContext("2d");
+              var myBar1 = new Chart(ctx1, {
                 type: 'line',
                 data: {
                   labels: time,
                   datasets: [{
                     label: choices[0],                     //データ設定
-                    data: a_lasts,
+                    data: a_lasts1,
                     backgroundColor: "rgb(0,220,255)",
                     borderColor: 'rgb(0,220,255)'
                   }, {
                     label: choices[1],
-                    data: b_lasts,
+                    data: b_lasts1,
                     backgroundColor: 'rgb(255,162,0)'
                   }, {
                     label: choices[2],
-                    data: c_lasts,
+                    data: c_lasts1,
                     backgroundColor: 'rgb(24,197,140)'
                   }, {
                     label: choices[3],
-                    data: d_lasts,
+                    data: d_lasts1,
                     backgroundColor: 'rgb(255,174,201)'
                   }, {
                     label: choices[4],
-                    data: e_lasts,
+                    data: e_lasts1,
                     backgroundColor: 'rgb(6,21,159)'
                   }, {
                     label: choices[5],
-                    data: f_lasts,
+                    data: f_lasts1,
                     backgroundColor: 'rgb(217,0,0)'
                   }, {
                     label: choices[6],
-                    data: g_lasts,
+                    data: g_lasts1,
                     backgroundColor: 'rgb(112,146,190)'
                   }, {
                     label: choices[7],
-                    data: h_lasts,
+                    data: h_lasts1,
                     backgroundColor: 'rgb(136,0,21)'
                   }, {
                     label: choices[8],
-                    data: i_lasts,
+                    data: i_lasts1,
                     backgroundColor: 'rgb(0,0,0)'
                   }, {
                     label: choices[9],
-                    data: j_lasts,
+                    data: j_lasts1,
                     backgroundColor: '#f16272'
                   }
                   ]
@@ -416,63 +416,63 @@
                 }
               });
 
-              time = obj.shortTransition.map((val) => Math.round((now - val.timestamp) / 3600000) + "h前");
-              a_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 1).reduce((accumulator, currentValue) => accumulator + currentValue));
-              b_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 2).reduce((accumulator, currentValue) => accumulator + currentValue));
-              c_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 3).reduce((accumulator, currentValue) => accumulator + currentValue));
-              d_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 4).reduce((accumulator, currentValue) => accumulator + currentValue));
-              e_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 5).reduce((accumulator, currentValue) => accumulator + currentValue));
-              f_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 6).reduce((accumulator, currentValue) => accumulator + currentValue));
-              g_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 7).reduce((accumulator, currentValue) => accumulator + currentValue));
-              h_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 8).reduce((accumulator, currentValue) => accumulator + currentValue));
-              i_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 9).reduce((accumulator, currentValue) => accumulator + currentValue));
-              j_lasts = obj.shortTransition.map((val, i) => 120);
+              time = obj.longTransition.map((val) => Math.round((now - val.timestamp) / 3600000) + "h前");
+              a_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 1).reduce((accumulator, currentValue) => accumulator + currentValue));
+              b_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 2).reduce((accumulator, currentValue) => accumulator + currentValue));
+              c_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 3).reduce((accumulator, currentValue) => accumulator + currentValue));
+              d_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 4).reduce((accumulator, currentValue) => accumulator + currentValue));
+              e_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 5).reduce((accumulator, currentValue) => accumulator + currentValue));
+              f_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 6).reduce((accumulator, currentValue) => accumulator + currentValue));
+              g_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 7).reduce((accumulator, currentValue) => accumulator + currentValue));
+              h_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 8).reduce((accumulator, currentValue) => accumulator + currentValue));
+              i_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 9).reduce((accumulator, currentValue) => accumulator + currentValue));
+              j_lasts2 = obj.longTransition.map((val, i) => 120);
 
-              var ctx = document.getElementById("canvas2").getContext("2d");
-              var myBar = new Chart(ctx, {
+              var ctx2 = document.getElementById("canvas2").getContext("2d");
+              var myBar2 = new Chart(ctx2, {
                 type: 'line',
                 data: {
                   labels: time,
                   datasets: [{
                     label: choices[0],                     //データ設定
-                    data: a_lasts,
+                    data: a_lasts2,
                     backgroundColor: "rgb(0,220,255)",
                     borderColor: 'rgb(0,220,255)'
                   }, {
                     label: choices[1],
-                    data: b_lasts,
+                    data: b_lasts2,
                     backgroundColor: 'rgb(255,162,0)'
                   }, {
                     label: choices[2],
-                    data: c_lasts,
+                    data: c_lasts2,
                     backgroundColor: 'rgb(24,197,140)'
                   }, {
                     label: choices[3],
-                    data: d_lasts,
+                    data: d_lasts2,
                     backgroundColor: 'rgb(255,174,201)'
                   }, {
                     label: choices[4],
-                    data: e_lasts,
+                    data: e_lasts2,
                     backgroundColor: 'rgb(6,21,159)'
                   }, {
                     label: choices[5],
-                    data: f_lasts,
+                    data: f_lasts2,
                     backgroundColor: 'rgb(217,0,0)'
                   }, {
                     label: choices[6],
-                    data: g_lasts,
+                    data: g_lasts2,
                     backgroundColor: 'rgb(112,146,190)'
                   }, {
                     label: choices[7],
-                    data: h_lasts,
+                    data: h_lasts2,
                     backgroundColor: 'rgb(136,0,21)'
                   }, {
                     label: choices[8],
-                    data: i_lasts,
+                    data: i_lasts2,
                     backgroundColor: 'rgb(0,0,0)'
                   }, {
                     label: choices[9],
-                    data: j_lasts,
+                    data: j_lasts2,
                     backgroundColor: 'rgb(130,120,0)'
                   }
                   ]
@@ -610,10 +610,10 @@
               <label for="tab1_2">長期スパン</label>
               <div class="cp_tabpanels">
                 <div id="first_tab01" class="cp_tabpanel">
-                  <canvas id="canvas1" width="300" height="210"></canvas>
+                  <canvas id="canvas1" width="300" height="215"></canvas>
                 </div>
                 <div id="second_tab01" class="cp_tabpanel">
-                  <canvas id="canvas2" width="300" height="210"></canvas>
+                  <canvas id="canvas2" width="300" height="215"></canvas>
                 </div>
               </div>
             </div>

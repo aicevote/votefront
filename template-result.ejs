@@ -137,14 +137,14 @@
                     $(".login").remove();
                     if (!data.isInfluencer) { $("#onlyinfluencer").remove(); }
                     $.ajax({
-                      url: "https://api.aicevote.com/theme",
+                      url: "https://api.aicevote.com/themes",
                       xhrFields: { withCredentials: true }
-                    }).done((data, textStatus, jqXHR) => {
+                    }).done((theme, textStatus, jqXHR) => {
                       const relate = document.getElementById('relate');
-                      data.forEach(item => {
+                      theme.forEach(item => {
                         if (item.genre == Genre) {
                           let li = document.createElement('li');
-                          li.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                          li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
                           relate.appendChild(li);
                         }
                       });
@@ -155,14 +155,14 @@
                 $("form").remove();
 
                 $.ajax({
-                  url: "https://api.aicevote.com/theme",
+                  url: "https://api.aicevote.com/themes",
                   xhrFields: { withCredentials: true }
                 }).done((data, textStatus, jqXHR) => {
                   const relate = document.getElementById('relate');
                   data.forEach(item => {
                     if (item.genre == Genre) {
                       let li = document.createElement('li');
-                      li.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                      li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
                       relate.appendChild(li);
                     }
                   });
@@ -416,7 +416,7 @@
                 }
               });
 
-              time = obj.longTransition.map((val) => Math.round((now - val.timestamp) / 3600000) + "h前");
+              time2 = obj.longTransition.map((val) => Math.round((now - val.timestamp) / 86400000) + "日前");
               a_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 1).reduce((accumulator, currentValue) => accumulator + currentValue));
               b_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 2).reduce((accumulator, currentValue) => accumulator + currentValue));
               c_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 3).reduce((accumulator, currentValue) => accumulator + currentValue));
@@ -432,7 +432,7 @@
               var myBar2 = new Chart(ctx2, {
                 type: 'line',
                 data: {
-                  labels: time,
+                  labels: time2,
                   datasets: [{
                     label: choices[0],                     //データ設定
                     data: a_lasts2,
@@ -610,10 +610,10 @@
               <label for="tab1_2">長期スパン</label>
               <div class="cp_tabpanels">
                 <div id="first_tab01" class="cp_tabpanel">
-                  <canvas id="canvas1" width="300" height="215"></canvas>
+                  <canvas id="canvas1" width="300" height="210"></canvas>
                 </div>
                 <div id="second_tab01" class="cp_tabpanel">
-                  <canvas id="canvas2" width="300" height="215"></canvas>
+                  <canvas id="canvas2" width="300" height="210"></canvas>
                 </div>
               </div>
             </div>

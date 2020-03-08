@@ -127,15 +127,21 @@
             return str;
           }
           socket.emit('feedback send', str);
+          $('#form')[0].reset();
         }
         });
       });
       </script>
       <br>
       <div class="feedback">
+        <hi>フィードバック募集</hi>
+        <h3>
+          <p>「この部分が良い」、「こういう機能をつけて欲しい」、「この部分がわかりにくい」などご意見がありましたら、できるだけ具体的に
+          詳しく以下にお書きくださいませ。</p>
+        </h3>
         <form id="form" class="form">
-          ご意見をください: <input type="text" id="message" class="input" required>
-          <button type="submit" class="submit" id="submit">送信</button>
+            <textarea id="message" placeholder="フィードバック" cols="20" rows="1"></textarea>
+            <a type="btn" class="submit" id="submit" style="font-size:11px">送信</a>
         </form>
       </div>
       <br>
@@ -151,11 +157,8 @@
               <img border="0" width="1" height="1" src="https://www14.a8.net/0.gif?a8mat=35UCHQ+9IYGI+1WP2+NX735" alt="">
         </div>
      <h2>人気の投票テーマ</h2>
-     <ul>
+     <ul id="litrend">
       <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
-      <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
-      <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
-      <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
      </ul>
     </div>
     </div>

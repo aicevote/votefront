@@ -163,7 +163,9 @@
                 const relate = document.getElementById('relate');
                 data.forEach(item => {
                   if (item.genre == Genre) {
-                  relate.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                    let li = document.createElement('li');
+                    li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
+                    relate.appendChild(li);
                   }
                 });
               });
@@ -330,9 +332,7 @@
         <h2>関連する投票テーマ</h2>
         <ul id="relate">
           <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
-          <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
-          <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
-          <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
+          
         </ul>
       </div>
 

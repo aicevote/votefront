@@ -31,36 +31,65 @@
   <script src="/javascripts/Chart.min.js"></script>
   <script src="/javascripts/chartjs-plugin-streaming.js"></script>
   <script src="/javascripts/ajax.js"></script>
-  <div class="anime" id="logo">
-    <p><img src="/images/animeaicevote.gif" alt=""></p>
-  </div>
   <script type="text/javascript">
-  $(function(){
-      if($.cookie("access")){
-          $('#logo').css({display:'none'});
-      }else{
-      $(window).load(function(){
-          $(".mainSite").css("display", "none");
-          setTimeout(function() {
-              $('.anime').fadeOut();
-            }, 2000);
-          $(".mainSite").css({opacity:'0'});
-            setTimeout(function(){
-            $(".mainSite").css("display", "block");
-            $(".mainSite").stop().animate({opacity:'1'},1000);
-          },2000);
-          $.cookie("access",$('body').addClass('access'));
-      })
-      };
-  });
-  $(function() {
-    var path = location.pathname;
-    if(path.indexOf("/auth/twitter/") > -1){
-    $('.login').remove();
-    console.log("ログイン中")
-    }
-  });
-  </script>
+    $(function() {
+      const socket = io("https://api.aicevote.com/");
+      var sessionToken;
+  
+      socket.on('connect', function () {
+        $.ajax({
+          url: "https://api.aicevote.com/auth/sessiontoken",
+          xhrFields: {
+            withCredentials: true
+          }
+        }).success(function(res){
+          sessionToken=res.sessionToken;
+          if(sessionToken){
+            $('.login').remove();                   
+          }
+          $.ajax({
+            url: "https://api.aicevote.com/themes"
+          }).done((data, textStatus, jqXHR) => {
+            const litrend =  document.getElementById('litrend');
+            data.sort(
+              function(a,b){
+                if (a.topicality < b.topicality){
+                  return 1;
+                } else {
+                  return -1;
+                }
+              }
+            )
+            for(i=0;i<2;i++){
+              let li = document.createElement('li');
+              li.innerHTML = `<img src="${data[i].imageURI}"><a href ="Dp${data[i].themeID}">${data[i].title}</a>`;
+              litrend.appendChild(li);
+            }
+          });
+        }).fail(function(){
+          $.ajax({
+            url: "https://api.aicevote.com/themes"
+          }).done((data, textStatus, jqXHR) => {
+            const litrend =  document.getElementById('litrend');
+            data.sort(
+              function(a,b){
+                if (a.topicality < b.topicality){
+                  return 1;
+                } else {
+                  return -1;
+                }
+              }
+            )
+            for(i=0;i<2;i++){
+              let li = document.createElement('li');
+              li.innerHTML = `<img src="${data[i].imageURI}"><a href ="result${data[i].themeID}">${data[i].title}</a>`;
+              litrend.appendChild(li);
+            }
+          });
+        });
+      });
+    });
+    </script>
   <div class="mainSite">
   <div class="header">
     <div class="header-logo"><a href="home"><img src="/images/aice.JPG" ></a>
@@ -101,12 +130,9 @@
         </div>
         <div class="subcontents">
      <h2>人気の投票テーマ</h2>
-     <ul>
+     <ul id="litrend">
       <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
-      <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
-      <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
-      <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
-     </ul>
+    </ul>
     </div>
     </div>
     <div class="footer">

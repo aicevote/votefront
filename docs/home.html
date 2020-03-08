@@ -46,7 +46,7 @@
           url: "https://api.aicevote.com/auth/sessiontoken",
           xhrFields: { withCredentials: true }
 
-        }).done((data, textStatus, jqXHR) => {
+        }).success((data, textStatus, jqXHR) => {
           sessionToken = data.sessionToken;
 
           $.ajax({

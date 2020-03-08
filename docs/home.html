@@ -89,6 +89,7 @@
               let li = document.createElement('li');
               li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
               tabs[0].appendChild(li);
+              li = document.createElement('li');
               li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
               tabs[item.genre+1].appendChild(li);
             })
@@ -176,6 +177,7 @@
               let li = document.createElement('li');
               li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
               tabs[0].appendChild(li);
+              li = document.createElement('li');
               li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
               tabs[item.genre+1].appendChild(li);
             })

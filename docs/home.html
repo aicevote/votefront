@@ -59,6 +59,26 @@
             else { $('#onlyinfluencer').remove(); }
           });
 
+          $.ajax({
+            url: "https://api.aicevote.com/themes"
+          }).done((data, textStatus, jqXHR) => {
+            const tabs = [document.getElementById('liall'), document.getElementById('lipolitical'),
+            document.getElementById('lilife'), document.getElementById('lieconomic'),
+            document.getElementById('lisports'), document.getElementById('lientertainment'),
+            document.getElementById('ligourmet'), document.getElementById('liother'),
+            document.getElementById('lipr')
+            ];
+
+            data.forEach(item =>{
+              let li = document.createElement('li');
+              li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
+              tabs[0].appendChild(li);
+              li = document.createElement('li');
+              li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
+              tabs[item.genre+1].appendChild(li);
+            })
+          });
+
 
 
           socket.on("news", (article) => {
@@ -126,10 +146,10 @@
 
             data.forEach(item =>{
               let li = document.createElement('li');
-              li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
+              li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
               tabs[0].appendChild(li);
               li = document.createElement('li');
-              li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
+              li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
               tabs[item.genre+1].appendChild(li);
             })
           });

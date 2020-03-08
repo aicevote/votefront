@@ -157,9 +157,8 @@
             document.getElementById('lilife'), document.getElementById('lieconomic'),
             document.getElementById('lisports'), document.getElementById('lientertainment'),
             document.getElementById('ligourmet'), document.getElementById('liother'),
-            document.getElementById('lipr')
+            document.getElementById('lipr'), document.getElementById('litrend')
             ];
-
             data.sort(
               function(a,b){
                 if (a.topicality < b.topicality){
@@ -174,12 +173,11 @@
               li.innerHTML = `<img src="${data[i].imageURI}"><a href ="result${data[i].themeID}">${data[i].title}</a>`;
               tabs[9].appendChild(li);
             }
-
             data.forEach(item =>{
               let li = document.createElement('li');
               li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
               tabs[0].appendChild(li);
-              li = document.createElement('li');
+              let li = document.createElement('li');
               li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
               tabs[item.genre+1].appendChild(li);
             })

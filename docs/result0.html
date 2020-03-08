@@ -144,7 +144,7 @@
                       theme.forEach(item => {
                         if (item.genre == Genre) {
                           let li = document.createElement('li');
-                          li.innerHTML = `<li><img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a></li>`;
+                          li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
                           relate.appendChild(li);
                         }
                       });
@@ -162,7 +162,7 @@
                   data.forEach(item => {
                     if (item.genre == Genre) {
                       let li = document.createElement('li');
-                      li.innerHTML = `<li><img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a></li>`;
+                      li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
                       relate.appendChild(li);
                     }
                   });

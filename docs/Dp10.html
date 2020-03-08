@@ -165,11 +165,11 @@
               $("#J").text(choices[9]);
 
               $.ajax({
-                url: "https://api.aicevote.com/theme",
+                url: "https://api.aicevote.com/themes",
                 xhrFields: { withCredentials: true }
-              }).done((data, textStatus, jqXHR) => {
+              }).done((theme, textStatus, jqXHR) => {
                 const relate = document.getElementById('relate');
-                data.forEach(item => {
+                theme.forEach(item => {
                   if (item.genre == Genre) {
                     let li = document.createElement('li');
                     li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;

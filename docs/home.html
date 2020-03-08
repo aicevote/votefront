@@ -103,9 +103,7 @@
                 article["id"] = i;
               });
             }
-            article.latest.forEach((article) => {
-              article["id"] = null;
-            });
+            
             article = article.related.reduce(
               (prev, cur) => prev.concat(cur)
             ).concat(article.latest).sort(
@@ -113,35 +111,37 @@
             );
             const newslist = document.getElementById('newslist');
             for (let j = 0; j < article.length; j++) {
-              var news = article[j];
-              const li = document.createElement('li');
-              li.innerHTML = `
-                                    <label id="newsnav-open${j}" for="newsnav-input${j}"><span></span>  
-                                      <div class="onenews">
-                                        <div class="anews">
-                                          <img src="${news.uriToImage}">
-                                          <p>${news.title}</p>
-                                        </div>
-                                        <div class="bnews">
-                                          <input id="newsnav-input${j}" type="checkbox" class="newsnav-unshown">
-                                          <label class="newsnav-unshown" id="newsnav-close" for="newsnav-input${j}"></label>
-                                          <div id="newsnav-content${j}">
-                                            <div class="newscontents">
-                                              <p>${news.title}</p>
-                                              <img src="${news.uriToImage}">
-                                              <a href="${news.uri}">                         
-                                                <h4>記事を読む</h4>
-                                              </a>
-                                              <div style="text-align:center; color:white; margin 10px;"><a href="Dp${news.id}" class="btn-gradient-flat">関連する投票</a></div>                                 
+              if (news.id){
+                var news = article[j];
+                const li = document.createElement('li');
+                li.innerHTML = `
+                                      <label id="newsnav-open${j}" for="newsnav-input${j}"><span></span>  
+                                        <div class="onenews">
+                                          <div class="anews">
+                                            <img src="${news.uriToImage}">
+                                            <p>${news.title}</p>
+                                          </div>
+                                          <div class="bnews">
+                                            <input id="newsnav-input${j}" type="checkbox" class="newsnav-unshown">
+                                            <label class="newsnav-unshown" id="newsnav-close" for="newsnav-input${j}"></label>
+                                            <div id="newsnav-content${j}">
+                                              <div class="newscontents">
+                                                <p>${news.title}</p>
+                                                <img src="${news.uriToImage}">
+                                                <a href="${news.uri}">                         
+                                                  <h4>記事を読む</h4>
+                                                </a>
+                                                <div style="text-align:center; color:white; margin 10px;"><a href="Dp${news.id}" class="btn-gradient-flat">関連する投票</a></div>                                 
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
-                                      </div>
-                                    </label>
-                                      <div class="news-background">
-                                      </div>
-                                    `;
-              newslist.appendChild(li)
+                                      </label>
+                                        <div class="news-background">
+                                        </div>
+                                      `;
+                newslist.appendChild(li);
+              }
             }
           });
         }).fail((jqXHR, textStatus, errorThrown) => {
@@ -159,7 +159,7 @@
             document.getElementById('ligourmet'), document.getElementById('liother'),
             document.getElementById('lipr'), document.getElementById('litrend')
             ];
-            const litrend = document.getElementById('litrend');
+            const litre = document.getElementById('litre');
             data.sort(
               function(a,b){
                 if (a.topicality < b.topicality){
@@ -177,7 +177,7 @@
             for(i=0;i<3;i++){
               let li = document.createElement('li');
               li.innerHTML = `<img src="${data[i].imageURI}"><a href ="result${data[i].themeID}">${data[i].title}</a>`;
-              litrend.appendChild(li);
+              litre.appendChild(li);
             }
             data.forEach(item =>{
               let li = document.createElement('li');
@@ -205,35 +205,37 @@
             );
             const newslist = document.getElementById('newslist');
             for (let j = 0; j < article.length; j++) {
-              var news = article[j];
-              const li = document.createElement('li');
-              li.innerHTML = `
-                                    <label id="newsnav-open${j}" for="newsnav-input${j}"><span></span>  
-                                      <div class="onenews">
-                                        <div class="anews">
-                                          <img src="${news.uriToImage}">
+              if (news.id){
+                var news = article[j];
+                const li = document.createElement('li');
+                li.innerHTML = `
+                                <label id="newsnav-open${j}" for="newsnav-input${j}"><span></span>  
+                                  <div class="onenews">
+                                    <div class="anews">
+                                      <img src="${news.uriToImage}">
+                                      <p>${news.title}</p>
+                                    </div>
+                                    <div class="bnews">
+                                      <input id="newsnav-input${j}" type="checkbox" class="newsnav-unshown">
+                                      <label class="newsnav-unshown" id="newsnav-close" for="newsnav-input${j}"></label>
+                                      <div id="newsnav-content${j}">
+                                        <div class="newscontents">
                                           <p>${news.title}</p>
-                                        </div>
-                                        <div class="bnews">
-                                          <input id="newsnav-input${j}" type="checkbox" class="newsnav-unshown">
-                                          <label class="newsnav-unshown" id="newsnav-close" for="newsnav-input${j}"></label>
-                                          <div id="newsnav-content${j}">
-                                            <div class="newscontents">
-                                              <p>${news.title}</p>
-                                              <img src="${news.uriToImage}">
-                                              <a href="${news.uri}">                         
-                                                <h4>記事を読む</h4>
-                                              </a>
-                                              <div style="text-align:center; color:white; margin 10px;"><a href="result${news.id}" class="btn-gradient-flat">関連する投票</a></div>                                 
-                                            </div>
-                                          </div>
+                                          <img src="${news.uriToImage}">
+                                          <a href="${news.uri}">                         
+                                            <h4>記事を読む</h4>
+                                          </a>
+                                          <div style="text-align:center; color:white; margin 10px;"><a href="result${news.id}" class="btn-gradient-flat">関連する投票</a></div>                                 
                                         </div>
                                       </div>
-                                    </label>
-                                      <div class="news-background">
-                                      </div>
-                                    `;
-              newslist.appendChild(li)
+                                    </div>
+                                  </div>
+                                </label>
+                                  <div class="news-background">
+                                  </div>
+                                `;
+                newslist.appendChild(li)
+              }
             }
           });
         });
@@ -430,7 +432,7 @@
           </div>
 
           <h2>人気の投票テーマ</h2>
-          <ul id="litrend">
+          <ul id="litre">
           </ul>
         </div>
       </div>

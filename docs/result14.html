@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="ja">
+
+<lang="ja">
 
 <head>
   <meta charset="UTF-8">
@@ -77,6 +77,15 @@
 
     <div id="allcontainer">
       <div class="container">
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+
         <div class="balloon2-left">
           <p id="title"></p>
         </div>
@@ -99,11 +108,22 @@
                 title = data.title;
                 description = data.description;
                 choices = data.choices;
+                Genre = data.genre;
 
                 document.title = title;
                 $("#title").text(title);
                 $("#description").text(description);
                 $("#share").attr("href", "https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=http://aicevote.com&hashtags=" + title);
+                $("#agree0").text(choices[0]);
+                $("#agree1").text(choices[1]);
+                $("#agree2").text(choices[2]);
+                $("#agree3").text(choices[3]);
+                $("#agree4").text(choices[4]);
+                $("#agree5").text(choices[5]);
+                $("#agree6").text(choices[6]);
+                $("#agree7").text(choices[7]);
+                $("#agree8").text(choices[8]);
+                $("#agree9").text(choices[9]);
               });
 
             socket.on("connect", () => {
@@ -116,10 +136,38 @@
                   .done((data, textStatus, jqXHR) => {
                     $(".login").remove();
                     if (!data.isInfluencer) { $("#onlyinfluencer").remove(); }
+                    $.ajax({
+                      url: "https://api.aicevote.com/themes",
+                      xhrFields: { withCredentials: true }
+                    }).done((theme, textStatus, jqXHR) => {
+                      const relate = document.getElementById('relate');
+                      theme.forEach(item => {
+                        if (item.genre == Genre) {
+                          let li = document.createElement('li');
+                          li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
+                          relate.appendChild(li);
+                        }
+                      });
+                    });
                   });
               }).fail((jqXHR, textStatus, errorThrown) => {
                 $("#onlyinfluencer").remove();
                 $("form").remove();
+
+                $.ajax({
+                  url: "https://api.aicevote.com/themes",
+                  xhrFields: { withCredentials: true }
+                }).done((data, textStatus, jqXHR) => {
+                  const relate = document.getElementById('relate');
+                  data.forEach(item => {
+                    if (item.genre == Genre) {
+                      let li = document.createElement('li');
+                      li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
+                      relate.appendChild(li);
+                    }
+                  });
+                });
+
               }).always(() => {
                 socket.emit("get votes", sessionToken ? { themeID: themeID, sessionToken: sessionToken } : { themeID: themeID });
               })
@@ -266,62 +314,62 @@
               const now = Date.now();
 
               let time = obj.shortTransition.map((val) => Math.round((now - val.timestamp) / 3600000) + "h前");
-              let a_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 1).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let b_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 2).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let c_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 3).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let d_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 4).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let e_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 5).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let f_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 6).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let g_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 7).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let h_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 8).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let i_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 9).reduce((accumulator, currentValue) => accumulator + currentValue));
-              let j_lasts = obj.shortTransition.map((val, i) => 120);
+              let a_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 1).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let b_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 2).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let c_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 3).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let d_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 4).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let e_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 5).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let f_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 6).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let g_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 7).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let h_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 8).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let i_lasts1 = obj.shortTransition.map((val) => val.percentage.slice(0, 9).reduce((accumulator, currentValue) => accumulator + currentValue));
+              let j_lasts1 = obj.shortTransition.map((val, i) => 120);
 
-              var ctx = document.getElementById("canvas1").getContext("2d");
-              var myBar = new Chart(ctx, {
+              var ctx1 = document.getElementById("canvas1").getContext("2d");
+              var myBar1 = new Chart(ctx1, {
                 type: 'line',
                 data: {
                   labels: time,
                   datasets: [{
                     label: choices[0],                     //データ設定
-                    data: a_lasts,
+                    data: a_lasts1,
                     backgroundColor: "rgb(0,220,255)",
                     borderColor: 'rgb(0,220,255)'
                   }, {
                     label: choices[1],
-                    data: b_lasts,
+                    data: b_lasts1,
                     backgroundColor: 'rgb(255,162,0)'
                   }, {
                     label: choices[2],
-                    data: c_lasts,
+                    data: c_lasts1,
                     backgroundColor: 'rgb(24,197,140)'
                   }, {
                     label: choices[3],
-                    data: d_lasts,
+                    data: d_lasts1,
                     backgroundColor: 'rgb(255,174,201)'
                   }, {
                     label: choices[4],
-                    data: e_lasts,
+                    data: e_lasts1,
                     backgroundColor: 'rgb(6,21,159)'
                   }, {
                     label: choices[5],
-                    data: f_lasts,
+                    data: f_lasts1,
                     backgroundColor: 'rgb(217,0,0)'
                   }, {
                     label: choices[6],
-                    data: g_lasts,
+                    data: g_lasts1,
                     backgroundColor: 'rgb(112,146,190)'
                   }, {
                     label: choices[7],
-                    data: h_lasts,
+                    data: h_lasts1,
                     backgroundColor: 'rgb(136,0,21)'
                   }, {
                     label: choices[8],
-                    data: i_lasts,
+                    data: i_lasts1,
                     backgroundColor: 'rgb(0,0,0)'
                   }, {
                     label: choices[9],
-                    data: j_lasts,
+                    data: j_lasts1,
                     backgroundColor: '#f16272'
                   }
                   ]
@@ -368,63 +416,63 @@
                 }
               });
 
-              time = obj.shortTransition.map((val) => Math.round((now - val.timestamp) / 3600000) + "h前");
-              a_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 1).reduce((accumulator, currentValue) => accumulator + currentValue));
-              b_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 2).reduce((accumulator, currentValue) => accumulator + currentValue));
-              c_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 3).reduce((accumulator, currentValue) => accumulator + currentValue));
-              d_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 4).reduce((accumulator, currentValue) => accumulator + currentValue));
-              e_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 5).reduce((accumulator, currentValue) => accumulator + currentValue));
-              f_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 6).reduce((accumulator, currentValue) => accumulator + currentValue));
-              g_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 7).reduce((accumulator, currentValue) => accumulator + currentValue));
-              h_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 8).reduce((accumulator, currentValue) => accumulator + currentValue));
-              i_lasts = obj.shortTransition.map((val) => val.percentage.slice(0, 9).reduce((accumulator, currentValue) => accumulator + currentValue));
-              j_lasts = obj.shortTransition.map((val, i) => 120);
+              time2 = obj.longTransition.map((val) => Math.round((now - val.timestamp) / 86400000) + "日前");
+              a_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 1).reduce((accumulator, currentValue) => accumulator + currentValue));
+              b_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 2).reduce((accumulator, currentValue) => accumulator + currentValue));
+              c_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 3).reduce((accumulator, currentValue) => accumulator + currentValue));
+              d_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 4).reduce((accumulator, currentValue) => accumulator + currentValue));
+              e_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 5).reduce((accumulator, currentValue) => accumulator + currentValue));
+              f_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 6).reduce((accumulator, currentValue) => accumulator + currentValue));
+              g_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 7).reduce((accumulator, currentValue) => accumulator + currentValue));
+              h_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 8).reduce((accumulator, currentValue) => accumulator + currentValue));
+              i_lasts2 = obj.longTransition.map((val) => val.percentage.slice(0, 9).reduce((accumulator, currentValue) => accumulator + currentValue));
+              j_lasts2 = obj.longTransition.map((val, i) => 120);
 
-              var ctx = document.getElementById("canvas2").getContext("2d");
-              var myBar = new Chart(ctx, {
+              var ctx2 = document.getElementById("canvas2").getContext("2d");
+              var myBar2 = new Chart(ctx2, {
                 type: 'line',
                 data: {
-                  labels: time,
+                  labels: time2,
                   datasets: [{
                     label: choices[0],                     //データ設定
-                    data: a_lasts,
+                    data: a_lasts2,
                     backgroundColor: "rgb(0,220,255)",
                     borderColor: 'rgb(0,220,255)'
                   }, {
                     label: choices[1],
-                    data: b_lasts,
+                    data: b_lasts2,
                     backgroundColor: 'rgb(255,162,0)'
                   }, {
                     label: choices[2],
-                    data: c_lasts,
+                    data: c_lasts2,
                     backgroundColor: 'rgb(24,197,140)'
                   }, {
                     label: choices[3],
-                    data: d_lasts,
+                    data: d_lasts2,
                     backgroundColor: 'rgb(255,174,201)'
                   }, {
                     label: choices[4],
-                    data: e_lasts,
+                    data: e_lasts2,
                     backgroundColor: 'rgb(6,21,159)'
                   }, {
                     label: choices[5],
-                    data: f_lasts,
+                    data: f_lasts2,
                     backgroundColor: 'rgb(217,0,0)'
                   }, {
                     label: choices[6],
-                    data: g_lasts,
+                    data: g_lasts2,
                     backgroundColor: 'rgb(112,146,190)'
                   }, {
                     label: choices[7],
-                    data: h_lasts,
+                    data: h_lasts2,
                     backgroundColor: 'rgb(136,0,21)'
                   }, {
                     label: choices[8],
-                    data: i_lasts,
+                    data: i_lasts2,
                     backgroundColor: 'rgb(0,0,0)'
                   }, {
                     label: choices[9],
-                    data: j_lasts,
+                    data: j_lasts2,
                     backgroundColor: 'rgb(130,120,0)'
                   }
                   ]
@@ -602,10 +650,6 @@
                         class="blink"></span></label>
                   <label class="infnav-unshown" id="infnavpeople1-close" for="infnavpeople1-input"></label>
                   <div id="infnavpeople1-content">
-                    <a href="https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=http://aicevote.com&hashtags=NHKスクランブル放送、賛成反対？"
-                      style="text-decoration:black; color:deepskyblue;">
-                      <h4><img src="/images/twitter.png">フォロワーを呼ぼう</h4>
-                    </a>
                     <h3>インフルエンサーの投票</h3>
                     <ul id="ainfmember">
                     </ul>
@@ -640,12 +684,9 @@
 
 
 
-<h2>人気の投票テーマ</h2>
-<ul>
+<h2>関連する投票テーマ</h2>
+<ul id="relate">
   <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
-  <li><img src="/images/money.png"><a href="Dp4">日本のカジノ、賛成？反対？</a></li>
-  <li><img src="/images/building.png"><a href="Dp9">大学入試改革、賛成反対？</a></li>
-  <li><img src="/images/smartphone.png"><a href="Dp7">iOS派？Android派？</a></li>
 </ul>
 </div>
 </div>
@@ -659,8 +700,10 @@
       <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
     </li>
     <li>
-      レポート
-    </li>
+        <a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50">
+          レポート
+        </a>
+      </li>
   </ul>
 </div>
 </div>

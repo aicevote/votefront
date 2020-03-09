@@ -274,9 +274,9 @@
             socket.on('comments', (comments) => {
               comments.comments.forEach(element => {
                 if (element.isInfluencer) {
-                  $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + new Date(element.createdAt) + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
+                  $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + new Date(element.createdAt).toISOString()　+ '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
                 } else {
-                  $('#comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + element.createdAt + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
+                  $('#comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + new Date(element.createdAt).toISOString() + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
                 }
               });
             });

@@ -37,8 +37,9 @@
   <body>
     <script>
       async function main() {
+        var sessionToken = null;
         try {
-          const sessionToken = await aicevote.getSessionToken();
+          sessionToken = await aicevote.getSessionToken();
           const myProfile = await aicevote.getMyProfile(sessionToken);
           console.log(myProfile)
           $('.login').remove();
@@ -61,24 +62,25 @@
           document.getElementById('lipr'), document.getElementById('litrend')
           ];
           const litre = document.getElementById('litre');
+          const link = sessionToken ? "Dp" : "result";
           themes.sort((a, b) => b.topicality - a.topicality)
           for (i = 0; i < 7; i++) {
             const li = document.createElement('li');
-            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="Dp${themes[i].themeID}">${themes[i].title}</a>`;
+            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}${themes[i].themeID}">${themes[i].title}</a>`;
             tabs[9].appendChild(li);
           }
           for (i = 0; i < 3; i++) {
             const li = document.createElement('li');
-            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="result${themes[i].themeID}">${themes[i].title}</a>`;
+            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}${themes[i].themeID}">${themes[i].title}</a>`;
             litre.appendChild(li);
           }
 
           themes.forEach(item => {
             let li = document.createElement('li');
-            li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
+            li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
             tabs[0].appendChild(li);
             li = document.createElement('li');
-            li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
+            li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
             tabs[item.genre + 1].appendChild(li);
           })
         } catch (e) { }
@@ -335,7 +337,8 @@
             <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
           </li>
           <li>
-            <a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50" style="text-decoration:none; color:deepskyblue;">
+            <a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50"
+              style="text-decoration:none; color:deepskyblue;">
               レポート
             </a>
           </li>

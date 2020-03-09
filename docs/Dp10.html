@@ -153,63 +153,62 @@
               document.title = title;
               $("#title").text(title);
               $("#description").text(description);
-              $("#A").text(choices[0]);
-              $("#B").text(choices[1]);
-              $("#C").text(choices[2]);
-              $("#D").text(choices[3]);
-              $("#E").text(choices[4]);
-              $("#F").text(choices[5]);
-              $("#G").text(choices[6]);
-              $("#H").text(choices[7]);
-              $("#I").text(choices[8]);
-              $("#J").text(choices[9]);
-
-              if ($('#A').text().length == 0) {
+              
+              if (choices[0]) {
+                $("#A").text(choices[0]);                
+              } else{
                 $('#A').remove();
                 $('#button01').remove();
               }
-              if ($('#B').text().length == 0) {
+              if (choices[1]) {
+                $("#B").text(choices[1]);                
+              } else{
                 $('#B').remove();
               }
-              if ($('#C').text().length == 0) {
+              if (choices[2]) {
+                $("#C").text(choices[2]);                
+              } else{
                 $('#C').remove();
                 $('#button23').remove();
               }
-              if ($('#D').text().length == 0) {
+              if (choices[3]) {
+                $("#D").text(choices[3]);                
+              } else{
                 $('#D').remove();
               }
-              if ($('#E').text().length == 0) {
+              if (choices[4]) {
+                $("#E").text(choices[4]);                
+              } else{
                 $('#E').remove();
                 $('#button45').remove();
               }
-              if ($('#F').text().length == 0) {
+              if (choices[5]) {
+                $("#F").text(choices[5]);                
+              } else{
                 $('#F').remove();
               }
-              if ($('#G').text().length == 0) {
+              if (choices[6]) {
+                $("#G").text(choices[6]);                
+              } else{
                 $('#G').remove();
                 $('#button67').remove();
               }
-              if ($('#H').text().length == 0) {
+              if (choices[7]) {
+                $("#H").text(choices[7]);                
+              } else{
                 $('#H').remove();
               }
-              if ($('#I').text().length == 0) {
+              if (choices[8]) {
+                $("#I").text(choices[8]);                
+              } else{
                 $('#I').remove();
                 $('#button89').remove();
               }
-              if ($('#J').text().length == 0) {
+              if (choices[9]) {
+                $("#J").text(choices[9]);                
+              } else{
                 $('#J').remove();
               }
-
-
-
-
-
-
-
-
-
-
-
 
               $.ajax({
                 url: "https://api.aicevote.com/themes",
@@ -226,42 +225,7 @@
               });
             });
 
-          if ($('#A').text().length == 0) {
-            $('#A').remove();
-            $('#button01').remove();
-          }
-          if ($('#B').text().length == 0) {
-            $('#B').remove();
-          }
-          if ($('#C').text().length == 0) {
-            $('#C').remove();
-            $('#button23').remove();
-          }
-          if ($('#D').text().length == 0) {
-            $('#D').remove();
-          }
-          if ($('#E').text().length == 0) {
-            $('#E').remove();
-            $('#button45').remove();
-          }
-          if ($('#F').text().length == 0) {
-            $('#F').remove();
-          }
-          if ($('#G').text().length == 0) {
-            $('#G').remove();
-            $('#button67').remove();
-          }
-          if ($('#H').text().length == 0) {
-            $('#H').remove();
-          }
-          if ($('#I').text().length == 0) {
-            $('#I').remove();
-            $('#button89').remove();
-          }
-          if ($('#J').text().length == 0) {
-            $('#J').remove();
-          }
-
+          
           
 
           socket.on('connect', function () {
@@ -407,11 +371,9 @@
       <ul>
         <li> <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a> </li>
         <li> <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a> </li>
-        <li>
-            <a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50" style="text-decoration:none; color:deepskyblue;">
-              レポート
-            </a>
-          </li>
+        <li><a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50" style="text-decoration:none; color:deepskyblue;">
+          レポート
+        </a></li>
       </ul>
     </div>
   </div>

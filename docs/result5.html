@@ -114,63 +114,67 @@
                 $("#title").text(title);
                 $("#description").text(description);
                 $("#share").attr("href", "https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=http://aicevote.com&hashtags=" + title);
-                $("#agree0").text(choices[0]);
-                $("#agree1").text(choices[1]);
-                $("#agree2").text(choices[2]);
-                $("#agree3").text(choices[3]);
-                $("#agree4").text(choices[4]);
-                $("#agree5").text(choices[5]);
-                $("#agree6").text(choices[6]);
-                $("#agree7").text(choices[7]);
-                $("#agree8").text(choices[8]);
-                $("#agree9").text(choices[9]);
-
-                if ($('#agree0').text().length == 0) {
-                  $('#A2').remove();
+                
+                if (choices[0]) {
+                  $("#agree0").text(choices[0]);                
+                } else{
                   $('#agree0').remove();
+                  $('#A2').remove();
                 }
-                if ($('#agree1').text().length == 0) {
-                  $('#B2').remove();
+                if (choices[1]) {
+                  $("#agree1").text(choices[1]);                
+                } else{
                   $('#agree1').remove();
+                  $('#B2').remove();
                 }
-                if ($('#agree2').text().length == 0) {
-                  $('#C2').remove();
+                if (choices[2]) {
+                  $("#agree2").text(choices[2]);                
+                } else{
                   $('#agree2').remove();
+                  $('#C2').remove();
                 }
-                if ($('#agree3').text().length == 0) {
-                  $('#D2').remove();
+                if (choices[3]) {
+                  $("#agree3").text(choices[3]);                
+                } else{
                   $('#agree3').remove();
+                  $('#D2').remove();
                 }
-                if ($('#agree4').text().length == 0) {
-                  $('#E2').remove();
+                if (choices[4]) {
+                  $("#agree4").text(choices[4]);                
+                } else{
                   $('#agree4').remove();
+                  $('#E2').remove();
                 }
-                if ($('#agree5').text().length == 0) {
-                  $('#F2').remove();
+                if (choices[5]) {
+                  $("#agree5").text(choices[5]);                
+                } else{
                   $('#agree5').remove();
+                  $('#F2').remove();
                 }
-                if ($('#agree6').text().length == 0) {
-                  $('#G2').remove();
+                if (choices[6]) {
+                  $("#agree6").text(choices[6]);                
+                } else{
                   $('#agree6').remove();
+                  $('#G2').remove();
                 }
-                if ($('#agree7').text().length == 0) {
-                  $('#H2').remove();
+                if (choices[7]) {
+                  $("#agree7").text(choices[7]);                
+                } else{
                   $('#agree7').remove();
+                  $('#H2').remove();
                 }
-                if ($('#agree8').text().length == 0) {
-                  $('#I2').remove();
+                if (choices[8]) {
+                  $("#agree8").text(choices[8]);                
+                } else{
                   $('#agree8').remove();
+                  $('#I2').remove();
                 }
-                if ($('#agree9').text().length == 0) {
-                  $('#J2').remove();
+                if (choices[9]) {
+                  $("#agree9").text(choices[9]);                
+                } else{
                   $('#agree9').remove();
+                  $('#J2').remove();
                 }
-
-
-
-
-
-
 
               });
 
@@ -225,46 +229,6 @@
               socket.emit("get comments", { themeID: themeID });
             });
 
-            if ($('#agree0').text().length == 0) {
-              $('#A2').remove();
-              $('#agree0').remove();
-            }
-            if ($('#agree1').text().length == 0) {
-              $('#B2').remove();
-              $('#agree1').remove();
-            }
-            if ($('#agree2').text().length == 0) {
-              $('#C2').remove();
-              $('#agree2').remove();
-            }
-            if ($('#agree3').text().length == 0) {
-              $('#D2').remove();
-              $('#agree3').remove();
-            }
-            if ($('#agree4').text().length == 0) {
-              $('#E2').remove();
-              $('#agree4').remove();
-            }
-            if ($('#agree5').text().length == 0) {
-              $('#F2').remove();
-              $('#agree5').remove();
-            }
-            if ($('#agree6').text().length == 0) {
-              $('#G2').remove();
-              $('#agree6').remove();
-            }
-            if ($('#agree7').text().length == 0) {
-              $('#H2').remove();
-              $('#agree7').remove();
-            }
-            if ($('#agree8').text().length == 0) {
-              $('#I2').remove();
-              $('#agree8').remove();
-            }
-            if ($('#agree9').text().length == 0) {
-              $('#J2').remove();
-              $('#agree9').remove();
-            }
             socket.on('result', function (obj) {
               if (obj.themeID != themeID) { return }
               var ctx = document.getElementById("ch").getContext("2d");

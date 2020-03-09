@@ -274,7 +274,7 @@
             socket.on('comments', (comments) => {
               comments.comments.forEach(element => {
                 if (element.isInfluencer) {
-                  $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + element.createdAt + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
+                  $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + new Date(element.createdAt) + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
                 } else {
                   $('#comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + element.createdAt + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
                 }
@@ -299,11 +299,11 @@
             socket.on('votes', function (people) {
               $('#member').empty();
               people.votes.forEach(element => {
-                $('#member').append($("<li><h4>" + choices[element.answer] + "<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                $('#member').append($("<li><h4>" + choices[element.answer] + "<img src=" + element.imageURI + ">" + element.name + "</h4></li>"));
               });
               $('#ainfmember').empty();
               people.votesFromInfluencer.forEach(element => {
-                $('#ainfmember').append($("<li><h4>" + choices[element.answer] + "<img src=" + element.imageURI + "></h4><h6>" + element.name + "</h6></li>"));
+                $('#ainfmember').append($("<li><h4>" + choices[element.answer] + "<img src=" + element.imageURI + ">" + element.name + "</h4></li>"));
               });
             });
 

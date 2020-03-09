@@ -124,6 +124,54 @@
                 $("#agree7").text(choices[7]);
                 $("#agree8").text(choices[8]);
                 $("#agree9").text(choices[9]);
+
+                if ($('#agree0').text().length == 0) {
+                  $('#A2').remove();
+                  $('#agree0').remove();
+                }
+                if ($('#agree1').text().length == 0) {
+                  $('#B2').remove();
+                  $('#agree1').remove();
+                }
+                if ($('#agree2').text().length == 0) {
+                  $('#C2').remove();
+                  $('#agree2').remove();
+                }
+                if ($('#agree3').text().length == 0) {
+                  $('#D2').remove();
+                  $('#agree3').remove();
+                }
+                if ($('#agree4').text().length == 0) {
+                  $('#E2').remove();
+                  $('#agree4').remove();
+                }
+                if ($('#agree5').text().length == 0) {
+                  $('#F2').remove();
+                  $('#agree5').remove();
+                }
+                if ($('#agree6').text().length == 0) {
+                  $('#G2').remove();
+                  $('#agree6').remove();
+                }
+                if ($('#agree7').text().length == 0) {
+                  $('#H2').remove();
+                  $('#agree7').remove();
+                }
+                if ($('#agree8').text().length == 0) {
+                  $('#I2').remove();
+                  $('#agree8').remove();
+                }
+                if ($('#agree9').text().length == 0) {
+                  $('#J2').remove();
+                  $('#agree9').remove();
+                }
+
+
+
+
+
+
+
               });
 
             socket.on("connect", () => {
@@ -521,9 +569,9 @@
             });
           });
         </script>
-        <div class="which1" id="agree0">賛成</div>
+        <div class="which1" id="agree0"></div>
 
-        <div class="which2" id="agree1">反対</div>
+        <div class="which2" id="agree1"></div>
 
         <div id="A2" class="number1">
         </div>

@@ -85,10 +85,10 @@
           <div class="button" id="button01">
             <ul>
               <li>
-                <a id="A" class="btn-box1">賛成</a>
+                <a id="A" class="btn-box1"></a>
               </li>
               <li>
-                <a id="B" class="btn-box2">反対</a>
+                <a id="B" class="btn-box2"></a>
               </li>
             </ul>
           </div>
@@ -163,6 +163,53 @@
               $("#H").text(choices[7]);
               $("#I").text(choices[8]);
               $("#J").text(choices[9]);
+
+              if ($('#A').text().length == 0) {
+                $('#A').remove();
+                $('#button01').remove();
+              }
+              if ($('#B').text().length == 0) {
+                $('#B').remove();
+              }
+              if ($('#C').text().length == 0) {
+                $('#C').remove();
+                $('#button23').remove();
+              }
+              if ($('#D').text().length == 0) {
+                $('#D').remove();
+              }
+              if ($('#E').text().length == 0) {
+                $('#E').remove();
+                $('#button45').remove();
+              }
+              if ($('#F').text().length == 0) {
+                $('#F').remove();
+              }
+              if ($('#G').text().length == 0) {
+                $('#G').remove();
+                $('#button67').remove();
+              }
+              if ($('#H').text().length == 0) {
+                $('#H').remove();
+              }
+              if ($('#I').text().length == 0) {
+                $('#I').remove();
+                $('#button89').remove();
+              }
+              if ($('#J').text().length == 0) {
+                $('#J').remove();
+              }
+
+
+
+
+
+
+
+
+
+
+
 
               $.ajax({
                 url: "https://api.aicevote.com/themes",

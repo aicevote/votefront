@@ -132,48 +132,52 @@
                 } else{
                   $('#agree2').remove();
                   $('#C2').remove();
+                  $('#agree3').remove();
+                  $('#D2').remove();
                 }
                 if (choices[3]) {
                   $("#agree3").text(choices[3]);                
                 } else{
-                  $('#agree3').remove();
-                  $('#D2').remove();
+                  
                 }
                 if (choices[4]) {
                   $("#agree4").text(choices[4]);                
                 } else{
                   $('#agree4').remove();
                   $('#E2').remove();
+                  $('#agree5').remove();
+                  $('#F2').remove();
                 }
                 if (choices[5]) {
                   $("#agree5").text(choices[5]);                
                 } else{
-                  $('#agree5').remove();
-                  $('#F2').remove();
+                  
                 }
                 if (choices[6]) {
                   $("#agree6").text(choices[6]);                
                 } else{
                   $('#agree6').remove();
                   $('#G2').remove();
+                  $('#agree7').remove();
+                  $('#H2').remove();
                 }
                 if (choices[7]) {
                   $("#agree7").text(choices[7]);                
                 } else{
-                  $('#agree7').remove();
-                  $('#H2').remove();
+                  
                 }
                 if (choices[8]) {
                   $("#agree8").text(choices[8]);                
                 } else{
                   $('#agree8').remove();
                   $('#I2').remove();
+                  $('#agree9').remove();
+                  $('#J2').remove();
                 }
                 if (choices[9]) {
                   $("#agree9").text(choices[9]);                
                 } else{
-                  $('#agree9').remove();
-                  $('#J2').remove();
+                  
                 }
 
               });
@@ -256,14 +260,21 @@
               $('#A2').prepend($('<dt>' + obj.results[0] + '</dt><dt>' + "%" + '</dt>'));
               $('#B2').prepend($('<dt>' + obj.results[1] + '</dt><dt>' + "%" + '</dt>'));
               $('#C2').prepend($('<dt>' + obj.results[2] + '</dt><dt>' + "%" + '</dt>'));
-              $('#D2').prepend($('<dt>' + obj.results[3] + '</dt><dt>' + "%" + '</dt>'));
+              if (obj.results[3]){
+                $('#D2').prepend($('<dt>' + obj.results[3] + '</dt><dt>' + "%" + '</dt>'));
+              }
               $('#E2').prepend($('<dt>' + obj.results[4] + '</dt><dt>' + "%" + '</dt>'));
-              $('#F2').prepend($('<dt>' + obj.results[5] + '</dt><dt>' + "%" + '</dt>'));
+              if (obj.results[5]){
+                $('#F2').prepend($('<dt>' + obj.results[5] + '</dt><dt>' + "%" + '</dt>'));
+              }
               $('#G2').prepend($('<dt>' + obj.results[6] + '</dt><dt>' + "%" + '</dt>'));
-              $('#H2').prepend($('<dt>' + obj.results[7] + '</dt><dt>' + "%" + '</dt>'));
+              if (obj.results[7]){
+                $('#H2').prepend($('<dt>' + obj.results[7] + '</dt><dt>' + "%" + '</dt>'));
+              }
               $('#I2').prepend($('<dt>' + obj.results[8] + '</dt><dt>' + "%" + '</dt>'));
-              $('#J2').prepend($('<dt>' + obj.results[9] + '</dt><dt>' + "%" + '</dt>'));
-
+              if (obj.results[9]){
+                $('#J2').prepend($('<dt>' + obj.results[9] + '</dt><dt>' + "%" + '</dt>'));
+              }
               $('#count').empty();
               obj.counts.forEach((val, i) => { $('#count').prepend($("<h4>" + choices[i] + ":" + val + "票</h4>")) })
             });

@@ -1577,10 +1577,7 @@ input[name="tab_item"] {
 #news{
   position: relative;
   width: 100%;
-  min-height: 100px;
-  max-height: 450px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  height: auto;
 }
 #newslist li{
   padding:0;

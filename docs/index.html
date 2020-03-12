@@ -22,7 +22,6 @@
   <title>AICEVOTE(アイスボート)</title>
   <meta name="description" content="いつでも、誰でも、何度でも、リアルタイム投票サービス　AICEVOTEです。">
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <script src="/socket.io/socket.io.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 </head>
@@ -53,19 +52,6 @@
           $.cookie("access",$('body').addClass('access'));
       })
       };
-  });
-  $(function() {
-    const socket = io("https://api.aicevote.com");
-    var sessionToken;
-    $.ajax({
-      url: "https://api.aicevote.com/auth/sessiontoken",
-      xhrFields: {
-        withCredentials: true
-      }
-    }).success(function(res){
-      sessionToken=res.sessionToken
-      console.log(sessionToken);
-    });
   });
   </script>
   <div class="mainSite">

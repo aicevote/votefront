@@ -1,380 +1,326 @@
 <lang="ja">
 
-<head prefix="og: http://ogp.me/ns#">
-  <meta property="og:title" content="AICEVOTE">
-  <meta property="og:type" content="website">
-  <meta property="og:description" content="票を氷にしたリアルタイム投票サイト">
-  <meta property="og:url" content="aicevote.com">
-  <meta property="og:site_name" content="AICEVOTE">
-  <meta property="og:image" content="http://aicevote.com/images/aicevote_2_skeleton.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-  <script src="/javascripts/moment.js"></script>
-  <script src="/javascripts/Chart.min.js"></script>
-  <script src="/javascripts/chartjs-plugin-streaming.js"></script>
+  <head prefix="og: http://ogp.me/ns#">
+    <meta property="og:title" content="AICEVOTE">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="票を氷にしたリアルタイム投票サイト">
+    <meta property="og:url" content="aicevote.com">
+    <meta property="og:site_name" content="AICEVOTE">
+    <meta property="og:image" content="http://aicevote.com/images/aicevote_2_skeleton.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aicevote@0.1.5/dist/aicevote.js"></script>
+    <script src="/javascripts/moment.js"></script>
+    <script src="/javascripts/Chart.min.js"></script>
+    <script src="/javascripts/chartjs-plugin-streaming.js"></script>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'UA-141182013-1');
-  </script>
-</head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'UA-141182013-1');
+    </script>
+  </head>
 
-<body>
-  <div class="mainSite">
-    <div class="header">
-      <div class="header-logo"> <a href="home"><img src="/images/aice.JPG"></a> </div>
-      <div id="nav-drawer">
-        <input id="nav-input" type="checkbox" class="nav-unshown">
-        <label id="nav-open" for="nav-input"><span></span></label>
-        <label class="nav-unshown" id="nav-close" for="nav-input"></label>
-        <div id="nav-content">
+  <body>
+    <div class="mainSite">
+      <div class="header">
+        <div class="header-logo"> <a href="home"><img src="/images/aice.JPG"></a> </div>
+        <div id="nav-drawer">
+          <input id="nav-input" type="checkbox" class="nav-unshown">
+          <label id="nav-open" for="nav-input"><span></span></label>
+          <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+          <div id="nav-content">
+            <ul>
+              <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+              <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
+              <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
+              <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
+              <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+              <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a>
+              <li>
+            </ul>
+          </div>
+        </div>
+        <div class="header-list">
           <ul>
             <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-            <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
-            <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
-            <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
+            <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
+            <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
+            <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
             <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-            <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a>
             <li>
+              <div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div>
+            </li>
           </ul>
         </div>
-      </div>
-      <div class="header-list">
-        <ul>
-          <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-          <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
-          <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
-          <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
-          <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-          <li>
-            <div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div>
-          </li>
-        </ul>
-      </div>
-      <div id="menu-background"> </div>
-    </div>
-
-    <div id="allcontainer">
-      <div class="container">
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-</head>
-
-<body>
-
-
-
-          <div class="balloon2-left">
-            <p id="title"></p>
-          </div>
-          <h4 id="description"></h4>
-
-          <div class="button" id="button01">
-            <ul>
-              <li>
-                <a id="A" class="btn-box1"></a>
-              </li>
-              <li>
-                <a id="B" class="btn-box2"></a>
-              </li>
-            </ul>
-          </div>
-          <div class="button" id="button23">
-            <ul>
-              <li>
-                <a id="C" class="btn-box1"></a>
-              </li>
-              <li>
-                <a id="D" class="btn-box2"></a>
-              </li>
-            </ul>
-          </div>
-          <div class="button" id="button45">
-            <ul>
-              <li>
-                <a id="E" class="btn-box1"></a>
-              </li>
-              <li>
-                <a id="F" class="btn-box2"></a>
-              </li>
-            </ul>
-          </div>
-          <div class="button" id="button67">
-            <ul>
-              <li>
-                <a id="G" class="btn-box1"></a>
-              </li>
-              <li>
-                <a id="H" class="btn-box2"></a>
-              </li>
-            </ul>
-          </div>
-          <div class="button" id="button89">
-            <ul>
-              <li>
-                <a id="I" class="btn-box1"></a>
-              </li>
-              <li>
-                <a id="J" class="btn-box2"></a>
-              </li>
-            </ul>
-          </div>
+        <div id="menu-background"> </div>
       </div>
 
-      <script>
-        $(() => {
-          const socket = io("https://api.aicevote.com");
-          const themeID = parseInt(window.location.pathname.replace(/[^-^0-9^\.]/g, ""), 10);
-          var sessionToken = "";
-          var title = "";
-          var description = "";
-          var choices = [""];
+      <div id="allcontainer">
+        <div class="container">
 
-          $.ajax({ url: "https://api.aicevote.com/themes/" + themeID })
-            .done((data, textStatus, jqXHR) => {
-              title = data.title;
-              description = data.description;
-              choices = data.choices;
-              Genre = data.genre;
+          <!DOCTYPE html>
+          <html lang="ja">
+
+          <head>
+            <meta charset="UTF-8">
+          </head>
+
+          <body>
+
+
+
+            <div class="balloon2-left">
+              <p id="title"></p>
+            </div>
+            <h4 id="description"></h4>
+
+            <div class="button" id="button01">
+              <ul>
+                <li>
+                  <a id="A" class="btn-box1"></a>
+                </li>
+                <li>
+                  <a id="B" class="btn-box2"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="button" id="button23">
+              <ul>
+                <li>
+                  <a id="C" class="btn-box1"></a>
+                </li>
+                <li>
+                  <a id="D" class="btn-box2"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="button" id="button45">
+              <ul>
+                <li>
+                  <a id="E" class="btn-box1"></a>
+                </li>
+                <li>
+                  <a id="F" class="btn-box2"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="button" id="button67">
+              <ul>
+                <li>
+                  <a id="G" class="btn-box1"></a>
+                </li>
+                <li>
+                  <a id="H" class="btn-box2"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="button" id="button89">
+              <ul>
+                <li>
+                  <a id="I" class="btn-box1"></a>
+                </li>
+                <li>
+                  <a id="J" class="btn-box2"></a>
+                </li>
+              </ul>
+            </div>
+        </div>
+
+        <script>
+          async function main() {
+            const themeID = parseInt(window.location.pathname.replace(/[^-^0-9^\.]/g, ""), 10);
+
+            try {
+              const themes = await aicevote.getAllThemes();
+              const title = themes[themeID].title;
+              const description = themes[themeID].description;
+              const choices = themes[themeID].choices;
+              const genre = themes[themeID].genre;
 
               document.title = title;
               $("#title").text(title);
               $("#description").text(description);
-              
+
               if (choices[0]) {
-                $("#A").text(choices[0]);                
-              } else{
-                $('#A').remove();
-                $('#button01').remove();
+                $("#A").text(choices[0]);
+              } else {
+                $("#A").remove();
+                $("#button01").remove();
               }
               if (choices[1]) {
-                $("#B").text(choices[1]);                
-              } else{
-                $('#B').remove();
+                $("#B").text(choices[1]);
+              } else {
+                $("#B").remove();
               }
               if (choices[2]) {
-                $("#C").text(choices[2]);                
-              } else{
-                $('#C').remove();
-                $('#button23').remove();
+                $("#C").text(choices[2]);
+              } else {
+                $("#C").remove();
+                $("#button23").remove();
               }
               if (choices[3]) {
-                $("#D").text(choices[3]);                
-              } else{
-                $('#D').remove();
+                $("#D").text(choices[3]);
+              } else {
+                $("#D").remove();
               }
               if (choices[4]) {
-                $("#E").text(choices[4]);                
-              } else{
-                $('#E').remove();
-                $('#button45').remove();
+                $("#E").text(choices[4]);
+              } else {
+                $("#E").remove();
+                $("#button45").remove();
               }
               if (choices[5]) {
-                $("#F").text(choices[5]);                
-              } else{
-                $('#F').remove();
+                $("#F").text(choices[5]);
+              } else {
+                $("#F").remove();
               }
               if (choices[6]) {
-                $("#G").text(choices[6]);                
-              } else{
-                $('#G').remove();
-                $('#button67').remove();
+                $("#G").text(choices[6]);
+              } else {
+                $("#G").remove();
+                $("#button67").remove();
               }
               if (choices[7]) {
-                $("#H").text(choices[7]);                
-              } else{
-                $('#H').remove();
+                $("#H").text(choices[7]);
+              } else {
+                $("#H").remove();
               }
               if (choices[8]) {
-                $("#I").text(choices[8]);                
-              } else{
-                $('#I').remove();
-                $('#button89').remove();
+                $("#I").text(choices[8]);
+              } else {
+                $("#I").remove();
+                $("#button89").remove();
               }
               if (choices[9]) {
-                $("#J").text(choices[9]);                
-              } else{
-                $('#J').remove();
+                $("#J").text(choices[9]);
+              } else {
+                $("#J").remove();
               }
 
-              $.ajax({
-                url: "https://api.aicevote.com/themes",
-                xhrFields: { withCredentials: true }
-              }).done((theme, textStatus, jqXHR) => {
-                const relate = document.getElementById('relate');
-                theme.forEach(item => {
-                  if (item.genre == Genre) {
-                    let li = document.createElement('li');
-                    li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
-                    relate.appendChild(li);
-                  }
+              const relate = document.getElementById("relate");
+              themes.forEach(theme => {
+                if (theme.genre == genre) {
+                  let li = document.createElement("li");
+                  li.innerHTML = `<img src="${theme.imageURI}"><a href ="Dp${theme.themeID}">${theme.title}</a>`;
+                  relate.appendChild(li);
+                }
+              });
+            } catch (e) { }
+
+            try {
+              const sessionToken = await aicevote.getSessionToken();
+              $(".login").remove();
+              $("#A").click(() => {
+                aicevote.vote(themeID, sessionToken, 0).then(() => {
+                  location.href = "/result" + themeID + ".html";
                 });
               });
-            });
+              $("#B").click(() => {
+                aicevote.vote(themeID, sessionToken, 1).then(() => {
+                  location.href = "/result" + themeID + ".html";
+                });
+              });
+              $("#C").click(() => {
+                aicevote.vote(themeID, sessionToken, 2).then(() => {
+                  location.href = "/result" + themeID + ".html";
+                });
+              });
+              $("#D").click(() => {
+                aicevote.vote(themeID, sessionToken, 3).then(() => {
+                  location.href = "/result" + themeID + ".html";
+                });
+              });
+              $("#E").click(() => {
+                aicevote.vote(themeID, sessionToken, 4).then(() => {
+                  location.href = "/result" + themeID + ".html";
+                });
+              });
+              $("#F").click(() => {
+                aicevote.vote(themeID, sessionToken, 5).then(() => {
+                  location.href = "/result" + themeID + ".html";
+                });
+              });
+              $("#G").click(() => {
+                aicevote.vote(themeID, sessionToken, 6).then(() => {
+                  location.href = "/result" + themeID + ".html";
+                });
+              });
+              $("#H").click(() => {
+                aicevote.vote(themeID, sessionToken, 7).then(() => {
+                  location.href = "/result" + themeID + ".html";
+                });
+              });
+              $("#I").click(() => {
+                aicevote.vote(themeID, sessionToken, 8).then(() => {
+                  location.href = "/result" + themeID + ".html";
+                });
+              });
+              $("#J").click(() => {
+                aicevote.vote(themeID, sessionToken, 9).then(() => {
+                  location.href = "/result" + themeID + ".html";
+                });
+              });
+            } catch (e) {
+              window.location.href = "/result" + themeID + ".html";
+            }
+          }
 
-          
-          
+          $(() => main());
+        </script>
 
-          socket.on('connect', function () {
-            $.ajax({
-              url: "https://api.aicevote.com/auth/sessiontoken",
-              xhrFields: { withCredentials: true }
-            }).done((data, textStatus, jqXHR) => {
-              sessionToken = data.sessionToken;
-              if (sessionToken) {
-                $('.login').remove();
-              } else {
-                location.href = "/Dp" + themeID + ".html";
-              }
-            });
-          });
-          $('#A').click((req, res) => {
-            socket.emit('put vote', {
-              themeID: themeID,
-              sessionToken: sessionToken,
-              answer: 0
-            });
-            location.href = "/result" + themeID + ".html";
-          });
+        <div class="subcontents">
+          <div class="adpc">
+            <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+6D4GH" rel="nofollow">
+              <img border="0" width="300" height="250" alt=""
+                src="https://www25.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001069000&mc=1">
+            </a>
+            <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+6D4GH" alt="">
+          </div>
+          <div class="adsmart">
+            <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+65U41" rel="nofollow">
+              <img border="0" width="234" height="60" alt=""
+                src="https://www24.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001035000&mc=1">
+            </a>
+            <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+65U41" alt="">
+          </div>
 
-          $('#B').click((req, res) => {
-            socket.emit('put vote', {
-              themeID: themeID,
-              sessionToken: sessionToken,
-              answer: 1
-            });
-            location.href = "/result" + themeID + ".html";
-          });
+  </body>
 
-          $('#C').click((req, res) => {
-            socket.emit('put vote', {
-              themeID: themeID,
-              sessionToken: sessionToken,
-              answer: 2
-            });
-            location.href = "/result" + themeID + ".html";
-          });
-
-          $('#D').click((req, res) => {
-            socket.emit('put vote', {
-              themeID: themeID,
-              sessionToken: sessionToken,
-              answer: 3
-            });
-            location.href = "/result" + themeID + ".html";
-          });
-
-          $('#E').click((req, res) => {
-            socket.emit('put vote', {
-              themeID: themeID,
-              sessionToken: sessionToken,
-              answer: 4
-            });
-            location.href = "/result" + themeID + ".html";
-          });
-
-          $('#F').click((req, res) => {
-            socket.emit('put vote', {
-              themeID: themeID,
-              sessionToken: sessionToken,
-              answer: 5
-            });
-            location.href = "/result" + themeID + ".html";
-          });
-
-          $('#G').click((req, res) => {
-            socket.emit('put vote', {
-              themeID: themeID,
-              sessionToken: sessionToken,
-              answer: 6
-            });
-            location.href = "/result" + themeID + ".html";
-          });
-
-          $('#H').click((req, res) => {
-            socket.emit('put vote', {
-              themeID: themeID,
-              sessionToken: sessionToken,
-              answer: 7
-            });
-            location.href = "/result" + themeID + ".html";
-          });
-
-          $('#I').click((req, res) => {
-            socket.emit('put vote', {
-              themeID: themeID,
-              sessionToken: sessionToken,
-              answer: 8
-            });
-            location.href = "/result" + themeID + ".html";
-          });
-
-          $('#J').click((req, res) => {
-            socket.emit('put vote', {
-              themeID: themeID,
-              sessionToken: sessionToken,
-              answer: 9
-            });
-            location.href = "/result" + themeID + ".html";
-          });
-        });
-      </script>
-
-      <div class="subcontents">
-        <div class="adpc">
-          <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+6D4GH" rel="nofollow">
-            <img border="0" width="300" height="250" alt=""
-              src="https://www25.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001069000&mc=1">
-          </a>
-          <img border="0" width="1" height="1" src="https://www19.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+6D4GH" alt="">
-        </div>
-        <div class="adsmart">
-          <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+65U41" rel="nofollow">
-            <img border="0" width="234" height="60" alt=""
-              src="https://www24.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001035000&mc=1">
-          </a>
-          <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+65U41" alt="">
-        </div>
-
-</body>
-
-</html>
+  </html>
 
 
 
 
 
 
-        <h2>関連する投票テーマ</h2>
-        <ul id="relate">
-          <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
-          
-        </ul>
-      </div>
+  <h2>関連する投票テーマ</h2>
+  <ul id="relate">
+    <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
 
-    </div>
-    <div class="footer">
-      <h1><img src="/images/firstix-ocean.png"></h1>
-      <ul>
-        <li> <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a> </li>
-        <li> <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a> </li>
-        <li><a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50" style="text-decoration:none; color:deepskyblue;">
+  </ul>
+  </div>
+
+  </div>
+  <div class="footer">
+    <h1><img src="/images/firstix-ocean.png"></h1>
+    <ul>
+      <li> <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a> </li>
+      <li> <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a> </li>
+      <li><a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50"
+          style="text-decoration:none; color:deepskyblue;">
           レポート
         </a></li>
-      </ul>
-    </div>
+    </ul>
   </div>
-</body>
+  </div>
+  </body>

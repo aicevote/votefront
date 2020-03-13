@@ -23,6 +23,7 @@
     <script src="/javascripts/Chart.min.js"></script>
     <script src="/javascripts/chartjs-plugin-streaming.js"></script>
     <script src="/javascripts/ajax.js"></script>
+    <script src="/javascripts/auth.js"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
@@ -37,6 +38,10 @@
   <body>
     <script>
       async function main() {
+        if (document.referrer.includes("https://api.aicevote.com/auth/")) {
+          saveSessionID();
+        }
+
         var sessionToken = null;
         try {
           sessionToken = await aicevote.getSessionToken();

@@ -70,7 +70,11 @@
         <h1 style="color: #AB335E;">ログイン</h1>
         <h3>
           AICEVOTEの投票にはtwitterアカウントが必要です<br>
-            <a href="https://api.aicevote.com/auth/app?callback=https://aicevote.com/home"><img src="/images/twitter_button.png"></a><br>
+            <a id="signin"><img src="/images/twitter_button.png"></a><br>
+            <script>
+              const link = "https://api.aicevote.com/auth/app?callback=" + location.origin + "/home";
+              $("#signin").attr("href", link);
+            </script>
         </h3>
         <h3 style="margin-top: 10%;">
           <p>twitterアカウントがなくてもAICEVOTEを楽しめます</p>

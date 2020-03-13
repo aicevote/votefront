@@ -20,6 +20,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/aicevote/dist/aicevote.js"></script>
   <script src="/javascripts/moment.js"></script>
   <script src="/javascripts/Chart.min.js"></script>
   <script src="/javascripts/chartjs-plugin-streaming.js"></script>
@@ -85,253 +87,133 @@
   <meta charset="UTF-8">
 </head>
 <body>
-
         <div class="balloon2-left">
           <p id="title"></p>
         </div>
         <h4 id="description"></h4>
 
         <script>
-          $(() => {
-            const socket = io("https://api.aicevote.com");
-            const themeID = parseInt(window.location.pathname.replace(/[^-^0-9^\.]/g, ""), 10);
-            var sessionToken = "";
-            var title = "";
-            var description = "";
-            var choices = [""];
-            const colors = ["rgb(0,220,255)", "rgb(255,162,0)", "rgb(24,197,140)",
-              "rgb(255,174,201)", "rgb(6,21,159)", "rgb(217,0,0)", "rgb(112,146,190)",
-              "rgb(136,0,21)", "rgb(0,0,0)", "rgb(130,120,0)"];
+          themeID = parseInt(window.location.pathname.replace(/[^-^0-9^\.]/g, ""), 10);
+        $(() => {
+          const socket = io("https://api.aicevote.com");
+          async function main() {
+            try {
+              const themes = await aicevote.getAllThemes();
+              const title = themes[themeID].title;
+              const description = themes[themeID].description;
+              const choices = themes[themeID].choices;
+              const genre = themes[themeID].genre;
 
-            $.ajax({ url: "https://api.aicevote.com/themes/" + themeID })
-              .done((data, textStatus, jqXHR) => {
-                title = data.title;
-                description = data.description;
-                choices = data.choices;
-                Genre = data.genre;
+              document.title = title;
+              $("#title").text(title);
+              $("#description").text(description);
+              $("#share").attr("href", "https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=https://aicevote.com&hashtags=" + title);
 
-                document.title = title;
-                $("#title").text(title);
-                $("#description").text(description);
-                $("#share").attr("href", "https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=http://aicevote.com&hashtags=" + title);
+              if (choices[0]) {
+                $("#agree0").text(choices[0]);                
+              } else{
+                $('#agree0').remove();
+                $('#A2').remove();
+              }
+              if (choices[1]) {
+                $("#agree1").text(choices[1]);                
+              } else{
+                $('#agree1').remove();
+                $('#B2').remove();
+              }
+              if (choices[2]) {
+                $("#agree2").text(choices[2]);                
+              } else{
+                $('#agree2').remove();
+                $('#C2').remove();
+                $('#agree3').remove();
+                $('#D2').remove();
+              }
+              if (choices[3]) {
+                $("#agree3").text(choices[3]);                
+              } else{
                 
-                if (choices[0]) {
-                  $("#agree0").text(choices[0]);                
-                } else{
-                  $('#agree0').remove();
-                  $('#A2').remove();
-                }
-                if (choices[1]) {
-                  $("#agree1").text(choices[1]);                
-                } else{
-                  $('#agree1').remove();
-                  $('#B2').remove();
-                }
-                if (choices[2]) {
-                  $("#agree2").text(choices[2]);                
-                } else{
-                  $('#agree2').remove();
-                  $('#C2').remove();
-                  $('#agree3').remove();
-                  $('#D2').remove();
-                }
-                if (choices[3]) {
-                  $("#agree3").text(choices[3]);                
-                } else{
-                  
-                }
-                if (choices[4]) {
-                  $("#agree4").text(choices[4]);                
-                } else{
-                  $('#agree4').remove();
-                  $('#E2').remove();
-                  $('#agree5').remove();
-                  $('#F2').remove();
-                }
-                if (choices[5]) {
-                  $("#agree5").text(choices[5]);                
-                } else{
-                  
-                }
-                if (choices[6]) {
-                  $("#agree6").text(choices[6]);                
-                } else{
-                  $('#agree6').remove();
-                  $('#G2').remove();
-                  $('#agree7').remove();
-                  $('#H2').remove();
-                }
-                if (choices[7]) {
-                  $("#agree7").text(choices[7]);                
-                } else{
-                  
-                }
-                if (choices[8]) {
-                  $("#agree8").text(choices[8]);                
-                } else{
-                  $('#agree8').remove();
-                  $('#I2').remove();
-                  $('#agree9').remove();
-                  $('#J2').remove();
-                }
-                if (choices[9]) {
-                  $("#agree9").text(choices[9]);                
-                } else{
-                  
-                }
+              }
+              if (choices[4]) {
+                $("#agree4").text(choices[4]);                
+              } else{
+                $('#agree4').remove();
+                $('#E2').remove();
+                $('#agree5').remove();
+                $('#F2').remove();
+              }
+              if (choices[5]) {
+                $("#agree5").text(choices[5]);                
+              } else{
+                
+              }
+              if (choices[6]) {
+                $("#agree6").text(choices[6]);                
+              } else{
+                $('#agree6').remove();
+                $('#G2').remove();
+                $('#agree7').remove();
+                $('#H2').remove();
+              }
+              if (choices[7]) {
+                $("#agree7").text(choices[7]);                
+              } else{
+                
+              }
+              if (choices[8]) {
+                $("#agree8").text(choices[8]);                
+              } else{
+                $('#agree8').remove();
+                $('#I2').remove();
+                $('#agree9').remove();
+                $('#J2').remove();
+              }
+              if (choices[9]) {
+                $("#agree9").text(choices[9]);                
+              } else{
+                
+              }
 
+
+              const relate = document.getElementById("relate");
+              themes.forEach(theme => {
+                if (theme.genre == genre) {
+                  let li = document.createElement("li");
+                  li.innerHTML = `<img src="${theme.imageURI}"><a href ="Dp${theme.themeID}">${theme.title}</a>`;
+                  relate.appendChild(li);
+                }
               });
+            } catch (e) { }
 
-            socket.on("connect", () => {
-              $.ajax({
-                url: "https://api.aicevote.com/auth/sessiontoken",
-                xhrFields: { withCredentials: true }
-              }).done((data, textStatus, jqXHR) => {
-                sessionToken = data.sessionToken;
-                $.ajax({ url: "https://api.aicevote.com/profiles?sessiontoken=" + sessionToken })
-                  .done((data, textStatus, jqXHR) => {
-                    $(".login").remove();
-                    if (!data.isInfluencer) { $("#onlyinfluencer").remove(); }
-                    $.ajax({
-                      url: "https://api.aicevote.com/themes",
-                      xhrFields: { withCredentials: true }
-                    }).done((theme, textStatus, jqXHR) => {
-                      const relate = document.getElementById('relate');
-                      theme.forEach(item => {
-                        if (item.genre == Genre) {
-                          let li = document.createElement('li');
-                          li.innerHTML = `<img src="${item.imageURI}"><a href ="Dp${item.themeID}">${item.title}</a>`;
-                          relate.appendChild(li);
-                        }
-                      });
-                    });
-                  });
-              }).fail((jqXHR, textStatus, errorThrown) => {
-                $("#onlyinfluencer").remove();
-                $("form").remove();
-
-                $.ajax({
-                  url: "https://api.aicevote.com/themes",
-                  xhrFields: { withCredentials: true }
-                }).done((data, textStatus, jqXHR) => {
-                  const relate = document.getElementById('relate');
-                  data.forEach(item => {
-                    if (item.genre == Genre) {
-                      let li = document.createElement('li');
-                      li.innerHTML = `<img src="${item.imageURI}"><a href ="result${item.themeID}">${item.title}</a>`;
-                      relate.appendChild(li);
-                    }
-                  });
+            try {
+              sessionToken = await aicevote.getSessionToken();
+              
+              try{
+                const pofile = await aicevote.getMyProfile(sessionToken);
+                $(".login").remove();
+                if (!profile.isInfluencer) { $("#onlyinfluencer").remove(); }
+                
+                const people = await aicevote.getVotes(themeID, sessionToken);
+                $('#member').empty();
+                people.votes.forEach(element => {
+                  $('#member').append($("<li><h4>" + choices[element.answer] + "<img src=" + element.imageURI + ">" + element.name + "</h4></li>"));
+                });
+                $('#ainfmember').empty();
+                people.votesFromInfluencer.forEach(element => {
+                  $('#ainfmember').append($("<li><h4>" + choices[element.answer] + "<img src=" + element.imageURI + ">" + element.name + "</h4></li>"));
                 });
 
-              }).always(() => {
-                socket.emit("get votes", sessionToken ? { themeID: themeID, sessionToken: sessionToken } : { themeID: themeID });
-              })
 
-              socket.emit("get result", { themeID: themeID });
-              socket.emit("get transition", { themeID: themeID });
-              socket.emit("get comments", { themeID: themeID });
-            });
+              } catch (e) {
 
-            socket.on('result', function (obj) {
-              if (obj.themeID != themeID) { return }
-              var ctx = document.getElementById("ch").getContext("2d");
-              var chart = new Chart(ctx, {
-                type: "horizontalBar",
-                data: {
-                  datasets: obj.results.map((val, i) => ({
-                    label: choices[i],
-                    data: [val],
-                    backgroundColor: colors[i]
-                  }))
-                },
-                options: { animation: false, scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] } }
-              });
-              $('#A2').empty();
-              $('#B2').empty();
-              $('#C2').empty();
-              $('#D2').empty();
-              $('#E2').empty();
-              $('#F2').empty();
-              $('#G2').empty();
-              $('#H2').empty();
-              $('#I2').empty();
-              $('#J2').empty();
-              $('#A2').prepend($('<dt>' + obj.results[0] + '</dt><dt>' + "%" + '</dt>'));
-              $('#B2').prepend($('<dt>' + obj.results[1] + '</dt><dt>' + "%" + '</dt>'));
-              $('#C2').prepend($('<dt>' + obj.results[2] + '</dt><dt>' + "%" + '</dt>'));
-              if (obj.results[3]){
-                $('#D2').prepend($('<dt>' + obj.results[3] + '</dt><dt>' + "%" + '</dt>'));
               }
-              $('#E2').prepend($('<dt>' + obj.results[4] + '</dt><dt>' + "%" + '</dt>'));
-              if (obj.results[5]){
-                $('#F2').prepend($('<dt>' + obj.results[5] + '</dt><dt>' + "%" + '</dt>'));
-              }
-              $('#G2').prepend($('<dt>' + obj.results[6] + '</dt><dt>' + "%" + '</dt>'));
-              if (obj.results[7]){
-                $('#H2').prepend($('<dt>' + obj.results[7] + '</dt><dt>' + "%" + '</dt>'));
-              }
-              $('#I2').prepend($('<dt>' + obj.results[8] + '</dt><dt>' + "%" + '</dt>'));
-              if (obj.results[9]){
-                $('#J2').prepend($('<dt>' + obj.results[9] + '</dt><dt>' + "%" + '</dt>'));
-              }
-              $('#count').empty();
-              obj.counts.forEach((val, i) => { $('#count').prepend($("<h4>" + choices[i] + ":" + val + "票</h4>")) })
-            });
-            $('#submit').click(function () {
-              const message = $('#message').val();
-              if (message.length == 0) {
-                alert("文字を入力してください");
-              } else if (message.length >= 140) {
-                alert("140字以内に収めてください")
-              } else {
-                socket.emit('post comment', {
-                  themeID: themeID,
-                  sessionToken: sessionToken,
-                  message: message
-                });
-                $('#comment-form')[0].reset();
-              }
-            });
-
-            socket.on('comments', (comments) => {
-              comments.comments.forEach(element => {
-                if (element.isInfluencer) {
-                  $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + new Date(element.createdAt).toISOString()　+ '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
-                } else {
-                  $('#comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + new Date(element.createdAt).toISOString() + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
-                }
-              });
-            });
-            $('#infsubmit').click(function () {
-              const message = $('#influencer-message').val();
-              if (message.length == 0) {
-                alert("文字を入力してください");
-              } else if (message.length >= 140) {
-                alert("140字以内に収めてください")
-              } else {
-                socket.emit('post comment', {
-                  themeID: themeID,
-                  sessionToken: sessionToken,
-                  message: message
-                });
-                $('#infcomment-form')[0].reset();
-              }
-            });
-
-            socket.on('votes', function (people) {
-              $('#member').empty();
-              people.votes.forEach(element => {
-                $('#member').append($("<li><h4>" + choices[element.answer] + "<img src=" + element.imageURI + ">" + element.name + "</h4></li>"));
-              });
-              $('#ainfmember').empty();
-              people.votesFromInfluencer.forEach(element => {
-                $('#ainfmember').append($("<li><h4>" + choices[element.answer] + "<img src=" + element.imageURI + ">" + element.name + "</h4></li>"));
-              });
-            });
-
-
-            socket.on('transition', function (obj) {
+            } catch (e) {
+              $("#onlyinfluencer").remove();
+              $("form").remove();
+              $('#member').append($("<h4>ログインするとフォロワーの投票先がわかります</h4>"));
+              $('#ainfmember').append($("<h4>ログインするとインフルエンサーの投票先がわかります</h4>"));
+            }　finally {
+              const obj = await aicevote.getTransition(themeID);
               obj.shortTransition.reverse();
               obj.longTransition.reverse();
               const now = Date.now();
@@ -541,8 +423,91 @@
                   },
                 }
               });
-            });
+            
+
+
+              const comments = await aicevote.getComments(themeID);
+              comments.comments.forEach(element => {
+                if (element.isInfluencer) {
+                  $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + new Date(element.createdAt).toISOString()　+ '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
+                } else {
+                  $('#comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + new Date(element.createdAt).toISOString() + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
+                }
+              });
+            
+            }
+          }
+          
+          $('#submit').click(function () {
+            const message = $('#message').val();
+            if (message.length == 0) {
+              alert("文字を入力してください");
+            } else if (message.length >= 140) {
+              alert("140字以内に収めてください")
+            } else {
+              aicevote.comment(themeID, sessionToken, message);
+              $('#comment-form')[0].reset();
+            }
           });
+          $('#infsubmit').click(function () {
+            const message = $('#influencer-message').val();
+            if (message.length == 0) {
+              alert("文字を入力してください");
+            } else if (message.length >= 140) {
+              alert("140字以内に収めてください")
+            } else {
+              aicevote.comment(themeID, sessionToken, message);
+              $('#infcomment-form')[0].reset();
+            }
+          });
+          socket.emit("get result", { themeID: themeID });
+          socket.on('result', function (obj) {
+            if (obj.themeID != themeID) { return }
+            var ctx = document.getElementById("ch").getContext("2d");
+            var chart = new Chart(ctx, {
+              type: "horizontalBar",
+              data: {
+                datasets: obj.results.map((val, i) => ({
+                  label: choices[i],
+                  data: [val],
+                  backgroundColor: colors[i]
+                }))
+              },
+              options: { animation: false, scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] } }
+            });
+            $('#A2').empty();
+            $('#B2').empty();
+            $('#C2').empty();
+            $('#D2').empty();
+            $('#E2').empty();
+            $('#F2').empty();
+            $('#G2').empty();
+            $('#H2').empty();
+            $('#I2').empty();
+            $('#J2').empty();
+            $('#A2').prepend($('<dt>' + obj.results[0] + '</dt><dt>' + "%" + '</dt>'));
+            $('#B2').prepend($('<dt>' + obj.results[1] + '</dt><dt>' + "%" + '</dt>'));
+            $('#C2').prepend($('<dt>' + obj.results[2] + '</dt><dt>' + "%" + '</dt>'));
+            if (obj.results[3]){
+              $('#D2').prepend($('<dt>' + obj.results[3] + '</dt><dt>' + "%" + '</dt>'));
+            }
+            $('#E2').prepend($('<dt>' + obj.results[4] + '</dt><dt>' + "%" + '</dt>'));
+            if (obj.results[5]){
+              $('#F2').prepend($('<dt>' + obj.results[5] + '</dt><dt>' + "%" + '</dt>'));
+            }
+            $('#G2').prepend($('<dt>' + obj.results[6] + '</dt><dt>' + "%" + '</dt>'));
+            if (obj.results[7]){
+              $('#H2').prepend($('<dt>' + obj.results[7] + '</dt><dt>' + "%" + '</dt>'));
+            }
+            $('#I2').prepend($('<dt>' + obj.results[8] + '</dt><dt>' + "%" + '</dt>'));
+            if (obj.results[9]){
+              $('#J2').prepend($('<dt>' + obj.results[9] + '</dt><dt>' + "%" + '</dt>'));
+            }
+            $('#count').empty();
+            obj.counts.forEach((val, i) => { $('#count').prepend($("<h4>" + choices[i] + ":" + val + "票</h4>")) })
+          });
+        });
+
         </script>
         <div class="which1" id="agree0"></div>
 

@@ -36,6 +36,9 @@
 
   <body>
     <script>
+      aicevote.getAllThemes().then(themes => {
+          console.log(themes);
+      });
       async function main() {
         var sessionToken = null;
         try {

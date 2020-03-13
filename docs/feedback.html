@@ -34,43 +34,34 @@
   <div class="anime" id="logo">
     <p><img src="/images/animeaicevote.gif" alt=""></p>
   </div>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/aicevote/dist/aicevote.js"></script>
   <script type="text/javascript">
-  $(function(){
-      if($.cookie("access")){
-          $('#logo').css({display:'none'});
-      }else{
-      $(window).load(function(){
-          $(".mainSite").css("display", "none");
-          setTimeout(function() {
-              $('.anime').fadeOut();
-            }, 2000);
-          $(".mainSite").css({opacity:'0'});
-            setTimeout(function(){
-            $(".mainSite").css("display", "block");
-            $(".mainSite").stop().animate({opacity:'1'},1000);
-          },2000);
-          $.cookie("access",$('body').addClass('access'));
-      })
-      };
-  });
-  $(function() {
-            const socket = io("https://api.aicevote.com/");
-                var sessionToken;
-        
-                socket.on('connect', function () {
-                  $.ajax({
-                    url: "https://api.aicevote.com/auth/sessiontoken",
-                    xhrFields: {
-                      withCredentials: true
-                    }
-                  }).success(function(res){
-                    sessionToken=res.sessionToken;
-                    if(sessionToken){
-                      $('.login').remove();                   
-                    }
-                  });
-                });
-          });
+  async function main() {
+    try {
+      const data = await aicevote.getAllThemes();
+      const litrend =  document.getElementById('litrend');
+      data.sort(
+        function(a,b){
+          if (a.topicality < b.topicality){
+            return 1;
+          } else {
+            return -1;
+          }
+        }
+      )
+      for(i=0;i<3;i++){
+        let li = document.createElement('li');
+        li.innerHTML = `<img src="${data[i].imageURI}"><a href ="result${data[i].themeID}">${data[i].title}</a>`;
+        litrend.appendChild(li);
+      }
+    } catch (e) { }
+    try {
+      const sessionToken = await aicevote.getSessionToken();
+      $(".login").remove();
+    } catch (e) { }
+  }
+  $(() => main());
   </script>
   <div class="mainSite">
   <div class="header">

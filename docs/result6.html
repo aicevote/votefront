@@ -94,6 +94,16 @@
 
         <script>
           themeID = parseInt(window.location.pathname.replace(/[^-^0-9^\.]/g, ""), 10);
+<<<<<<< Updated upstream
+=======
+          var sessionToken = "";
+          var title = "";
+          var description = "";
+          var choices = [""];
+          const colors = ["rgb(0,220,255)", "rgb(255,162,0)", "rgb(24,197,140)",
+            "rgb(255,174,201)", "rgb(6,21,159)", "rgb(217,0,0)", "rgb(112,146,190)",
+            "rgb(136,0,21)", "rgb(0,0,0)", "rgb(130,120,0)"];
+>>>>>>> Stashed changes
         $(() => {
           const socket = io("https://api.aicevote.com");
           async function main() {
@@ -101,7 +111,11 @@
               const themes = await aicevote.getAllThemes();
               const title = themes[themeID].title;
               const description = themes[themeID].description;
+<<<<<<< Updated upstream
               const choices = themes[themeID].choices;
+=======
+              choices = themes[themeID].choices;
+>>>>>>> Stashed changes
               const genre = themes[themeID].genre;
 
               document.title = title;
@@ -187,6 +201,7 @@
 
             try {
               sessionToken = await aicevote.getSessionToken();
+<<<<<<< Updated upstream
               
               try{
                 const pofile = await aicevote.getMyProfile(sessionToken);
@@ -203,10 +218,28 @@
                   $('#ainfmember').append($("<li><h4>" + choices[element.answer] + "<img src=" + element.imageURI + ">" + element.name + "</h4></li>"));
                 });
 
+=======
+              const pofile = await aicevote.getMyProfile(sessionToken);
+              $(".login").remove();
+              if (!profile.isInfluencer) { $("#onlyinfluencer").remove(); }
+              
+              const people = await aicevote.getVotes(themeID, sessionToken);
+              $('#member').empty();
+              people.votes.forEach(element => {
+                $('#member').append($("<li><h4>" + choices[element.answer] + "<img src=" + element.imageURI + ">" + element.name + "</h4></li>"));
+              });
+              $('#ainfmember').empty();
+              people.votesFromInfluencer.forEach(element => {
+                $('#ainfmember').append($("<li><h4>" + choices[element.answer] + "<img src=" + element.imageURI + ">" + element.name + "</h4></li>"));
+              });
+>>>>>>> Stashed changes
 
               } catch (e) {
 
+<<<<<<< Updated upstream
               }
+=======
+>>>>>>> Stashed changes
             } catch (e) {
               $("#onlyinfluencer").remove();
               $("form").remove();
@@ -427,7 +460,11 @@
 
 
               const comments = await aicevote.getComments(themeID);
+<<<<<<< Updated upstream
               comments.comments.forEach(element => {
+=======
+              comments.forEach(element => {
+>>>>>>> Stashed changes
                 if (element.isInfluencer) {
                   $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + new Date(element.createdAt).toISOString()　+ '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
                 } else {
@@ -437,7 +474,11 @@
             
             }
           }
+<<<<<<< Updated upstream
           
+=======
+          $(() => main());
+>>>>>>> Stashed changes
           $('#submit').click(function () {
             const message = $('#message').val();
             if (message.length == 0) {
@@ -460,6 +501,7 @@
               $('#infcomment-form')[0].reset();
             }
           });
+<<<<<<< Updated upstream
           socket.emit("get result", { themeID: themeID });
           socket.on('result', function (obj) {
             if (obj.themeID != themeID) { return }
@@ -474,6 +516,54 @@
                 }))
               },
               options: { animation: false, scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] } }
+=======
+          socket.on("connect", () => {
+            socket.emit("get result", { themeID: themeID });
+            socket.on('result', function (obj) {
+              if (obj.themeID != themeID) { return }
+              var ctx = document.getElementById("ch").getContext("2d");
+              var chart = new Chart(ctx, {
+                type: "horizontalBar",
+                data: {
+                  datasets: obj.results.map((val, i) => ({
+                    label: choices[i],
+                    data: [val],
+                    backgroundColor: colors[i]
+                  }))
+                },
+                options: { animation: false, scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] } }
+              });
+              $('#A2').empty();
+              $('#B2').empty();
+              $('#C2').empty();
+              $('#D2').empty();
+              $('#E2').empty();
+              $('#F2').empty();
+              $('#G2').empty();
+              $('#H2').empty();
+              $('#I2').empty();
+              $('#J2').empty();
+              $('#A2').prepend($('<dt>' + obj.results[0] + '</dt><dt>' + "%" + '</dt>'));
+              $('#B2').prepend($('<dt>' + obj.results[1] + '</dt><dt>' + "%" + '</dt>'));
+              $('#C2').prepend($('<dt>' + obj.results[2] + '</dt><dt>' + "%" + '</dt>'));
+              if (obj.results[3]){
+                $('#D2').prepend($('<dt>' + obj.results[3] + '</dt><dt>' + "%" + '</dt>'));
+              }
+              $('#E2').prepend($('<dt>' + obj.results[4] + '</dt><dt>' + "%" + '</dt>'));
+              if (obj.results[5]){
+                $('#F2').prepend($('<dt>' + obj.results[5] + '</dt><dt>' + "%" + '</dt>'));
+              }
+              $('#G2').prepend($('<dt>' + obj.results[6] + '</dt><dt>' + "%" + '</dt>'));
+              if (obj.results[7]){
+                $('#H2').prepend($('<dt>' + obj.results[7] + '</dt><dt>' + "%" + '</dt>'));
+              }
+              $('#I2').prepend($('<dt>' + obj.results[8] + '</dt><dt>' + "%" + '</dt>'));
+              if (obj.results[9]){
+                $('#J2').prepend($('<dt>' + obj.results[9] + '</dt><dt>' + "%" + '</dt>'));
+              }
+              $('#count').empty();
+              obj.counts.forEach((val, i) => { $('#count').prepend($("<h4>" + choices[i] + ":" + val + "票</h4>")) })
+>>>>>>> Stashed changes
             });
             $('#A2').empty();
             $('#B2').empty();

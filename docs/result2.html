@@ -201,24 +201,6 @@
 
             try {
               sessionToken = await aicevote.getSessionToken();
-<<<<<<< Updated upstream
-              
-              try{
-                const pofile = await aicevote.getMyProfile(sessionToken);
-                $(".login").remove();
-                if (!profile.isInfluencer) { $("#onlyinfluencer").remove(); }
-                
-                const people = await aicevote.getVotes(themeID, sessionToken);
-                $('#member').empty();
-                people.votes.forEach(element => {
-                  $('#member').append($("<li><h4>" + choices[element.answer] + "<img src=" + element.imageURI + ">" + element.name + "</h4></li>"));
-                });
-                $('#ainfmember').empty();
-                people.votesFromInfluencer.forEach(element => {
-                  $('#ainfmember').append($("<li><h4>" + choices[element.answer] + "<img src=" + element.imageURI + ">" + element.name + "</h4></li>"));
-                });
-
-=======
               const pofile = await aicevote.getMyProfile(sessionToken);
               $(".login").remove();
               if (!profile.isInfluencer) { $("#onlyinfluencer").remove(); }
@@ -232,14 +214,7 @@
               people.votesFromInfluencer.forEach(element => {
                 $('#ainfmember').append($("<li><h4>" + choices[element.answer] + "<img src=" + element.imageURI + ">" + element.name + "</h4></li>"));
               });
->>>>>>> Stashed changes
 
-              } catch (e) {
-
-<<<<<<< Updated upstream
-              }
-=======
->>>>>>> Stashed changes
             } catch (e) {
               $("#onlyinfluencer").remove();
               $("form").remove();
@@ -460,11 +435,7 @@
 
 
               const comments = await aicevote.getComments(themeID);
-<<<<<<< Updated upstream
               comments.comments.forEach(element => {
-=======
-              comments.forEach(element => {
->>>>>>> Stashed changes
                 if (element.isInfluencer) {
                   $('#influencer-comment-list').prepend($('<div class="twitter__block"><img src="' + element.imageURI + '"><div class="twitter__block-text"><div class="name">' + element.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + new Date(element.createdAt).toISOString()　+ '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div>'));
                 } else {
@@ -474,11 +445,7 @@
             
             }
           }
-<<<<<<< Updated upstream
-          
-=======
           $(() => main());
->>>>>>> Stashed changes
           $('#submit').click(function () {
             const message = $('#message').val();
             if (message.length == 0) {
@@ -501,22 +468,6 @@
               $('#infcomment-form')[0].reset();
             }
           });
-<<<<<<< Updated upstream
-          socket.emit("get result", { themeID: themeID });
-          socket.on('result', function (obj) {
-            if (obj.themeID != themeID) { return }
-            var ctx = document.getElementById("ch").getContext("2d");
-            var chart = new Chart(ctx, {
-              type: "horizontalBar",
-              data: {
-                datasets: obj.results.map((val, i) => ({
-                  label: choices[i],
-                  data: [val],
-                  backgroundColor: colors[i]
-                }))
-              },
-              options: { animation: false, scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] } }
-=======
           socket.on("connect", () => {
             socket.emit("get result", { themeID: themeID });
             socket.on('result', function (obj) {
@@ -563,7 +514,6 @@
               }
               $('#count').empty();
               obj.counts.forEach((val, i) => { $('#count').prepend($("<h4>" + choices[i] + ":" + val + "票</h4>")) })
->>>>>>> Stashed changes
             });
             $('#A2').empty();
             $('#B2').empty();

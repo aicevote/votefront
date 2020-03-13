@@ -116,7 +116,7 @@
                     str = str.replace(/`/g, '&#x60;');
                     return str;
                   }
-                  socket.emit('apply send', str);
+                  aicevote.postApplication(str);
                   $('#form')[0].reset();
                 }
               });

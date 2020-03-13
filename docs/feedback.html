@@ -99,7 +99,6 @@
     <div class="container">
       <script>
         $(function(){
-          var socket = io("https://api.aicevote.com");
         $('#submit').click(function () {
         var message = $('#message');
         if (message.val().length == 0) {
@@ -117,7 +116,7 @@
             str = str.replace(/`/g, '&#x60;');
             return str;
           }
-          socket.emit('feedback send', str);
+          aicevote.postFeedback(str);
           $('#form')[0].reset();
         }
         });

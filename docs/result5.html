@@ -94,8 +94,6 @@
 
         <script>
           themeID = parseInt(window.location.pathname.replace(/[^-^0-9^\.]/g, ""), 10);
-<<<<<<< Updated upstream
-=======
           var sessionToken = "";
           var title = "";
           var description = "";
@@ -103,7 +101,6 @@
           const colors = ["rgb(0,220,255)", "rgb(255,162,0)", "rgb(24,197,140)",
             "rgb(255,174,201)", "rgb(6,21,159)", "rgb(217,0,0)", "rgb(112,146,190)",
             "rgb(136,0,21)", "rgb(0,0,0)", "rgb(130,120,0)"];
->>>>>>> Stashed changes
         $(() => {
           const socket = io("https://api.aicevote.com");
           async function main() {
@@ -111,11 +108,7 @@
               const themes = await aicevote.getAllThemes();
               const title = themes[themeID].title;
               const description = themes[themeID].description;
-<<<<<<< Updated upstream
-              const choices = themes[themeID].choices;
-=======
               choices = themes[themeID].choices;
->>>>>>> Stashed changes
               const genre = themes[themeID].genre;
 
               document.title = title;

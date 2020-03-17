@@ -1,13 +1,15 @@
 // for sign-in page
 function saveSessionID() {
-    const sessionID = decodeURIComponent(location.search.substring(1))
+    const q = decodeURIComponent(location.search.substring(1))
         .split('&').map(query => {
             const pair = query.split('=');
             return { key: pair[0], value: pair[1] };
-        }).filter(query => query.key == "sessionid")[0].value;
+        }).filter(query => query.key == "sessionid");
 
-    localStorage.setItem("sessionid", sessionID);
-    return sessionID;
+    if (q[0] && q[0].value) {
+        const sessionID = q[0].value;
+        localStorage.setItem("sessionid", sessionID);
+    }
 }
 
 // for sign-out page

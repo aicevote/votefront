@@ -43,9 +43,7 @@
         console.log(themes);
       });
       async function main() {
-        if (document.referrer.includes("https://api.aicevote.com/auth/")) {
-          saveSessionID();
-        }
+        saveSessionID();
 
         var sessionToken = null;
         try {

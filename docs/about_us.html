@@ -1,190 +1,199 @@
 <html>
 
 <lang="ja">
-<head prefix="og: http://ogp.me/ns#">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-141182013-1');
-  </script>
-  <meta property="og:title" content="AICEVOTE">
-  <meta property="og:type" content="website">
-  <meta property="og:description" content="票を氷にしたリアルタイム投票サイト">
-  <meta property="og:url" content="aicevote.com">
-  <meta property="og:site_name" content="AICEVOTE">
-  <meta property="og:image" content="http://aicevote.com/images/aicevote_2_skeleton.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-  <meta name="description" content="リアルタイム投票サービス　AICEVOTE　（アイスボート）の運営者情報です。">
-  <title>運営者情報</title>
-</head>
-<body>
-  <script src="/javascripts/moment.js"></script>
-  <script src="/javascripts/Chart.min.js"></script>
-  <script src="/javascripts/chartjs-plugin-streaming.js"></script>
-  <script src="/javascripts/ajax.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://unpkg.com/aicevote@0.1.5/dist/aicevote.js"></script>
-  <script type="text/javascript">
-  async function main() {
-    try {
-      const data = await aicevote.getAllThemes();
-      const litrend =  document.getElementById('litrend');
-      data.sort(
-        function(a,b){
-          if (a.topicality < b.topicality){
-            return 1;
-          } else {
-            return -1;
+
+  <head prefix="og: http://ogp.me/ns#">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'UA-141182013-1');
+    </script>
+    <meta property="og:title" content="AICEVOTE">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="票を氷にしたリアルタイム投票サイト">
+    <meta property="og:url" content="aicevote.com">
+    <meta property="og:site_name" content="AICEVOTE">
+    <meta property="og:image" content="http://aicevote.com/images/aicevote_2_skeleton.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <meta name="description" content="リアルタイム投票サービス　AICEVOTE　（アイスボート）の運営者情報です。">
+    <title>運営者情報</title>
+  </head>
+
+  <body>
+    <script src="/javascripts/moment.js"></script>
+    <script src="/javascripts/Chart.min.js"></script>
+    <script src="/javascripts/chartjs-plugin-streaming.js"></script>
+    <script src="/javascripts/ajax.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="https://unpkg.com/aicevote/dist/aicevote.js"></script>
+    <script src="/javascripts/auth.js"></script>
+    <script type="text/javascript">
+      async function main() {
+        try {
+          const data = await aicevote.getAllThemes();
+          const litrend = document.getElementById('litrend');
+          data.sort(
+            function (a, b) {
+              if (a.topicality < b.topicality) {
+                return 1;
+              } else {
+                return -1;
+              }
+            }
+          )
+          for (i = 0; i < 3; i++) {
+            let li = document.createElement('li');
+            li.innerHTML = `<img src="${data[i].imageURI}"><a href ="result${data[i].themeID}">${data[i].title}</a>`;
+            litrend.appendChild(li);
           }
+        } catch (e) { }
+        try {
+          const sessionID = getSessionID();
+          const sessionToken = await aicevote.getSessionToken(sessionID);
+          $(".login").remove();
+        } catch (e) {
+          deleteSessionID();
         }
-      )
-      for(i=0;i<3;i++){
-        let li = document.createElement('li');
-        li.innerHTML = `<img src="${data[i].imageURI}"><a href ="result${data[i].themeID}">${data[i].title}</a>`;
-        litrend.appendChild(li);
       }
-    } catch (e) { }
-    try {
-      const sessionToken = await aicevote.getSessionToken();
-      $(".login").remove();
-    } catch (e) { }
-  }
-  $(() => main());
-  </script>
-  <div class="mainSite">
-  <div class="header">
-    <div class="header-logo"><a href="home"><img src="/images/aice.JPG" ></a>
-    </div>
-    <div id="nav-drawer">
-      <input id="nav-input" type="checkbox" class="nav-unshown">
-      <label id="nav-open" for="nav-input"><span></span></label>
-      <label class="nav-unshown" id="nav-close" for="nav-input"></label>
-      <div id="nav-content">
+      $(() => main());
+    </script>
+    <div class="mainSite">
+      <div class="header">
+        <div class="header-logo"><a href="home"><img src="/images/aice.JPG"></a>
+        </div>
+        <div id="nav-drawer">
+          <input id="nav-input" type="checkbox" class="nav-unshown">
+          <label id="nav-open" for="nav-input"><span></span></label>
+          <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+          <div id="nav-content">
+            <ul>
+              <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+              <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
+              <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
+              <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
+              <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+              <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a>
+              <li>
+            </ul>
+          </div>
+        </div>
+        <div class="header-list">
+          <ul>
+            <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+            <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
+            <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
+            <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
+            <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+            <li>
+              <div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div>
+            </li>
+          </ul>
+        </div>
+        <div id="menu-background">
+        </div>
+      </div>
+      <div id="allcontainer">
+        <div class="container">
+          <h3 class="aboutus">
+            <p>私たちはリアルタイム投票サイト「AICEVOTE」を管理・運営しています。</p>
+            <p>私たちはそれぞれが、数学、政治、コンピュータエンジニアリング、語学
+              経済、統計処理、などといった幅広い得意分野を
+              持った学生達で構成されています。</p>
+          </h3>
+          <div class="portray"><img src="/images/kotaro.JPG">
+            <h3>
+              <p>和田　航太朗</p>
+              <p>アイスボート管理人<br>フロントエンド、機械学習担当</p>
+            </h3>
+          </div>
+          <div class="script">
+            <h3>ひとこと、ふたこと</h3>
+            <h4>
+              <p>2018年の10月ごろ、岡本から「何かやりたいからアイデアをくれ、」と言われました。</p>
+              <p>ちょうどある数学の問題について考えていた時に浮かんだ</p>
+              <p>"投票をリアルタイムに大勢の人が積極的にできるやり方"</p>
+              <p>について話したところ、「それいいね」と言われた覚えがあります。</p>
+              <p>それから多くの人に会ったり、これについて話したりした上で今の形に至るわけですね。</p>
+              <p>いろいろ勉強しながら開発、運営してます。</p>
+            </h4>
+          </div>
+          <div class="portray"><img src="/images/sohei.JPG.jpg">
+            <h3>
+              <p>岡本　爽平</p>
+              <p>システムエンジニア、機能開発担当</p>
+            </h3>
+          </div>
+          <div class="script">
+            <h3>ひとこと、ふたこと</h3>
+            <h4>
+              <br>
+              <p>「ワクワクして落ち着かない　自由な人間の喜びだ」 — Red</p>
+              <br>
+              <p></p>
+            </h4>
+          </div>
+          <div class="portray"><img src="/images/yuji.jpg">
+            <h3>
+              <p>YUJI</p>
+              <p><br>バックエンド担当</p>
+            </h3>
+          </div>
+          <div class="script">
+            <h3>ひとこと、ふたこと</h3>
+            <h4>
+              <p>C++とかWin32APIとかで遊んでます</p>
+              <p>OS自作したいけど、CPUも気になる</p>
+            </h4>
+          </div>
+        </div>
+        <div class="subcontents">
+          <div class="adpc">
+            <a href="https://px.a8.net/svt/ejp?a8mat=35UCHP+5SZ642+4B5K+5ZMCH" rel="nofollow">
+              <img border="0" width="300" height="250" alt=""
+                src="https://www26.a8.net/svt/bgt?aid=191212477351&wid=001&eno=01&mid=s00000020108001006000&mc=1"></a>
+            <img border="0" width="1" height="1" src="https://www17.a8.net/0.gif?a8mat=35UCHP+5SZ642+4B5K+5ZMCH" alt="">
+          </div>
+          <div class="adsmart">
+            <a href="https://px.a8.net/svt/ejp?a8mat=35UA5D+7E4S6Q+4ES4+60H7L" rel="nofollow">
+              <img border="0" width="234" height="60" alt=""
+                src="https://www21.a8.net/svt/bgt?aid=191209441447&wid=001&eno=01&mid=s00000020578001010000&mc=1"></a>
+            <img border="0" width="1" height="1" src="https://www10.a8.net/0.gif?a8mat=35UA5D+7E4S6Q+4ES4+60H7L" alt="">
+          </div>
+          <h2>人気の投票テーマ</h2>
+          <ul id="litrend">
+            <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer">
+        <h1><img src="/images/firstix-ocean.png"></h1>
         <ul>
-          <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-          <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
-          <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
-          <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
-          <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-          <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a><li>
+          <li>
+            <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a>
+          </li>
+          <li>
+            <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
+          </li>
+          <li>
+            <a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50"
+              style="text-decoration:none; color:deepskyblue;">
+              レポート
+            </a>
+          </li>
         </ul>
       </div>
     </div>
-    <div class="header-list">
-      <ul>
-        <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-        <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
-        <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
-        <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
-        <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-        <li><div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div></li>
-      </ul>
-    </div>
-    <div id="menu-background">
-    </div>
-    </div>
-    <div id="allcontainer">
-    <div class="container">
-      <h3 class="aboutus">
-        <p>私たちはリアルタイム投票サイト「AICEVOTE」を管理・運営しています。</p>
-        <p>私たちはそれぞれが、数学、政治、コンピュータエンジニアリング、語学
-        経済、統計処理、などといった幅広い得意分野を
-        持った学生達で構成されています。</p>
-      </h3>
-            <div class="portray"><img src="/images/kotaro.JPG">
-              <h3>
-                <p>和田　航太朗</p>
-                <p>アイスボート管理人<br>フロントエンド、機械学習担当</p>
-              </h3>
-            </div>
-            <div class="script">
-              <h3>ひとこと、ふたこと</h3>
-              <h4>
-                <p>2018年の10月ごろ、岡本から「何かやりたいからアイデアをくれ、」と言われました。</p>
-                <p>ちょうどある数学の問題について考えていた時に浮かんだ</p>
-                <p>"投票をリアルタイムに大勢の人が積極的にできるやり方"</p>
-                <p>について話したところ、「それいいね」と言われた覚えがあります。</p>
-                <p>それから多くの人に会ったり、これについて話したりした上で今の形に至るわけですね。</p>
-                <p>いろいろ勉強しながら開発、運営してます。</p>
-              </h4>
-            </div>
-            <div class="portray"><img src="/images/sohei.JPG.jpg">
-              <h3>
-                <p>岡本　爽平</p>
-                <p>システムエンジニア、機能開発担当</p>
-              </h3>
-            </div>
-            <div class="script">
-                <h3>ひとこと、ふたこと</h3>
-                <h4>
-                  <br>
-                  <p>「ワクワクして落ち着かない　自由な人間の喜びだ」 — Red</p>
-                  <br>
-                  <p></p>
-                </h4>
-              </div>
-            <div class="portray"><img src="/images/yuji.jpg">
-              <h3>
-                <p>YUJI</p>
-                <p><br>バックエンド担当</p>
-              </h3>
-            </div>
-            <div class="script">
-                <h3>ひとこと、ふたこと</h3>
-                <h4>
-                  <p>C++とかWin32APIとかで遊んでます</p>
-                  <p>OS自作したいけど、CPUも気になる</p>
-                </h4>
-              </div>
-          </div>
-          <div class="subcontents">
-            <div class="adpc">
-                <a href="https://px.a8.net/svt/ejp?a8mat=35UCHP+5SZ642+4B5K+5ZMCH" rel="nofollow">
-                  <img border="0" width="300" height="250" alt="" src="https://www26.a8.net/svt/bgt?aid=191212477351&wid=001&eno=01&mid=s00000020108001006000&mc=1"></a>
-                  <img border="0" width="1" height="1" src="https://www17.a8.net/0.gif?a8mat=35UCHP+5SZ642+4B5K+5ZMCH" alt="">
-            </div>
-            <div class="adsmart">
-                <a href="https://px.a8.net/svt/ejp?a8mat=35UA5D+7E4S6Q+4ES4+60H7L" rel="nofollow">
-                  <img border="0" width="234" height="60" alt="" src="https://www21.a8.net/svt/bgt?aid=191209441447&wid=001&eno=01&mid=s00000020578001010000&mc=1"></a>
-                  <img border="0" width="1" height="1" src="https://www10.a8.net/0.gif?a8mat=35UA5D+7E4S6Q+4ES4+60H7L" alt="">
-            </div>
-     <h2>人気の投票テーマ</h2>
-     <ul id="litrend">
-      <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
-     </ul>
-    </div>
-    </div>
-    <div class="footer">
-     <h1><img src="/images/firstix-ocean.png"></h1>
-     <ul>
-       <li>
-        <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a>
-       </li>
-       <li>
-         <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
-       </li>
-       <li>
-          <a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50" style="text-decoration:none; color:deepskyblue;">
-            レポート
-          </a>
-        </li>
-     </ul>
-    </div>
-  </div>
-</body>
+  </body>
 
 </html>
-
-
-
-

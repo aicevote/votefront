@@ -15,7 +15,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/aicevote@0.1.5/dist/aicevote.js"></script>
+
+    <script src="https://unpkg.com/aicevote/dist/aicevote.js"></script>
+    <script src="/javascripts/auth.js"></script>
+
     <script src="/javascripts/moment.js"></script>
     <script src="/javascripts/Chart.min.js"></script>
     <script src="/javascripts/chartjs-plugin-streaming.js"></script>
@@ -218,7 +221,8 @@
             } catch (e) { }
 
             try {
-              const sessionToken = await aicevote.getSessionToken();
+              const sessionID = getSessionID();
+              const sessionToken = await aicevote.getSessionToken(sessionID);
               $(".login").remove();
               $("#A").click(() => {
                 aicevote.vote(themeID, sessionToken, 0).then(() => {
@@ -271,6 +275,7 @@
                 });
               });
             } catch (e) {
+              deleteSessionID();
               window.location.href = "/result" + themeID + ".html";
             }
           }

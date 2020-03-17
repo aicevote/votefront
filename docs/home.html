@@ -18,12 +18,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/aicevote@0.1.5/dist/aicevote.js"></script>
+
+    <script src="https://unpkg.com/aicevote/dist/aicevote.js"></script>
+    <script src="/javascripts/auth.js"></script>
+
     <script src="/javascripts/moment.js"></script>
     <script src="/javascripts/Chart.min.js"></script>
     <script src="/javascripts/chartjs-plugin-streaming.js"></script>
     <script src="/javascripts/ajax.js"></script>
-    <script src="/javascripts/auth.js"></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
@@ -38,7 +40,7 @@
   <body>
     <script>
       aicevote.getAllThemes().then(themes => {
-          console.log(themes);
+        console.log(themes);
       });
       async function main() {
         if (document.referrer.includes("https://api.aicevote.com/auth/")) {
@@ -47,7 +49,8 @@
 
         var sessionToken = null;
         try {
-          sessionToken = await aicevote.getSessionToken();
+          const sessionID = getSessionID();
+          const sessionToken = await aicevote.getSessionToken(sessionID);
           const myProfile = await aicevote.getMyProfile(sessionToken);
           console.log(myProfile)
           $('.login').remove();
@@ -56,6 +59,7 @@
           if (myProfile.isInfluencer) { $('#notinfluencer').remove(); }
           else { $('#onlyinfluencer').remove(); }
         } catch (e) {
+          deleteSessionID();
           $('#onlyinfluencer').remove();
           const profile = document.getElementById('profile');
           profile.innerHTML = `<img src="/images/person.png"  width="48" height="48" margin="24" border-radius="50%">ゲストさんようこそ`;

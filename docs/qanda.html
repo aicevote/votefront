@@ -1,187 +1,202 @@
 <html>
-    <lang="ja">
-        <head prefix="og: http://ogp.me/ns#">
-          <!-- Global site tag (gtag.js) - Google Analytics -->
-          <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
-          <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'UA-141182013-1');
-          </script>
-          <meta property="og:title" content="AICEVOTE">
-          <meta property="og:type" content="website">
-          <meta property="og:description" content="票を氷にしたリアルタイム投票サイト">
-          <meta property="og:url" content="aicevote.com">
-          <meta property="og:site_name" content="AICEVOTE">
-          <meta property="og:image" content="http://aicevote.com/images/aicevote_2_skeleton.png">
-          <meta name="twitter:card" content="summary_large_image">
-          <meta charset="UTF-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width,initial-scale=1">
-          <link rel='stylesheet' href='/stylesheets/style.css' />
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-          <meta name="description" content="リアルタイム投票サービス　AICEVOTE　（アイスボート）のQ＆Aページです。">
-          <title>よくある質問</title>
-        </head>
-        <body>
-          <script src="/javascripts/moment.js"></script>
-          <script src="/javascripts/Chart.min.js"></script>
-          <script src="/javascripts/chartjs-plugin-streaming.js"></script>
-          <script src="/javascripts/ajax.js"></script>
-          <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-          <script src="https://unpkg.com/aicevote@0.1.5/dist/aicevote.js"></script>
-          <script type="text/javascript">
-          async function main() {
-            try {
-              const data = await aicevote.getAllThemes();
-              const litrend =  document.getElementById('litrend');
-              data.sort(
-                function(a,b){
-                  if (a.topicality < b.topicality){
-                    return 1;
-                  } else {
-                    return -1;
-                  }
-                }
-              )
-              for(i=0;i<3;i++){
-                let li = document.createElement('li');
-                li.innerHTML = `<img src="${data[i].imageURI}"><a href ="result${data[i].themeID}">${data[i].title}</a>`;
-                litrend.appendChild(li);
-              }
-            } catch (e) { }
-            try {
-              const sessionToken = await aicevote.getSessionToken();
-              $(".login").remove();
-            } catch (e) { }
-          }
-          $(() => main());
-          </script>
-          <div class="mainSite">
-          <div class="header">
-            <div class="header-logo"><a href="home"><img src="/images/aice.JPG" ></a>
-            </div>
-            <div id="nav-drawer">
-              <input id="nav-input" type="checkbox" class="nav-unshown">
-              <label id="nav-open" for="nav-input"><span></span></label>
-              <label class="nav-unshown" id="nav-close" for="nav-input"></label>
-              <div id="nav-content">
-                <ul>
-                  <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-                  <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
-                  <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
-                  <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
-                  <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-                  <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a><li>
-                </ul>
-              </div>
-            </div>
-            <div class="header-list">
-              <ul>
-                <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-                <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
-                <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
-                <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
-                <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-                <li><div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div></li>
-              </ul>
-            </div>
-            <div id="menu-background">
-            </div>
-            </div>
-            <div id="allcontainer">
-            <div class="container">
-                <h1>
-                    　<span>よくある質問</span>
-                    </h1>
-                    <h2>
-                        Q.<span>どうしてAICEVOTEを作ったんですか?</span>
-                      </h2>
-                      <h5>
-                        <p>
-                          政治からスポーツ、日常の些細な問題や嗜好について、インターネットのリアルタイムさを
-                          フルに活用し、議論や共有の場を作ろうと思いました。
-                        </p>
-                        <p>
-                          そのため、リアルタイムな投票結果を表示できる”AICEVOTE"という投票システム、
-                          過去の結果を時系列に見ることのできるグラフ、
-                          twitter上のフォロー、インフルエンサーの投票先が知れるシステム、
-                          これらは画期的かつ合理的なソリューションであると我々は自負しています。
-                        </p>
-                      </h5>
-                    <h2>
-                      Q.<span>氷の票が解けるスピードは、どうやって決まりますか?</span>
-                    </h2>
-                    <h5>
-                    <p>
-                      投票テーマごとに、氷の票が解けるスピードは違います。
-                      例えばサッカーの勝利予測投票では氷の解けるスピードは早くなりやすく、
-                      死刑制度の賛否投票ではゆっくりになりやすくなります。
-                      AICEVOTE開発者が独自に開発した機械学習システムを導入して、
-                      リアルタイムに正確な投票結果を得られます。
-                    </p>
-                    </h5>
-                    <h2>
-                      Q.<span>再投票したら過去に入れた票は無効になりますか?</span>
-                    </h2>
-                    <h5>
-                      <p>
-                        例えば以前あなたが、死刑制度を「賛成」に投票して、
-                        今「反対」に投票した場合、過去に「賛成」に投票した票の価値は無効となります。
-                        今再度「賛成」に投票した場合、「賛成」としての票の価値が更新されます。
-                      </p>
-                    </h5>
-                    <h2>
-                      Q.<span>ユーザーが自由に投票テーマを設置できませんか?</span>
-                    </h2>
-                    <h5>
-                      <p>
-                        ユーザーが自由に投票テーマを設置できることで、本来一つの投票テーマなのに、他のユーザーが似たような投票テーマを多数立ててしまい、
-                        票が分散されることを危惧しています。
-                      </p>
-                      <p>
-                        そのため現状は応募された投票テーマ案のうちから、管理者が約束に従うものかどうか選別し投票テーマを立てています。
-                      </p>
-                    </h5>
-                  </div>
-                  <div class="subcontents">
-                    <div class="adpc">
-                        <a href="https://px.a8.net/svt/ejp?a8mat=35UAXH+2NUT6A+50+4T5XAP" rel="nofollow">
-                          <img border="0" width="300" height="250" alt="" src="https://www25.a8.net/svt/bgt?aid=191210453161&wid=001&eno=01&mid=s00000000018029085000&mc=1"></a>
-                          <img border="0" width="1" height="1" src="https://www13.a8.net/0.gif?a8mat=35UAXH+2NUT6A+50+4T5XAP" alt="">
-                    </div>
-                    <div class="adsmart">
-                        <a href="https://px.a8.net/svt/ejp?a8mat=35UAXG+FPLTGY+3SPO+25GPIP" rel="nofollow">
-                          <img border="0" width="300" height="250" alt="" src="https://www21.a8.net/svt/bgt?aid=191210452950&wid=001&eno=01&mid=s00000017718013011000&mc=1"></a>
-                          <img border="0" width="1" height="1" src="https://www17.a8.net/0.gif?a8mat=35UAXG+FPLTGY+3SPO+25GPIP" alt="">
-                    </div>
-              
-             <h2>人気の投票テーマ</h2>
-             <ul id="litrend">
-              <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
-            </ul>
-            </div>
-            </div>
-            <div class="footer">
-             <h1><img src="/images/firstix-ocean.png"></h1>
-             <ul>
-               <li>
-                <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a>
-               </li>
-               <li>
-                 <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
-               </li>
-               <li>
-                  <a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50" style="text-decoration:none; color:deepskyblue;">
-                    レポート
-                  </a>
-                </li>
-             </ul>
-            </div>
-          </div>
-        </body>
-      </html>
+<lang="ja">
 
+  <head prefix="og: http://ogp.me/ns#">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'UA-141182013-1');
+    </script>
+    <meta property="og:title" content="AICEVOTE">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="票を氷にしたリアルタイム投票サイト">
+    <meta property="og:url" content="aicevote.com">
+    <meta property="og:site_name" content="AICEVOTE">
+    <meta property="og:image" content="http://aicevote.com/images/aicevote_2_skeleton.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <meta name="description" content="リアルタイム投票サービス　AICEVOTE　（アイスボート）のQ＆Aページです。">
+    <title>よくある質問</title>
+  </head>
+
+  <body>
+    <script src="/javascripts/moment.js"></script>
+    <script src="/javascripts/Chart.min.js"></script>
+    <script src="/javascripts/chartjs-plugin-streaming.js"></script>
+    <script src="/javascripts/ajax.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="https://unpkg.com/aicevote/dist/aicevote.js"></script>
+    <script src="/javascripts/auth.js"></script>
+
+    <script type="text/javascript">
+      async function main() {
+        try {
+          const data = await aicevote.getAllThemes();
+          const litrend = document.getElementById('litrend');
+          data.sort(
+            function (a, b) {
+              if (a.topicality < b.topicality) {
+                return 1;
+              } else {
+                return -1;
+              }
+            }
+          )
+          for (i = 0; i < 3; i++) {
+            let li = document.createElement('li');
+            li.innerHTML = `<img src="${data[i].imageURI}"><a href ="result${data[i].themeID}">${data[i].title}</a>`;
+            litrend.appendChild(li);
+          }
+        } catch (e) { }
+        try {
+          const sessionID = getSessionID();
+          const sessionToken = await aicevote.getSessionToken(sessionID);
+          $(".login").remove();
+        } catch (e) {
+          deleteSessionID();
+        }
+      }
+      $(() => main());
+    </script>
+    <div class="mainSite">
+      <div class="header">
+        <div class="header-logo"><a href="home"><img src="/images/aice.JPG"></a>
+        </div>
+        <div id="nav-drawer">
+          <input id="nav-input" type="checkbox" class="nav-unshown">
+          <label id="nav-open" for="nav-input"><span></span></label>
+          <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+          <div id="nav-content">
+            <ul>
+              <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+              <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
+              <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
+              <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
+              <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+              <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a>
+              <li>
+            </ul>
+          </div>
+        </div>
+        <div class="header-list">
+          <ul>
+            <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+            <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
+            <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
+            <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
+            <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+            <li>
+              <div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div>
+            </li>
+          </ul>
+        </div>
+        <div id="menu-background">
+        </div>
+      </div>
+      <div id="allcontainer">
+        <div class="container">
+          <h1>
+            　<span>よくある質問</span>
+          </h1>
+          <h2>
+            Q.<span>どうしてAICEVOTEを作ったんですか?</span>
+          </h2>
+          <h5>
+            <p>
+              政治からスポーツ、日常の些細な問題や嗜好について、インターネットのリアルタイムさを
+              フルに活用し、議論や共有の場を作ろうと思いました。
+            </p>
+            <p>
+              そのため、リアルタイムな投票結果を表示できる”AICEVOTE"という投票システム、
+              過去の結果を時系列に見ることのできるグラフ、
+              twitter上のフォロー、インフルエンサーの投票先が知れるシステム、
+              これらは画期的かつ合理的なソリューションであると我々は自負しています。
+            </p>
+          </h5>
+          <h2>
+            Q.<span>氷の票が解けるスピードは、どうやって決まりますか?</span>
+          </h2>
+          <h5>
+            <p>
+              投票テーマごとに、氷の票が解けるスピードは違います。
+              例えばサッカーの勝利予測投票では氷の解けるスピードは早くなりやすく、
+              死刑制度の賛否投票ではゆっくりになりやすくなります。
+              AICEVOTE開発者が独自に開発した機械学習システムを導入して、
+              リアルタイムに正確な投票結果を得られます。
+            </p>
+          </h5>
+          <h2>
+            Q.<span>再投票したら過去に入れた票は無効になりますか?</span>
+          </h2>
+          <h5>
+            <p>
+              例えば以前あなたが、死刑制度を「賛成」に投票して、
+              今「反対」に投票した場合、過去に「賛成」に投票した票の価値は無効となります。
+              今再度「賛成」に投票した場合、「賛成」としての票の価値が更新されます。
+            </p>
+          </h5>
+          <h2>
+            Q.<span>ユーザーが自由に投票テーマを設置できませんか?</span>
+          </h2>
+          <h5>
+            <p>
+              ユーザーが自由に投票テーマを設置できることで、本来一つの投票テーマなのに、他のユーザーが似たような投票テーマを多数立ててしまい、
+              票が分散されることを危惧しています。
+            </p>
+            <p>
+              そのため現状は応募された投票テーマ案のうちから、管理者が約束に従うものかどうか選別し投票テーマを立てています。
+            </p>
+          </h5>
+        </div>
+        <div class="subcontents">
+          <div class="adpc">
+            <a href="https://px.a8.net/svt/ejp?a8mat=35UAXH+2NUT6A+50+4T5XAP" rel="nofollow">
+              <img border="0" width="300" height="250" alt=""
+                src="https://www25.a8.net/svt/bgt?aid=191210453161&wid=001&eno=01&mid=s00000000018029085000&mc=1"></a>
+            <img border="0" width="1" height="1" src="https://www13.a8.net/0.gif?a8mat=35UAXH+2NUT6A+50+4T5XAP" alt="">
+          </div>
+          <div class="adsmart">
+            <a href="https://px.a8.net/svt/ejp?a8mat=35UAXG+FPLTGY+3SPO+25GPIP" rel="nofollow">
+              <img border="0" width="300" height="250" alt=""
+                src="https://www21.a8.net/svt/bgt?aid=191210452950&wid=001&eno=01&mid=s00000017718013011000&mc=1"></a>
+            <img border="0" width="1" height="1" src="https://www17.a8.net/0.gif?a8mat=35UAXG+FPLTGY+3SPO+25GPIP"
+              alt="">
+          </div>
+
+          <h2>人気の投票テーマ</h2>
+          <ul id="litrend">
+            <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer">
+        <h1><img src="/images/firstix-ocean.png"></h1>
+        <ul>
+          <li>
+            <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a>
+          </li>
+          <li>
+            <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
+          </li>
+          <li>
+            <a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50"
+              style="text-decoration:none; color:deepskyblue;">
+              レポート
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+
+</html>

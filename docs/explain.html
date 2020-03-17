@@ -1,174 +1,204 @@
 <html>
 <lang="ja">
-<head prefix="og: http://ogp.me/ns#">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
-  <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-141182013-1');
-  </script>
-  <meta property="og:title" content="AICEVOTE">
-  <meta property="og:type" content="website">
-  <meta property="og:description" content="票を氷にしたリアルタイム投票サイト">
-  <meta property="og:url" content="aicevote.com">
-  <meta property="og:site_name" content="AICEVOTE">
-  <meta property="og:image" content="http://aicevote.com/images/aicevote_2_skeleton.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-  <meta name="description" content="リアルタイム投票サービス　AICEVOTE　（アイスボート）のシステムの説明です。">
-  <title>システムの説明</title>
-</head>
-<body>
-  <script src="/javascripts/moment.js"></script>
-  <script src="/javascripts/Chart.min.js"></script>
-  <script src="/javascripts/chartjs-plugin-streaming.js"></script>
-  <script src="/javascripts/ajax.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://unpkg.com/aicevote@0.1.5/dist/aicevote.js"></script>
-  <script type="text/javascript">
-  async function main() {
-    try {
-      const data = await aicevote.getAllThemes();
-      const litrend =  document.getElementById('litrend');
-      data.sort(
-        function(a,b){
-          if (a.topicality < b.topicality){
-            return 1;
-          } else {
-            return -1;
+
+  <head prefix="og: http://ogp.me/ns#">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'UA-141182013-1');
+    </script>
+    <meta property="og:title" content="AICEVOTE">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="票を氷にしたリアルタイム投票サイト">
+    <meta property="og:url" content="aicevote.com">
+    <meta property="og:site_name" content="AICEVOTE">
+    <meta property="og:image" content="http://aicevote.com/images/aicevote_2_skeleton.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.slim.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <meta name="description" content="リアルタイム投票サービス　AICEVOTE　（アイスボート）のシステムの説明です。">
+    <title>システムの説明</title>
+  </head>
+
+  <body>
+    <script src="/javascripts/moment.js"></script>
+    <script src="/javascripts/Chart.min.js"></script>
+    <script src="/javascripts/chartjs-plugin-streaming.js"></script>
+    <script src="/javascripts/ajax.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="https://unpkg.com/aicevote/dist/aicevote.js"></script>
+    <script src="/javascripts/auth.js"></script>
+    <script type="text/javascript">
+      async function main() {
+        try {
+          const data = await aicevote.getAllThemes();
+          const litrend = document.getElementById('litrend');
+          data.sort(
+            function (a, b) {
+              if (a.topicality < b.topicality) {
+                return 1;
+              } else {
+                return -1;
+              }
+            }
+          )
+          for (i = 0; i < 3; i++) {
+            let li = document.createElement('li');
+            li.innerHTML = `<img src="${data[i].imageURI}"><a href ="result${data[i].themeID}">${data[i].title}</a>`;
+            litrend.appendChild(li);
           }
+        } catch (e) { }
+        try {
+          const sessionID = getSessionID();
+          const sessionToken = await aicevote.getSessionToken(sessionID);
+          $(".login").remove();
+        } catch (e) {
+          deleteSessionID();
         }
-      )
-      for(i=0;i<3;i++){
-        let li = document.createElement('li');
-        li.innerHTML = `<img src="${data[i].imageURI}"><a href ="result${data[i].themeID}">${data[i].title}</a>`;
-        litrend.appendChild(li);
       }
-    } catch (e) { }
-    try {
-      const sessionToken = await aicevote.getSessionToken();
-      $(".login").remove();
-    } catch (e) { }
-  }
-  $(() => main());
-  </script>
-  <div class="mainSite">
-  <div class="header">
-    <div class="header-logo"><a href="home"><img src="/images/aice.JPG" ></a>
-    </div>
-    <div id="nav-drawer">
-      <input id="nav-input" type="checkbox" class="nav-unshown">
-      <label id="nav-open" for="nav-input"><span></span></label>
-      <label class="nav-unshown" id="nav-close" for="nav-input"></label>
-      <div id="nav-content">
+      $(() => main());
+    </script>
+    <div class="mainSite">
+      <div class="header">
+        <div class="header-logo"><a href="home"><img src="/images/aice.JPG"></a>
+        </div>
+        <div id="nav-drawer">
+          <input id="nav-input" type="checkbox" class="nav-unshown">
+          <label id="nav-open" for="nav-input"><span></span></label>
+          <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+          <div id="nav-content">
+            <ul>
+              <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+              <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
+              <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
+              <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
+              <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+              <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a>
+              <li>
+            </ul>
+          </div>
+        </div>
+        <div class="header-list">
+          <ul>
+            <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+            <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
+            <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
+            <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
+            <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+            <li>
+              <div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div>
+            </li>
+          </ul>
+        </div>
+        <div id="menu-background">
+        </div>
+      </div>
+      <div id="allcontainer">
+        <div class="container">
+          <div class="script">
+            <h1>いつでも、誰でも、何度でも</h1>
+            <p></p>
+            <h1><span>AICEVOTE</span>とは</h1>
+            <h2>普通の投票とAICEVOTE（アイスボート）の違い</h2>
+            <h2>普通の投票</h2>
+            <img src="/images/general.png">
+            <h2>
+              <p>普通の投票では、投票箱A/Bに最終的に投票された票の数の比で結果が決まります</p>
+            </h2>
+            <h2><span>AICEVOTE</span></h2>
+            <h2>
+              <p>AICEVOTEでは投票用紙の代わりに<span>氷</span>を投票します</P>
+            </h2>
+            <img src="/images/aiceblocks.png">
+            <h2>
+              <p>それぞれの投票箱の底は<span>網目</span>になっています</p>
+            </h2>
+            <img src="/images/box.png">
+            <h2>
+              <p>時間が経てばあなたが投票した氷は少しずつ溶けて、水となって網目から落ちていきます</p>
+            </h2>
+            <img src="/images/aicevote_1_skeleton.png">
+            <h2>
+              <p>つまり、最近に投票された票の価値を高く、時間が経つほど次第に価値を低いものと捉えるのです</p>
+            </h2>
+            <img src="/images/aicevote_2_skeleton.png">
+            <h2>
+              <p>その瞬間に投票箱に入っている氷の量をポイント化した合計を<span>リアルタイム</span>に表示しています。投票箱はいつでも開かれており再投票できます</p>
+            </h2>
+            <img src="/images/aicevote_3_skeleton.png">
+            <h2>
+              <p>要は、こうしていつでも、<span>もしも今「一般的な投票」を行ったらどうなるか？</span>の結果を教えてくれるんです</p>
+            </h2>
+
+            <h1>
+              <span>AICEVOTE</span> のメリット
+            </h1>
+            <h2>
+              <span>AI</span>
+              <p>リアルタイムに何％の人があなたと同じように思っているか計算（機械学習）し、結果をすぐに知ることができます</p>　
+              <span>ICE</span>
+              <p>過去の投票結果の履歴を、時系列にグラフ化しており、自由に知り分析することができます</p>　　　
+              <span>VOTE</span>
+              <p>いつでも投票、再投票が可能で、あなたがフォローする人や、インフルエンサーの投票結果を知ることができます</p>
+            </h2>
+          </div>
+          <br>
+          <h3>
+            <div class="Login">
+              <a href="/auth/twitter"><img src="/images/twitter_button.png"></a><br>
+            </div>
+          </h3>
+
+          <div style="text-align:center;"><a href="home" class="btn-gradient-flat">さあ今すぐ始めよう</a></div><br><br>
+        </div>
+        <div class="subcontents">
+          <div class="adpc">
+            <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+6D4GH" rel="nofollow">
+              <img border="0" width="300" height="250" alt=""
+                src="https://www26.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001069000&mc=1"></a>
+            <img border="0" width="1" height="1" src="https://www13.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+6D4GH" alt="">
+          </div>
+          <div class="adsmart">
+            <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+661TT" rel="nofollow">
+              <img border="0" width="234" height="60" alt=""
+                src="https://www26.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001036000&mc=1"></a>
+            <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+661TT" alt="">
+            　</div>
+
+          <h2>人気の投票テーマ</h2>
+          <ul id="litrend">
+            <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer">
+        <h1><img src="/images/firstix-ocean.png"></h1>
         <ul>
-          <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-          <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
-          <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
-          <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
-          <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-          <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a><li>
+          <li>
+            <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a>
+          </li>
+          <li>
+            <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
+          </li>
+          <li>
+            <a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50"
+              style="text-decoration:none; color:deepskyblue;">
+              レポート
+            </a>
+          </li>
         </ul>
       </div>
     </div>
-    <div class="header-list">
-      <ul>
-        <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-        <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
-        <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
-        <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
-        <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-        <li><div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div></li>
-      </ul>
-    </div>
-    <div id="menu-background">
-    </div>
-    </div>
-    <div id="allcontainer">
-    <div class="container">
-      <div class="script">
-        <h1>いつでも、誰でも、何度でも</h1>
-        <p></p>
-        <h1><span>AICEVOTE</span>とは</h1>
-        <h2>普通の投票とAICEVOTE（アイスボート）の違い</h2>
-        <h2>普通の投票</h2>
-        <img src="/images/general.png">
-        <h2><p>普通の投票では、投票箱A/Bに最終的に投票された票の数の比で結果が決まります</p></h2>
-        <h2><span>AICEVOTE</span></h2>
-        <h2><p>AICEVOTEでは投票用紙の代わりに<span>氷</span>を投票します</P></h2>
-        <img src="/images/aiceblocks.png">
-        <h2><p>それぞれの投票箱の底は<span>網目</span>になっています</p></h2>
-        <img src="/images/box.png">
-        <h2><p>時間が経てばあなたが投票した氷は少しずつ溶けて、水となって網目から落ちていきます</p></h2>
-        <img src="/images/aicevote_1_skeleton.png">
-        <h2><p>つまり、最近に投票された票の価値を高く、時間が経つほど次第に価値を低いものと捉えるのです</p></h2>
-        <img src="/images/aicevote_2_skeleton.png">
-        <h2><p>その瞬間に投票箱に入っている氷の量をポイント化した合計を<span>リアルタイム</span>に表示しています。投票箱はいつでも開かれており再投票できます</p></h2>
-        <img src="/images/aicevote_3_skeleton.png">
-        <h2><p>要は、こうしていつでも、<span>もしも今「一般的な投票」を行ったらどうなるか？</span>の結果を教えてくれるんです</p></h2>
-      
-      <h1>
-      <span>AICEVOTE</span> のメリット
-      </h1>
-      <h2>
-      <span>AI</span><p>リアルタイムに何％の人があなたと同じように思っているか計算（機械学習）し、結果をすぐに知ることができます</p>　
-      <span>ICE</span><p>過去の投票結果の履歴を、時系列にグラフ化しており、自由に知り分析することができます</p>　　　
-      <span>VOTE</span><p>いつでも投票、再投票が可能で、あなたがフォローする人や、インフルエンサーの投票結果を知ることができます</p>
-      </h2>
-      </div>
-      <br>
-      <h3>
-        <div class="Login">
-          <a href="/auth/twitter"><img src="/images/twitter_button.png"></a><br>
-        </div>
-      </h3>
-      
-      <div style="text-align:center;"><a href="home" class="btn-gradient-flat">さあ今すぐ始めよう</a></div><br><br>
-      </div>
-        <div class="subcontents">
-          <div class="adpc">
-              <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+6D4GH" rel="nofollow">
-                <img border="0" width="300" height="250" alt="" src="https://www26.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001069000&mc=1"></a>
-                <img border="0" width="1" height="1" src="https://www13.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+6D4GH" alt="">
-          </div>
-          <div class="adsmart">
-              <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+661TT" rel="nofollow">
-                <img border="0" width="234" height="60" alt="" src="https://www26.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001036000&mc=1"></a>
-                <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+661TT" alt="">
-        　</div>
-      
-     <h2>人気の投票テーマ</h2>
-     <ul id="litrend">
-      <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
-    </ul>
-    </div>
-    </div>
-    <div class="footer">
-     <h1><img src="/images/firstix-ocean.png"></h1>
-     <ul>
-       <li>
-        <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a>
-       </li>
-       <li>
-         <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
-       </li>
-       <li>
-          <a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50" style="text-decoration:none; color:deepskyblue;">
-            レポート
-          </a>
-        </li>
-     </ul>
-    </div>
-  </div>
-</body>
+  </body>
 
 
 </html>

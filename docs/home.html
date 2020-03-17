@@ -48,7 +48,7 @@
         var sessionToken = null;
         try {
           const sessionID = getSessionID();
-          const sessionToken = await aicevote.getSessionToken(sessionID);
+          sessionToken = await aicevote.getSessionToken(sessionID);
           const myProfile = await aicevote.getMyProfile(sessionToken);
           console.log(myProfile)
           $('.login').remove();

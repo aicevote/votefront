@@ -54,11 +54,14 @@
           $('.login').remove();
           const profile = document.getElementById('profile');
           profile.innerHTML = `<img src="${myProfile.imageURI}"  width="48" height="48" margin="24" border-radius="50%">${myProfile.name}さんようこそ`;
+          const userimg = document.getElementById('userimg');
+          userimg.innerHTML = `<a href="user/${myProfile.name}.html"><img src="images/user.png"></a>`;
           if (myProfile.isInfluencer) { $('#notinfluencer').remove(); }
           else { $('#onlyinfluencer').remove(); }
         } catch (e) {
           deleteSessionID();
           $('#onlyinfluencer').remove();
+          $('#userimg').remove();
           const profile = document.getElementById('profile');
           profile.innerHTML = `<img src="/images/person.png"  width="48" height="48" margin="24" border-radius="50%">ゲストさんようこそ`;
         }
@@ -337,6 +340,7 @@
           </ul>
         </div>
       </div>
+      <div id="userimg"></div>
       <div class="footer">
         <h1><img src="/images/firstix-ocean.png"></h1>
         <ul>

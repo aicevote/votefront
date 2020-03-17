@@ -1257,7 +1257,12 @@ input[name="tab_item2"] {
   transform: translateX(0%);/*中身を表示（右へスライド）*/
   box-shadow: 6px 0 25px rgba(0,0,0,.15);
 }
-
+#userimg{
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  z-index: 10;
+}
 .footer{
   background-color: #001100;
   padding-top: 10px;
@@ -2503,7 +2508,12 @@ textarea{
   transform: translateX(0%);/*中身を表示（右へスライド）*/
   box-shadow: 6px 0 25px rgba(0,0,0,.15);
 }
-
+#userimg{
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 10;
+}
 .footer{
   background-color: #001100;
   color: white;

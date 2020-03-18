@@ -78,6 +78,25 @@ body {
   min-height: 100vh;
 }
 
+#profile {
+  margin: 15px;
+}
+#profile img{
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin: 10px;
+}
+#profile h4{
+  font-weight: bold;
+}
+
+#mytheme li, #timeline li, #pastvote li {
+  margin: 20px;
+  border-bottom:1px solid #666
+}
+
+
 /* Form Layout */
 .form-wrapper {
   background: #fafafa;
@@ -1436,6 +1455,30 @@ h4 img{
   width:32px;
   height: 32px;
 }
+
+#profile {
+  margin: 10px;
+}
+#profile img{
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin: 5px;
+}
+#profile h4{
+  font-weight: bold;
+}
+
+#mytheme li, #timeline li, #pastvote li {
+  margin: 20px;
+  border-bottom:1px solid #666
+}
+
+
+
+
+
+
 form {
   padding: 0 1.5em;
 }

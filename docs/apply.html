@@ -62,8 +62,13 @@
           const sessionID = getSessionID();
           const sessionToken = await aicevote.getSessionToken(sessionID);
           $(".login").remove();
+          const myProfile = await aicevote.getMyProfile(sessionToken);
+          const userimg = document.getElementById('userimg');
+          userimg.innerHTML = `<a href="user.html?id=${myProfile.userID}"><img src="images/user.png"></a>`;
+          
         } catch (e) {
           deleteSessionID();
+          $('#userimg').remove();
         }
       }
       $(() => main());
@@ -108,7 +113,6 @@
 
           <script>
             $(function () {
-              var socket = io("https://api.aicevote.com");
               $('#submit').click(function () {
                 var message = $('#message');
                 if (message.val().length == 0) {
@@ -184,6 +188,7 @@
           </ul>
         </div>
       </div>
+      <div id="userimg"></div>
       <div class="footer">
         <h1><img src="/images/firstix-ocean.png"></h1>
         <ul>

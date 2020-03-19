@@ -50,17 +50,14 @@
 
         var sessionToken = null;
         try {
+          const litre = document.getElementById('litre');
           const link = sessionToken ? "Dp" : "result";
-          themes.forEach(item => {
-            let li = document.createElement('li');
-            li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
-            tabs[0].appendChild(li);
-            li = document.createElement('li');
-            li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
-            tabs[item.genre + 1].appendChild(li);
-          })
-
-
+          themes.sort((a, b) => b.topicality - a.topicality)
+          for (i = 0; i < 3; i++) {
+            const li = document.createElement('li');
+            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}${themes[i].themeID}">${themes[i].title}</a>`;
+            litre.appendChild(li);
+          }
 
 
           const themes = await aicevote.getAllThemes();
@@ -68,14 +65,7 @@
           const sessionToken = await aicevote.getSessionToken(sessionID);
           const myProfile = await aicevote.getMyProfile(sessionToken);
           const hisProfile = await aicevote.getProfile("twitter",id);
-          if(myProfile.userID == id){
-            const allvotes = await aicevote.getAllVotes(sessionToken);
-            
-            //自分onlyの処理、タイムライン
-            //フォロワーの投票先
-          }else{
-            $('#timeline').remove();
-          }
+          
 
           const link = sessionToken ? "Dp" : "result";
           hisProfile.vote.forEach(number => {
@@ -92,15 +82,14 @@
 
           $('.login').remove();
           const profile = document.getElementById('profile');
-          profile.innerHTML = `<img src="${myProfile.imageURI}"><h4>${myProfile.name}</h4>`;
-          const userimg = document.getElementById('userimg');
-          userimg.innerHTML = `<a href="user/${myProfile.name}.html"><img src="images/user.png"></a>`;
-          if (myProfile.isInfluencer) { $('#notinfluencer').remove(); }
+          profile.innerHTML = `<img src="${hisProfile.imageURI}"><h4>${hisProfile.name}</h4>`;
+          const twitter = document.getElementById('.twitter');
+          profile.innerHTML = `<a href="https://twitter.com/${hisProfile.name}" style="text-decoration:none; color:deepskyblue;"><h4>ツイッターを確認</h4></a>`;
+          if (hisProfile.isInfluencer) { $('#notinfluencer').remove(); }
           else { $('#onlyinfluencer').remove(); }
         } catch (e) {
           deleteSessionID();
           $('#onlyinfluencer').remove();
-          $('#userimg').remove();
           const profile = document.getElementById('profile');
           profile.innerHTML = `<img src="/images/person.png" ><h4>ゲストさんようこそ</h4>`;
         }
@@ -152,45 +141,16 @@
           <div id="onlyinfluencer">
             <h5>認定インフルエンサー</h5>
           </div>
-          <div id="mytheme"><h3>Myテーマ</h3></div>
+          <div class="twitter"></div>
           <div id="timeline"><h3>タイムライン</h3>
-            <ul id="tl">
-            <li>
-                <a href="Dp4.html">
-                    kotaro
-                    さんがあなたの投票にコメントしました。
-                </a>
-            </li>
-            <li>
-                <a href="Dp4.html">
-                    kotaro
-                    さんがあなたの投票に投票しました。
-                </a>
-            </li>
-            <li>
-                <a href="Dp4.html">
-                    過去の投票に関するニュース
-                </a>
-            </li>
-            <li>
-                <a href="Dp4.html">
-                    kotaro
-                    さんがあなたの投票にコメントしました。
-                </a>
-            </li>
-            <li>
-                <a href="Dp4.html">
-                    kotaro
-                    さんがあなたの投票にコメントしました。
-                </a>
-            </li>
-            <li>
-                <a href="Dp4.html">
-                    kotaro
-                    さんがあなたの投票にコメントしました。
-                </a>
-            </li>
-          </ul>
+            <h4>
+              <p>
+                友達の投票をリアルタイムに通知し、新しいテーマやニュースがわかります。
+              </p>
+              <p>
+                タイムラインを使うにはアプリをダウンロード!
+              </p>
+            </h4>
           </div>
           <div id="pastvote"><h3>投票履歴</h3>
             <ul id="pv">

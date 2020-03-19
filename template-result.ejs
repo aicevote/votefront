@@ -201,7 +201,9 @@
                     const profile = await aicevote.getMyProfile(sessionToken);
                     $(".login").remove();
                     if (!profile.isInfluencer) { $("#onlyinfluencer").remove(); }
-
+                    const userimg = document.getElementById('userimg');
+                    userimg.innerHTML = `<a href="user.html?id=${profile.userID}"><img src="images/user.png"></a>`;
+          
                     const votes = await aicevote.getVotes(themeID, sessionToken);
                     const profiles = await aicevote.getProfiles(votes.map(vote => ({
                       userProvider: vote.userProvider, userID: vote.userID

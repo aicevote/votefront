@@ -214,9 +214,9 @@
                         && profile.userID == vote.userID
                       );
                       if (profile.isInfluencer) {
-                        $('#ainfmember').append($('<li><a href="user.html?name=' + profile.name + '"><h4>' + choices[vote.answer] + '<img src="' + profile.imageURI + '">' + profile.name + '</h4></a></li>'));
+                        $('#ainfmember').append($('<li><a href="user.html?id=' + profile.userID + '"><h4>' + choices[vote.answer] + '<img src="' + profile.imageURI + '">' + profile.name + '</h4></a></li>'));
                       } else {
-                        $('#member').append($('<li><a href="user.html?name=' + profile.name + '"><h4>' + choices[vote.answer] + '<img src="' + profile.imageURI + '">' + profile.name + '</h4></a></li>'));
+                        $('#member').append($('<li><a href="user.html?id=' + profile.userID + '"><h4>' + choices[vote.answer] + '<img src="' + profile.imageURI + '">' + profile.name + '</h4></a></li>'));
                       }
                     });
 
@@ -731,6 +731,7 @@
   </ul>
   </div>
   </div>
+  <div id="userimg"></div>
   <div class="footer">
     <h1><img src="/images/firstix-ocean.png"></h1>
     <ul>

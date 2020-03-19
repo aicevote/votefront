@@ -41,7 +41,7 @@
   <body>
     <script>
       let param = (new URL(document.location)).searchParams;
-      let user = param.get('user');
+      let id = param.get('id');
 
 
 
@@ -50,14 +50,46 @@
 
         var sessionToken = null;
         try {
+          const link = sessionToken ? "Dp" : "result";
+          themes.forEach(item => {
+            let li = document.createElement('li');
+            li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
+            tabs[0].appendChild(li);
+            li = document.createElement('li');
+            li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
+            tabs[item.genre + 1].appendChild(li);
+          })
+
+
+
+
+          const themes = await aicevote.getAllThemes();
           const sessionID = getSessionID();
           const sessionToken = await aicevote.getSessionToken(sessionID);
           const myProfile = await aicevote.getMyProfile(sessionToken);
-          if(myProfile.username == user){
-            //自分の処理、タイムライン
+          const hisProfile = await aicevote.getProfile("twitter",id);
+          if(myProfile.userID == id){
+            const allvotes = await aicevote.getAllVotes(sessionToken);
+            
+            //自分onlyの処理、タイムライン
+            //フォロワーの投票先
           }else{
             $('#timeline').remove();
           }
+
+          const link = sessionToken ? "Dp" : "result";
+          hisProfile.vote.forEach(number => {
+            themes.forEach(item => {
+              if (number == item.themeID){
+                let li = document.createElement('li');
+                let pv = document.getElementById('pv');
+                li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
+                pv.appendChild(li);
+              }
+            })
+          })
+          //投票履歴検索
+
           $('.login').remove();
           const profile = document.getElementById('profile');
           profile.innerHTML = `<img src="${myProfile.imageURI}"><h4>${myProfile.name}</h4>`;
@@ -73,38 +105,7 @@
           profile.innerHTML = `<img src="/images/person.png" ><h4>ゲストさんようこそ</h4>`;
         }
 
-        try {
-          const themes = await aicevote.getAllThemes();
-          const tabs = [document.getElementById('liall'), document.getElementById('lipolitical'),
-          document.getElementById('lilife'), document.getElementById('lieconomic'),
-          document.getElementById('lisports'), document.getElementById('lientertainment'),
-          document.getElementById('ligourmet'), document.getElementById('liother'),
-          document.getElementById('lipr'), document.getElementById('litrend')
-          ];
-          const litre = document.getElementById('litre');
-          const link = sessionToken ? "Dp" : "result";
-          themes.sort((a, b) => b.topicality - a.topicality)
-          for (i = 0; i < 7; i++) {
-            const li = document.createElement('li');
-            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}${themes[i].themeID}">${themes[i].title}</a>`;
-            tabs[9].appendChild(li);
-          }
-          for (i = 0; i < 3; i++) {
-            const li = document.createElement('li');
-            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}${themes[i].themeID}">${themes[i].title}</a>`;
-            litre.appendChild(li);
-          }
-
-          themes.forEach(item => {
-            let li = document.createElement('li');
-            li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
-            tabs[0].appendChild(li);
-            li = document.createElement('li');
-            li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
-            tabs[item.genre + 1].appendChild(li);
-          })
-        } catch (e) { }
-
+        
         
       }
 
@@ -151,9 +152,9 @@
           <div id="onlyinfluencer">
             <h5>認定インフルエンサー</h5>
           </div>
-          <div id="follower"></div>
           <div id="mytheme"><h3>Myテーマ</h3></div>
           <div id="timeline"><h3>タイムライン</h3>
+            <ul id="tl">
             <li>
                 <a href="Dp4.html">
                     kotaro
@@ -189,8 +190,13 @@
                     さんがあなたの投票にコメントしました。
                 </a>
             </li>
+          </ul>
           </div>
-          <div id="pastvote"><h3>投票履歴</h3></div>
+          <div id="pastvote"><h3>投票履歴</h3>
+            <ul id="pv">
+
+            </ul>
+          </div>
         </div>
         <div class="subcontents">
           <div class="adpc">

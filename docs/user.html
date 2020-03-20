@@ -42,7 +42,7 @@
     <script>
       let param = (new URL(document.location)).searchParams;
       let id = param.get('id');
-
+      console.log(id);
 
 
       async function main() {
@@ -50,6 +50,12 @@
 
         var sessionToken = null;
         try {
+          const themes = await aicevote.getAllThemes();
+          const sessionID = getSessionID();
+          const sessionToken = await aicevote.getSessionToken(sessionID);
+          const myProfile = await aicevote.getMyProfile(sessionToken);
+          const hisProfile = await aicevote.getProfile("twitter",id);
+          
           const litre = document.getElementById('litre');
           const link = sessionToken ? "Dp" : "result";
           themes.sort((a, b) => b.topicality - a.topicality)
@@ -58,16 +64,7 @@
             li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}${themes[i].themeID}">${themes[i].title}</a>`;
             litre.appendChild(li);
           }
-
-
-          const themes = await aicevote.getAllThemes();
-          const sessionID = getSessionID();
-          const sessionToken = await aicevote.getSessionToken(sessionID);
-          const myProfile = await aicevote.getMyProfile(sessionToken);
-          const hisProfile = await aicevote.getProfile("twitter",id);
           
-
-          const link = sessionToken ? "Dp" : "result";
           hisProfile.vote.forEach(number => {
             themes.forEach(item => {
               if (number == item.themeID){
@@ -78,17 +75,18 @@
               }
             })
           })
-          //投票履歴検索
-
           $('.login').remove();
+          const userimg = document.getElementById('userimg');
+          userimg.innerHTML = `<a href="user.html?id=${myProfile.userID}"><img src="images/user.png"></a>`;
           const profile = document.getElementById('profile');
           profile.innerHTML = `<img src="${hisProfile.imageURI}"><h4>${hisProfile.name}</h4>`;
           const twitter = document.getElementById('.twitter');
-          profile.innerHTML = `<a href="https://twitter.com/${hisProfile.name}" style="text-decoration:none; color:deepskyblue;"><h4>ツイッターを確認</h4></a>`;
+          twitter.innerHTML = `<a href="https://twitter.com/${hisProfile.name}" style="text-decoration:none; color:deepskyblue;"><h4>ツイッターを確認</h4></a>`;
           if (hisProfile.isInfluencer) { $('#notinfluencer').remove(); }
           else { $('#onlyinfluencer').remove(); }
         } catch (e) {
           deleteSessionID();
+          $('#userimg').remove();
           $('#onlyinfluencer').remove();
           const profile = document.getElementById('profile');
           profile.innerHTML = `<img src="/images/person.png" ><h4>ゲストさんようこそ</h4>`;

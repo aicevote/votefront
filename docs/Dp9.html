@@ -223,6 +223,11 @@
             try {
               const sessionID = getSessionID();
               const sessionToken = await aicevote.getSessionToken(sessionID);
+              const myProfile = await aicevote.getMyProfile(sessionToken);
+
+              const userimg = document.getElementById('userimg');
+              userimg.innerHTML = `<a href="user.html?id=${myProfile.userID}"><img src="images/user.png"></a>`;
+          
               $(".login").remove();
               $("#A").click(() => {
                 aicevote.vote(themeID, sessionToken, 0).then(() => {
@@ -276,6 +281,7 @@
               });
             } catch (e) {
               deleteSessionID();
+              $('#userimg').remove();
               window.location.href = "/result" + themeID + ".html";
             }
           }
@@ -316,6 +322,7 @@
   </div>
 
   </div>
+  <div id="userimg"></div>
   <div class="footer">
     <h1><img src="/images/firstix-ocean.png"></h1>
     <ul>

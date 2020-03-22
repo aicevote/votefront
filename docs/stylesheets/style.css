@@ -2556,8 +2556,8 @@ textarea{
 
 #userimg {
   position: fixed;
-  right: 48px;
-  bottom: 48px;
+  right: 32px;
+  bottom: 32px;
   z-index: 1000;
 }
 .footer{

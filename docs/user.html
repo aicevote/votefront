@@ -42,7 +42,6 @@
     <script>
       let param = (new URL(document.location)).searchParams;
       let id = param.get('id');
-      console.log(id);
 
 
       async function main() {
@@ -72,17 +71,7 @@
             li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}${themes[i].themeID}">${themes[i].title}</a>`;
             litre.appendChild(li);
           }
-          hisProfile.vote.forEach(number => {
-            themes.forEach(item => {
-              if (number == item.themeID){
-                console.log(number);
-                let li = document.createElement('li');
-                let pv = document.getElementById('pv');
-                li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
-                pv.appendChild(li);
-              }
-            })
-          })
+          
           if (hisProfile.isInfluencer) { $('#notinfluencer').remove(); }
           else { $('#onlyinfluencer').remove(); }
           const profile = document.getElementById('profile');

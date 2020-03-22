@@ -49,7 +49,7 @@
         var sessionToken = null;
         try {
           const sessionID = getSessionID();
-          const sessionToken = await aicevote.getSessionToken(sessionID);
+          sessionToken = await aicevote.getSessionToken(sessionID);
           const myProfile = await aicevote.getMyProfile(sessionToken);
           $('.login').remove();
           const userimg = document.getElementById('userimg');
@@ -64,7 +64,6 @@
         try {
           const themes = await aicevote.getAllThemes();
           const hisProfile = await aicevote.getProfile("twitter",id);
-          console.log(hisProfile);
           const litre = document.getElementById('litre');
           const link = sessionToken ? "Dp" : "result";
           themes.sort((a, b) => b.topicality - a.topicality)
@@ -73,7 +72,6 @@
             li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}${themes[i].themeID}">${themes[i].title}</a>`;
             litre.appendChild(li);
           }
-          
           hisProfile.vote.forEach(number => {
             themes.forEach(item => {
               if (number == item.themeID){

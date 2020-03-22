@@ -75,6 +75,7 @@
           hisProfile.vote.forEach(number => {
             themes.forEach(item => {
               if (number == item.themeID){
+                console.log(number);
                 let li = document.createElement('li');
                 let pv = document.getElementById('pv');
                 li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
@@ -85,7 +86,7 @@
           if (hisProfile.isInfluencer) { $('#notinfluencer').remove(); }
           else { $('#onlyinfluencer').remove(); }
           const profile = document.getElementById('profile');
-          profile.innerHTML = `<img src="${hisProfile.imageURI}"><h4>${hisProfile.name}</h4>`;
+          profile.innerHTML = `<h4><img src="${hisProfile.imageURI}">${hisProfile.name}</h4>`;
           const twitter = document.getElementById('.twitter');
           twitter.innerHTML = `<a href="https://twitter.com/${hisProfile.name}" style="text-decoration:none; color:deepskyblue;"><h4>ツイッターを確認</h4></a>`;
         } catch (e) {

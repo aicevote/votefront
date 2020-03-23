@@ -57,12 +57,15 @@
           deleteSessionID();
           $('#userimg').remove();
           $('#onlyinfluencer').remove();
-          const profile = document.getElementById('profile');
-          profile.innerHTML = `<img src="/images/person.png" ><h4>ゲストさんようこそ</h4>`;
         }
         try {
           const themes = await aicevote.getAllThemes();
-          const hisProfile = await aicevote.getProfile("twitter",id);
+          try {
+            hisProfile = await aicevote.getProfile("twitter",id);
+          } catch (e) {
+            hisProfile = await aicevote.getProfile("legacy",id);
+          }
+          
           const litre = document.getElementById('litre');
           const link = sessionToken ? "Dp" : "result";
           themes.sort((a, b) => b.topicality - a.topicality)
@@ -71,21 +74,22 @@
             li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}${themes[i].themeID}">${themes[i].title}</a>`;
             litre.appendChild(li);
           }
-          
-          if (hisProfile.isInfluencer) { $('#notinfluencer').remove(); }
-          else { $('#onlyinfluencer').remove(); }
-          const profile = document.getElementById('profile');
-          profile.innerHTML = `<h4><img src="${hisProfile.imageURI}">${hisProfile.name}</h4>`;
-          const twitter = document.getElementById('.twitter');
-          twitter.innerHTML = `<a href="https://twitter.com/${hisProfile.name}" style="text-decoration:none; color:deepskyblue;"><h4>ツイッターを確認</h4></a>`;
-        } catch (e) {
-          const profile = document.getElementById('profile');
-          profile.innerHTML = `<img src="/images/person.png" ><h4>ユーザーが見つかりませんでした</h4>`;
-        }
-        
+          if (!hisProfile.isInfluencer) { $('#onlyinfluencer').remove(); }
+          else {  }
+          $('#profile2').append($('<img src="' + hisProfile.imageURI + '"><h4>' + hisProfile.name + '<br><a href="https://twitter.com/' + hisProfile.name + '" style="text-decoration:none; color:deepskyblue;">ツイッターを確認</a></h4>'));
 
-        
-        
+          hisProfile.votes.forEach(element => {
+            themes.forEach(theme => {
+              if (element.themeID == theme.themeID){
+                $('#pv').append($('<li><img src="' + theme.imageURI + '"><a href ="' + link + theme.themeID + '" style="text-decoration:none; color:black;">' + theme.title + '</a></li>'));
+              }
+            })
+          });
+        } catch (e) {
+          console.log( e.message );
+          const profile = document.getElementById('profile');
+          profile.innerHTML = `<h4><img src="/images/person.png" >ユーザーが見つかりませんでした</h4>`;
+        }
       }
 
       $(() => { main(); })
@@ -127,12 +131,11 @@
       </div>
       <div id="allcontainer">
         <div class="container">
-          <div id="profile"></div>
+          <div id="profile2"></div>
           <div id="onlyinfluencer">
             <h5>認定インフルエンサー</h5>
           </div>
-          <div class="twitter"></div>
-          <div id="timeline"><h3>タイムライン</h3>
+          <div id="timeline"><h2>タイムライン</h2>
             <h4>
               <p>
                 友達の投票をリアルタイムに通知し、新しいテーマやニュースがわかります。
@@ -142,7 +145,7 @@
               </p>
             </h4>
           </div>
-          <div id="pastvote"><h3>投票履歴</h3>
+          <div id="pastvote"><h2>投票履歴</h2>
             <ul id="pv">
 
             </ul>

@@ -226,7 +226,7 @@
               const myProfile = await aicevote.getMyProfile(sessionToken);
 
               const userimg = document.getElementById('userimg');
-              userimg.innerHTML = `<a href="user.html?id=${myProfile.userID}"><img src="images/user.png"></a>`;
+              userimg.innerHTML = `<a href="user.html?id=${myProfile.userID}&which=${myProfile.userProvider}"><img src="images/user.png"></a>`;
           
               $(".login").remove();
               $("#A").click(() => {

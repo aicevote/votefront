@@ -202,7 +202,7 @@
                     $(".login").remove();
                     if (!profile.isInfluencer) { $("#onlyinfluencer").remove(); }
                     const userimg = document.getElementById('userimg');
-                    userimg.innerHTML = `<a href="user.html?id=${profile.userID}"><img src="images/user.png"></a>`;
+                    userimg.innerHTML = `<a href="user.html?id=${profile.userID}&which=${profile.userProvider}"><img src="images/user.png"></a>`;
           
                     const votes = await aicevote.getVotes(themeID, sessionToken);
                     const profiles = await aicevote.getProfiles(votes.map(vote => ({
@@ -216,9 +216,9 @@
                         && profile.userID == vote.userID
                       );
                       if (profile.isInfluencer) {
-                        $('#ainfmember').append($('<li><a href="user.html?id=' + profile.userID + ' " style="text-decoration:none; color:black;"><h4>' + choices[vote.answer] + '<img src="' + profile.imageURI + '">' + profile.name + '</h4></a></li>'));
+                        $('#ainfmember').append($('<li><a href="user.html?id=' + profile.userID + '&which=' + profile.userProvider + '" style="text-decoration:none; color:black;"><h4>' + choices[vote.answer] + '<img src="' + profile.imageURI + '">' + profile.name + '</h4></a></li>'));
                       } else {
-                        $('#member').append($('<li><a href="user.html?id=' + profile.userID + '" style="text-decoration:none; color:black;"><h4>' + choices[vote.answer] + '<img src="' + profile.imageURI + '">' + profile.name + '</h4></a></li>'));
+                        $('#member').append($('<li><a href="user.html?id=' + profile.userID + '&which=' + profile.userProvider + '" style="text-decoration:none; color:black;"><h4>' + choices[vote.answer] + '<img src="' + profile.imageURI + '">' + profile.name + '</h4></a></li>'));
                       }
                     });
 
@@ -452,9 +452,9 @@
                         && profile.userID == element.userID
                       );
                       if (element.isInfluencer) {
-                        $('#influencer-comment-list').prepend($('<a href="user.html?name=' + profile.name + '" style="text-decoration:none; color:black;"><div class="twitter__block"><img src="' + profile.imageURI + '"><div class="twitter__block-text"><div class="name">' + profile.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + new Date(element.createdAt).toISOString() + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div></a>'));
+                        $('#influencer-comment-list').prepend($('<a href="user.html?id=' + profile.userID + '&which=' + profile.userProvider + '" style="text-decoration:none; color:black;"><div class="twitter__block"><img src="' + profile.imageURI + '"><div class="twitter__block-text"><div class="name">' + profile.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + new Date(element.createdAt).toISOString() + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div></a>'));
                       } else {
-                        $('#comment-list').prepend($('<a href="user.html?name=' + profile.name + '" style="text-decoration:none; color:black;"><div class="twitter__block"><img src="' + profile.imageURI + '"><div class="twitter__block-text"><div class="name">' + profile.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + new Date(element.createdAt).toISOString() + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div></a>'));
+                        $('#comment-list').prepend($('<a href="user.html?id=' + profile.userID + '&which=' + profile.userProvider + '" style="text-decoration:none; color:black;"><div class="twitter__block"><img src="' + profile.imageURI + '"><div class="twitter__block-text"><div class="name">' + profile.name + '</div><p><div class="text" id="text">' + element.message + '</div></p><div class="date" id="date">' + new Date(element.createdAt).toISOString() + '</div><a id="good"><div class="twitter__icon"><span class="twitter-heart"></span></div></a><div id="goodcount" class="goodcount"></div></div></div></a>'));
                       }
                     });
 

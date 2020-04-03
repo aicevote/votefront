@@ -42,7 +42,7 @@
     <script>
       let param = (new URL(document.location)).searchParams;
       let id = param.get('id');
-
+      let which = param.get('which');
 
       async function main() {
         var sessionToken = null;
@@ -52,7 +52,7 @@
           const myProfile = await aicevote.getMyProfile(sessionToken);
           $('.login').remove();
           const userimg = document.getElementById('userimg');
-          userimg.innerHTML = `<a href="user.html?id=${myProfile.userID}"><img src="images/user.png"></a>`;
+          userimg.innerHTML = `<a href="user.html?id=${myProfile.userID}&which=${myProfile.userProvider}"><img src="images/user.png"></a>`;
         } catch (e) {
           deleteSessionID();
           $('#userimg').remove();
@@ -61,9 +61,14 @@
         try {
           const themes = await aicevote.getAllThemes();
           try {
-            hisProfile = await aicevote.getProfile("twitter",id);
+            if (which == "twitter") {
+              hisProfile = await aicevote.getProfile("twitter",id);
+            } else if (which == "legacy") {
+              hisProfile = await aicevote.getProfile("legacy",id);
+            }
           } catch (e) {
-            hisProfile = await aicevote.getProfile("legacy",id);
+            const profile2 = document.getElementById('profile2');
+            profile2.innerHTML = `<h4><img src="/images/person.png" >ユーザーが見つかりませんでした</h4>`;
           }
           
           const litre = document.getElementById('litre');
@@ -76,7 +81,12 @@
           }
           if (!hisProfile.isInfluencer) { $('#onlyinfluencer').remove(); }
           else {  }
-          $('#profile2').append($('<img src="' + hisProfile.imageURI + '"><h4>' + hisProfile.name + '<br><a href="https://twitter.com/' + hisProfile.name + '" style="text-decoration:none; color:deepskyblue;">ツイッターを確認</a></h4>'));
+          if (which == "twitter") {
+            $('#profile2').append($('<img src="' + hisProfile.imageURI + '"><h4>' + hisProfile.name + '<br><a href="https://twitter.com/' + hisProfile.name + '" style="text-decoration:none; color:deepskyblue;">ツイッターを確認</a></h4>'));
+          } else if (which == "legacy") {
+            $('#profile2').append($('<img src="' + hisProfile.imageURI + '"><h4>' + hisProfile.name + '<br><a href="https://twitter.com/search?q=' + hisProfile.name + '&f=user" style="text-decoration:none; color:deepskyblue;">ツイッターを確認</a></h4>'));
+          }
+          
 
           hisProfile.votes.forEach(element => {
             themes.forEach(theme => {
@@ -87,8 +97,7 @@
           });
         } catch (e) {
           console.log( e.message );
-          const profile = document.getElementById('profile');
-          profile.innerHTML = `<h4><img src="/images/person.png" >ユーザーが見つかりませんでした</h4>`;
+          
         }
       }
 

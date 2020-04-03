@@ -55,7 +55,7 @@
           const profile = document.getElementById('profile');
           profile.innerHTML = `<img src="${myProfile.imageURI}">${myProfile.name}さんようこそ`;
           const userimg = document.getElementById('userimg');
-          userimg.innerHTML = `<a href="user.html?id=${myProfile.userID}"><img src="images/user.png"></a>`;
+          userimg.innerHTML = `<a href="user.html?id=${myProfile.userID}&which=${myProfile.userProvider}"><img src="images/user.png"></a>`;
           if (myProfile.isInfluencer) { $('#notinfluencer').remove(); }
           else { $('#onlyinfluencer').remove(); }
         } catch (e) {

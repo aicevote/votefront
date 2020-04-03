@@ -107,6 +107,8 @@ body {
 }
 #mytheme li, #timeline li, #pastvote li {
   margin: 10px;
+  padding: 10px 15px;
+  float: none;
   border-bottom:1px solid #666
 }
 
@@ -114,8 +116,6 @@ body {
   padding: 100px;
 }
 #pastvote {
-  width: inherit;
-  height: auto;
   margin: 0 auto;
   border: solid 5px #444444;
   border-radius: 5px;
@@ -651,7 +651,11 @@ input[name="tab_item"] {
   color: black;
 }
 .movie{
-  height: 400px;
+  width:630px;
+  height: auto;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .main h1{
@@ -2010,6 +2014,14 @@ input[name="tab_item"] {
 }
 .adpc{
   display: none;
+}
+
+.movie{
+  width:98%;
+  height: auto;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 #allcontainer{
   position: relative;

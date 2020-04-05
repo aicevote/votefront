@@ -72,12 +72,57 @@ li{
 
 /* body */
 body {
-  font-family: "Hiragino Sans","ヒラギノ角ゴシック","ヒラギノ角ゴ ProN W3",verdana,Arial,sans-serif;;
+  font-family: "Hiragino Sans","ヒラギノ角ゴシック","ヒラギノ角ゴ ProN W3",verdana,Arial,sans-serif;
   background: #F4F5F7;
   color: #5e5e5e;
   min-height: 100vh;
 }
 
+#profile {
+  margin: 15px;
+}
+#profile img{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 10px;
+}
+#profile h4{
+  margin: 15px;
+  font-weight: bold;
+}
+#profile2 {
+  margin: 15px;
+  text-align: center;
+}
+#profile2 img{
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 20px;
+}
+#profile2 h4{
+  margin: 20px;
+  font-weight: bold;
+}
+#mytheme li, #timeline li, #pastvote li {
+  margin: 10px;
+  padding: 10px 15px;
+  float: none;
+  border-bottom:1px solid #666
+}
+
+#timeline {
+  padding: 100px;
+}
+#pastvote {
+  margin: 0 auto;
+  border: solid 5px #444444;
+  border-radius: 5px;
+  padding-bottom: 70px;
+  padding: 40px;
+  box-shadow: #444444 8px;
+}
 /* Form Layout */
 .form-wrapper {
   background: #fafafa;
@@ -606,7 +651,11 @@ input[name="tab_item"] {
   color: black;
 }
 .movie{
-  height: 400px;
+  width:630px;
+  height: auto;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .main h1{
@@ -1257,7 +1306,12 @@ input[name="tab_item2"] {
   transform: translateX(0%);/*中身を表示（右へスライド）*/
   box-shadow: 6px 0 25px rgba(0,0,0,.15);
 }
-
+#userimg {
+  position: fixed;
+  right: 60px;
+  bottom: 60px;
+  z-index: 1000;
+}
 .footer{
   background-color: #001100;
   padding-top: 10px;
@@ -1431,6 +1485,56 @@ h4 img{
   width:32px;
   height: 32px;
 }
+
+#profile {
+  margin: 10px;
+}
+#profile img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 5px;
+}
+#profile h4{
+  margin: 10px;
+  font-weight: bold;
+}
+#profile2 {
+  margin: 10px;
+  text-align: center;
+}
+#profile2 img{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 10px;
+}
+#profile2 h4{
+  margin: 10px;
+  font-weight: bold;
+}
+#mytheme li, #timeline li, #pastvote li {
+  margin: 20px;
+  border-bottom:1px solid #666
+}
+
+#timeline {
+  padding-top: 70px;
+}
+#pastvote {
+  width: inherit;
+  height: auto;
+  margin: 0 auto;
+  border: solid 5px#444444;
+  border-radius: 5px;
+  padding-bottom: 70px;
+  padding: 20px;
+  box-shadow: #444444 5px;
+}
+
+
+
+
 form {
   padding: 0 1.5em;
 }
@@ -1910,6 +2014,14 @@ input[name="tab_item"] {
 }
 .adpc{
   display: none;
+}
+
+.movie{
+  width:98%;
+  height: auto;
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 #allcontainer{
   position: relative;
@@ -2504,6 +2616,12 @@ textarea{
   box-shadow: 6px 0 25px rgba(0,0,0,.15);
 }
 
+#userimg {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  z-index: 1000;
+}
 .footer{
   background-color: #001100;
   color: white;

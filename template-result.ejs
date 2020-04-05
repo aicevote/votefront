@@ -197,7 +197,7 @@
 
                   try {
                     const sessionID = getSessionID();
-                    const sessionToken = await aicevote.getSessionToken(sessionID);
+                    sessionToken = await aicevote.getSessionToken(sessionID);
                     const profile = await aicevote.getMyProfile(sessionToken);
                     $(".login").remove();
                     if (!profile.isInfluencer) { $("#onlyinfluencer").remove(); }

@@ -652,10 +652,15 @@ input[name="tab_item"] {
 }
 .movie{
   width:630px;
-  height: auto;
+  height: 390px;
   margin: 0 auto;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.movie iframe{
+  position: relative;
+  width: 630px;
+  height: 390px;
 }
 
 .main h1{
@@ -1320,6 +1325,9 @@ input[name="tab_item2"] {
 .footer img{
   width: 250px;
   margin: 0 auto;
+}
+#banner{
+  display: none;
 }
 }
 
@@ -2017,11 +2025,16 @@ input[name="tab_item"] {
 }
 
 .movie{
-  width:98%;
-  height: auto;
+  width:95vw;
+  height: 53vw;
   margin: 0 auto;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+.movie iframe{
+  position: relative;
+  width: 100%;
+  height: auto;
 }
 #allcontainer{
   position: relative;
@@ -2636,6 +2649,13 @@ textarea{
 }
 .goodcount{
   left:100px;
+}
+#banner{
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 25vw;
+  z-index: 99;
 }
 }
 .cp_link {

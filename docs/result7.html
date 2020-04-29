@@ -40,6 +40,8 @@
 
   <body>
     <div class="mainSite">
+        <div id="banner">
+        </div>
       <div class="header">
         <div class="header-logo">
           <a href="home"><img src="/images/aice.JPG"></a>
@@ -96,6 +98,16 @@
             <h4 id="description"></h4>
 
             <script>
+              if ( navigator.userAgent.indexOf('iPhone') > 0 ){
+                $('#banner').prepend($('<a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/DownloadBanner.png"></a>'));
+              } else if( navigator.userAgent.indexOf('iPad') > 0 ){
+                $('#banner').prepend($('<a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/DownloadBanner.png"></a>'));
+              } else if( navigator.userAgent.indexOf('iPod') > 0 ){
+                $('#banner').prepend($('<a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/DownloadBanner.png"></a>'));
+              } else if( navigator.userAgent.indexOf('Android') > 0 ){
+                $('#banner').prepend($('<a href="https://play.google.com/store/apps/details?id=com.aicevote.aicevoteapplication"><img src="/images/DownloadBanner.png"></a>'));
+              }
+
               themeID = parseInt(window.location.pathname.replace(/[^-^0-9^\.]/g, ""), 10);
               var sessionToken = "";
               var title = "";

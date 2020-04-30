@@ -102,7 +102,7 @@
           let articles = await aicevote.getAllArticles();
           for (let i = 0; i < articles.related.length; i++) {
             articles.related[i].forEach((article) => {
-              articles.related[i].themeID = i;
+              article["id"] = articles.related[i].themeID;
             });
           }
           articles = articles.related.map(a=>a.articles).reduce(

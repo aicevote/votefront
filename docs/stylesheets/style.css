@@ -1686,7 +1686,7 @@ input[name="tab_item"] {
 #newslist li{
   padding:0;
   width: 100%;
-  height: 15vw;
+  height: 20vw;
   margin: 1%;
   margin-bottom: 10px;
   margin-top: 10px;
@@ -1697,16 +1697,16 @@ input[name="tab_item"] {
 }
 .anews img{
   position: absolute;
-  height: 14vw;
-  width: 26vw;
+  height: 18vw;
+  width: 32vw;
   padding:0;
   margin: 0;
 }
 .anews p{
   position: relative;
-  left: 27vw;
-  width: 68vw;
-  font-size: 11px;
+  left: 34vw;
+  width: 64vw;
+  font-size: 10px;
   font-weight: bold;
   padding:5px;
   margin: 0;

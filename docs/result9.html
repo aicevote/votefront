@@ -104,7 +104,7 @@
             <h4 id="description"></h4>
 
             <script>
-              themeid = parseInt(window.location.pathname.replace(/[^-^0-9^\.]/g, ""), 10);
+              themeID = parseInt(window.location.pathname.replace(/[^-^0-9^\.]/g, ""), 10);
               var sessionToken = "";
               var title = "";
               var description = "";
@@ -118,7 +118,7 @@
                   try {
                     const themes = await aicevote.getAllThemes();
                     themes.forEach(theme => {
-                      if(theme.themeID == themeid){
+                      if(theme.themeID == themeID){
                         const title = theme.title;
                         const description = theme.description;
                         choices = theme.choices;
@@ -217,7 +217,7 @@
                     const userimg = document.getElementById('userimg');
                     userimg.innerHTML = `<a href="user.html?id=${profile.userID}&which=${profile.userProvider}"><img src="images/user.png"></a>`;
           
-                    const votes = await aicevote.getVotes(themeid, sessionToken);
+                    const votes = await aicevote.getVotes(themeID, sessionToken);
                     const profiles = await aicevote.getProfiles(votes.map(vote => ({
                       userProvider: vote.userProvider, userID: vote.userID
                     })));
@@ -242,7 +242,7 @@
                     $('#member').append($("<h4>ログインするとフォロワーの投票先がわかります</h4>"));
                     $('#ainfmember').append($("<h4>ログインするとインフルエンサーの投票先がわかります</h4>"));
                   } finally {
-                    const obj = await aicevote.getTransition(themeid);
+                    const obj = await aicevote.getTransition(themeID);
                     obj.shortTransition.reverse();
                     obj.longTransition.reverse();
                     const now = Date.now();
@@ -458,7 +458,7 @@
                 async function comment() {
                     $('#influencer-comment-list').empty();
                     $('#comment-list').empty();
-                    const comments = await aicevote.getComments(themeid);
+                    const comments = await aicevote.getComments(themeID);
                     const profiles = await aicevote.getProfiles(comments.map(comment => ({
                       userProvider: comment.userProvider, userID: comment.userID
                     })));
@@ -474,10 +474,9 @@
                       }
                     });
                   };
-                setInterval(() => {
-                  $(() => comment());
-                }, 5000);
+                
                 $(() => main());
+                console.log(themeID);
                 $('#submit').click(function () {
                   const message = $('#message').val();
                   if (message.length == 0) {
@@ -485,7 +484,7 @@
                   } else if (message.length >= 140) {
                     alert("140字以内に収めてください")
                   } else {
-                    aicevote.comment(themeid, sessionToken, message);
+                    aicevote.comment(themeID, sessionToken, message);
                     $('#comment-form')[0].reset();
                   }
                 });
@@ -496,13 +495,13 @@
                   } else if (message.length >= 140) {
                     alert("140字以内に収めてください")
                   } else {
-                    aicevote.comment(themeid, sessionToken, message);
+                    aicevote.comment(themeID, sessionToken, message);
                     $('#infcomment-form')[0].reset();
                   }
                 });
                 socket.on("connect", async () => {
-                  const obj = await aicevote.getResult(themeid);
-                  if (obj.themeID != themeid) { return }
+                  const obj = await aicevote.getResult(themeID);
+                  if (obj.themeID != themeID) { return }
                   var ctx = document.getElementById("ch").getContext("2d");
                   var chart = new Chart(ctx, {
                     type: "horizontalBar",

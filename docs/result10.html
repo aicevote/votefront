@@ -458,6 +458,7 @@
                 async function comment() {
                     $('#influencer-comment-list').empty();
                     $('#comment-list').empty();
+                    console.log(themeID);
                     const comments = await aicevote.getComments(themeID);
                     const profiles = await aicevote.getProfiles(comments.map(comment => ({
                       userProvider: comment.userProvider, userID: comment.userID

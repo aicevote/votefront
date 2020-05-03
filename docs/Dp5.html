@@ -25,6 +25,12 @@
 
     <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+      </script>
   <script>
     var firebaseConfig = {
       apiKey: "AIzaSyCV8Z8TI9MZ_Il_r2XikNfFL6Dm64pbmhA",
@@ -243,51 +249,61 @@
               console.log(themeID);
               $(".login").remove();
               $("#A").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 0).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#B").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 1).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#C").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 2).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#D").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 3).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#E").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 4).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#F").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 5).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#G").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 6).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#H").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 7).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#I").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 8).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#J").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 9).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });

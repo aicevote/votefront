@@ -149,12 +149,12 @@
 
         <script>
           async function main() {
-            const themeid = parseInt(window.location.pathname.replace(/[^-^0-9^\.]/g, ""), 10);
+            const themeID = parseInt(window.location.pathname.replace(/[^-^0-9^\.]/g, ""), 10);
 
             try {
               const themes = await aicevote.getAllThemes();
               themes.forEach(theme => {
-                if (theme.themeID == themeid) {
+                if (theme.themeID == themeID) {
                   const title = theme.title;
                   const description = theme.description;
                   const choices = theme.choices;
@@ -240,62 +240,62 @@
 
               const userimg = document.getElementById('userimg');
               userimg.innerHTML = `<a href="user.html?id=${myProfile.userID}&which=${myProfile.userProvider}"><img src="images/user.png"></a>`;
-          
+              console.log(themeID);
               $(".login").remove();
               $("#A").click(() => {
-                aicevote.vote(themeid, sessionToken, 0).then(() => {
-                  location.href = "/result" + themeid + ".html";
+                aicevote.vote(themeID, sessionToken, 0).then(() => {
+                  location.href = "/result" + themeID + ".html";
                 });
               });
               $("#B").click(() => {
-                aicevote.vote(themeid, sessionToken, 1).then(() => {
-                  location.href = "/result" + themeid + ".html";
+                aicevote.vote(themeID, sessionToken, 1).then(() => {
+                  location.href = "/result" + themeID + ".html";
                 });
               });
               $("#C").click(() => {
-                aicevote.vote(themeid, sessionToken, 2).then(() => {
-                  location.href = "/result" + themeid + ".html";
+                aicevote.vote(themeID, sessionToken, 2).then(() => {
+                  location.href = "/result" + themeID + ".html";
                 });
               });
               $("#D").click(() => {
-                aicevote.vote(themeid, sessionToken, 3).then(() => {
-                  location.href = "/result" + themeid + ".html";
+                aicevote.vote(themeID, sessionToken, 3).then(() => {
+                  location.href = "/result" + themeID + ".html";
                 });
               });
               $("#E").click(() => {
-                aicevote.vote(themeid, sessionToken, 4).then(() => {
-                  location.href = "/result" + themeid + ".html";
+                aicevote.vote(themeID, sessionToken, 4).then(() => {
+                  location.href = "/result" + themeID + ".html";
                 });
               });
               $("#F").click(() => {
-                aicevote.vote(themeid, sessionToken, 5).then(() => {
-                  location.href = "/result" + themeid + ".html";
+                aicevote.vote(themeID, sessionToken, 5).then(() => {
+                  location.href = "/result" + themeID + ".html";
                 });
               });
               $("#G").click(() => {
-                aicevote.vote(themeid, sessionToken, 6).then(() => {
-                  location.href = "/result" + themeid + ".html";
+                aicevote.vote(themeID, sessionToken, 6).then(() => {
+                  location.href = "/result" + themeID + ".html";
                 });
               });
               $("#H").click(() => {
-                aicevote.vote(themeid, sessionToken, 7).then(() => {
-                  location.href = "/result" + themeid + ".html";
+                aicevote.vote(themeID, sessionToken, 7).then(() => {
+                  location.href = "/result" + themeID + ".html";
                 });
               });
               $("#I").click(() => {
-                aicevote.vote(themeid, sessionToken, 8).then(() => {
-                  location.href = "/result" + themeid + ".html";
+                aicevote.vote(themeID, sessionToken, 8).then(() => {
+                  location.href = "/result" + themeID + ".html";
                 });
               });
               $("#J").click(() => {
-                aicevote.vote(themeid, sessionToken, 9).then(() => {
-                  location.href = "/result" + themeid + ".html";
+                aicevote.vote(themeID, sessionToken, 9).then(() => {
+                  location.href = "/result" + themeID + ".html";
                 });
               });
             } catch (e) {
               deleteSessionID();
               $('#userimg').remove();
-              window.location.href = "/result" + themeid + ".html";
+              window.location.href = "/result" + themeID + ".html";
             }
           }
 

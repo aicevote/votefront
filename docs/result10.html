@@ -579,8 +579,6 @@
                   if (obj.results[9]) {
                     $('#J2').prepend($('<dt>' + obj.results[9] + '</dt><dt>' + "%" + '</dt>'));
                   }
-                  $('#count').empty();
-                  obj.counts.forEach((val, i) => { $('#count').prepend($("<h4>" + choices[i] + ":" + val + "票</h4>")) })
                 });
               });
 
@@ -681,8 +679,6 @@
                     </div>
                   </div>
                 </div>
-                <h4>通算投票数</h4>
-                <div id="count"></div>
               </div>
 
               <div class="tab_content2" id="comment_content">

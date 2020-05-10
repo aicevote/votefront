@@ -23,14 +23,28 @@
     <script src="/javascripts/Chart.min.js"></script>
     <script src="/javascripts/chartjs-plugin-streaming.js"></script>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag('config', 'UA-141182013-1');
-    </script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+      </script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyCV8Z8TI9MZ_Il_r2XikNfFL6Dm64pbmhA",
+      authDomain: "aicevote-firebase.firebaseapp.com",
+      databaseURL: "https://aicevote-firebase.firebaseio.com",
+      projectId: "aicevote-firebase",
+      storageBucket: "aicevote-firebase.appspot.com",
+      messagingSenderId: "1023354604812",
+      appId: "1:1023354604812:web:5d348857efd173ef878d29",
+      measurementId: "G-ZPE9QD7PD5"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
   </head>
 
   <body>
@@ -145,70 +159,75 @@
 
             try {
               const themes = await aicevote.getAllThemes();
-              const title = themes[themeID].title;
-              const description = themes[themeID].description;
-              const choices = themes[themeID].choices;
-              const genre = themes[themeID].genre;
+              themes.forEach(theme => {
+                if (theme.themeID == themeID) {
+                  const title = theme.title;
+                  const description = theme.description;
+                  const choices = theme.choices;
+                  const genre = theme.genre;
+                  document.title = title;
+                  $("#title").text(title);
+                  $("#description").text(description);
 
-              document.title = title;
-              $("#title").text(title);
-              $("#description").text(description);
+                  if (choices[0]) {
+                    $("#A").text(choices[0]);
+                  } else {
+                    $("#A").remove();
+                    $("#button01").remove();
+                  }
+                  if (choices[1]) {
+                    $("#B").text(choices[1]);
+                  } else {
+                    $("#B").remove();
+                  }
+                  if (choices[2]) {
+                    $("#C").text(choices[2]);
+                  } else {
+                    $("#C").remove();
+                    $("#button23").remove();
+                  }
+                  if (choices[3]) {
+                    $("#D").text(choices[3]);
+                  } else {
+                    $("#D").remove();
+                  }
+                  if (choices[4]) {
+                    $("#E").text(choices[4]);
+                  } else {
+                    $("#E").remove();
+                    $("#button45").remove();
+                  }
+                  if (choices[5]) {
+                    $("#F").text(choices[5]);
+                  } else {
+                    $("#F").remove();
+                  }
+                  if (choices[6]) {
+                    $("#G").text(choices[6]);
+                  } else {
+                    $("#G").remove();
+                    $("#button67").remove();
+                  }
+                  if (choices[7]) {
+                    $("#H").text(choices[7]);
+                  } else {
+                    $("#H").remove();
+                  }
+                  if (choices[8]) {
+                    $("#I").text(choices[8]);
+                  } else {
+                    $("#I").remove();
+                    $("#button89").remove();
+                  }
+                  if (choices[9]) {
+                    $("#J").text(choices[9]);
+                  } else {
+                    $("#J").remove();
+                  }
+                }
+              })
 
-              if (choices[0]) {
-                $("#A").text(choices[0]);
-              } else {
-                $("#A").remove();
-                $("#button01").remove();
-              }
-              if (choices[1]) {
-                $("#B").text(choices[1]);
-              } else {
-                $("#B").remove();
-              }
-              if (choices[2]) {
-                $("#C").text(choices[2]);
-              } else {
-                $("#C").remove();
-                $("#button23").remove();
-              }
-              if (choices[3]) {
-                $("#D").text(choices[3]);
-              } else {
-                $("#D").remove();
-              }
-              if (choices[4]) {
-                $("#E").text(choices[4]);
-              } else {
-                $("#E").remove();
-                $("#button45").remove();
-              }
-              if (choices[5]) {
-                $("#F").text(choices[5]);
-              } else {
-                $("#F").remove();
-              }
-              if (choices[6]) {
-                $("#G").text(choices[6]);
-              } else {
-                $("#G").remove();
-                $("#button67").remove();
-              }
-              if (choices[7]) {
-                $("#H").text(choices[7]);
-              } else {
-                $("#H").remove();
-              }
-              if (choices[8]) {
-                $("#I").text(choices[8]);
-              } else {
-                $("#I").remove();
-                $("#button89").remove();
-              }
-              if (choices[9]) {
-                $("#J").text(choices[9]);
-              } else {
-                $("#J").remove();
-              }
+              
 
               const relate = document.getElementById("relate");
               themes.forEach(theme => {
@@ -227,54 +246,64 @@
 
               const userimg = document.getElementById('userimg');
               userimg.innerHTML = `<a href="user.html?id=${myProfile.userID}&which=${myProfile.userProvider}"><img src="images/user.png"></a>`;
-          
+              console.log(themeID);
               $(".login").remove();
               $("#A").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 0).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#B").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 1).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#C").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 2).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#D").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 3).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#E").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 4).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#F").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 5).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#G").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 6).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#H").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 7).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#I").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 8).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
               });
               $("#J").click(() => {
+                firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 9).then(() => {
                   location.href = "/result" + themeID + ".html";
                 });
@@ -335,4 +364,8 @@
     </ul>
   </div>
   </div>
+  <script src="/__/firebase/init.js"></script>
+  <script src="/__/firebase/6.2.0/firebase-app.js"></script>
+  <script src="/__/firebase/6.2.0/firebase-auth.js"></script>
+  <script src="/__/firebase/6.2.0/firebase-firestore.js"></script>
   </body>

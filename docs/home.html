@@ -27,14 +27,28 @@
     <script src="/javascripts/chartjs-plugin-streaming.js"></script>
     <script src="/javascripts/ajax.js"></script>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag('config', 'UA-141182013-1');
-    </script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+      </script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyCV8Z8TI9MZ_Il_r2XikNfFL6Dm64pbmhA",
+      authDomain: "aicevote-firebase.firebaseapp.com",
+      databaseURL: "https://aicevote-firebase.firebaseio.com",
+      projectId: "aicevote-firebase",
+      storageBucket: "aicevote-firebase.appspot.com",
+      messagingSenderId: "1023354604812",
+      appId: "1:1023354604812:web:5d348857efd173ef878d29",
+      measurementId: "G-ZPE9QD7PD5"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
   </head>
 
   <body>
@@ -50,7 +64,6 @@
           const sessionID = getSessionID();
           sessionToken = await aicevote.getSessionToken(sessionID);
           const myProfile = await aicevote.getMyProfile(sessionToken);
-          console.log(myProfile)
           $('.login').remove();
           const profile = document.getElementById('profile');
           profile.innerHTML = `<img src="${myProfile.imageURI}">${myProfile.name}さんようこそ`;
@@ -100,17 +113,20 @@
 
         try {
           let articles = await aicevote.getAllArticles();
+          console.log(articles);
           for (let i = 0; i < articles.related.length; i++) {
-            articles.related[i].forEach((article) => {
-              article["id"] = i;
+            articles.related[i].articles.forEach(article => {
+              article["id"] = articles.related[i].themeID;
             });
           }
-          articles = articles.related.reduce(
+          
+          articles = articles.related.map(a => a.articles).reduce(
             (prev, cur) => prev.concat(cur)
           ).sort((a, b) => b.publishedAt - a.publishedAt);
-
+          
           const newslist = document.getElementById('newslist');
           articles.forEach((article, i) => {
+            
             const li = document.createElement('li');
             li.innerHTML = `
                                     <label id="newsnav-open${i}" for="newsnav-input${i}"><span></span>  

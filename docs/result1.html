@@ -28,14 +28,28 @@
     <script src="/javascripts/Chart.min.js"></script>
     <script src="/javascripts/chartjs-plugin-streaming.js"></script>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141182013-1"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag('config', 'UA-141182013-1');
-    </script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+      </script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyCV8Z8TI9MZ_Il_r2XikNfFL6Dm64pbmhA",
+      authDomain: "aicevote-firebase.firebaseapp.com",
+      databaseURL: "https://aicevote-firebase.firebaseio.com",
+      projectId: "aicevote-firebase",
+      storageBucket: "aicevote-firebase.appspot.com",
+      messagingSenderId: "1023354604812",
+      appId: "1:1023354604812:web:5d348857efd173ef878d29",
+      measurementId: "G-ZPE9QD7PD5"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
   </head>
 
   <body>
@@ -121,80 +135,85 @@
                 async function main() {
                   try {
                     const themes = await aicevote.getAllThemes();
-                    const title = themes[themeID].title;
-                    const description = themes[themeID].description;
-                    choices = themes[themeID].choices;
-                    const genre = themes[themeID].genre;
+                    themes.forEach(theme => {
+                      if(theme.themeID == themeID){
+                        const title = theme.title;
+                        const description = theme.description;
+                        choices = theme.choices;
+                        genre  = theme.genre;
 
-                    document.title = title;
-                    $("#title").text(title);
-                    $("#description").text(description);
-                    $("#share").attr("href", "https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=https://aicevote.com&hashtags=" + title);
+                        document.title = title;
+                        $("#title").text(title);
+                        $("#description").text(description);
+                        $("#share").attr("href", "https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=https://aicevote.com&hashtags=" + title);
 
-                    if (choices[0]) {
-                      $("#agree0").text(choices[0]);
-                    } else {
-                      $('#agree0').remove();
-                      $('#A2').remove();
-                    }
-                    if (choices[1]) {
-                      $("#agree1").text(choices[1]);
-                    } else {
-                      $('#agree1').remove();
-                      $('#B2').remove();
-                    }
-                    if (choices[2]) {
-                      $("#agree2").text(choices[2]);
-                    } else {
-                      $('#agree2').remove();
-                      $('#C2').remove();
-                      $('#agree3').remove();
-                      $('#D2').remove();
-                    }
-                    if (choices[3]) {
-                      $("#agree3").text(choices[3]);
-                    } else {
+                        if (choices[0]) {
+                          $("#agree0").text(choices[0]);
+                        } else {
+                          $('#agree0').remove();
+                          $('#A2').remove();
+                        }
+                        if (choices[1]) {
+                          $("#agree1").text(choices[1]);
+                        } else {
+                          $('#agree1').remove();
+                          $('#B2').remove();
+                        }
+                        if (choices[2]) {
+                          $("#agree2").text(choices[2]);
+                        } else {
+                          $('#agree2').remove();
+                          $('#C2').remove();
+                          $('#agree3').remove();
+                          $('#D2').remove();
+                        }
+                        if (choices[3]) {
+                          $("#agree3").text(choices[3]);
+                        } else {
 
-                    }
-                    if (choices[4]) {
-                      $("#agree4").text(choices[4]);
-                    } else {
-                      $('#agree4').remove();
-                      $('#E2').remove();
-                      $('#agree5').remove();
-                      $('#F2').remove();
-                    }
-                    if (choices[5]) {
-                      $("#agree5").text(choices[5]);
-                    } else {
+                        }
+                        if (choices[4]) {
+                          $("#agree4").text(choices[4]);
+                        } else {
+                          $('#agree4').remove();
+                          $('#E2').remove();
+                          $('#agree5').remove();
+                          $('#F2').remove();
+                        }
+                        if (choices[5]) {
+                          $("#agree5").text(choices[5]);
+                        } else {
 
-                    }
-                    if (choices[6]) {
-                      $("#agree6").text(choices[6]);
-                    } else {
-                      $('#agree6').remove();
-                      $('#G2').remove();
-                      $('#agree7').remove();
-                      $('#H2').remove();
-                    }
-                    if (choices[7]) {
-                      $("#agree7").text(choices[7]);
-                    } else {
+                        }
+                        if (choices[6]) {
+                          $("#agree6").text(choices[6]);
+                        } else {
+                          $('#agree6').remove();
+                          $('#G2').remove();
+                          $('#agree7').remove();
+                          $('#H2').remove();
+                        }
+                        if (choices[7]) {
+                          $("#agree7").text(choices[7]);
+                        } else {
 
-                    }
-                    if (choices[8]) {
-                      $("#agree8").text(choices[8]);
-                    } else {
-                      $('#agree8').remove();
-                      $('#I2').remove();
-                      $('#agree9').remove();
-                      $('#J2').remove();
-                    }
-                    if (choices[9]) {
-                      $("#agree9").text(choices[9]);
-                    } else {
+                        }
+                        if (choices[8]) {
+                          $("#agree8").text(choices[8]);
+                        } else {
+                          $('#agree8').remove();
+                          $('#I2').remove();
+                          $('#agree9').remove();
+                          $('#J2').remove();
+                        }
+                        if (choices[9]) {
+                          $("#agree9").text(choices[9]);
+                        } else {
 
-                    }
+                        }
+                      }
+                    })
+                    
 
 
                     const relate = document.getElementById("relate");
@@ -457,6 +476,7 @@
                 async function comment() {
                     $('#influencer-comment-list').empty();
                     $('#comment-list').empty();
+                    console.log(themeID);
                     const comments = await aicevote.getComments(themeID);
                     const profiles = await aicevote.getProfiles(comments.map(comment => ({
                       userProvider: comment.userProvider, userID: comment.userID
@@ -473,10 +493,9 @@
                       }
                     });
                   };
-                setInterval(() => {
-                  $(() => comment());
-                }, 5000);
+                $(() => comment());
                 $(() => main());
+                console.log(themeID);
                 $('#submit').click(function () {
                   const message = $('#message').val();
                   if (message.length == 0) {
@@ -572,8 +591,6 @@
                   if (obj.results[9]) {
                     $('#J2').prepend($('<dt>' + obj.results[9] + '</dt><dt>' + "%" + '</dt>'));
                   }
-                  $('#count').empty();
-                  obj.counts.forEach((val, i) => { $('#count').prepend($("<h4>" + choices[i] + ":" + val + "票</h4>")) })
                 });
               });
 
@@ -674,8 +691,6 @@
                     </div>
                   </div>
                 </div>
-                <h4>通算投票数</h4>
-                <div id="count"></div>
               </div>
 
               <div class="tab_content2" id="comment_content">

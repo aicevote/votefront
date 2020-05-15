@@ -121,8 +121,8 @@
             (prev, cur) => prev.concat(cur)
           ).sort((a, b) => b.publishedAt - a.publishedAt);
           const newslist = document.getElementById('newslist');
-          articles.forEach((article, i) => {
-            
+          for (i=0 ; i<10; i++){
+            var article = articles[i];
             const li = document.createElement('li');
             li.innerHTML = `
                                     <label id="newsnav-open${i}" for="newsnav-input${i}"><span></span>  
@@ -151,7 +151,7 @@
                                       </div>
                                     `;
             newslist.appendChild(li)
-          });
+          }
         } catch (e) { }
       }
 

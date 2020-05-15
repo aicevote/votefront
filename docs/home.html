@@ -110,7 +110,7 @@
 
         try {
           let articles = await aicevote.getArticles();
-          
+          console.log(articles);
           for (let i = 0; i < articles.related.length; i++) {
             articles.related[i].articles.forEach(article => {
               article["id"] = articles.related[i].themeID;

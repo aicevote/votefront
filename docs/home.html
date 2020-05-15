@@ -121,7 +121,7 @@
             (prev, cur) => prev.concat(cur)
           ).sort((a, b) => b.publishedAt - a.publishedAt);
           const newslist = document.getElementById('newslist');
-          for (i=0 ; i<10; i++){
+          for (i=0 ; i<20; i++){
             var article = articles[i];
             const li = document.createElement('li');
             li.innerHTML = `

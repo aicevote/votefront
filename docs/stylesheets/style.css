@@ -56,7 +56,7 @@ li img {
 .search{
   position: relative;
 }
-.search textarea{
+.search input{
   width:200px;
   height:25px;
   
@@ -1492,9 +1492,9 @@ li img {
   margin: 10px auto;
   height: 45px;
 }
-#search-content textarea{
+#search-content input{
   width:75vw;
-  font-size: 25px;
+  font-size: 20px;
 }
 /*チェックが入ったらもろもろ表示*/
 #search-input:checked ~ #search-close {

@@ -508,12 +508,13 @@
                 });
                 socket.on("connect", async () => {
                   const obj = await aicevote.getResult(themeID);
+                  console.log(obj);
                   if (obj.themeID != themeID) { return }
                   var ctx = document.getElementById("ch").getContext("2d");
                   var chart = new Chart(ctx, {
                     type: "horizontalBar",
                     data: {
-                      datasets: obj.results.map((val, i) => ({
+                      datasets: obj.percentage.map((val, i) => ({
                         label: choices[i],
                         data: [val],
                         backgroundColor: colors[i]
@@ -531,23 +532,23 @@
                   $('#H2').empty();
                   $('#I2').empty();
                   $('#J2').empty();
-                  $('#A2').prepend($('<dt>' + obj.results[0] + '</dt><dt>' + "%" + '</dt>'));
-                  $('#B2').prepend($('<dt>' + obj.results[1] + '</dt><dt>' + "%" + '</dt>'));
-                  $('#C2').prepend($('<dt>' + obj.results[2] + '</dt><dt>' + "%" + '</dt>'));
-                  if (obj.results[3]) {
-                    $('#D2').prepend($('<dt>' + obj.results[3] + '</dt><dt>' + "%" + '</dt>'));
+                  $('#A2').prepend($('<dt>' + obj.percentage[0] + '</dt><dt>' + "%" + '</dt>'));
+                  $('#B2').prepend($('<dt>' + obj.percentage[1] + '</dt><dt>' + "%" + '</dt>'));
+                  $('#C2').prepend($('<dt>' + obj.percentage[2] + '</dt><dt>' + "%" + '</dt>'));
+                  if (obj.percentage[3]) {
+                    $('#D2').prepend($('<dt>' + obj.percentage[3] + '</dt><dt>' + "%" + '</dt>'));
                   }
-                  $('#E2').prepend($('<dt>' + obj.results[4] + '</dt><dt>' + "%" + '</dt>'));
-                  if (obj.results[5]) {
-                    $('#F2').prepend($('<dt>' + obj.results[5] + '</dt><dt>' + "%" + '</dt>'));
+                  $('#E2').prepend($('<dt>' + obj.percentage[4] + '</dt><dt>' + "%" + '</dt>'));
+                  if (obj.percentage[5]) {
+                    $('#F2').prepend($('<dt>' + obj.percentage[5] + '</dt><dt>' + "%" + '</dt>'));
                   }
-                  $('#G2').prepend($('<dt>' + obj.results[6] + '</dt><dt>' + "%" + '</dt>'));
-                  if (obj.results[7]) {
-                    $('#H2').prepend($('<dt>' + obj.results[7] + '</dt><dt>' + "%" + '</dt>'));
+                  $('#G2').prepend($('<dt>' + obj.percentage[6] + '</dt><dt>' + "%" + '</dt>'));
+                  if (obj.percentage[7]) {
+                    $('#H2').prepend($('<dt>' + obj.percentage[7] + '</dt><dt>' + "%" + '</dt>'));
                   }
-                  $('#I2').prepend($('<dt>' + obj.results[8] + '</dt><dt>' + "%" + '</dt>'));
-                  if (obj.results[9]) {
-                    $('#J2').prepend($('<dt>' + obj.results[9] + '</dt><dt>' + "%" + '</dt>'));
+                  $('#I2').prepend($('<dt>' + obj.percentage[8] + '</dt><dt>' + "%" + '</dt>'));
+                  if (obj.percentage[9]) {
+                    $('#J2').prepend($('<dt>' + obj.percentage[9] + '</dt><dt>' + "%" + '</dt>'));
                   }
                   $('#count').empty();
                   obj.counts.forEach((val, i) => { $('#count').prepend($("<h4>" + choices[i] + ":" + val + "票</h4>")) })
@@ -561,23 +562,23 @@
                   $('#H2').empty();
                   $('#I2').empty();
                   $('#J2').empty();
-                  $('#A2').prepend($('<dt>' + obj.results[0] + '</dt><dt>' + "%" + '</dt>'));
-                  $('#B2').prepend($('<dt>' + obj.results[1] + '</dt><dt>' + "%" + '</dt>'));
-                  $('#C2').prepend($('<dt>' + obj.results[2] + '</dt><dt>' + "%" + '</dt>'));
-                  if (obj.results[3]) {
-                    $('#D2').prepend($('<dt>' + obj.results[3] + '</dt><dt>' + "%" + '</dt>'));
+                  $('#A2').prepend($('<dt>' + obj.percentage[0] + '</dt><dt>' + "%" + '</dt>'));
+                  $('#B2').prepend($('<dt>' + obj.percentage[1] + '</dt><dt>' + "%" + '</dt>'));
+                  $('#C2').prepend($('<dt>' + obj.percentage[2] + '</dt><dt>' + "%" + '</dt>'));
+                  if (obj.percentage[3]) {
+                    $('#D2').prepend($('<dt>' + obj.percentage[3] + '</dt><dt>' + "%" + '</dt>'));
                   }
-                  $('#E2').prepend($('<dt>' + obj.results[4] + '</dt><dt>' + "%" + '</dt>'));
-                  if (obj.results[5]) {
-                    $('#F2').prepend($('<dt>' + obj.results[5] + '</dt><dt>' + "%" + '</dt>'));
+                  $('#E2').prepend($('<dt>' + obj.percentage[4] + '</dt><dt>' + "%" + '</dt>'));
+                  if (obj.percentage[5]) {
+                    $('#F2').prepend($('<dt>' + obj.percentage[5] + '</dt><dt>' + "%" + '</dt>'));
                   }
-                  $('#G2').prepend($('<dt>' + obj.results[6] + '</dt><dt>' + "%" + '</dt>'));
-                  if (obj.results[7]) {
-                    $('#H2').prepend($('<dt>' + obj.results[7] + '</dt><dt>' + "%" + '</dt>'));
+                  $('#G2').prepend($('<dt>' + obj.percentage[6] + '</dt><dt>' + "%" + '</dt>'));
+                  if (obj.percentage[7]) {
+                    $('#H2').prepend($('<dt>' + obj.percentage[7] + '</dt><dt>' + "%" + '</dt>'));
                   }
-                  $('#I2').prepend($('<dt>' + obj.results[8] + '</dt><dt>' + "%" + '</dt>'));
-                  if (obj.results[9]) {
-                    $('#J2').prepend($('<dt>' + obj.results[9] + '</dt><dt>' + "%" + '</dt>'));
+                  $('#I2').prepend($('<dt>' + obj.percentage[8] + '</dt><dt>' + "%" + '</dt>'));
+                  if (obj.percentage[9]) {
+                    $('#J2').prepend($('<dt>' + obj.percentage[9] + '</dt><dt>' + "%" + '</dt>'));
                   }
                 });
               });

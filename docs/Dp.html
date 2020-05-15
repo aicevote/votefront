@@ -154,9 +154,9 @@
         </div>
 
         <script>
+          let param = (new URL(document.location)).searchParams;
+          themeID = param.get('themeID');
           async function main() {
-            const themeID = parseInt(window.location.pathname.replace(/[^-^0-9^\.]/g, ""), 10);
-
             try {
               const themes = await aicevote.getAllThemes();
               themes.forEach(theme => {
@@ -233,7 +233,7 @@
               themes.forEach(theme => {
                 if (theme.genre == genre) {
                   let li = document.createElement("li");
-                  li.innerHTML = `<img src="${theme.imageURI}"><a href ="Dp${theme.themeID}">${theme.title}</a>`;
+                  li.innerHTML = `<img src="${theme.imageURI}"><a href ="Dp.html?themeID=${theme.themeID}">${theme.title}</a>`;
                   relate.appendChild(li);
                 }
               });
@@ -251,67 +251,67 @@
               $("#A").click(() => {
                 firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 0).then(() => {
-                  location.href = "/result" + themeID + ".html";
+                  location.href = "/result.html?themeID=" + themeID + "";
                 });
               });
               $("#B").click(() => {
                 firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 1).then(() => {
-                  location.href = "/result" + themeID + ".html";
+                  location.href = "/result.html?themeID=" + themeID + "";
                 });
               });
               $("#C").click(() => {
                 firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 2).then(() => {
-                  location.href = "/result" + themeID + ".html";
+                  location.href = "/result.html?themeID=" + themeID + "";
                 });
               });
               $("#D").click(() => {
                 firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 3).then(() => {
-                  location.href = "/result" + themeID + ".html";
+                  location.href = "/result.html?themeID=" + themeID + "";
                 });
               });
               $("#E").click(() => {
                 firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 4).then(() => {
-                  location.href = "/result" + themeID + ".html";
+                  location.href = "/result.html?themeID=" + themeID + "";
                 });
               });
               $("#F").click(() => {
                 firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 5).then(() => {
-                  location.href = "/result" + themeID + ".html";
+                  location.href = "/result.html?themeID=" + themeID + "";
                 });
               });
               $("#G").click(() => {
                 firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 6).then(() => {
-                  location.href = "/result" + themeID + ".html";
+                  location.href = "/result.html?themeID=" + themeID + "";
                 });
               });
               $("#H").click(() => {
                 firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 7).then(() => {
-                  location.href = "/result" + themeID + ".html";
+                  location.href = "/result.html?themeID=" + themeID + "";
                 });
               });
               $("#I").click(() => {
                 firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 8).then(() => {
-                  location.href = "/result" + themeID + ".html";
+                  location.href = "/result.html?themeID=" + themeID + "";
                 });
               });
               $("#J").click(() => {
                 firebase.analytics().logEvent('vote');
                 aicevote.vote(themeID, sessionToken, 9).then(() => {
-                  location.href = "/result" + themeID + ".html";
+                  location.href = "/result.html?themeID=" + themeID + "";
                 });
               });
             } catch (e) {
               deleteSessionID();
               $('#userimg').remove();
-              window.location.href = "/result" + themeID + ".html";
+              window.location.href = "/result.html?themeID=" + themeID + "";
             }
           }
 

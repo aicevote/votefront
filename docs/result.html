@@ -112,6 +112,8 @@
             <h4 id="description"></h4>
 
             <script>
+              let param = (new URL(document.location)).searchParams;
+              themeID = param.get('themeID');
               if ( navigator.userAgent.indexOf('iPhone') > 0 ){
                 $('#banner').prepend($('<a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/DownloadBanner.png"></a>'));
               } else if( navigator.userAgent.indexOf('iPad') > 0 ){
@@ -122,7 +124,6 @@
                 $('#banner').prepend($('<a href="https://play.google.com/store/apps/details?id=com.aicevote.aicevoteapplication"><img src="/images/DownloadBanner.png"></a>'));
               }
 
-              themeID = parseInt(window.location.pathname.replace(/[^-^0-9^\.]/g, ""), 10);
               var sessionToken = "";
               var title = "";
               var description = "";
@@ -217,13 +218,19 @@
 
 
                     const relate = document.getElementById("relate");
-                    themes.forEach(theme => {
-                      if (theme.genre == genre) {
-                        let li = document.createElement("li");
-                        li.innerHTML = `<img src="${theme.imageURI}"><a href ="Dp${theme.themeID}">${theme.title}</a>`;
-                        relate.appendChild(li);
+                    var items = [];
+                    themes.sort((a, b) => b.topicality - a.topicality)
+                    for (i=0;i<themes.length;i++) {
+                      if (themes[i].genre == genre) {
+                        items.push(themes[i]);
                       }
-                    });
+                    }
+                    for (i=0; i<7; i++) {
+                      let li = document.createElement("li");
+                      li.innerHTML = `<img src="${items[i].imageURI}"><a href ="Dp${items[i].themeID}">${items[i].title}</a>`;
+                      relate.appendChild(li);
+                    }
+                    
                   } catch (e) { }
 
                   try {

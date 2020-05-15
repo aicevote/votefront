@@ -112,8 +112,8 @@
         } catch (e) { }
 
         try {
-          let articles = await aicevote.getAllArticles();
-          console.log(articles);
+          let articles = await aicevote.getArticles();
+          
           for (let i = 0; i < articles.related.length; i++) {
             articles.related[i].articles.forEach(article => {
               article["id"] = articles.related[i].themeID;
@@ -123,7 +123,6 @@
           articles = articles.related.map(a => a.articles).reduce(
             (prev, cur) => prev.concat(cur)
           ).sort((a, b) => b.publishedAt - a.publishedAt);
-          
           const newslist = document.getElementById('newslist');
           articles.forEach((article, i) => {
             

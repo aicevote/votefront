@@ -5,10 +5,8 @@
   </head>
 
   <head prefix="og: http://ogp.me/ns#">
-    <meta property="og:title" content="AICEVOTE">
     <meta property="og:type" content="website">
     <meta property="og:description" content="票を氷にしたリアルタイム投票サイト">
-    <meta property="og:url" content="aicevote.com">
     <meta property="og:site_name" content="AICEVOTE">
     <meta property="og:image" content="http://aicevote.com/images/aicevote_2_skeleton.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -175,6 +173,19 @@
                         genre  = theme.genre;
 
                         document.title = title;
+                        var headData = document.head.children;
+                        for (var i = 0; i < headData.length; i++) {
+                          // OGPの設定
+                          var propertyVal = headData[i].getAttribute('property');
+                          if(propertyVal !== null) {
+                              if(propertyVal.indexOf('og:title') != -1) {
+                                  headData[i].setAttribute('content', title);
+                              }
+                              if(propertyVal.indexOf('og:url') != -1) {
+                                  headData[i].setAttribute('content', 'https://aicevote.com/Dp' + themeID + "");
+                              }
+                          }
+                        }
                         $("#title").text(title);
                         $("#description").text(description);
                         $("#share").attr("href", "https://twitter.com/intent/tweet?text=私はこの議題に投票しました。あなたも投票しよう&url=https://aicevote.com&hashtags=" + title);

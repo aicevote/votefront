@@ -25,6 +25,10 @@ li{
   float: left;
   padding: 40px 30px;
 }
+li img{
+  width:32px;
+  height:32px;
+}
 .header{
   background-color:#000;
   height: 100px;
@@ -1351,7 +1355,10 @@ li{
   margin: 10px;
   list-style: none;
 }
-
+li img{
+  width:32px;
+  height:32px;
+}
 .header{
   height: 60px;
   width: auto;
@@ -1702,7 +1709,7 @@ input[name="tab_item"] {
 .anews p{
   position: relative;
   left: 34vw;
-  width: 64vw;
+  width: 60vw;
   font-size: 10px;
   font-weight: bold;
   padding:5px;

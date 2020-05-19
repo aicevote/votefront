@@ -90,7 +90,7 @@
           const litre = document.getElementById('litre');
           const link = sessionToken ? "Dp" : "result";
           themes.sort((a, b) => b.topicality - a.topicality)
-          for (i = 0; i < 7; i++) {
+          for (i = 0; i < 9; i++) {
             const li = document.createElement('li');
             li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}${themes[i].themeID}">${themes[i].title}</a>`;
             tabs[9].appendChild(li);
@@ -112,8 +112,7 @@
         } catch (e) { }
 
         try {
-          let articles = await aicevote.getAllArticles();
-          console.log(articles);
+          let articles = await aicevote.getArticles();
           for (let i = 0; i < articles.related.length; i++) {
             articles.related[i].articles.forEach(article => {
               article["id"] = articles.related[i].themeID;
@@ -254,6 +253,8 @@
 
             <input id="all" type="radio" name="tab_item" checked>
             <label class="tab_item" for="all">トレンド</label>
+            <input id="pr" type="radio" name="tab_item">
+            <label class="tab_item" for="pr">Me</label>
             <input id="political" type="radio" name="tab_item">
             <label class="tab_item" for="political">政治</label>
             <input id="life" type="radio" name="tab_item">
@@ -270,12 +271,21 @@
             <label class="tab_item" for="girl">その他</label>
             <input id="Trend" type="radio" name="tab_item">
             <label class="tab_item" for="Trend">全て</label>
-            <input id="pr" type="radio" name="tab_item">
-            <label class="tab_item" for="pr">PR</label>
+            
             <div class="tab_content" id="all_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
                   <ul id="litrend">
+                  </ul>
+                </p>
+              </div>
+            </div>
+            <div class="tab_content" id="pr_content">
+              <div class="tab_content_description">
+                <p class="c-txtsp">
+                  *フォロワーがホストしている投票
+                  <ul id="lipr">
+
                   </ul>
                 </p>
               </div>
@@ -347,15 +357,6 @@
               <div class="tab_content_description">
                 <p class="c-txtsp">
                   <ul id="liall">
-
-                  </ul>
-                </p>
-              </div>
-            </div>
-            <div class="tab_content" id="pr_content">
-              <div class="tab_content_description">
-                <p class="c-txtsp">
-                  <ul id="lipr">
 
                   </ul>
                 </p>

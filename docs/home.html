@@ -53,9 +53,6 @@
 
   <body>
     <script>
-      aicevote.getAllThemes().then(themes => {
-        console.log(themes);
-      });
       async function main() {
         saveSessionID();
 
@@ -71,6 +68,7 @@
           userimg.innerHTML = `<a href="user.html?id=${myProfile.userID}&which=${myProfile.userProvider}"><img src="images/user.png"></a>`;
           if (myProfile.isInfluencer) { $('#notinfluencer').remove(); }
           else { $('#onlyinfluencer').remove(); }
+          friends = myProfile.friends;
         } catch (e) {
           deleteSessionID();
           $('#onlyinfluencer').remove();
@@ -102,12 +100,23 @@
           }
 
           themes.forEach(item => {
-            let li = document.createElement('li');
-            li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
-            tabs[0].appendChild(li);
-            li = document.createElement('li');
-            li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
-            tabs[item.genre + 1].appendChild(li);
+            if (item.genre!=7) {
+              let li = document.createElement('li');
+              li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
+              tabs[0].appendChild(li);
+              li = document.createElement('li');
+              li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
+              tabs[item.genre + 1].appendChild(li);
+            }
+            else if (item.genre==7) {
+              friends.forEach( person => {
+                if (person == item.userID) {                                                                                //ispersonalmatters
+                  li = document.createElement('li');
+                  li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
+                  tabs[8].appendChild(li);
+                }
+              });
+            }
           })
         } catch (e) { }
 
@@ -192,7 +201,7 @@
                   <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
                   <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
                   <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-                  <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a>
+                  <li class="Login"><a href="login" style="text-decoration:none; color:white;">Login</a>
                   <li>
                 </ul>
               </div>
@@ -223,7 +232,7 @@
                 <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
                 <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
                 <li>
-                  <div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div>
+                  <div class="Login"><a href="login" style="text-decoration:none; color:white;">Login</a></div>
                 </li>
               </ul>
             </div>

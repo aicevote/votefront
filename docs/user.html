@@ -100,8 +100,9 @@
           } else if (which == "legacy") {
             $('#profile2').append($('<img src="' + hisProfile.imageURI + '"><h4>' + hisProfile.name + '<br><a href="https://twitter.com/search?q=' + hisProfile.name + '&f=user" style="text-decoration:none; color:deepskyblue;">ツイッターを確認</a></h4>'));
           }
-          
-
+          hisProfile.themes.forEach(theme => {
+            $('#mine').append($('<li><img src="' + theme.imageURI + '"><a href ="' + link + theme.themeID + '" style="text-decoration:none; color:black;">' + theme.title + '</a></li>'));
+          });
           hisProfile.votes.forEach(element => {
             themes.forEach(theme => {
               if (element.themeID == theme.themeID){
@@ -116,6 +117,62 @@
       }
 
       $(() => { main(); })
+      $(function () {
+        $('#submit-smart').click(function () {
+          var message = $('#message-smart');
+          if (message.val().length == 0) {
+            alert("文字を入力してください");
+          } else if (message.val().length >= 10) {
+            alert("10字以内");
+          } else {
+            var regex = message.val();
+            async function searchsmart(regex) {
+              const searchvalue = document.getElementById('search-value-smart');
+              try {
+                const results = await aicevote.queryThemes(regex);
+                results.forEach((result) => {
+                  let li = document.createElement('li');
+                  li.innerHTML = `<img src="${result.imageURI}"><a href ="result.html?themeID=${result.themeID}">${result.title}</a>`;
+                  searchvalue.appendChild(li);
+                });
+              } catch (e) {
+                let li = document.createElement('li');
+                li.innerHTML = `検索結果はありません`;
+                searchvalue.appendChild(li);
+              }
+            }
+            $(() => searchsmart(regex));
+          }
+        });
+      });
+      $(function () {
+        $('#submit-pc').click(function () {
+          var message = $('#message-pc');
+          if (message.val().length == 0) {
+            alert("文字を入力してください");
+          } else if (message.val().length >= 10) {
+            alert("10字以内");
+          } else {
+            var regex = message.val();
+            async function searchpc(regex) {
+              const searchvalue = document.getElementById('search-value-pc');
+              try {
+                const results = await aicevote.queryThemes(regex);
+                results.forEach((result) => {
+                  let li = document.createElement('li');
+                  li.innerHTML = `<img src="${result.imageURI}"><a href ="result.html?themeID=${result.themeID}">${result.title}</a>`;
+                  searchvalue.appendChild(li);
+                });
+              } catch (e) {
+                let li = document.createElement('li');
+                li.innerHTML = `検索結果はありません`;
+                searchvalue.appendChild(li);
+              }
+            }
+            $(() => searchpc(regex));
+          }
+        });
+      });
     </script>
     <div class="mainSite">
         <div class="header">
@@ -193,6 +250,11 @@
           <div id="profile2"></div>
           <div id="onlyinfluencer">
             <h5>認定インフルエンサー</h5>
+          </div>
+          <div id="mytheme">
+            <ul id="mine">
+
+            </ul>
           </div>
           <div id="timeline"><h2>タイムライン</h2>
             <h4>

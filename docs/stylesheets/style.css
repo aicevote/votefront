@@ -27,7 +27,6 @@ li{
 }
 li img {
   width:32px;
-  height:32px;
 }
 .header{
   background-color:#000;
@@ -57,9 +56,8 @@ li img {
   position: relative;
 }
 .search input{
-  width:200px;
+  width:170px;
   height:25px;
-  
 }
 .search-result{
   position: absolute;
@@ -730,7 +728,6 @@ input{
   width:400px;
   margin-top: 10px;
   margin-bottom: 30px;
-  padding-left: 50px;
   font-size: 18px;
   border:1px solid #dee7ec;
 }
@@ -1404,7 +1401,6 @@ li{
 }
 li img {
   width:32px;
-  height:32px;
 }
 .header{
   height: 60px;

@@ -69,6 +69,7 @@
           if (myProfile.isInfluencer) { $('#notinfluencer').remove(); }
           else { $('#onlyinfluencer').remove(); }
           friends = myProfile.friends;
+          console.log(friends);
         } catch (e) {
           deleteSessionID();
           $('#onlyinfluencer').remove();
@@ -292,7 +293,7 @@
             <div class="tab_content" id="pr_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
-                  *フォロワーがホストしている投票
+                  *フォローがホストしている投票
                   <ul id="lipr">
 
                   </ul>

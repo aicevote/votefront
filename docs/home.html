@@ -60,6 +60,7 @@
         try {
           const sessionID = getSessionID();
           sessionToken = await aicevote.getSessionToken(sessionID);
+          console.log(sessionToken);
           const myProfile = await aicevote.getMyProfile(sessionToken);
           $('.login').remove();
           const profile = document.getElementById('profile');
@@ -91,29 +92,29 @@
           themes.sort((a, b) => b.topicality - a.topicality)
           for (i = 0; i < 9; i++) {
             const li = document.createElement('li');
-            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}${themes[i].themeID}">${themes[i].title}</a>`;
+            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}.html?themeID=${themes[i].themeID}">${themes[i].title}</a>`;
             tabs[9].appendChild(li);
           }
           for (i = 0; i < 3; i++) {
             const li = document.createElement('li');
-            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}${themes[i].themeID}">${themes[i].title}</a>`;
+            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}.html?themeID=${themes[i].themeID}">${themes[i].title}</a>`;
             litre.appendChild(li);
           }
 
           themes.forEach(item => {
-            if (item.genre!=7) {
+            if (item.genre != 7) {
               let li = document.createElement('li');
-              li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
+              li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}.html?themeID=${item.themeID}">${item.title}</a>`;
               tabs[0].appendChild(li);
               li = document.createElement('li');
-              li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
+              li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}.html?themeID=${item.themeID}">${item.title}</a>`;
               tabs[item.genre + 1].appendChild(li);
             }
-            else if (item.genre==7) {
+            else if (item.genre == 7) {
               friends.forEach( person => {
                 if (person == item.userID) {                                                                                //ispersonalmatters
                   li = document.createElement('li');
-                  li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
+                  li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}.html?themeID=${item.themeID}">${item.title}</a>`;
                   tabs[8].appendChild(li);
                 }
               });
@@ -169,6 +170,62 @@
       }
 
       $(() => { main(); })
+      $(function () {
+        $('#submit-smart').click(function () {
+          var message = $('#message-smart');
+          if (message.val().length == 0) {
+            alert("文字を入力してください");
+          } else if (message.val().length >= 10) {
+            alert("10字以内");
+          } else {
+            var regex = message.val();
+            async function searchsmart(regex) {
+              const searchvalue = document.getElementById('search-value-smart');
+              try {
+                const results = await aicevote.queryThemes(regex);
+                results.forEach((result) => {
+                  let li = document.createElement('li');
+                  li.innerHTML = `<img src="${result.imageURI}"><a href ="result.html?themeID=${result.themeID}"style="text-decoration:none; color:white;">${result.title}</a>`;
+                  searchvalue.appendChild(li);
+                });
+              } catch (e) {
+                let li = document.createElement('li');
+                li.innerHTML = `検索結果はありません`;
+                searchvalue.appendChild(li);
+              }
+            }
+            $(() => searchsmart(regex));
+          }
+        });
+      });
+      $(function () {
+        $('#submit-pc').click(function () {
+          var message = $('#message-pc');
+          if (message.val().length == 0) {
+            alert("文字を入力してください");
+          } else if (message.val().length >= 10) {
+            alert("10字以内");
+          } else {
+            var regex = message.val();
+            async function searchpc(regex) {
+              const searchvalue = document.getElementById('search-value-pc');
+              try {
+                const results = await aicevote.queryThemes(regex);
+                results.forEach((result) => {
+                  let li = document.createElement('li');
+                  li.innerHTML = `<img src="${result.imageURI}"><a href ="result.html?themeID=${result.themeID}"style="text-decoration:none; color:white;">${result.title}</a>`;
+                  searchvalue.appendChild(li);
+                });
+              } catch (e) {
+                let li = document.createElement('li');
+                li.innerHTML = `検索結果はありません`;
+                searchvalue.appendChild(li);
+              }
+            }
+            $(() => searchpc(regex));
+          }
+        });
+      });
     </script>
     <div class="mainSite">
         <div class="header">
@@ -274,7 +331,7 @@
             <input id="sports" type="radio" name="tab_item">
             <label class="tab_item" for="sports">スポーツ</label>
             <input id="WS" type="radio" name="tab_item">
-            <label class="tab_item" for="WS">芸能</label>
+            <label class="tab_item" for="WS">エンタメ</label>
             <input id="Gourmet" type="radio" name="tab_item">
             <label class="tab_item" for="Gourmet">グルメ</label>
             <input id="girl" type="radio" name="tab_item">

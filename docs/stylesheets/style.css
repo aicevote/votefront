@@ -56,23 +56,27 @@ li img {
   position: relative;
 }
 .search input{
-  width:170px;
+  width:160px;
   height:25px;
 }
 .search-result{
   position: absolute;
-  width: 150px;
+  bottom: 27px;
+  width: 300px;
   height: auto;
   border-color: black;
+  background-color: rgb(53,54,54);
   box-shadow: #000 4px;
   overflow-y: scroll;
+  z-index: 99;
 }
 .search-value-pc li{
-  border-bottom: 2px solid #0066cc;
-  width: 150px;
+  border-bottom: 2px solid #e9e9e9;
+  width: 300px;
   height: 30px;
-  margin: 3px;
-  font-size: 15px;
+  margin: 6px;
+  padding: 0;
+  font-size: 18px;
 }
 .header-list{
   float:left;
@@ -303,7 +307,7 @@ input[name="tab_item"] {
 #Gourmet:checked ~ #Gourmet_content,
 #girl:checked ~ #girl_content,
 #Trend:checked ~ #Trend_content,
-#pr:checked ~ #Trend_content {
+#pr:checked ~ #pr_content {
   display: block;
 }
 
@@ -1508,13 +1512,15 @@ li img {
   margin: 0 auto;
   height: auto;
   overflow-y: scroll;
+  background-color: rgb(53, 54, 54);
 }
 #search-value-smart li{
   color: #FFF;
   border-bottom: 2px solid #e9e9e9;
-  height: 45px;
-  margin: 10px;
-  font-size: 25px;
+  height: 32px;
+  margin: 7px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 #nav-drawer {

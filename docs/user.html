@@ -63,7 +63,6 @@
         try {
           const sessionID = getSessionID();
           sessionToken = await aicevote.getSessionToken(sessionID);
-          console.log(sessionToken);
           const myProfile = await aicevote.getMyProfile(sessionToken);
           $('.login').remove();
           const userimg = document.getElementById('userimg');
@@ -212,7 +211,7 @@
                 <ul>
                   <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
                   <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
-                  <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+                  <li><a href="apply" style="text-decoration:none; color:white;">テーマの追加</a></li>
                   <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a>
                   <li>
                 </ul>
@@ -242,7 +241,7 @@
                 <li style="padding:30px 0;"><a type="btn" class="submit-pc" id="submit-pc" style="height:25px; width:25px; padding:30px 0;"><img src="/images/search.png"></a></li>
                 <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
                 <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
-                <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+                <li><a href="apply" style="text-decoration:none; color:white;">テーマの追加</a></li>
                 <li>
                   <div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div>
                 </li>
@@ -258,20 +257,10 @@
           <div id="onlyinfluencer">
             <h5>認定インフルエンサー</h5>
           </div>
-          <div id="mytheme">
+          <div id="mytheme"><h2>ホストする投票テーマ</h2>
             <ul id="mine">
 
             </ul>
-          </div>
-          <div id="timeline"><h2>タイムライン</h2>
-            <h4>
-              <p>
-                友達の投票をリアルタイムに通知し、新しいテーマやニュースがわかります。
-              </p>
-              <p>
-                現在準備中
-              </p>
-            </h4>
           </div>
           <div id="pastvote"><h2>投票履歴</h2>
             <ul id="pv">
@@ -304,7 +293,7 @@
           </li>
           <li>
             <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
-          </li>
+          </li><li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
           <li>
             <a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50"
               style="text-decoration:none; color:deepskyblue;">

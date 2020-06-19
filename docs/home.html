@@ -60,7 +60,6 @@
         try {
           const sessionID = getSessionID();
           sessionToken = await aicevote.getSessionToken(sessionID);
-          console.log(sessionToken);
           const myProfile = await aicevote.getMyProfile(sessionToken);
           $('.login').remove();
           const profile = document.getElementById('profile');
@@ -70,7 +69,6 @@
           if (myProfile.isInfluencer) { $('#notinfluencer').remove(); }
           else { $('#onlyinfluencer').remove(); }
           friends = myProfile.friends;
-          console.log(friends);
         } catch (e) {
           deleteSessionID();
           $('#onlyinfluencer').remove();
@@ -135,8 +133,8 @@
           ).sort((a, b) => b.publishedAt - a.publishedAt);
           
           const newslist = document.getElementById('newslist');
-          articles.forEach((article, i) => {
-            
+          for (i=0 ; i<20; i++){
+            var article = articles[i];
             const li = document.createElement('li');
             li.innerHTML = `
                                     <label id="newsnav-open${i}" for="newsnav-input${i}"><span></span>  
@@ -165,7 +163,7 @@
                                       </div>
                                     `;
             newslist.appendChild(li)
-          });
+          }
         } catch (e) { }
       }
 

@@ -109,7 +109,15 @@ li img {
 #search-drawer{
   display:none;
 }
-
+#search-input{
+  display: none;
+}
+#search-open{
+  display: none;
+}
+#form-smart{
+  display:none;
+}
 /* body */
 body {
   font-family: "Hiragino Sans","ヒラギノ角ゴシック","ヒラギノ角ゴ ProN W3",verdana,Arial,sans-serif;

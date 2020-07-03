@@ -180,7 +180,7 @@
                               headData[i].setAttribute('content', title);
                           }
                           if(propertyVal.indexOf('og:url') != -1) {
-                              headData[i].setAttribute('content', 'https://aicevote.com/Dp' + themeID + "");
+                              headData[i].setAttribute('content', 'https://aicevote.com/Dp.html?thmeID=' + themeID + "");
                           }
                       }
                     }
@@ -192,7 +192,7 @@
                     users.userProvider = "twitter";
                     users.userID = String(theme.userID);
                     const　hisProfile = await aicevote.getProfiles([users]);
-                    $('#user').append($('<img src="' + hisProfile[0].imageURI + '" style="width:32px;height:32px;border-radius:16px"><a href="https://aicevote.com/user.html?id=' + theme.userID + '&which=' + theme.userProvider + '" style="text-decoration:none; color:deepskyblue;">' + hisProfile[0].name + '</a>さんがこのテーマをホストしています。'));
+                    $('#user').append($('<img src="' + hisProfile[0].imageURI + '" style="width:32px;height:32px;border-radius:16px">このテーマのホストは<a href="https://aicevote.com/user.html?id=' + theme.userID + '&which=' + theme.userProvider + '" style="text-decoration:none; color:deepskyblue;">' + hisProfile[0].name + '</a>'));
 
 
                     if (choices[0]) {

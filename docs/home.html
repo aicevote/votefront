@@ -69,7 +69,6 @@
           userimg.innerHTML = `<a href="user.html?id=${myProfile.userID}&which=${myProfile.userProvider}"><img src="images/user.png"></a>`;
           if (myProfile.isInfluencer) { $('#notinfluencer').remove(); }
           else { $('#onlyinfluencer').remove(); }
-          friends = myProfile.friends;
         } catch (e) {
           deleteSessionID();
           $('#onlyinfluencer').remove();
@@ -89,40 +88,30 @@
           const litre = document.getElementById('litre');
           const link = sessionToken ? "Dp" : "result";
           themes.sort((a, b) => b.topicality - a.topicality)
-          for (i = 0; i < 9; i++) {
+          for (i = 0; i < 7; i++) {
             const li = document.createElement('li');
-            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}.html?themeID=${themes[i].themeID}">${themes[i].title}</a>`;
+            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}${themes[i].themeID}">${themes[i].title}</a>`;
             tabs[9].appendChild(li);
           }
           for (i = 0; i < 3; i++) {
             const li = document.createElement('li');
-            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}.html?themeID=${themes[i].themeID}">${themes[i].title}</a>`;
+            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}${themes[i].themeID}">${themes[i].title}</a>`;
             litre.appendChild(li);
           }
 
           themes.forEach(item => {
-            if (item.genre != 7) {
-              let li = document.createElement('li');
-              li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}.html?themeID=${item.themeID}">${item.title}</a>`;
-              tabs[0].appendChild(li);
-              li = document.createElement('li');
-              li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}.html?themeID=${item.themeID}">${item.title}</a>`;
-              tabs[item.genre + 1].appendChild(li);
-            }
-            else if (item.genre == 7) {
-              friends.forEach( person => {
-                if (person == item.userID) {                                                                                //ispersonalmatters
-                  li = document.createElement('li');
-                  li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}.html?themeID=${item.themeID}">${item.title}</a>`;
-                  tabs[8].appendChild(li);
-                }
-              });
-            }
+            let li = document.createElement('li');
+            li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
+            tabs[0].appendChild(li);
+            li = document.createElement('li');
+            li.innerHTML = `<img src="${item.imageURI}"><a href ="${link}${item.themeID}">${item.title}</a>`;
+            tabs[item.genre + 1].appendChild(li);
           })
         } catch (e) { }
 
         try {
           let articles = await aicevote.getArticles();
+          console.log(articles);
           for (let i = 0; i < articles.related.length; i++) {
             articles.related[i].articles.forEach(article => {
               article["id"] = articles.related[i].themeID;
@@ -168,134 +157,42 @@
       }
 
       $(() => { main(); })
-      $(function () {
-        $('#submit-smart').click(function () {
-          var message = $('#message-smart');
-          if (message.val().length == 0) {
-            alert("文字を入力してください");
-          } else if (message.val().length >= 10) {
-            alert("10字以内");
-          } else {
-            var regex = message.val();
-            async function searchsmart(regex) {
-              const searchvalue = document.getElementById('search-value-smart');
-              try {
-                const results = await aicevote.queryThemes(regex);
-                results.forEach((result) => {
-                  let li = document.createElement('li');
-                  li.innerHTML = `<img src="${result.imageURI}"><a href ="result.html?themeID=${result.themeID}"style="text-decoration:none; color:white;">${result.title}</a>`;
-                  searchvalue.appendChild(li);
-                });
-              } catch (e) {
-                let li = document.createElement('li');
-                li.innerHTML = `検索結果はありません`;
-                searchvalue.appendChild(li);
-              }
-            }
-            $(() => searchsmart(regex));
-          }
-        });
-      });
-      $(function () {
-        $('#submit-pc').click(function () {
-          var message = $('#message-pc');
-          if (message.val().length == 0) {
-            alert("文字を入力してください");
-          } else if (message.val().length >= 10) {
-            alert("10字以内");
-          } else {
-            var regex = message.val();
-            async function searchpc(regex) {
-              const searchvalue = document.getElementById('search-value-pc');
-              try {
-                const results = await aicevote.queryThemes(regex);
-                results.forEach((result) => {
-                  let li = document.createElement('li');
-                  li.innerHTML = `<img src="${result.imageURI}"><a href ="result.html?themeID=${result.themeID}"style="text-decoration:none; color:white;">${result.title}</a>`;
-                  searchvalue.appendChild(li);
-                });
-              } catch (e) {
-                let li = document.createElement('li');
-                li.innerHTML = `検索結果はありません`;
-                searchvalue.appendChild(li);
-              }
-            }
-            $(() => searchpc(regex));
-          }
-        });
-      });
     </script>
     <div class="mainSite">
-        <div class="header">
-            <div class="header-logo"><a href="home"><img src="/images/aice.JPG"></a>
-            </div>
-            
-              <div id="search-drawer">
-                <input id="search-input" type="checkbox" class="search-unshown">
-                <label id="search-open" for="search-input"><span><img src="/images/search.png"></span></label>
-                <label class="search-unshown" id="search-close" for="search-input"></label>
-                <div id="search-content">
-                  <form id="form-smart" class="form-smart">
-                    <input type="text" id="message-smart" placeholder="キーワードを検索…" cols="10" rows="1"></input>
-                    <a type="btn" class="submit-smart" id="submit-smart" style="height:24px; width:24px;"><img src="/images/search.png"></a>
-                  </form>
-                  <div class="search-result">
-                    <ul id="search-value-smart">
-                      
-                    </ul>
-                  </div>
-                </div>
-                
-              </div>
-              
-            <div id="nav-drawer">
-              <input id="nav-input" type="checkbox" class="nav-unshown">
-              <label id="nav-open" for="nav-input"><span></span></label>
-              <label class="nav-unshown" id="nav-close" for="nav-input"></label>
-              <div id="nav-content">
-                <ul>
-                  <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-                  <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
-                  <li><a href="apply" style="text-decoration:none; color:white;">テーマの追加</a></li>
-                  <li class="Login"><a href="login" style="text-decoration:none; color:white;">Login</a>
-                  <li>
-                </ul>
-              </div>
-            </div>
-    
-            
-            <div class="header-list">
-              <ul>
-                  <li style="padding:30px 0;">
-                  <div id="search-pc">
-                  <div class="search">
-                    <form id="form-pc" class="form-pc">
-                      <input type="text"id="message-pc" placeholder="キーワードを検索…" cols="12" rows="1" style="float:left; "></input>
-                      
-                    </form>
-                    
-                  </div>
-                  <div class="search-result">
-                    <ul id="search-value-pc">
-                      
-                    </ul>
-                  </div>
-                  
-                  </div>
-                </li>
-                <li style="padding:30px 0;"><a type="btn" class="submit-pc" id="submit-pc" style="height:25px; width:25px; padding:30px 0;"><img src="/images/search.png"></a></li>
-                <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-                <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
-                <li><a href="apply" style="text-decoration:none; color:white;">テーマの追加</a></li>
-                <li>
-                  <div class="Login"><a href="login" style="text-decoration:none; color:white;">Login</a></div>
-                </li>
-              </ul>
-            </div>
-    
-            <div id="menu-background">
-            </div>
+      <div class="header">
+        <div class="header-logo"><a href="home"><img src="/images/aice.JPG"></a>
+        </div>
+        <div id="nav-drawer">
+          <input id="nav-input" type="checkbox" class="nav-unshown">
+          <label id="nav-open" for="nav-input"><span></span></label>
+          <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+          <div id="nav-content">
+            <ul>
+              <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+              <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
+              <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
+              <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
+              <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+              <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a>
+              <li>
+            </ul>
           </div>
+        </div>
+        <div class="header-list">
+          <ul>
+            <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+            <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
+            <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
+            <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
+            <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+            <li>
+              <div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div>
+            </li>
+          </ul>
+        </div>
+        <div id="menu-background">
+        </div>
+      </div>
       <div id="allcontainer">
         <div class="container">
           <div id="profile"></div>
@@ -318,8 +215,6 @@
 
             <input id="all" type="radio" name="tab_item" checked>
             <label class="tab_item" for="all">トレンド</label>
-            <input id="pr" type="radio" name="tab_item">
-            <label class="tab_item" for="pr">Me</label>
             <input id="political" type="radio" name="tab_item">
             <label class="tab_item" for="political">政治</label>
             <input id="life" type="radio" name="tab_item">
@@ -336,21 +231,12 @@
             <label class="tab_item" for="girl">その他</label>
             <input id="Trend" type="radio" name="tab_item">
             <label class="tab_item" for="Trend">全て</label>
-            
+            <input id="pr" type="radio" name="tab_item">
+            <label class="tab_item" for="pr">PR</label>
             <div class="tab_content" id="all_content">
               <div class="tab_content_description">
                 <p class="c-txtsp">
                   <ul id="litrend">
-                  </ul>
-                </p>
-              </div>
-            </div>
-            <div class="tab_content" id="pr_content">
-              <div class="tab_content_description">
-                <p class="c-txtsp">
-                  *フォローがホストしている投票
-                  <ul id="lipr">
-
                   </ul>
                 </p>
               </div>
@@ -427,6 +313,15 @@
                 </p>
               </div>
             </div>
+            <div class="tab_content" id="pr_content">
+              <div class="tab_content_description">
+                <p class="c-txtsp">
+                  <ul id="lipr">
+
+                  </ul>
+                </p>
+              </div>
+            </div>
           </div>
           <div id="newszone">
             <h1>
@@ -440,9 +335,12 @@
           </div>
         </div>
         <div class="subcontents">
-            <div class="adpc">
-                <a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/iPhone_iPad.png"></a>
-              </div>
+          <div class="adpc">
+            <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+6D4GH" rel="nofollow">
+              <img border="0" width="300" height="250" alt=""
+                src="https://www26.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001069000&mc=1"></a>
+            <img border="0" width="1" height="1" src="https://www13.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+6D4GH" alt="">
+          </div>
           <div class="adsmart">
             <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+66H9D" rel="nofollow">
               <img border="0" width="234" height="60" alt=""
@@ -464,7 +362,7 @@
           </li>
           <li>
             <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
-          </li><li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+          </li>
           <li>
             <a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50"
               style="text-decoration:none; color:deepskyblue;">

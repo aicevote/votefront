@@ -53,15 +53,6 @@
     <script src="https://unpkg.com/aicevote/dist/aicevote.min.js"></script>
     <script src="/javascripts/auth.js"></script>
     <script type="text/javascript">
-      if ( navigator.userAgent.indexOf('iPhone') > 0 ){
-        $('#banner').prepend($('<a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/DownloadBanner.png"></a>'));
-      } else if( navigator.userAgent.indexOf('iPad') > 0 ){
-        $('#banner').prepend($('<a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/DownloadBanner.png"></a>'));
-      } else if( navigator.userAgent.indexOf('iPod') > 0 ){
-        $('#banner').prepend($('<a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/DownloadBanner.png"></a>'));
-      } else if( navigator.userAgent.indexOf('Android') > 0 ){
-        $('#banner').prepend($('<a href="https://play.google.com/store/apps/details?id=com.aicevote.aicevoteapplication"><img src="/images/DownloadBanner.png"></a>'));
-      }
       async function main() {
         try {
           const data = await aicevote.getAllThemes();
@@ -95,136 +86,42 @@
         }
       }
       $(() => main());
-      $(function () {
-        $('#submit-smart').click(function () {
-          var message = $('#message-smart');
-          if (message.val().length == 0) {
-            alert("文字を入力してください");
-          } else if (message.val().length >= 10) {
-            alert("10字以内");
-          } else {
-            var regex = message.val();
-            async function searchsmart(regex) {
-              const searchvalue = document.getElementById('search-value-smart');
-              try {
-                const results = await aicevote.queryThemes(regex);
-                results.forEach((result) => {
-                  let li = document.createElement('li');
-                  li.innerHTML = `<img src="${result.imageURI}"><a href ="result.html?themeID=${result.themeID}"style="text-decoration:none; color:white;">${result.title}</a>`;
-                  searchvalue.appendChild(li);
-                });
-              } catch (e) {
-                let li = document.createElement('li');
-                li.innerHTML = `検索結果はありません`;
-                searchvalue.appendChild(li);
-              }
-            }
-            $(() => searchsmart(regex));
-          }
-        });
-      });
-      $(function () {
-        $('#submit-pc').click(function () {
-          var message = $('#message-pc');
-          if (message.val().length == 0) {
-            alert("文字を入力してください");
-          } else if (message.val().length >= 10) {
-            alert("10字以内");
-          } else {
-            var regex = message.val();
-            async function searchpc(regex) {
-              const searchvalue = document.getElementById('search-value-pc');
-              try {
-                const results = await aicevote.queryThemes(regex);
-                results.forEach((result) => {
-                  let li = document.createElement('li');
-                  li.innerHTML = `<img src="${result.imageURI}"><a href ="result.html?themeID=${result.themeID}"style="text-decoration:none; color:white;">${result.title}</a>`;
-                  searchvalue.appendChild(li);
-                });
-              } catch (e) {
-                let li = document.createElement('li');
-                li.innerHTML = `検索結果はありません`;
-                searchvalue.appendChild(li);
-              }
-            }
-            $(() => searchpc(regex));
-          }
-        });
-      });
     </script>
     <div class="mainSite">
-        <div id="banner">
+      <div class="header">
+        <div class="header-logo"><a href="home"><img src="/images/aice.JPG"></a>
+        </div>
+        <div id="nav-drawer">
+          <input id="nav-input" type="checkbox" class="nav-unshown">
+          <label id="nav-open" for="nav-input"><span></span></label>
+          <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+          <div id="nav-content">
+            <ul>
+              <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+              <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
+              <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
+              <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
+              <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+              <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a>
+              <li>
+            </ul>
           </div>
-          <div class="header">
-              <div class="header-logo"><a href="home"><img src="/images/aice.JPG"></a>
-              </div>
-              
-                <div id="search-drawer">
-                  <input id="search-input" type="checkbox" class="search-unshown">
-                  <label id="search-open" for="search-input"><span><img src="/images/search.png"></span></label>
-                  <label class="search-unshown" id="search-close" for="search-input"></label>
-                  <div id="search-content">
-                    <form id="form-smart" class="form-smart">
-                      <input type="text" id="message-smart" placeholder="キーワードを検索…" cols="10" rows="1"></input>
-                      <a type="btn" class="submit-smart" id="submit-smart" style="height:24px; width:24px;"><img src="/images/search.png"></a>
-                    </form>
-                    <div class="search-result">
-                      <ul id="search-value-smart">
-                        
-                      </ul>
-                    </div>
-                  </div>
-                  
-                </div>
-                
-              <div id="nav-drawer">
-                <input id="nav-input" type="checkbox" class="nav-unshown">
-                <label id="nav-open" for="nav-input"><span></span></label>
-                <label class="nav-unshown" id="nav-close" for="nav-input"></label>
-                <div id="nav-content">
-                  <ul>
-                    <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-                    <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
-                    <li><a href="apply" style="text-decoration:none; color:white;">テーマの追加</a></li>
-                    <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a>
-                    <li>
-                  </ul>
-                </div>
-              </div>
-      
-              
-              <div class="header-list">
-                <ul>
-                    <li style="padding:30px 0;">
-                    <div id="search-pc">
-                    <div class="search">
-                      <form id="form-pc" class="form-pc">
-                        <input type="text"id="message-pc" placeholder="キーワードを検索…" cols="12" rows="1" style="float:left; "></input>
-                        
-                      </form>
-                      
-                    </div>
-                    <div class="search-result">
-                      <ul id="search-value-pc">
-                        
-                      </ul>
-                    </div>
-                    
-                    </div>
-                  </li>
-                  <li style="padding:30px 0;"><a type="btn" class="submit-pc" id="submit-pc" style="height:25px; width:25px; padding:30px 0;"><img src="/images/search.png"></a></li>
-                  <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-                  <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
-                  <li><a href="apply" style="text-decoration:none; color:white;">テーマの追加</a></li>
-                  <li>
-                    <div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div>
-                  </li>
-                </ul>
-              </div>
-      
-              <div id="menu-background">
-              </div>
-            </div>
+        </div>
+        <div class="header-list">
+          <ul>
+            <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+            <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
+            <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
+            <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
+            <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+            <li>
+              <div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div>
+            </li>
+          </ul>
+        </div>
+        <div id="menu-background">
+        </div>
+      </div>
       <div id="allcontainer">
         <div class="container">
 
@@ -253,40 +150,46 @@
               });
             });
           </script>
-          <div class="script">
-            
-          <h1>投票テーマをホストしよう!</h1>
-          <h3>
-            <p>＊AICEVOTEアプリ版からのみ投票テーマ作成を行えます。</p>
-            <p>あなたは、AICEVOTEシステムを使った投票テーマを作成できます。</p>
-          </h3>
-            <img src="/images/iPhone_iPad.png">
-            <h2><span>アプリをダウンロード！</span></h2>
-            <a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/App_Store.png" style="width: 100px; margin: 40px; float: left;"></a>
-            <a href="https://play.google.com/store/apps/details?id=com.aicevote.aicevoteapplication"><img src="/images/google-play.png" style="width: 100px; margin: 40px;"></a>
-          <h3>
+          <h1>Myテーマを作ってみんなに投票して欲しい!</h1>
+          <h4>
+            <p>AICEVOTEシステムを使って、あなたやあなたの団体の投票テーマをフォロワーに投票してもらおう！</p>
             <p>団体の事例</p>
             <p>esports大会の開催で優勝予想に、AICEVOTEを使って試合の流れに連動するリアルタイムな投票を可能にしたい</p>
-            <br>
             <p>個人の事例</p>
             <p>ダイエットをしているが、みんなが自分の体型についてどう思っているかAICEVOTEで投票してもらい、数週間にわたって観測したい</p>
+          </h4>
+          <h3>もちろん初回無料です！お気軽にご相談ください！<a href="https://twitter.com/aicevote"
+              style="text-decoration:none; color:deepskyblue;">こちら</a>までDMください</h3>
+
+          <h1>投票テーマの募集!</h1>
+          <h3>
+            <p>私たちは、政治、社会の投票する議題について一般公募しています。</p>
+            <p>下記の約束に従うような、内容をフォームから送信してください。</p>
+            <p>管理者達が精査の上、議題に掲載します。</p>
+            <p>AICEVOTE管理者たちは可能な限り中立的立場をもって、また調査や勉強の上で投票テーマの選定を行います。</p>
           </h3>
-          <br>
-          <h2>下記の約束を満たさない投票テーマは管理者によって削除されます。</h2>
-          <br>
           <h4>
-            <p>約束１、日本国内で認められていない犯罪行為、また反社会的勢力などに関連しないこと。</p>
-            <p>約束２、投票テーマ自体が特定の個人や団体を侮辱、または中傷していないこと。</p>
+            <p>約束１、日本国内で認められていない賭博などに関連しないこと。</p>
+            <p>約束２、質問が特定の個人や団体を侮辱、中傷していないこと。</p>
             <p>約束３、公職選挙法違反に抵触しないこと。</p>
             <p>約束４、短期的または長期的に世論の変動があること。</p>
           </h4>
+          <br>
+          <div class="apply">
+            <form id="form" class="form">
+              <textarea id="message" placeholder="例：死刑制度に賛成か反対か" cols="20" rows="1"></textarea>
+              <a type="btn" class="submit" id="submit" style="font-size:11px">送信</a>
+            </form>
           </div>
           <br>
         </div>
         <div class="subcontents">
-            <div class="adpc">
-                <a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/iPhone_iPad.png"></a>
-              </div>
+          <div class="adpc">
+            <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+6D4GH" rel="nofollow">
+              <img border="0" width="300" height="250" alt=""
+                src="https://www26.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001069000&mc=1"></a>
+            <img border="0" width="1" height="1" src="https://www13.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+6D4GH" alt="">
+          </div>
           <div class="adsmart">
             <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+661TT" rel="nofollow">
               <img border="0" width="234" height="60" alt=""
@@ -308,7 +211,7 @@
           </li>
           <li>
             <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a>
-          </li><li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
+          </li>
           <li>
             <a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50"
               style="text-decoration:none; color:deepskyblue;">

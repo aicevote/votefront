@@ -6,6 +6,7 @@
   "author": "AICEVOTE Dev Team",
   "license": "MIT",
   "scripts": {
+    "prestart": "yarn gulp ejs",
     "start": "yarn http-server ./docs"
   },
   "devDependencies": {

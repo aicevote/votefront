@@ -69,37 +69,76 @@
   });
   </script>
   <div class="mainSite">
-  <div class="header">
-    <div class="header-logo"><a href="home"><img src="/images/aice.JPG" ></a>
-    </div>
-    <div id="nav-drawer">
-      <input id="nav-input" type="checkbox" class="nav-unshown">
-      <label id="nav-open" for="nav-input"><span></span></label>
-      <label class="nav-unshown" id="nav-close" for="nav-input"></label>
-      <div id="nav-content">
-        <ul>
-          <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-          <li><a href="about_us" style="text-decoration:none; color:white;">about us/運営者情報</a></li>
-          <li><a href="apply" style="text-decoration:none; color:white;">投票テーマの応募</a></li>
-          <li><a href="feedback" style="text-decoration:none; color:white;">フィードバック</a></li>
-          <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-          <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a><li>
-        </ul>
-      </div>
-    </div>
-    <div class="header-list">
-      <ul>
-        <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
-        <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
-        <li><a href="feedback" style="text-decoration:none; color:white;">feedback</a></li>
-        <li><a href="apply" style="text-decoration:none; color:white;">応募</a></li>
-        <li><a href="qanda" style="text-decoration:none; color:white;">Q&A</a></li>
-        <li><div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div></li>
-      </ul>
-    </div>
-    <div id="menu-background">
-    </div>
-    </div>
+      <div class="header">
+          <div class="header-logo"><a href="home"><img src="/images/aice.JPG"></a>
+          </div>
+          
+            <div id="search-drawer">
+              <input id="search-input" type="checkbox" class="search-unshown">
+              <label id="search-open" for="search-input"><span><img src="/images/search.png"></span></label>
+              <label class="search-unshown" id="search-close" for="search-input"></label>
+              <div id="search-content">
+                <form id="form-smart" class="form-smart">
+                  <input type="text" id="message-smart" placeholder="キーワードを検索…" cols="10" rows="1"></input>
+                  <a type="btn" class="submit-smart" id="submit-smart" style="height:24px; width:24px;"><img src="/images/search.png"></a>
+                </form>
+                <div class="search-result">
+                  <ul id="search-value-smart">
+                    
+                  </ul>
+                </div>
+              </div>
+              
+            </div>
+            
+          <div id="nav-drawer">
+            <input id="nav-input" type="checkbox" class="nav-unshown">
+            <label id="nav-open" for="nav-input"><span></span></label>
+            <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+            <div id="nav-content">
+              <ul>
+                <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+                <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
+                <li><a href="apply" style="text-decoration:none; color:white;">テーマの追加</a></li>
+                <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a>
+                <li>
+              </ul>
+            </div>
+          </div>
+  
+          
+          <div class="header-list">
+            <ul>
+                <li style="padding:30px 0;">
+                <div id="search-pc">
+                <div class="search">
+                  <form id="form-pc" class="form-pc">
+                    <input type="text"id="message-pc" placeholder="キーワードを検索…" cols="12" rows="1" style="float:left; "></input>
+                    
+                  </form>
+                  
+                </div>
+                <div class="search-result">
+                  <ul id="search-value-pc">
+                    
+                  </ul>
+                </div>
+                
+                </div>
+              </li>
+              <li style="padding:30px 0;"><a type="btn" class="submit-pc" id="submit-pc" style="height:25px; width:25px; padding:30px 0;"><img src="/images/search.png"></a></li>
+              <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+              <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
+              <li><a href="apply" style="text-decoration:none; color:white;">テーマの追加</a></li>
+              <li>
+                <div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div>
+              </li>
+            </ul>
+          </div>
+  
+          <div id="menu-background">
+          </div>
+        </div>
     <div id="first">
     <div class="container">
         <div style="margin-top:25px; text-align:center;"><a href="login" class="btn-gradient-flat">今すぐ投票</a></div>
@@ -109,8 +148,15 @@
     <br>
     
     <div class="script">
+    <img src="/images/iPhone_iPad.png">
+    <h2><span>アプリをダウンロード！</span></h2>
+    <a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/App_Store.png" style="width: 100px; margin: 40px; float: left;"></a>
+    <a href="https://play.google.com/store/apps/details?id=com.aicevote.aicevoteapplication"><img src="/images/google-play.png" style="width: 100px; margin: 40px;"></a>
+    <br>
     <h1 style="text-decoration: underline;"><span>AICEVOTE</span>とは</h1>
-    
+    <div class="movie">
+     <iframe src="https://www.youtube.com/embed/PgaKgGJ_iZE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
     <h2>普通の投票とAICEVOTE<br>（アイスボート）の違い</h2>
     <h2 style="text-decoration: underline;">普通の投票</h2>
     <img src="/images/general.png">
@@ -160,8 +206,4 @@
     </div>
   </div>
 </body>
-<script src="/__/firebase/init.js"></script>
-  <script src="/__/firebase/6.2.0/firebase-app.js"></script>
-  <script src="/__/firebase/6.2.0/firebase-auth.js"></script>
-  <script src="/__/firebase/6.2.0/firebase-firestore.js"></script>
 </html>

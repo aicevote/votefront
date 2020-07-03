@@ -1,0 +1,479 @@
+<lang="ja">
+
+  <head prefix="og: http://ogp.me/ns#">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="票を氷にしたリアルタイム投票サイト">
+    <meta property="og:site_name" content="AICEVOTE">
+    <meta property="og:image" content="http://aicevote.com/images/aicevote_2_skeleton.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="https://unpkg.com/aicevote/dist/aicevote.min.js"></script>
+    <script src="/javascripts/auth.js"></script>
+
+    <script src="/javascripts/moment.js"></script>
+    <script src="/javascripts/Chart.min.js"></script>
+    <script src="/javascripts/chartjs-plugin-streaming.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+      </script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyCV8Z8TI9MZ_Il_r2XikNfFL6Dm64pbmhA",
+      authDomain: "aicevote-firebase.firebaseapp.com",
+      databaseURL: "https://aicevote-firebase.firebaseio.com",
+      projectId: "aicevote-firebase",
+      storageBucket: "aicevote-firebase.appspot.com",
+      messagingSenderId: "1023354604812",
+      appId: "1:1023354604812:web:5d348857efd173ef878d29",
+      measurementId: "G-ZPE9QD7PD5"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+  </head>
+
+  <body>
+    <div class="mainSite">
+        <div class="header">
+            <div class="header-logo"><a href="home"><img src="/images/aice.JPG"></a>
+            </div>
+            
+              <div id="search-drawer">
+                <input id="search-input" type="checkbox" class="search-unshown">
+                <label id="search-open" for="search-input"><span><img src="/images/search.png"></span></label>
+                <label class="search-unshown" id="search-close" for="search-input"></label>
+                <div id="search-content">
+                  <form id="form-smart" class="form-smart">
+                    <input type="text" id="message-smart" placeholder="キーワードを検索…" cols="10" rows="1"></input>
+                    <a type="btn" class="submit-smart" id="submit-smart" style="height:24px; width:24px;"><img src="/images/search.png"></a>
+                  </form>
+                  <div class="search-result">
+                    <ul id="search-value-smart">
+                      
+                    </ul>
+                  </div>
+                </div>
+                
+              </div>
+              
+            <div id="nav-drawer">
+              <input id="nav-input" type="checkbox" class="nav-unshown">
+              <label id="nav-open" for="nav-input"><span></span></label>
+              <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+              <div id="nav-content">
+                <ul>
+                  <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+                  <li><a href="about_us" style="text-decoration:none; color:white;">運営者情報</a></li>
+                  <li><a href="apply" style="text-decoration:none; color:white;">テーマの追加</a></li>
+                  <li class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a>
+                  <li>
+                </ul>
+              </div>
+            </div>
+    
+            
+            <div class="header-list">
+              <ul>
+                  <li style="padding:30px 0;">
+                  <div id="search-pc">
+                  <div class="search">
+                    <form id="form-pc" class="form-pc">
+                      <input type="text"id="message-pc" placeholder="キーワードを検索…" cols="12" rows="1" style="float:left; "></input>
+                      
+                    </form>
+                    
+                  </div>
+                  <div class="search-result">
+                    <ul id="search-value-pc">
+                      
+                    </ul>
+                  </div>
+                  
+                  </div>
+                </li>
+                <li style="padding:30px 0;"><a type="btn" class="submit-pc" id="submit-pc" style="height:25px; width:25px; padding:30px 0;"><img src="/images/search.png"></a></li>
+                <li><a href="explain" style="text-decoration:none; color:white;">aicevoteとは</a></li>
+                <li><a href="about_us" style="text-decoration:none; color:white;">about us</a></li>
+                <li><a href="apply" style="text-decoration:none; color:white;">テーマの追加</a></li>
+                <li>
+                  <div class="Login"><a href="./login" style="text-decoration:none; color:white;">Login</a></div>
+                </li>
+              </ul>
+            </div>
+    
+            <div id="menu-background">
+            </div>
+          </div>
+      <div id="allcontainer">
+        <div class="container">
+
+          <!DOCTYPE html>
+          <html lang="ja">
+
+          <head>
+            <meta charset="UTF-8">
+          </head>
+
+          <body>
+
+            <h3 id="user">
+
+            </h3>
+
+            <div class="balloon2-left">
+              <p id="title"></p>
+            </div>
+            <h4 id="description"></h4>
+
+            <div class="button" id="button01">
+              <ul>
+                <li>
+                  <a id="A" class="btn-box1"></a>
+                </li>
+                <li>
+                  <a id="B" class="btn-box2"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="button" id="button23">
+              <ul>
+                <li>
+                  <a id="C" class="btn-box1"></a>
+                </li>
+                <li>
+                  <a id="D" class="btn-box2"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="button" id="button45">
+              <ul>
+                <li>
+                  <a id="E" class="btn-box1"></a>
+                </li>
+                <li>
+                  <a id="F" class="btn-box2"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="button" id="button67">
+              <ul>
+                <li>
+                  <a id="G" class="btn-box1"></a>
+                </li>
+                <li>
+                  <a id="H" class="btn-box2"></a>
+                </li>
+              </ul>
+            </div>
+            <div class="button" id="button89">
+              <ul>
+                <li>
+                  <a id="I" class="btn-box1"></a>
+                </li>
+                <li>
+                  <a id="J" class="btn-box2"></a>
+                </li>
+              </ul>
+            </div>
+            
+        </div>
+
+        <script>
+          let param = (new URL(document.location)).searchParams;
+          themeID = param.get('themeID');
+          async function main() {
+            try {
+              const theme = await aicevote.getTheme(themeID);
+              const title = theme.title;
+              const description = theme.description;
+              const choices = theme.choices;
+              const genre = theme.genre;
+              document.title = title;
+
+              var headData = document.head.children;
+              for (var i = 0; i < headData.length; i++) {
+                // OGPの設定
+                var propertyVal = headData[i].getAttribute('property');
+                if(propertyVal !== null) {
+                    if(propertyVal.indexOf('og:title') != -1) {
+                        headData[i].setAttribute('content', title);
+                    }
+                    if(propertyVal.indexOf('og:url') != -1) {
+                        headData[i].setAttribute('content', 'https://aicevote.com/result.html?themeID=' + themeID + "");
+                    }
+                }
+              }
+              $("#title").text(title);
+              $("#description").text(description);
+
+              var users = {};
+              users.userProvider = "twitter";
+              users.userID = String(theme.userID);
+              const hisProfile = await aicevote.getProfiles([users]);
+              $('#user').append($('<img src="' + hisProfile[0].imageURI + '" style="width:32px;height:32px;border-radius:16px">このテーマのホストは<a href="https://aicevote.com/user.html?id=' + theme.userID + '&which=' + theme.userProvider + '" style="text-decoration:none; color:deepskyblue;">' + hisProfile[0].name + '</a>'));
+
+              if (choices[0]) {
+                $("#A").text(choices[0]);
+              } else {
+                $("#A").remove();
+                $("#button01").remove();
+              }
+              if (choices[1]) {
+                $("#B").text(choices[1]);
+              } else {
+                $("#B").remove();
+              }
+              if (choices[2]) {
+                $("#C").text(choices[2]);
+              } else {
+                $("#C").remove();
+                $("#button23").remove();
+              }
+              if (choices[3]) {
+                $("#D").text(choices[3]);
+              } else {
+                $("#D").remove();
+              }
+              if (choices[4]) {
+                $("#E").text(choices[4]);
+              } else {
+                $("#E").remove();
+                $("#button45").remove();
+              }
+              if (choices[5]) {
+                $("#F").text(choices[5]);
+              } else {
+                $("#F").remove();
+              }
+              if (choices[6]) {
+                $("#G").text(choices[6]);
+              } else {
+                $("#G").remove();
+                $("#button67").remove();
+              }
+              if (choices[7]) {
+                $("#H").text(choices[7]);
+              } else {
+                $("#H").remove();
+              }
+              if (choices[8]) {
+                $("#I").text(choices[8]);
+              } else {
+                $("#I").remove();
+                $("#button89").remove();
+              }
+              if (choices[9]) {
+                $("#J").text(choices[9]);
+              } else {
+                $("#J").remove();
+              }
+                
+
+              const themes = await aicevote.getAllThemes();
+              const relate = document.getElementById("relate");
+              var items = [];
+              themes.sort((a, b) => b.topicality - a.topicality)
+              for (i=0;i<themes.length;i++) {
+                if (themes[i].genre == genre) {
+                  items.push(themes[i]);
+                }
+              }
+              for (i=0; i<7; i++) {
+                let li = document.createElement("li");
+                li.innerHTML = `<img src="${items[i].imageURI}"><a href ="Dp${items[i].themeID}">${items[i].title}</a>`;
+                relate.appendChild(li);
+              }
+            } catch (e) { }
+
+            try {
+              const sessionID = getSessionID();
+              const sessionToken = await aicevote.getSessionToken(sessionID);
+              const myProfile = await aicevote.getMyProfile(sessionToken);
+
+              const userimg = document.getElementById('userimg');
+              userimg.innerHTML = `<a href="user.html?id=${myProfile.userID}&which=${myProfile.userProvider}"><img src="images/user.png"></a>`;
+              console.log(themeID);
+              $(".login").remove();
+              $("#A").click(() => {
+                firebase.analytics().logEvent('vote');
+                aicevote.vote(themeID, sessionToken, 0).then(() => {
+                  location.href = "/result.html?themeID=" + themeID + "";
+                });
+              });
+              $("#B").click(() => {
+                firebase.analytics().logEvent('vote');
+                aicevote.vote(themeID, sessionToken, 1).then(() => {
+                  location.href = "/result.html?themeID=" + themeID + "";
+                });
+              });
+              $("#C").click(() => {
+                firebase.analytics().logEvent('vote');
+                aicevote.vote(themeID, sessionToken, 2).then(() => {
+                  location.href = "/result.html?themeID=" + themeID + "";
+                });
+              });
+              $("#D").click(() => {
+                firebase.analytics().logEvent('vote');
+                aicevote.vote(themeID, sessionToken, 3).then(() => {
+                  location.href = "/result.html?themeID=" + themeID + "";
+                });
+              });
+              $("#E").click(() => {
+                firebase.analytics().logEvent('vote');
+                aicevote.vote(themeID, sessionToken, 4).then(() => {
+                  location.href = "/result.html?themeID=" + themeID + "";
+                });
+              });
+              $("#F").click(() => {
+                firebase.analytics().logEvent('vote');
+                aicevote.vote(themeID, sessionToken, 5).then(() => {
+                  location.href = "/result.html?themeID=" + themeID + "";
+                });
+              });
+              $("#G").click(() => {
+                firebase.analytics().logEvent('vote');
+                aicevote.vote(themeID, sessionToken, 6).then(() => {
+                  location.href = "/result.html?themeID=" + themeID + "";
+                });
+              });
+              $("#H").click(() => {
+                firebase.analytics().logEvent('vote');
+                aicevote.vote(themeID, sessionToken, 7).then(() => {
+                  location.href = "/result.html?themeID=" + themeID + "";
+                });
+              });
+              $("#I").click(() => {
+                firebase.analytics().logEvent('vote');
+                aicevote.vote(themeID, sessionToken, 8).then(() => {
+                  location.href = "/result.html?themeID=" + themeID + "";
+                });
+              });
+              $("#J").click(() => {
+                firebase.analytics().logEvent('vote');
+                aicevote.vote(themeID, sessionToken, 9).then(() => {
+                  location.href = "/result.html?themeID=" + themeID + "";
+                });
+              });
+            } catch (e) {
+              deleteSessionID();
+              $('#userimg').remove();
+              window.location.href = "/result.html?themeID=" + themeID + "";
+            }
+          }
+
+          $(() => main());
+          $(function () {
+        $('#submit-smart').click(function () {
+          var message = $('#message-smart');
+          if (message.val().length == 0) {
+            alert("文字を入力してください");
+          } else if (message.val().length >= 10) {
+            alert("10字以内");
+          } else {
+            var regex = message.val();
+            async function searchsmart(regex) {
+              const searchvalue = document.getElementById('search-value-smart');
+              try {
+                const results = await aicevote.queryThemes(regex);
+                results.forEach((result) => {
+                  let li = document.createElement('li');
+                  li.innerHTML = `<img src="${result.imageURI}"><a href ="result.html?themeID=${result.themeID}"style="text-decoration:none; color:white;">${result.title}</a>`;
+                  searchvalue.appendChild(li);
+                });
+              } catch (e) {
+                let li = document.createElement('li');
+                li.innerHTML = `検索結果はありません`;
+                searchvalue.appendChild(li);
+              }
+            }
+            $(() => searchsmart(regex));
+          }
+        });
+      });
+      $(function () {
+        $('#submit-pc').click(function () {
+          var message = $('#message-pc');
+          if (message.val().length == 0) {
+            alert("文字を入力してください");
+          } else if (message.val().length >= 10) {
+            alert("10字以内");
+          } else {
+            var regex = message.val();
+            async function searchpc(regex) {
+              const searchvalue = document.getElementById('search-value-pc');
+              try {
+                const results = await aicevote.queryThemes(regex);
+                results.forEach((result) => {
+                  let li = document.createElement('li');
+                  li.innerHTML = `<img src="${result.imageURI}"><a href ="result.html?themeID=${result.themeID}"style="text-decoration:none; color:white;">${result.title}</a>`;
+                  searchvalue.appendChild(li);
+                });
+              } catch (e) {
+                let li = document.createElement('li');
+                li.innerHTML = `検索結果はありません`;
+                searchvalue.appendChild(li);
+              }
+            }
+            $(() => searchpc(regex));
+          }
+        });
+      });
+        </script>
+
+        <div class="subcontents">
+          <div class="adsmart">
+            <a href="https://px.a8.net/svt/ejp?a8mat=35UA59+5E3BZM+1WP2+65U41" rel="nofollow">
+              <img border="0" width="234" height="60" alt=""
+                src="https://www24.a8.net/svt/bgt?aid=191209437326&wid=001&eno=01&mid=s00000008903001035000&mc=1">
+            </a>
+            <img border="0" width="1" height="1" src="https://www16.a8.net/0.gif?a8mat=35UA59+5E3BZM+1WP2+65U41" alt="">
+          </div>
+
+  </body>
+
+  </html>
+
+
+
+
+
+
+  <h2>関連する投票テーマ</h2>
+  <ul id="relate">
+    <li><a href="home" style="text-decoration:none; color:deepskyblue;">メニューに戻る</a></li>
+
+  </ul>
+  </div>
+
+  </div>
+  <div id="userimg"></div>
+  <div class="footer">
+    <h1><img src="/images/firstix-ocean.png"></h1>
+    <ul>
+      <li> <a href="https://twitter.com/aicevote" style="text-decoration:none; color:deepskyblue;">お問い合わせ</a> </li>
+      <li> <a href="Terms" style="text-decoration:none; color:deepskyblue;">プライバシーポリシー</a> </li>
+      <li><a href="https://qiita.com/akaoni_sohei/items/186121bd9994197aab50"
+          style="text-decoration:none; color:deepskyblue;">
+          レポート
+        </a></li>
+    </ul>
+  </div>
+  </div>
+  <script src="/__/firebase/init.js"></script>
+  <script src="/__/firebase/6.2.0/firebase-app.js"></script>
+  <script src="/__/firebase/6.2.0/firebase-auth.js"></script>
+  <script src="/__/firebase/6.2.0/firebase-firestore.js"></script>
+  </body>

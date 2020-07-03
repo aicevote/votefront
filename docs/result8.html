@@ -110,7 +110,9 @@
             <h4 id="description"></h4>
 
             <script>
-              themeID = parseInt(window.location.pathname.replace(/[^-^0-9^\.]/g, ""), 10);
+              let param = (new URL(document.location)).searchParams;
+              themeID = param.get('themeID');
+             
               var sessionToken = "";
               var title = "";
               var description = "";

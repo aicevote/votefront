@@ -96,7 +96,7 @@
           themes.sort((a, b) => b.topicality - a.topicality)
           for (i = 0; i < 3; i++) {
             const li = document.createElement('li');
-            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}${themes[i].themeID}">${themes[i].title}</a>`;
+            li.innerHTML = `<img src="${themes[i].imageURI}"><a href ="${link}.html?themeID=${themes[i].themeID}">${themes[i].title}</a>`;
             litre.appendChild(li);
           }
           if (!hisProfile[0].isInfluencer) { $('#onlyinfluencer').remove(); }

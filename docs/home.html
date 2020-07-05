@@ -183,7 +183,7 @@
                 const results = await aicevote.queryThemes(regex);
                 results.forEach((result) => {
                   let li = document.createElement('li');
-                  li.innerHTML = `<img src="${result.imageURI}"><a href ="result.html?themeID=${result.themeID}"style="text-decoration:none; color:white;">${result.title}</a>`;
+                  li.innerHTML = `<img src="${result.imageURI}"><a href ="Dp.html?themeID=${result.themeID}"style="text-decoration:none; color:white;">${result.title}</a>`;
                   searchvalue.appendChild(li);
                 });
               } catch (e) {
@@ -211,7 +211,7 @@
                 const results = await aicevote.queryThemes(regex);
                 results.forEach((result) => {
                   let li = document.createElement('li');
-                  li.innerHTML = `<img src="${result.imageURI}"><a href ="result.html?themeID=${result.themeID}"style="text-decoration:none; color:white;">${result.title}</a>`;
+                  li.innerHTML = `<img src="${result.imageURI}"><a href ="Dp.html?themeID=${result.themeID}"style="text-decoration:none; color:white;">${result.title}</a>`;
                   searchvalue.appendChild(li);
                 });
               } catch (e) {

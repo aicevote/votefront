@@ -68,7 +68,7 @@
           )
           for (i = 0; i < 3; i++) {
             let li = document.createElement('li');
-            li.innerHTML = `<img src="${data[i].imageURI}"><a href ="result${data[i].themeID}">${data[i].title}</a>`;
+            li.innerHTML = `<img src="${data[i].imageURI}"><a href ="Dp.html?themeID=${data[i].themeID}">${data[i].title}</a>`;
             litrend.appendChild(li);
           }
         } catch (e) { }

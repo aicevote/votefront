@@ -2808,10 +2808,11 @@ textarea{
 }
 #banner{
   position: fixed;
-  bottom: 0;
-  width: 100vw;
-  height: 25vw;
-  z-index: 99;
+  bottom: 10px;
+  width: 95vw;
+  margin: 0 auto;
+  height: auto;
+  z-index: 999;
 }
 
 .cp_link {

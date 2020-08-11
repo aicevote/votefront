@@ -53,15 +53,7 @@
     <script src="https://unpkg.com/aicevote/dist/aicevote.min.js"></script>
     <script src="/javascripts/auth.js"></script>
     <script type="text/javascript">
-      if ( navigator.userAgent.indexOf('iPhone') > 0 ){
-        $('#banner').prepend($('<a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/DownloadBanner.png"></a>'));
-      } else if( navigator.userAgent.indexOf('iPad') > 0 ){
-        $('#banner').prepend($('<a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/DownloadBanner.png"></a>'));
-      } else if( navigator.userAgent.indexOf('iPod') > 0 ){
-        $('#banner').prepend($('<a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/DownloadBanner.png"></a>'));
-      } else if( navigator.userAgent.indexOf('Android') > 0 ){
-        $('#banner').prepend($('<a href="https://play.google.com/store/apps/details?id=com.aicevote.aicevoteapplication"><img src="/images/DownloadBanner.png"></a>'));
-      }
+      
       async function main() {
         try {
           const data = await aicevote.getAllThemes();
@@ -92,6 +84,19 @@
         } catch (e) {
           deleteSessionID();
           $('#userimg').remove();
+        }
+        try {
+          if ( navigator.userAgent.indexOf('iPhone') > 0 ){
+                  $('#banner').prepend($('<a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/DownloadBanner.png"></a>'));
+                } else if( navigator.userAgent.indexOf('iPad') > 0 ){
+                  $('#banner').prepend($('<a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/DownloadBanner.png"></a>'));
+                } else if( navigator.userAgent.indexOf('iPod') > 0 ){
+                  $('#banner').prepend($('<a href="https://itunes.apple.com/jp/app/id1507860199"><img src="/images/DownloadBanner.png"></a>'));
+                } else if( navigator.userAgent.indexOf('Android') > 0 ){
+                  $('#banner').prepend($('<a href="https://play.google.com/store/apps/details?id=com.aicevote.aicevoteapplication"><img src="/images/DownloadBanner.png"></a>'));
+                }
+        } catch(e) {
+
         }
       }
       $(() => main());
@@ -153,6 +158,9 @@
       });
     </script>
     <div class="mainSite">
+      <div id="banner">
+
+      </div>
           <div class="header">
               <div class="header-logo"><a href="home"><img src="/images/aice.JPG"></a>
               </div>

@@ -697,7 +697,9 @@ input[name="tab_item"] {
   color: black;
 }
 .adpc{
+  position: absolute;
   width:300px;
+  height: 300px;
 }
 .adpc img{
   text-align: center;

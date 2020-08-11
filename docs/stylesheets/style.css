@@ -698,11 +698,10 @@ input[name="tab_item"] {
 }
 .adpc{
   position: absolute;
-  width:300px;
-  height: 300px;
+  width:100%;
+  height: auto;
 }
 .adpc img{
-  text-align: center;
   width:100%;
   height: auto;
 }
@@ -2813,8 +2812,8 @@ textarea{
 }
 #banner{
   position: fixed;
-  bottom: 10px;
-  width: 95%;
+  bottom: 50px;
+  width: 300px;
   margin: 0 auto;
   height: auto;
   z-index: 999;

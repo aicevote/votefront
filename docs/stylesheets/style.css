@@ -714,8 +714,8 @@ input[name="tab_item"] {
 }
 .movie iframe{
   position: relative;
-  width: 630px;
-  height: 390px;
+  width:100%;
+  height: auto;
 }
 
 .main h1{
@@ -2810,13 +2810,17 @@ textarea{
 .goodcount{
   left:100px;
 }
-#banner{
+#banner　{
   position: fixed;
-  bottom: 50px;
   width: 300px;
-  margin: 0 auto;
+  bottom: 50px;
   height: auto;
   z-index: 999;
+}
+#banner img{
+  width: 100%;
+  height :auto;
+  margin: 0 auto;
 }
 
 .cp_link {

@@ -653,12 +653,7 @@ input[name="tab_item"] {
 .adsmart{
   display: none;
 }
-.adpc img{
-  text-align: center;
-  width:310px;
-  height:auto;
-  max-height: 400px;
-}
+
 #allcontainer{
   width:960px;
   height:auto;
@@ -700,6 +695,14 @@ input[name="tab_item"] {
 .subcontents li a{
   text-decoration: none;
   color: black;
+}
+.adpc{
+  width:300px;
+}
+.adpc img{
+  text-align: center;
+  max-width:300px;
+  max-height: 300px;
 }
 .movie{
   width:630px;

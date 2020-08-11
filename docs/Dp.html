@@ -259,7 +259,7 @@
               }
               for (i=0; i<7; i++) {
                 let li = document.createElement("li");
-                li.innerHTML = `<img src="${items[i].imageURI}"><a href ="Dp${items[i].themeID}">${items[i].title}</a>`;
+                li.innerHTML = `<img src="${items[i].imageURI}"><a href ="Dp.html?themeID=${items[i].themeID}">${items[i].title}</a>`;
                 relate.appendChild(li);
               }
             } catch (e) { }

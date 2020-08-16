@@ -671,7 +671,6 @@ input[name="tab_item"] {
   margin: 0 auto;
 }
 .container{
-  display: inline-block;
   position:relative;
   width: 650px;
   padding-left: 10px;

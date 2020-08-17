@@ -660,6 +660,8 @@ input[name="tab_item"] {
   max-height: 400px;
 }
 #allcontainer{
+  display: inline-block;
+  vertical-align: top;
   width:960px;
   height:auto;
   margin: 0 auto;
@@ -674,7 +676,7 @@ input[name="tab_item"] {
   display: inline-block;
   position:relative;
   width: 650px;
-  padding-left: 10px;
+  padding-left: 6px;
   background-color: white;
   margin: 0 auto;
   box-shadow: 0 0 5px;

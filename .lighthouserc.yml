@@ -1,6 +1,7 @@
 ci:
   collect:
     staticDistDir: "./docs"
+    numberOfFiles: 0
   assert:
     preset: "lighthouse:recommended"
     first-contentful-paint:

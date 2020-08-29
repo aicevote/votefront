@@ -1,5 +1,15 @@
 ci:
   collect:
-    staticDistDir: './docs'
+    staticDistDir: "./docs"
+  assert:
+    preset: "lighthouse:recommended"
+    first-contentful-paint:
+      - "error"
+      - maxNumericValue: 2000
+        aggregationMethod: "optimistic"
+    interactive:
+      - "error"
+      - maxNumericValue: 5000
+        aggregationMethod: "optimistic"
   upload:
     target: "temporary-public-storage"

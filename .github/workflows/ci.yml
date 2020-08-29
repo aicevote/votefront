@@ -15,3 +15,5 @@ jobs:
         run: |
           yarn add @lhci/cli@0.4.x
           yarn lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
